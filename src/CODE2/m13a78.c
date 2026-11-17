@@ -1454,7 +1454,9 @@ int FUN_000166e8(int slot)
 /* ---- from src/CODE2/f16c68.c */
 /* FUN_00016c68 @ 00016c68 */
 extern unsigned char *FUN_0002e8c8(int, int);
-extern short B000755d2_ai, B000755d6_ae; extern int DAT_0005cf6c;
+#define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
+#define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
+ extern int DAT_0005cf6c;
 void FUN_00016c68(void)
 {
     unsigned char *p = FUN_0002e8c8(B000755d2_ai, B000755d6_ae);

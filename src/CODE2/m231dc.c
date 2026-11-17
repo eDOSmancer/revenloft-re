@@ -395,7 +395,11 @@ extern void FUN_0002c124(int), FUN_00038ef0(void), FUN_00038ce8(void), FUN_00028
 extern void FUN_00039008(int), FUN_00038f58(int), FUN_00038e58(int, int, int), FUN_0002f8fc(void), FUN_00029cf4(void);
 extern int FUN_00039050(void);
  extern int DAT_00057f7c, DAT_0005c658, DAT_0005c034;
-extern short B000755d0_ao, B000755d2_ai, B000755d4_ak, B000755d6_ae;
+extern short B000755d0_ao;
+#define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
+extern short B000755d4_ak;
+#define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
+extern short B000755d0_ao, B000755d4_ak;
 extern unsigned char DAT_0005c054[];
 void FUN_00023c88(int sc, int s, int v, int f, int p)
 {

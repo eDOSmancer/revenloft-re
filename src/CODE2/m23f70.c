@@ -1215,7 +1215,9 @@ extern int FUN_00039050(void), FUN_00039048(void), FUN_000390a0(void), FUN_00039
 extern void FUN_00038dcc(int), FUN_00029ccc(int), FUN_000396c0(int, int, int, int), FUN_0003e510(int, int, int, int), FUN_000281b4(int), FUN_0002c160(int), FUN_00038ef0(void), FUN_00038f58(int), FUN_00039008(int), FUN_00038e58(int, int, int), FUN_0002f8fc(void), FUN_00032d70(void), FUN_00029cf4(void);
 extern unsigned char DAT_0005bf38, DAT_00058100, DAT_00058102, DAT_00058101, DAT_00057fb8, DAT_0005d680, DAT_0005801b;
 extern int DAT_00057ff0, DAT_00057ff8, DAT_00057fd0, DAT_00057fd4, B000758cc_fL, DAT_0005c658, DAT_0005bf44;
-extern short DAT_0005a6ba, DAT_0005a6be, DAT_0005a6bc, B000755d2_ai, B000755d6_ae;
+#define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
+#define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
+extern short DAT_0005a6ba, DAT_0005a6be, DAT_0005a6bc;
 #define B00064018_co ((struct R12 *)((char *)&B00064024_ck - 12)) /* STANDIN: view, B00064024_ck - 12 (element -1 of the table: the code indexes from 1) */
 
 

@@ -112,16 +112,16 @@ int FUN_0003ca5c(int y, int x)
 extern int FUN_00024a60(char *), FUN_0002c1dc(int);
 extern void FUN_000281b4(int), FUN_00024c40(int), FUN_0002c160(int), FUN_0002c124(int), FUN_0001ccf4(void);
 extern int DAT_0005c658, DAT_0005bf44; extern unsigned short B000718f0_hO[]; extern unsigned char DAT_0005cf5a[];
-#define B000755d0_ao (*(int *)&B000755d0_ao)
-#define B000755d4_ak (*(int *)&B000755d4_ak)
+#define M000755d0_ao (*(int *)&B000755d0_ao)
+#define M000755d4_ak (*(int *)&B000755d4_ak)
 #define CH16(i) (*(unsigned short *)((char *)B000718f0_hO + (i) * 0x248))
 void FUN_0003cad4(void)
 {
     int vl, ta, ir, i;
-    ((short *)&B000755d0_ao)[1] = 0x26;
-    ((short *)&B000755d0_ao)[0] = 0x8000;
-    ((short *)&B000755d4_ak)[1] = 0x37;
-    ((short *)&B000755d4_ak)[0] = 0x8000;
+    ((short *)&M000755d0_ao)[1] = 0x26;
+    ((short *)&M000755d0_ao)[0] = 0x8000;
+    ((short *)&M000755d4_ak)[1] = 0x37;
+    ((short *)&M000755d4_ak)[0] = 0x8000;
     DAT_0005c658 = 0x5a;
     FUN_000281b4(0x18);
     DAT_0005bf44 = 0x12;
@@ -161,8 +161,8 @@ void FUN_0003cad4(void)
     FUN_0001ccf4();
 }
 
-#undef B000755d0_ao
-#undef B000755d4_ak
+#undef M000755d0_ao
+#undef M000755d4_ak
 #undef CH16
 /* ---- from build/var/mod/parts/p3cc88.c */
 extern void FUN_0003cad4(void); /* module prototype */
@@ -177,8 +177,8 @@ extern unsigned char *B000755dc_aX; extern int DAT_0005c6c8;
 #define B00072238_dL ((struct SO *)B00072238_dL)
 #define M00064d80_ay ((struct O *)B00064d80_ay)
 #define B00072230_c4 (*(struct MT **)&B00072230_c4)
-#define B000755d0_ao (*(int *)&B000755d0_ao)
-#define B000755d4_ak (*(int *)&B000755d4_ak)
+#define M000755d0_ao (*(int *)&B000755d0_ao)
+#define M000755d4_ak (*(int *)&B000755d4_ak)
 extern void FUN_0002c0c0(int), FUN_000281b4(int);
 int FUN_0003cc88(unsigned y, unsigned x, int who)
 {
@@ -199,18 +199,18 @@ int FUN_0003cc88(unsigned y, unsigned x, int who)
                 if (B00072238_dL[i].type == 0x54) {
                     if (B00072238_dL[i].st == 1) {
                         if (DAT_0005c6c8 == 0x17) {
-                            ((short *)&B000755d0_ao)[1] = 3;
-                            ((short *)&B000755d0_ao)[0] = 0x8000;
-                            ((short *)&B000755d4_ak)[1] = 0xa;
-                            ((short *)&B000755d4_ak)[0] = 0x8000;
+                            ((short *)&M000755d0_ao)[1] = 3;
+                            ((short *)&M000755d0_ao)[0] = 0x8000;
+                            ((short *)&M000755d4_ak)[1] = 0xa;
+                            ((short *)&M000755d4_ak)[0] = 0x8000;
                             FUN_0002c0c0(0xb4);
                             FUN_000281b4(0x13);
                             return 2;
                         } else if (DAT_0005c6c8 == 0xa) {
-                            ((short *)&B000755d0_ao)[1] = 6;
-                            ((short *)&B000755d0_ao)[0] = 0x8000;
-                            ((short *)&B000755d4_ak)[1] = 0x3e;
-                            ((short *)&B000755d4_ak)[0] = 0x8000;
+                            ((short *)&M000755d0_ao)[1] = 6;
+                            ((short *)&M000755d0_ao)[0] = 0x8000;
+                            ((short *)&M000755d4_ak)[1] = 0x3e;
+                            ((short *)&M000755d4_ak)[0] = 0x8000;
                             FUN_0002c0c0(0xb4);
                             FUN_000281b4(6);
                             return 2;
@@ -234,8 +234,8 @@ int FUN_0003cc88(unsigned y, unsigned x, int who)
 #undef M00064d80_ay
 #undef B00072230_c4
 #undef B00072238_dL
-#undef B000755d0_ao
-#undef B000755d4_ak
+#undef M000755d0_ao
+#undef M000755d4_ak
 #undef O
 #undef SO
 /* ---- from build/var/mod/parts/p3ceb8.c */
@@ -243,18 +243,18 @@ int FUN_0003cc88(unsigned y, unsigned x, int who)
 extern int DAT_0005bf30, B0007b630_hz, B0007b634_e6, DAT_0005c050, B000758ec_bl, DAT_0005c658;
 extern void FUN_0003e608(void), FUN_000391b0(unsigned char), FUN_0002f1c8(void), FUN_0003e510(int, int, int, int), FUN_0003efd0(int, int);
 extern void FUN_0002ea04(void), FUN_0002ea78(void), FUN_0003e614(unsigned, int), FUN_000281b4(int); extern int FUN_00040b40(void);
-#define B000755d0_ao (*(int *)&B000755d0_ao)
-#define B000755d4_ak (*(int *)&B000755d4_ak)
-#define XF (((short *)&B000755d0_ao)[0])
-#define XI (((short *)&B000755d0_ao)[1])
-#define YF (((short *)&B000755d4_ak)[0])
-#define YI (((short *)&B000755d4_ak)[1])
+#define M000755d0_ao (*(int *)&B000755d0_ao)
+#define M000755d4_ak (*(int *)&B000755d4_ak)
+#define XF (((short *)&M000755d0_ao)[0])
+#define XI (((short *)&M000755d0_ao)[1])
+#define YF (((short *)&M000755d4_ak)[0])
+#define YI (((short *)&M000755d4_ak)[1])
 void FUN_0003ceb8(void)
 {
     int i;
     DAT_0005bf30 = 2;
-    B000755d0_ao = B0007b634_e6;
-    B000755d4_ak = B0007b630_hz;
+    M000755d0_ao = B0007b634_e6;
+    M000755d4_ak = B0007b630_hz;
     for (i = 0; i < 0x47; i++) {
         FUN_0003e608();
         FUN_000391b0(DAT_0005c050);
@@ -283,8 +283,8 @@ void FUN_0003ceb8(void)
     }
 }
 
-#undef B000755d0_ao
-#undef B000755d4_ak
+#undef M000755d0_ao
+#undef M000755d4_ak
 #undef XF
 #undef XI
 #undef YF
@@ -297,8 +297,8 @@ extern int FUN_0002c1dc(int), FUN_0002c328(int, int, int, int);
 extern void FUN_000281b4(int), FUN_0002f1c8(void), FUN_0002ea78(void), FUN_0001cd44(int, int), FUN_0003e510(int, int, int, int), FUN_0002ea04(void);
  extern int DAT_0005c6c8, B0007b630_hz, B0007b634_e6, DAT_0005c658, B000758ec_bl, DAT_0005bf44;
 extern unsigned short B000718f0_hO[];
-#define B000755d0_ao (*(int *)&B000755d0_ao)
-#define B000755d4_ak (*(int *)&B000755d4_ak)
+#define M000755d0_ao (*(int *)&B000755d0_ao)
+#define M000755d4_ak (*(int *)&B000755d4_ak)
 int FUN_0003d004(int k)
 {
     int sy, sx, i;
@@ -309,10 +309,10 @@ int FUN_0003d004(int k)
                 return 1;
             }
             if (DAT_0005c6c8 == 0x10 || DAT_0005c6c8 == 0x11) {
-                ((short *)&B000755d0_ao)[1] = 0x21;
-                ((short *)&B000755d0_ao)[0] = 0x8000;
-                ((short *)&B000755d4_ak)[1] = 2;
-                ((short *)&B000755d4_ak)[0] = 0x8000;
+                ((short *)&M000755d0_ao)[1] = 0x21;
+                ((short *)&M000755d0_ao)[0] = 0x8000;
+                ((short *)&M000755d4_ak)[1] = 2;
+                ((short *)&M000755d4_ak)[0] = 0x8000;
                 DAT_0005c658 = 0;
                 FUN_000281b4(0x1f);
                 return 1;
@@ -320,10 +320,10 @@ int FUN_0003d004(int k)
         }
     } else {
         if (B00075618_b1.t0[k] >= 0x242 && B00075618_b1.t0[k] <= 0x247) {
-            sy = B000755d0_ao;
-            sx = B000755d4_ak;
-            B000755d0_ao = B0007b634_e6;
-            B000755d4_ak = B0007b630_hz;
+            sy = M000755d0_ao;
+            sx = M000755d4_ak;
+            M000755d0_ao = B0007b634_e6;
+            M000755d4_ak = B0007b630_hz;
             FUN_0002f1c8();
             FUN_0002ea78();
             for (i = 0; i < 4; i++) {
@@ -347,8 +347,8 @@ int FUN_0003d004(int k)
     return 0;
 }
 
-#undef B000755d0_ao
-#undef B000755d4_ak
+#undef M000755d0_ao
+#undef M000755d4_ak
 /* ---- from build/var/mod/parts/p3d234.c */
 /* FUN_0003d234 @ 0003d234: Vladislav leaves the party for good; unoptimised module */
 void *memset(void *, int, unsigned);
@@ -632,33 +632,33 @@ struct CELL { unsigned short lo : 6, mid : 5, mark : 1, rest : 4; };
 extern void FUN_000102a8(int);
 struct MK { unsigned char kind; unsigned char b0 : 2, on : 1, b3 : 5; signed char a2, a3; unsigned char a4, a5, a6, a7, a8, a9; };
 #define FUN_0002e8c8 ((struct MK *(*)(int, int))FUN_0002e8c8)
-#define B000755d0_ao (*(int *)&B000755d0_ao)
-#define B000755d4_ak (*(int *)&B000755d4_ak)
+#define M000755d0_ao (*(int *)&B000755d0_ao)
+#define M000755d4_ak (*(int *)&B000755d4_ak)
 extern int B0007b630_hz, B0007b634_e6, DAT_0005f040, DAT_0005f044, DAT_0005f048, B0007b638_d2, DAT_0005cf6c, DAT_0005c658;
  extern char *B000758bc_al;
 void FUN_0003dbac(int dx, int dy)
 {
     int a, b, cell; struct MK *p;
-    B0007b630_hz = B000755d4_ak;
-    B0007b634_e6 = B000755d0_ao;
-    a = B000755d4_ak;
-    b = B000755d0_ao;
-    B000755d4_ak = a + dx;
-    B000755d0_ao = b + dy;
+    B0007b630_hz = M000755d4_ak;
+    B0007b634_e6 = M000755d0_ao;
+    a = M000755d4_ak;
+    b = M000755d0_ao;
+    M000755d4_ak = a + dx;
+    M000755d0_ao = b + dy;
     DAT_0005f048 = 0;
-    if (!FUN_0003d5d0(B000755d4_ak, B000755d0_ao, -1)) if (!DAT_0005f048) {
-        B000755d4_ak = a + dx;
-        B000755d0_ao = b;
-        if (!FUN_0003d5d0(B000755d4_ak, B000755d0_ao, -1)) if (!DAT_0005f048) {
-            B000755d4_ak = a;
-            B000755d0_ao = b + dy;
-            if (!FUN_0003d5d0(B000755d4_ak, B000755d0_ao, -1)) if (!DAT_0005f048) {
-                B000755d4_ak = a;
-                B000755d0_ao = b;
+    if (!FUN_0003d5d0(M000755d4_ak, M000755d0_ao, -1)) if (!DAT_0005f048) {
+        M000755d4_ak = a + dx;
+        M000755d0_ao = b;
+        if (!FUN_0003d5d0(M000755d4_ak, M000755d0_ao, -1)) if (!DAT_0005f048) {
+            M000755d4_ak = a;
+            M000755d0_ao = b + dy;
+            if (!FUN_0003d5d0(M000755d4_ak, M000755d0_ao, -1)) if (!DAT_0005f048) {
+                M000755d4_ak = a;
+                M000755d0_ao = b;
             }
         }
     }
-    if (((short *)&B000755d4_ak)[1] != DAT_0005f044 || ((short *)&B000755d0_ao)[1] != DAT_0005f040) {
+    if (((short *)&M000755d4_ak)[1] != DAT_0005f044 || ((short *)&M000755d0_ao)[1] != DAT_0005f040) {
         cell = B00075618_b1.w * DAT_0005f044 + DAT_0005f040;
         FUN_0003da7c(cell);
         if (M000698e0_b7[cell].mark) {
@@ -680,22 +680,22 @@ void FUN_0003dbac(int dx, int dy)
                 }
             }
         }
-        DAT_0005f040 = ((short *)&B000755d0_ao)[1];
-        DAT_0005f044 = ((short *)&B000755d4_ak)[1];
+        DAT_0005f040 = ((short *)&M000755d0_ao)[1];
+        DAT_0005f044 = ((short *)&M000755d4_ak)[1];
         cell = B00075618_b1.w * DAT_0005f044 + DAT_0005f040;
         if (M000698e0_b7[cell].mark) {
             FUN_00038110(B000758bc_al + 10, 0xff, 1, 4);
             B0007b638_d2 = M000698e0_b7[cell].lo;
             M000698e0_b7[cell].lo = 0;
         }
-        p = FUN_0002e8c8(((short *)&B000755d0_ao)[1], ((short *)&B000755d4_ak)[1]);
+        p = FUN_0002e8c8(((short *)&M000755d0_ao)[1], ((short *)&M000755d4_ak)[1]);
         if (p) {
             switch (p->kind) {
             case 3:
                 if (p->on) FUN_000102a8(p->a2);
                 break;
             case 8:
-                FUN_0003d3d8(((short *)&B000755d0_ao)[1], ((short *)&B000755d4_ak)[1], p->a7, p->a8, p->a9, p->a6);
+                FUN_0003d3d8(((short *)&M000755d0_ao)[1], ((short *)&M000755d4_ak)[1], p->a7, p->a8, p->a9, p->a6);
                 break;
             case 6:
                 if (p->on) {
@@ -711,8 +711,8 @@ void FUN_0003dbac(int dx, int dy)
 
 #undef CELL
 #undef M000698e0_b7
-#undef B000755d0_ao
-#undef B000755d4_ak
+#undef M000755d0_ao
+#undef M000755d4_ak
 #undef FUN_0002e8c8
 #undef FUN_00038110
 #undef MK

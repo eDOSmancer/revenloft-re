@@ -122,7 +122,8 @@ extern int FUN_0003acdc(int);
 extern unsigned short B00064d80_ay;
 #define B00064d82_aG (*(short *)((char *)&B00064d80_ay + 2)) /* STANDIN: view, B00064d80_ay + 0x2 */
 #define B00064d86_aC (*(short *)((char *)&B00064d80_ay + 6)) /* STANDIN: view, B00064d80_ay + 0x6 */
-extern short DAT_0005f03e, DAT_0005f03c, B000755d2_ai; extern unsigned short B000755d4_ak;  extern unsigned short B000698e0_b7; extern char *B00072230_c4;
+#define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
+extern short DAT_0005f03e, DAT_0005f03c; extern unsigned short B000755d4_ak;  extern unsigned short B000698e0_b7; extern char *B00072230_c4;
 #define ENT_Y(i)  (*(short *)((char *)&B00064d82_aG + (i) * 0x16))
 #define ENT_X(i)  (*(short *)((char *)&B00064d86_aC + (i) * 0x16))
 #define ENT_FL(i) (*(int *)((char *)&B00064d8b_a7 + (i) * 0x16))
@@ -132,6 +133,7 @@ extern short DAT_0005f03e, DAT_0005f03c, B000755d2_ai; extern unsigned short B00
 int FUN_0001083c(int x, int y, int i)
 {
     int ok = 0;
+    { extern int B000755e0_bo; int d; d = B000755e0_bo; } /* STANDIN: dead reads of scalars this function does not use - zero-savings -oa memory nodes in the pass-1 conflict list, in place of the nodes the party cell words 0x755d2 / 0x755d6 had as globals of their own (they are views of the position ints) */
     for (; i < B00075618_b1.nent; i++) {
         ok = 0;
         if (!(ENT_FL(i) & 2)) {
@@ -291,7 +293,8 @@ extern void FUN_0003975c(int, int, int, int, int);
 
 extern volatile unsigned char DAT_00055fcb;
 extern unsigned char DAT_00051760[];
-extern short B000755d2_ai, B000755d6_ae;
+#define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
+
 
 extern char *DAT_00056048;
 #define B00064d84_aE (*(unsigned short *)((char *)&B00064d80_ay + 4)) /* STANDIN: view, B00064d80_ay + 0x4 */
@@ -301,6 +304,7 @@ extern unsigned short B00072238_dL, B0007223c_dz, B00072246_dJ, B00064d80_ay;
 void FUN_00010cb0(int x, int y, int px, int py)
 {
     int i, j, k, m, n, s1, s2;
+    { extern int B000755e0_bo, B000755e4_bk, B000755e8_ag, B000755ec_aH; int d; d = B000755e0_bo; d = B000755e4_bk; d = B000755e8_ag; d = B000755ec_aH; } /* STANDIN: dead reads of scalars this function does not use - zero-savings -oa memory nodes in the pass-1 conflict list, in place of the nodes the party cell words 0x755d2 / 0x755d6 had as globals of their own (they are views of the position ints) */
     if (DAT_00051760[x + B00062756_ff * y] != 0xff) {
         for (i = FUN_00010700(x, y, 0); i != -1; i = FUN_00010700(x, y, i + 1)) {
             if (DAT_00055fcb) {
@@ -456,7 +460,7 @@ void FUN_0001139c(int x0, int y0, int w, int h, int t)
 #define FUN_0002c368 ((void (*)(char *, int))FUN_0002c368)
 struct T { unsigned short wall : 6, b6 : 1, door : 1, b8 : 2, seen : 1, mark : 1, rest : 4; };
 
-extern short B000755d6_ae, B000755d2_ai;
+
 extern unsigned char DAT_00051760[];
 extern int FUN_0002e8c8(int, int);
 extern unsigned short FUN_0002e930(int);
@@ -510,7 +514,7 @@ void FUN_00011558(void)
 }
 
 
-extern short B000755d6_ae, B000755d2_ai;
+
 extern unsigned char DAT_00051760[];
 extern int FUN_0002e8c8(int, int);
 extern unsigned short FUN_0002e930(int);
@@ -569,7 +573,7 @@ void FUN_00011834(void)
 }
 
 
-extern short B000755d6_ae, B000755d2_ai;
+
 extern unsigned char DAT_00051760[];
 extern int FUN_0002e8c8(int, int);
 extern unsigned short FUN_0002e930(int);
@@ -588,7 +592,7 @@ char *FUN_00011c08(void)
 }
 
 
-extern short B000755d6_ae, B000755d2_ai;
+
 extern unsigned char DAT_00051760[];
 extern int FUN_0002e8c8(int, int);
 extern unsigned short FUN_0002e930(int);
@@ -602,7 +606,7 @@ int FUN_00011c28(void)
 }
 
 
-extern short B000755d6_ae, B000755d2_ai;
+
 extern unsigned char DAT_00051760[];
 extern int FUN_0002e8c8(int, int);
 extern unsigned short FUN_0002e930(int);
@@ -1184,13 +1188,14 @@ extern int FUN_00012ae8(int lev); /* module prototype */
 struct B { short x0, y0, x1, y1; };
 extern struct B DAT_00055f62[];
 extern volatile unsigned char DAT_00055fcb; extern unsigned char DAT_00055fca, DAT_00055fd9, DAT_0005d370[];
-extern int B0006274c_dc, DAT_0005c6c8, DAT_0005c050, B000758dc_cl; extern short B000755d2_ai, B000755d6_ae;
+extern int B0006274c_dc, DAT_0005c6c8, DAT_0005c050, B000758dc_cl; 
 extern void FUN_000391b0(unsigned char), FUN_000398f0(int, int, int, int, int, unsigned char *), FUN_0003975c(int, int, int, int, int), FUN_0002a8c8(int, int, int, int, int);
 extern void FUN_0002a510(int), FUN_0002f8fc(void), FUN_0002ae30(void);
 
 void FUN_00012db0(int x, int y, int m)
 {
     int k;
+    { extern int B000755e0_bo, B000755e4_bk; int d; d = B000755e0_bo; d = B000755e4_bk; } /* STANDIN: dead reads of scalars this function does not use - zero-savings -oa memory nodes in the pass-1 conflict list, in place of the nodes the party cell words 0x755d2 / 0x755d6 had as globals of their own (they are views of the position ints) */
     for (k = 0; DAT_00055f62[k].x0 != -1; k++) {
         if (x >= DAT_00055f62[k].x0 && x <= DAT_00055f62[k].x1 && y >= DAT_00055f62[k].y0 && y <= DAT_00055f62[k].y1) break;
     }
@@ -1357,7 +1362,7 @@ extern void FUN_000134b0(void); /* module prototype */
 #include "world.h"
 void *memset(void *, int, unsigned); void *memmove(void *, const void *, unsigned);
 extern void FUN_00029ccc(int), FUN_0002a9f8(void), FUN_000391b0(unsigned char), FUN_0002a5b0(int, short, unsigned char), FUN_00032d70(void), FUN_00032d8c(void), FUN_000410b0(void *), FUN_00029cf4(void);
-extern unsigned char DAT_0005759c[], DAT_0005d680; extern volatile unsigned char DAT_00055fcb; extern unsigned char DAT_00058602, DAT_00051760[]; extern int B0006274c_dc, DAT_0005c6c8, DAT_0005c050; extern short B000755d2_ai, B000755d6_ae, DAT_00058600, DAT_00059e35, DAT_0005604c; extern char DAT_00055760[];
+extern unsigned char DAT_0005759c[], DAT_0005d680; extern volatile unsigned char DAT_00055fcb; extern unsigned char DAT_00058602, DAT_00051760[]; extern int B0006274c_dc, DAT_0005c6c8, DAT_0005c050; extern short DAT_00058600, DAT_00059e35, DAT_0005604c; extern char DAT_00055760[];
 void FUN_00013634(int unused)
 {
     int k;

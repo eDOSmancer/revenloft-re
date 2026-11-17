@@ -922,7 +922,9 @@ void FUN_00035acc(char *sp, int who, int slot)
 /* ---- from build/var/mod/parts/p35c38.c */
 /* FUN_00035c38 @ 00035c38 */
 extern int FUN_0002c1dc(int); extern void FUN_0003195c(int, int, int, int, int, int, int); extern void FUN_0002c124(int);
-extern int DAT_0005c6c8, B000755d0_ao, B000755d4_ak; extern short B000755d2_ai, B000755d6_ae;
+#define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
+#define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
+extern int DAT_0005c6c8, B000755d0_ao, B000755d4_ak; 
 void FUN_00035c38(void)
 {
     if (FUN_0002c1dc(0x40) == 0 && DAT_0005c6c8 == 0xb && B000755d2_ai >= 2 && B000755d2_ai <= 4 && B000755d6_ae >= 0x77 && B000755d6_ae <= 0x79) {

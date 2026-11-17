@@ -1,3 +1,48 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+short B000758fe_j6;
+short B000758fc_kL;
+int B000758f8_h3;
+int B000758f4_hG;
+int B000758f0_hK;
+int B000758ec_bl;
+int B000758e8_jC;
+int B000758e4_h7;
+int B000758e0_iK;
+char *B000758dc_cl;
+int B000758d8_j3[1];
+int B000758d4_jG;
+char *B000758d0_jK;
+int B000758cc_fL;
+int B000758c8_as;
+char *B000758c4_j7;
+int B000758c0_kK;
+int B000758bc_al;
+struct LEV B00075618_b1;
+int B00075614_lm;
+int B00075610_a9;
+int B0007560c_hn;
+int B00075608_c1;
+int B00075604_mM;
+int B00075600_b9;
+int B000755fc_ax;
+int B000755f8_bg;
+int B000755f4_ck;
+int B000755f0_co;
+int B000755ec_aH;
+int B000755e8_ag;
+int B000755e4_bk;
+int B000755e0_bo;
+unsigned char *B000755dc_aX;
+struct IT *B000755d8_aw;
+unsigned char B000755d4_ak[4];
+unsigned char B000755d0_ao[4];
+char B000748ec_bk[3300];
+int B000748e8_jD;
+int B000748e4_h8;
+unsigned char B0007224c_ez[9880];
+/* BSS end */
+extern unsigned char B000755d4_ak[4];
+extern unsigned char B000755d0_ao[4];
 /* Module: FUN_000307e8, FUN_00030850, FUN_00030994, FUN_00030a24, FUN_00030b40, FUN_00030c0c, FUN_00030cf4,
    FUN_00030d7c, FUN_00030e08, FUN_000310b0, FUN_000311d8, FUN_000314b8, FUN_00031704, FUN_00031880,
    FUN_0003195c, FUN_00031adc, FUN_00031b44, FUN_00031bf0, FUN_00031db4, FUN_00031f1c, FUN_00031f70,
@@ -76,7 +121,9 @@ void FUN_00030850(void)
 extern void FUN_00030850(void); /* module prototype */
 /* FUN_00030994 @ 00030994: toggle stepping mode */
 extern void FUN_0002c21c(char *);
-extern unsigned char DAT_0005c02f; extern int DAT_0005c658; extern short B000755d0_ao, B000755d4_ak; extern char *PTR_s_Stepping_Mode_On_0005d670, *PTR_s_Stepping_Mode_Off_0005d674;
+#define B000755d0_ao (*(short *)((char *)&B000755d0_ao)) /* STANDIN: the first bytes of the object */
+#define B000755d4_ak (*(short *)((char *)&B000755d4_ak)) /* STANDIN: the first bytes of the object */
+extern unsigned char DAT_0005c02f; extern int DAT_0005c658;  extern char *PTR_s_Stepping_Mode_On_0005d670, *PTR_s_Stepping_Mode_Off_0005d674;
 void FUN_00030994(void)
 {
     DAT_0005c02f ^= 1;
@@ -101,10 +148,13 @@ void FUN_00030994(void)
 #include <stdlib.h>
 #include "world.h"
 extern void FUN_00038110(int, int, int, int), FUN_00038164(int, int, unsigned char);
-extern short B000755d6_ae, B000755d2_ai, DAT_0005d7a0[]; extern unsigned short B000698e0_b7[]; extern int B000758bc_al;
+#define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
+#define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
+extern short DAT_0005d7a0[]; extern unsigned short B000698e0_b7[]; extern int B000758bc_al;
 void FUN_00030a24(unsigned char *e)
 {
     int dist; int v; int d[2]; int type; int k; int vol; int snd;
+    { extern int B000755e0_bo, B000755e4_bk; int d; d = B000755e0_bo; d = B000755e4_bk; } /* STANDIN: dead reads of scalars this function does not use - zero-savings -oa memory nodes in the pass-1 conflict list, in place of the nodes the party cell words 0x755d2 / 0x755d6 had as globals of their own (they are views of the position ints) */
     d[0] = abs(e[4] - B000755d6_ae);
     d[1] = abs(e[5] - B000755d2_ai);
     type = e[5] + B00075618_b1.w * e[4];
@@ -789,7 +839,7 @@ extern void FUN_00029ccc(int), FUN_0002f1c8(void), FUN_0002ea78(void), FUN_0002c
 extern void FUN_000380e8(void), FUN_0003e608(void), FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_0002ea04(void), FUN_00038168(void), FUN_0003e614(unsigned, int), FUN_000281b4(int), FUN_0001f540(int), FUN_00029cf4(void);
 extern int DAT_0005c658;
 extern int DAT_0005bf30;
-extern short B000755d2_ai, B000755d6_ae;
+
 
 extern unsigned DAT_0005cf4c;
 
@@ -1062,7 +1112,7 @@ struct BOX { short x0, y0, x1, y1; };
 extern struct BOX DAT_0005d684[];
 extern struct W B00065a18_cn[];
 extern short DAT_00058600; extern unsigned char DAT_00058602, DAT_0005d681[], DAT_0005d682;
-extern short B000755d0_ao, B000755d4_ak; extern int DAT_0005c738;
+ extern int DAT_0005c738;
 extern void FUN_0001c704(void);
 
 extern void FUN_00043808(int, int, int, int *, int *, int *, int *, int *);

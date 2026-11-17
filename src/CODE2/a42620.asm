@@ -38,9 +38,7 @@ extrn B00072220_gw:byte
 extrn B000748e4_h8:byte
 extrn B000748e8_jD:byte
 extrn B000755d0_ao:byte
-extrn B000755d2_ai:byte
 extrn B000755d4_ak:byte
-extrn B000755d6_ae:byte
 extrn B000755e4_bk:byte
 extrn B000755e8_ag:byte
 extrn B000755ec_aH:byte
@@ -1164,9 +1162,9 @@ L_000434ec:
     mov dword ptr [DAT_0005c6f4 + 030h], eax
     movsx eax, word ptr [B000755f4_ck+2]
     mov dword ptr [DAT_0005c6f4 + 02ch], eax
-    movsx eax, word ptr [B000755d6_ae]
+    movsx eax, word ptr [B000755d4_ak+2]
     mov dword ptr [DAT_0005c6f4 + 028h], eax
-    movsx eax, word ptr [B000755d2_ai]
+    movsx eax, word ptr [B000755d0_ao+2]
     mov dword ptr [DAT_0005c6f4 + 024h], eax
     mov dword ptr [DAT_0005c6f4 + 038h], 0xffffffff
     mov dword ptr [B00072220_gw], 0x800

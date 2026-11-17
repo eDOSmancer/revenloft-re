@@ -323,8 +323,8 @@ struct CHR { char p0[0x10]; unsigned short st; char p12[3]; signed char cls[3]; 
 #include "dice.h"
 #define DAT_000566c8 ((struct DICE *)DAT_000566c8)
 #define M000718e0_iO ((char *)&B000718e0_iO)
-#define B000755d0_ao ((unsigned )B000755d0_ao)
-#define B000755d4_ak ((unsigned )B000755d4_ak)
+#define M000755d0_ao ((unsigned )B000755d0_ao)
+#define M000755d4_ak ((unsigned )B000755d4_ak)
 extern int FUN_00024a60(char *), FUN_0001f2d4(int, int), FUN_0001cf2c(int, int); extern void FUN_0001cd44(int, int);
 #define CH(i) ((struct CHR *)(M000718e0_iO + (i) * 0x248))
 #undef DAT_000566c8
@@ -336,8 +336,8 @@ void FUN_00019070(struct MS *p, int f)
 {
     unsigned char *dice; int off; int c, mult, k, d, w;
     unsigned xlo, xhi, yhi, ylo;
-    xlo = xhi = B000755d0_ao;
-    ylo = yhi = B000755d4_ak;
+    xlo = xhi = M000755d0_ao;
+    ylo = yhi = M000755d4_ak;
     if (f) {
         c = p->type;
         dice = DAT_000566c8 + c * 4;
@@ -391,18 +391,20 @@ void FUN_00019070(struct MS *p, int f)
 #undef CHR
 #undef DAT_000566c8
 #undef M000718e0_iO
-#undef B000755d0_ao
-#undef B000755d4_ak
+#undef M000755d0_ao
+#undef M000755d4_ak
 #undef MS
 #undef CH
 /* ---- from src/CODE2/wip/f19368.c */
 /* Round 63 (lane AH): MATCH in the module compile. The c19368 form of round 62 (struct MS of the module, party y via the int view, party x as the short scalar) plus one reused difference local d for the two abs() arguments (lane AF catalogue): one conflict node fewer, which puts the savings-6 group and the dx operands the original way. */
 int abs(int);
 #pragma intrinsic(abs)
-extern short B000755d2_ai;
+#define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
+
 void FUN_00019368(struct MS *m)
 {
     int dy, dx, snd, d;
+    { extern int B000755e0_bo; int d; d = B000755e0_bo; } /* STANDIN: dead reads of scalars this function does not use - zero-savings -oa memory nodes in the pass-1 conflict list, in place of the nodes the party cell words 0x755d2 / 0x755d6 had as globals of their own (they are views of the position ints) */
 
     d = ((short *)&m->a)[1] - ((short *)&B000755d4_ak)[1]; /* STANDIN: one reused difference local d for both abs() arguments: one conflict node fewer (21 -> 20), decides the savings-6 / dx operand ties */
     dy = abs(d);
@@ -1245,10 +1247,12 @@ void FUN_0001ae30(void)
 struct ENT { int y, x; unsigned lo : 24, fb0 : 1, dead : 1, fb2 : 2, st : 2, fb6 : 2;
     unsigned short cell, type; short timer, hp; unsigned short w14; };
 struct MT { char name[0x16]; unsigned short rad; char p18[0x16]; unsigned f2e : 31, nokill : 1; int imm; char p36[0xf]; };
-extern short B000755d2_ai, B000755d6_ae;  extern unsigned char *B00072230_c4;
+#define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
+  extern unsigned char *B00072230_c4;
 void FUN_0001aed8(int who)
 {
     int i, j, k, x, y, x0, y0, n, cell;
+    { extern int B000755e0_bo, B000755e4_bk; int d; d = B000755e0_bo; d = B000755e4_bk; } /* STANDIN: dead reads of scalars this function does not use - zero-savings -oa memory nodes in the pass-1 conflict list, in place of the nodes the party cell words 0x755d2 / 0x755d6 had as globals of their own (they are views of the position ints) */
 
     n = FUN_0002c328(4, 20, 0, 0);
     x0 = B000755d2_ai - 1;

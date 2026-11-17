@@ -97,12 +97,15 @@ int abs(int);
 #pragma intrinsic(abs)
 struct MOB { int a, b; unsigned char c8, c9, ca, cb; short cell, type, s10, cnt; unsigned short f0 : 1, f1 : 1, f2 : 1, dir : 3, step : 3, f9 : 5, top : 2; };
 extern int B000755d0_ao, B000755d4_ak;
-extern short B000755d2_ai, B000755d6_ae;
+#define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
+#define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
+
 
 
 void FUN_0002b27c(struct MOB *m, int b)
 {
     int tx, ty, dx, dy, n;
+    { extern int B000755e0_bo, B000755e4_bk, B000755e8_ag, B000755ec_aH; int d; d = B000755e0_bo; d = B000755e4_bk; d = B000755e8_ag; d = B000755ec_aH; } /* STANDIN: dead reads of scalars this function does not use - zero-savings -oa memory nodes in the pass-1 conflict list, in place of the nodes the party cell words 0x755d2 / 0x755d6 had as globals of their own (they are views of the position ints) */
     tx = B000755d0_ao;
     tx -= m->b;
     ty = B000755d4_ak - m->a;

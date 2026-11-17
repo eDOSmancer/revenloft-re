@@ -22,7 +22,6 @@ c    m2af90   -3s -ox -oe -oa -ot -w0
 c    m2c0c0   -3s -ox -oe -oa -ot -w0
 asm  b2c0c0   -3p -c
 c    m307e8   -3s -ox -oe -oa -ot -w0
-asm  b307e8   -3p -c
 c    m32e40   -3s -ox -oe -oa -ot -w0
 c    m33df0   -3s -ox -oe -ot -w0
 asm  a373e7   -3p -mf -c
