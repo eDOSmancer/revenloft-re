@@ -1,3 +1,9 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+struct RES B0007b670_fk;
+char B0007b64e_bV[34];
+unsigned char B0007b644_dg[10];
+unsigned B0007b640_gk;
+/* BSS end */
 /* Module: FUN_0003e340, FUN_0003e34c, FUN_0003e360, FUN_0003e374, FUN_0003e404, FUN_0003e438, FUN_0003e488,
    FUN_0003e4a4, FUN_0003e4f4, FUN_0003e510, FUN_0003e538, FUN_0003e564, FUN_0003e590, FUN_0003e5d4,
    FUN_0003e608, FUN_0003e614, FUN_0003e6d0, FUN_0003e6f0, FUN_0003e70c, FUN_0003e728, FUN_0003e740,
@@ -120,7 +126,7 @@ void FUN_0003e564(unsigned short *img) { int k; for (k = 0; k < img[1]; k++) FUN
 extern void FUN_0003f580(char *msg); /* module prototype */
 /* FUN_0003e590 @ 0003e590: push the page stack (the post-increment index form also compiles like the original under the module's -oa; n = count, count = n + 1 does not) */
  extern void FUN_000391b0(unsigned char);
-extern unsigned char DAT_0005f0d0, B0007b644_dg[], DAT_0005ef4d;
+extern unsigned char DAT_0005f0d0, B0007b644_dg[10], DAT_0005ef4d;
 
 void FUN_0003e590(unsigned char page)
 {
@@ -133,7 +139,7 @@ void FUN_0003e590(unsigned char page)
 extern void FUN_0003f580(char *msg); /* module prototype */
 /* FUN_0003e5d4 @ 0003e5d4: pop the page stack */
  extern void FUN_000391b0(unsigned char);
-extern unsigned char DAT_0005f0d0, B0007b644_dg[];
+extern unsigned char DAT_0005f0d0, B0007b644_dg[10];
 
 void FUN_0003e5d4(void)
 {
@@ -194,13 +200,13 @@ void FUN_0003e6d0(void) { sound(0x416); FUN_0003e614(6, 0); nosound(); }
 /* ---- from build/var/mod/parts/p3e6f0.c */
 /* FUN_0003e6f0 @ 0003e6f0: a as a decimal string (itoa, the library function at 0x473bf) */
 extern char *itoa(int, char *, int);
-extern char B0007b64e_bV[];
+extern char B0007b64e_bV[34];
 char *FUN_0003e6f0(int a) { itoa(a, B0007b64e_bV, 10); return B0007b64e_bV; }
 
 /* ---- from build/var/mod/parts/p3e70c.c */
 /* FUN_0003e70c @ 0003e70c: a as a decimal string (ltoa, the library function at 0x47483) */
 extern char *ltoa(long, char *, int);
-extern char B0007b64e_bV[];
+extern char B0007b64e_bV[34];
 char *FUN_0003e70c(int a) { ltoa(a, B0007b64e_bV, 10); return B0007b64e_bV; }
 
 /* ---- from build/var/mod/parts/p3e728.c */
