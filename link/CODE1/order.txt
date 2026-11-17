@@ -1,0 +1,124 @@
+# Link order of CODE.1: every object in the order WLINK loads it (FILE order).
+#   c    <module> <wcc386 options>   src/CODE1/<module>.c
+#   asm  <file>   <wasm options>     src/CODE1/<file>.asm
+#   lib  <module> <library>          a module of the Watcom C library (libraries: see config)
+lib  istable  CLIB3S.LIB
+c    m10010   -3s -s -of+ -ot -d1+ -ol -w0
+asm  b10010   -3p -c
+asm  xib      -3p -c
+c    m150c0   -3s -s -of+ -ot -d1+ -ol -w0
+asm  b150c0   -3p -c
+c    m15880   -3s -s -of+ -ot -d1+ -ol -w0
+asm  b15880   -3p -c
+c    m15d90   -3s -s -of+ -ot -d1+ -ol -w0
+asm  a16060   -3p -mf -c
+lib  rand     CLIB3S.LIB
+c    m161c0   -3s -s -of+ -ot -d1+ -ol -w0
+asm  b161c0   -3p -c
+c    m164b0   -3s -s -of+ -ot -d1+ -ol -w0
+lib  strlen   CLIB3S.LIB
+c    m16f10   -3s -s -of+ -ot -d1+ -ol -w0
+lib  strcpy   CLIB3S.LIB
+c    m172d0   -3s -s -of+ -ot -d1+ -ol -w0
+asm  b172d0   -3p -c
+c    m17f50   -3s -s -of+ -ot -d1+ -ol -w0
+asm  b17f50   -3p -c
+lib  memset   CLIB3S.LIB
+c    m184d0   -3s -s -of+ -ot -d1+ -ol -w0
+asm  b184d0   -3p -c
+c    m19be0   -3s -s -of+ -ot -d1+ -ol -w0
+asm  a19ca0   -3p -mf -c
+lib  sprintf  CLIB3S.LIB
+lib  strcat   CLIB3S.LIB
+c    m1b060   -3s -s -of+ -ot -d1+ -w0
+asm  b1b060   -3p -c
+c    m1be70   -3s -s -of+ -ot -d1+ -w0
+c    m1c2d0   -3s -s -of+ -ot -d1+ -w0
+asm  a1c7a0   -3p -mf -c
+lib  exit     3CSDL.B
+lib  cstart   3CSDL.B
+lib  argcargv CLIB3S.LIB
+lib  int386x  CLIB3S.LIB
+c    m1cef0   -3s -s -of+ -ot -d1+ -ol -w0
+asm  b1cef0   -3p -c
+lib  memmove  CLIB3S.LIB
+lib  access   CLIB3S.LIB
+lib  dosfind  CLIB3S.LIB
+lib  open     CLIB3S.LIB
+lib  creat    CLIB3S.LIB
+lib  close    CLIB3S.LIB
+lib  read     CLIB3S.LIB
+lib  write    3CSDL.A
+lib  lseek    3CSDL.A
+lib  unlink   CLIB3S.LIB
+lib  dosdrive CLIB3S.LIB
+lib  getcwd   3CSDL.A
+lib  toupper  CLIB3S.LIB
+lib  chdir    CLIB3S.LIB
+lib  mkdir    CLIB3S.LIB
+lib  memcpy   CLIB3S.LIB
+lib  disable  CLIB3S.LIB
+lib  enable   CLIB3S.LIB
+lib  int386   CLIB3S.LIB
+lib  dosmem   CLIB3S.LIB
+lib  memmax   CLIB3S.LIB
+lib  nmalloc  CLIB3S.LIB
+lib  nfree    CLIB3S.LIB
+asm  a1db80   -3p -mf -c
+c    m1dde0   -3s -s -of+ -ot -d1+ -ol -w0
+lib  inp      CLIB3S.LIB
+lib  outp     CLIB3S.LIB
+lib  d_setvec CLIB3S.LIB
+lib  d_getvec CLIB3S.LIB
+lib  __stos   CLIB3S.LIB
+lib  sound    CLIB3S.LIB
+lib  itoa     3CSDL.A
+lib  ltoa     3CSDL.A
+c    m1e0d0   -3s -s -of+ -ot -d1+ -ol -w0
+c    m1e190   -3s -s -of+ -ot -d1+ -ol -w0
+lib  harderr  CLIB3S.LIB
+lib  atoi     CLIB3S.LIB
+asm  a1e3b4   -3p -mf -c
+c    m1ede0   -3s -s -of+ -ot -d1+ -ol -w0
+lib  prtf     3CSDL.A
+c    m1f750   -3s -s -of+ -ot -d1+ -w0
+lib  crwdata  CLIB3S.LIB
+lib  cmain386 CLIB3S.LIB
+lib  initrtns CLIB3S.LIB
+lib  initargv CLIB3S.LIB
+lib  int386xa CLIB3S.LIB
+lib  dosret   CLIB3S.LIB
+lib  umaskval CLIB3S.LIB
+lib  doserror CLIB3S.LIB
+lib  isatty   CLIB3S.LIB
+lib  errno    CLIB3S.LIB
+lib  iomode   CLIB3S.LIB
+lib  iob      CLIB3S.LIB
+lib  stack386 CLIB3S.LIB
+lib  stk      CLIB3S.LIB
+lib  strncpy  CLIB3S.LIB
+lib  segread  CLIB3S.LIB
+lib  memalloc CLIB3S.LIB
+lib  grownear 3CSDL.B
+lib  heapmod  CLIB3S.LIB
+lib  ___argc  CLIB3S.LIB
+lib  nmemneed CLIB3S.LIB
+lib  noefgfmt CLIB3S.LIB
+lib  stinit   CLIB3S.LIB
+lib  minreal  CLIB3S.LIB
+lib  tell     3CSDL.A
+lib  _strcmp  CLIB3S.LIB
+lib  cinit    CLIB3S.LIB
+lib  heapen   3CSDL.A
+lib  amblksiz CLIB3S.LIB
+lib  sbrk386  CLIB3S.LIB
+lib  initfile 3CSDL.A
+lib  ioexit   CLIB3S.LIB
+lib  allocfp  3CSDL.B
+lib  fclose   CLIB3S.LIB
+lib  getpid   CLIB3S.LIB
+lib  flush    CLIB3S.LIB
+lib  ftell    CLIB3S.LIB
+lib  remove   CLIB3S.LIB
+lib  qwrite   CLIB3S.LIB
+lib  dosseg   CLIB3S.LIB
