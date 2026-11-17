@@ -174,7 +174,7 @@ extern void (__interrupt __far *DAT_00032924)();
 void FUN_00018424(void) { if (DAT_0003291d) { _dos_setvect(9, DAT_0003291e); _dos_setvect(8, DAT_0003292a); _dos_setvect(0, DAT_00032924); DAT_0003291d = 0; } }
 
 /* ---- from build/var/mod/parts/p18484.c */
-extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00018484 @ 00018484 */
 int FUN_00018484(void) { return DAT_0003291d; }

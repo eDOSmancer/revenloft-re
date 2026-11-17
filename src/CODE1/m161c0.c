@@ -6,7 +6,7 @@
 #include <direct.h>
 #include <ctype.h>
 /* ---- from build/var/mod/parts/p161c0.c */
-extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_000161c0 @ 000161c0: BIOS timer tick count (0x46c) */
 int FUN_000161c0(void) { return *(int *)0x46c; }
@@ -49,9 +49,10 @@ struct SR { short size, n, w; unsigned char h, f; };
 char *FUN_0001624c(void) { if (_dos_findnext(&B00038904_eu)) return 0; return B00038904_eu.name; }
 
 /* ---- from build/var/mod/parts/p16270.c */
-extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00016270 @ 00016270 */
+#define B00038919_eu (B00038904_eu.attrib) /* STANDIN: the attribute byte of the find record carries a name of its own (0x38919) */
 unsigned char FUN_00016270(void) { return B00038919_eu; }
 
 /* ---- from build/var/mod/parts/p1627c.c */

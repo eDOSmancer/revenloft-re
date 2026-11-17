@@ -6,10 +6,7 @@ DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
 public B00038904_eu
 B00038904_eu label byte
-    db 21 dup(?)
-public B00038919_eu
-B00038919_eu label byte
-    db 22 dup(?)
+    db 43 dup(?)
 public B0003892f_eu
 B0003892f_eu label byte
     db 89 dup(?)

@@ -15,7 +15,7 @@ int FUN_00016f10(int n, int *seg, short *sel) { union REGS r; volatile union REG
 int FUN_00016f74(int sel) { union REGS r; volatile union REGS o; r.x.eax = 0x101; r.w.dx = sel; int386(0x31, &r, (union REGS *)&o); return ((o.x.cflag & 1) == 0) - 1; }
 
 /* ---- from build/var/mod/parts/p16fac.c */
-extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00016fac @ 00016fac */
 void FUN_00016fac(unsigned short a) { _dos_freemem(a); }

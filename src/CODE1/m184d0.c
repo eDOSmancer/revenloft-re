@@ -165,13 +165,13 @@ int FUN_00018918(int v) { if (v < 0) return -1; if (v > 0) return 1; return 0; }
 
 #undef SB
 /* ---- from build/var/mod/parts/p18940.c */
-extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00018940 @ 00018940 */
 void FUN_00018940(int v) { DAT_00032b1c = v; }
 
 /* ---- from build/var/mod/parts/p18950.c */
-extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00018950 @ 00018950 */
 void FUN_00018950(int v) { DAT_00032b18 = v; }
@@ -619,7 +619,7 @@ void FUN_00019ae8(void)
 }
 
 /* ---- from build/var/mod/parts/p19bc4.c */
-extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00019bc4 @ 00019bc4: request the quit prompt and poll the keyboard hooks */
 void FUN_00019bc4(void) { DAT_00032b01 |= 1; FUN_00019ae8(); }

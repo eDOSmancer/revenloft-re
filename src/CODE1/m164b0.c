@@ -84,7 +84,7 @@ void FUN_00016674(int x) { FUN_0001a2b0(DAT_000323d7 - x, x - DAT_000323d7); }
 
 #undef SR
 /* ---- from build/var/mod/parts/p16694.c */
-extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00016694 @ 00016694 */
 void FUN_00016694(int a) { FUN_0001a21c(a); }
