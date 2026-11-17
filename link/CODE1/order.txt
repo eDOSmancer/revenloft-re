@@ -4,7 +4,6 @@
 #   lib  <module> <library>          a module of the Watcom C library (libraries: see config)
 lib  istable  CLIB3S.LIB
 c    m10010   -3s -s -of+ -ot -d1+ -ol -w0
-asm  b10010   -3p -c
 c    d36814   -3s -s -of+ -ot -d1+ -ol -w0
 c    d3682c   -3s -s -of+ -ot -d1+ -ol -w0
 c    d36838   -3s -s -of+ -ot -d1+ -ol -w0

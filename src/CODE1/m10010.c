@@ -1,3 +1,28 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+unsigned char B00036813_eu[1];
+unsigned char B00036812_eu[1];
+unsigned char F00036810_eu[1];
+char B00036810_eu[1];
+unsigned char B0003680f_eu[1];
+signed char B0003680e_eu[1];
+signed char B0003680d_eu[1];
+unsigned char B0003680c_eu[1];
+unsigned char B0003680b_eu[1];
+signed char B0003680a_eu[1];
+unsigned char B00036809_eu[1];
+unsigned char B00036808_eu[1];
+unsigned char B000367f8_eu[16];
+unsigned char B000364f8_eu[768];
+unsigned char B000363f8_eu[256];
+unsigned char B00035ff8_eu[1024];
+unsigned char B00035af8_eu[1280];
+unsigned char B00035a00_eu[248];
+char B000359f8_eu[8];
+char B000355f8_eu[1024];
+/* BSS end */
+extern unsigned char B00036808_eu[1];
+extern unsigned char B000363f8_eu[256];
+extern unsigned char B00035a00_eu[248];
 /* Module: FUN_00010010, FUN_0001004c, FUN_000100ec, FUN_0001035c, FUN_0001043c, FUN_000104b0, FUN_0001064c,
    FUN_000107e4, FUN_000110a4, FUN_00011464, FUN_000115b0, FUN_00011a04, FUN_00011bd4, FUN_00011cd0,
    FUN_00011dd8, FUN_00011e64, FUN_00011ee4, FUN_00011f24, FUN_00012198, FUN_000124d4, FUN_0001266c,
@@ -177,7 +202,8 @@ void *memset(void *, int, unsigned);
 extern void FUN_00018e3c(int, int), FUN_00016588(int), FUN_000186c4(int, int, int, int), FUN_00016c60(int, int, int, int, int), FUN_00016eb0(int, int, int, int, int, unsigned char *);
 extern void FUN_00019c44(int, int, int, int, int, void *, int, int), FUN_0001a05c(int, int, int, int, int), FUN_000155dc(int, int, int, int, int), FUN_000153e4(int);
 extern void *FUN_0001954c(int, int);
-extern unsigned char B00037138_eu, B000363f8_eu, B00035af8_eu[], B00035ff8_eu[];
+#define B000363f8_eu (*(unsigned char *)((char *)&B000363f8_eu)) /* STANDIN: the first bytes of the object */
+extern unsigned char B00037138_eu, B00035af8_eu[], B00035ff8_eu[];
 extern int B0003713c_eu;
 
 extern char B000355f8_eu[];
@@ -558,7 +584,8 @@ extern void FUN_000107e4(int lo, int hi); /* module prototype */
 extern void FUN_00011a04(void); /* module prototype */
 /* FUN_00011bd4: the "start the adventure?" screen: show the party sheet, wait for yes (4: finish creation) or no (3), then restore the cursor shapes */
 extern void FUN_00016588(int), FUN_0001550c(int, int, int, int, int); 
-extern int DAT_000304cc; extern unsigned char B00037138_eu, DAT_000304c4[]; extern short B00036808_eu[];
+#define B00036808_eu ((short *)((char *)&B00036808_eu)) /* STANDIN: the first bytes of the object */
+extern int DAT_000304cc; extern unsigned char B00037138_eu, DAT_000304c4[]; 
 void FUN_00011bd4(void) { int done, r; DAT_00030904 = DAT_00030908; DAT_0003090c = DAT_00030910; DAT_00030908 = 0x2f; DAT_00030910 = 0x30; FUN_000107e4(0, 6); FUN_00016588(B00037138_eu); FUN_000104b0(6); FUN_0001550c(*(int *)&B00037138_eu, 0xc8, 0, 0xc8, 0x140); B00037138_eu ^= 1; done = 0; do { r = FUN_0001043c(); switch (r) { case 4: *(short *)((char *)B00036808_eu + DAT_000304cc * 0x248) = 0x8000; DAT_000304c4[DAT_000304cc] = 0; DAT_00030940 = 2; case 3: done = 1; } } while (!done); DAT_00030904 = DAT_00030908; DAT_0003090c = DAT_00030910; DAT_00030908 = 1; DAT_00030910 = 1; FUN_00011a04(); FUN_000107e4(0, 6); }
 
 /* ---- from build/var/mod/parts/p11cd0.c */
@@ -1070,7 +1097,7 @@ extern void FUN_000115b0(int sel, int tx, int ty, int arg); /* module prototype 
 extern void FUN_00013020(void); /* module prototype */
 /* FUN_00013138: run the "keep this character" dialog until it is answered: 3 = keep (back to the roll screen), 4 = done */
  
-extern int DAT_000304cc; extern unsigned char DAT_000304c4[], B00036809_eu[]; extern short B00036808_eu[];
+extern int DAT_000304cc; extern unsigned char DAT_000304c4[], B00036809_eu[]; 
 void FUN_00013138(void) { int done, s, r; ++DAT_000304d0; FUN_00011464(6, -1, -1, 0x2f, 0x30, -1, -1, -1, -1, -1, -1, -1, 0x2d); done = 0; (*(int *)((char *)&DAT_000304cc + 4))--; /* STANDIN: plain view of DAT_000304d0 through its neighbour: dec dword ptr */ do { s = DAT_000304d0; DAT_000304d0 = 0; r = FUN_0001043c(); DAT_000304d0 = s; switch (r) { case 3: FUN_000115b0(-1, -1, -1, -1); FUN_00013020(); DAT_000304c4[DAT_000304cc] = 1; *(short *)((char *)B00036808_eu + DAT_000304cc * 0x248) = 0; done = 1; break; case 4: FUN_000115b0(-1, -1, -1, -1); DAT_000304c4[DAT_000304cc] = 0; B00036809_eu[DAT_000304cc * 0x248] |= 0x80; done = 1; break; } } while (!done); }
 
 /* ---- from build/var/mod/parts/p13208.c */
@@ -1233,7 +1260,8 @@ int sprintf(char *, const char *, ...);
 char *strcpy(char *, const char *), *strcat(char *, const char *);
 extern int DAT_000304cc, B00037124_eu;
 extern char B000355f8_eu[], B000359f8_eu[];
-extern unsigned char B00035a00_eu;
+#define B00035a00_eu (*(unsigned char *)((char *)&B00035a00_eu)) /* STANDIN: the first bytes of the object */
+
 extern unsigned char B00036836_eu[], B0003682a_eu[], B0003682c_eu[];
 extern signed char B0003680e_eu[], DAT_0003083f[];
 extern char B00036810_eu[], B0003681a_eu[], B0003681c_eu[];

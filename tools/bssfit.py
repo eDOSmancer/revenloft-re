@@ -425,7 +425,7 @@ def stmt_decls(st):
         out.append((name, base, decl))
     return out
 
-def views_in_text(text, V, hdr, fname):
+def views_in_text(text, V, hdr, fname, predeclare=True):
     """rewrite one C text: V {name: (container, offset)}; cur {name: view text} carried in from the headers it includes"""
     t = blank_comments(text); rx = re.compile(r'\b(%s)\b' % '|'.join(V)); edits = []; cur = {}; declared = set(); known = ''
     if not rx.search(t): return text, cur
@@ -451,7 +451,7 @@ def views_in_text(text, V, hdr, fname):
                 cont, off = V[name]; v = view_expr(base, decl, cont, off, bool(re.search(r'&\s*%s\b' % name, t)))
                 if cur.get(name) not in (None, v) and re.search(r'\b%s\b' % name, t[ls:pos]):
                     print('   CHECK %s: %s is used ahead of its redeclaration in one line' % (fname, name))
-                if cont not in declared and not re.search(r'\b%s\b' % cont, t[:pos]) and not re.search(r'\b%s\b' % cont, known):
+                if predeclare and cont not in declared and not re.search(r'\b%s\b' % cont, t[:pos]) and not re.search(r'\b%s\b' % cont, known):
                     DD = declarations(text)
                     for h in re.findall(r'#include\s+"(\w+\.h)"', t):
                         if h in hdr:
@@ -540,6 +540,17 @@ def cmd_views(prog, V):
             else: L.append((n, s))
         write_asm(f, 'm' + os.path.basename(f)[1:-4], L, NOTE)
 
+def cmd_selfview(prog, module, sized):
+    """the module declares NAME with another type than the object it is to define (a scalar that is the first member of
+    an array or record of SIZE bytes): the object is declared as bytes at the top and the module's own declarations
+    become views of it.  sized: [NAME=SIZE]"""
+    S = {x.split('=')[0]: int(x.split('=')[1], 0) for x in sized}
+    f = src(prog, module + '.c'); text = demacro_text(read(f), set(S))
+    new, _ = views_in_text(text, {n: (n, 0) for n in S}, {}, module, predeclare=False)
+    for n in S: new = new.replace('/* STANDIN: view, %s + 0x0 */' % n, '/* STANDIN: the first bytes of the object */')
+    pre = ''.join('extern unsigned char %s[%d];\n' % (n, S[n]) for n in sorted(S, reverse=True))
+    open(f, 'w', encoding='latin1').write(pre + new)
+
 def cmd_contain(prog, cont, size, keep=()):
     """every label inside the `size` bytes of the object `cont` becomes a view of it (not the labels in `keep`: these stay
     objects of their own, defined next to each other)"""
@@ -570,6 +581,7 @@ if __name__ == '__main__':
     elif a[0] == 'view': cmd_view(a[1], a[2], a[3], int(a[4], 0))
     elif a[0] == 'own': cmd_own(a[1], a[2], int(a[3], 16), int(a[4], 16))
     elif a[0] == 'contain': cmd_contain(a[1], a[2], int(a[3], 0), a[a.index('--keep') + 1:] if '--keep' in a else ())
+    elif a[0] == 'selfview': cmd_selfview(a[1], a[2], a[3:])
     elif a[0] == 'check': sys.exit(1 if cmd_check(a[1]) else 0)
     elif a[0] == 'name': print(fit(a[1], a[2]))
     else: raise SystemExit(__doc__)
