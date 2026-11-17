@@ -24,7 +24,6 @@ asm  b172d0   -3p -c
 c    m17f50   -3s -s -of+ -ot -d1+ -ol -w0
 lib  memset   CLIB3S.LIB
 c    m184d0   -3s -s -of+ -ot -d1+ -ol -w0
-asm  b184d0   -3p -c
 c    m19be0   -3s -s -of+ -ot -d1+ -ol -w0
 asm  a19ca0   -3p -mf -c
 lib  sprintf  CLIB3S.LIB
