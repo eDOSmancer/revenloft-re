@@ -1,4 +1,4 @@
-; b29c80.asm - uninitialised data (_BSS) of module m29c80.c, 9880 bytes
+; b2af90.asm - uninitialised data (_BSS) of module m2af90.c, 9880 bytes
 ; STANDIN: part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md).
 .386p
 DGROUP group _BSS
