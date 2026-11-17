@@ -189,9 +189,10 @@ def sizes(prog, module, names):
         for n in order:
             base, decl = D[n]
             add.append('#undef %s' % n)
+            add.append('extern %s %s;' % (base, decl.replace('@', 'ZZS%d' % order.index(n))))   # the first declaration's type
         inc = lambda n: re.match(r'@\s*\[\s*\]', D[n][1].lstrip('(* '))
         add.append('unsigned long ZZBSSSZ[] = { %s };' % ', '.join(
-            '(sizeof(%s%s) << 8) | %d' % (n, '[0]' if inc(n) else '', i & 255) for i, n in enumerate(order)))
+            '(sizeof(ZZS%d%s) << 8) | %d' % (i, '[0]' if inc(n) else '', i & 255) for i, n in enumerate(order)))
         obj = compile_text(prog, module, text + '\n'.join(add) + '\n')
         if not obj: raise SystemExit('size probe of %s failed' % module)
         segs, pubs, data = omf(obj); s, o = pubs['ZZBSSSZ']
@@ -359,40 +360,166 @@ def cmd_convert(prog, module, first=None, last=None, at=None, dry=False, trim=Fa
     open(op, 'w').write('\n'.join(o))
     print('   left in assembler: %d bytes ahead, %d bytes behind' % (sum(s for n, s in head), sum(s for n, s in tail)))
 
-def cmd_view(prog, name, cont, off):
-    """NAME is a label inside the object CONT: every C file that declares it sees it as a view of CONT instead, and the
-    label is dropped from its b*.asm (its bytes go to the label ahead of it)"""
-    for f in sorted(glob.glob(src(prog, 'm*.c'))):
-        text = read(f); t = blank_comments(text)
-        if not re.search(r'\b%s\b' % name, t): continue
-        D = declarations(text)
-        if name not in D: raise SystemExit('%s uses %s without a declaration' % (f, name))
-        base, decl = D[name]; cuts = []; first = None
-        if decl == '@': view = '(*(%s *)((char *)&%s + %d))' % (base, cont, off)
-        elif re.fullmatch(r'@\s*\[[^\]]*\]', decl): view = '((%s *)((char *)&%s + %d))' % (base, cont, off)
-        else: raise SystemExit('%s: no view for the declarator %s' % (f, decl))
-        for m in re.finditer(r'\bextern\b', t):
-            e = t.find(';', m.start()); st = t[m.start():e + 1]
-            if not re.search(r'\b%s\b' % name, st): continue
-            parts = split_top(st[len('extern'):-1]); keep = [q for q in parts if not re.search(r'\b%s\b' % name, q)]
-            if len(keep) == len(parts): continue
-            if first is None: first = m.start()
-            if not re.search(r'\b%s\b' % name, parts[0]): new = 'extern' + ','.join(keep) + ';'
-            elif keep:
-                b0 = re.match(r'\s*((?:\w+\s+)+)', parts[0]).group(1); new = 'extern ' + b0 + ','.join(keep).lstrip() + ';'
+# ---- address model of the b*.asm files, ownership, views -----------------------------------------------------------------
+def addr_of(n):
+    m = re.fullmatch(r'[B-Z]([0-9a-f]{8})_\w\w', n); return int(m.group(1), 16) if m else None
+
+def bmap(prog):
+    """{path of b*.asm: [(address, name or '', size)]}"""
+    out = {}
+    for f in sorted(glob.glob(src(prog, 'b*.asm'))):
+        L = labels(f); k = next(i for i, (n, s) in enumerate(L) if n)
+        a = addr_of(L[k][0]) - sum(s for n, s in L[:k]); E = []
+        for n, s in L:
+            if n and addr_of(n) != a: raise SystemExit('%s: %s is at %x' % (f, n, a))
+            E.append((a, n, s)); a += s
+        out[f] = E
+    return out
+
+NOTE = "part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md)."
+
+def cmd_own(prog, module, start, end):
+    """the labels in [start, end) move to b<module>.asm (created after the module in the link order if it is new)"""
+    M = bmap(prog); dst = src(prog, 'b%s.asm' % module[1:]); take = []
+    op = os.path.join(ROOT, 'link', prog, 'order.txt'); o = open(op).read().split('\n')
+    for f, E in list(M.items()):
+        if f == dst: continue
+        mine = [e for e in E if start <= e[0] < end]; rest = [e for e in E if not (start <= e[0] < end)]
+        if not mine: continue
+        if any(e[0] < start and e[0] + e[2] > start or e[0] < end and e[0] + e[2] > end for e in E): raise SystemExit('cut inside an object in ' + f)
+        if rest and any(rest[i][0] + rest[i][2] != rest[i + 1][0] for i in range(len(rest) - 1)): raise SystemExit('%s would not stay contiguous' % f)
+        take += mine; b = os.path.basename(f)[:-4]
+        if rest: write_asm(f, 'm' + b[1:], [(n, s) for a, n, s in rest], NOTE)
+        else:
+            os.remove(f); o = [l for l in o if l.split()[:2] != ['asm', b]]
+    E = sorted(M.get(dst, []) + take)
+    if any(E[i][0] + E[i][2] != E[i + 1][0] for i in range(len(E) - 1)): raise SystemExit('b%s.asm would not be contiguous' % module[1:])
+    write_asm(dst, module, [(n, s) for a, n, s in E], NOTE)
+    if not any(l.split()[:2] == ['asm', 'b' + module[1:]] for l in o):
+        i = next(i for i, l in enumerate(o) if l.split()[:2] == ['c', module]); o.insert(i + 1, 'asm  b%s   -3p -c' % module[1:])
+    open(op, 'w').write('\n'.join(o)); print('b%s.asm: %x-%x' % (module[1:], E[0][0], E[-1][0] + E[-1][2]))
+
+def view_expr(base, decl, cont, off):
+    addr = '((char *)&%s + %d)' % (cont, off) if off else '((char *)&%s)' % cont
+    if decl == '@': return '(*(%s *)%s)' % (base, addr)
+    m = re.fullmatch(r'(\**)\s*@', decl)
+    if m: return '(*(%s %s*)%s)' % (base, m.group(1), addr)
+    m = re.fullmatch(r'(\**)\s*@\s*\[[^\]]*\]', decl)
+    if m: return '((%s %s*)%s)' % (base, m.group(1), addr)
+    m = re.fullmatch(r'@\s*\[[^\]]*\]((\s*\[[^\]]*\])+)', decl)
+    if m: return '((%s (*)%s)%s)' % (base, m.group(1).replace(' ', ''), addr)
+    return '(*(%s %s)%s)' % (base, decl.replace('@', '(*)'), addr)
+
+def stmt_decls(st):
+    """an extern statement (without `extern` and `;`) -> [(name, base, declarator with @)] or None"""
+    parts = split_top(st); out = []; base = None
+    for i, p in enumerate(parts):
+        mm = re.search(r'\b([A-Za-z_]\w*)\s*((\[[^\]]*\])*)\s*(\)\s*(\(.*\))?(\[[^\]]*\])*)?\s*$', p, re.S)
+        if not mm: return None
+        if i == 0:
+            k = mm.start(1)
+            while k > 0 and p[k - 1] in '*( \t\n': k -= 1
+            base = ' '.join(p[:k].split()); decl = p[k:]
+        else: decl = p
+        name = mm.group(1); decl = re.sub(r'\b%s\b' % name, '@', ' '.join(decl.split()), count=1)
+        out.append((name, base, decl))
+    return out
+
+def views_in_text(text, V, cur, fname, known=''):
+    """rewrite one C text: V {name: (container, offset)}; cur {name: view text} carried in from the headers it includes"""
+    t = blank_comments(text); rx = re.compile(r'\b(%s)\b' % '|'.join(V)); edits = []; cur = dict(cur); declared = set()
+    if not rx.search(t): return text, cur
+    ev = []
+    for m in re.finditer(r'\bextern\b', t):
+        e = t.find(';', m.start())
+        if '{' in t[m.end():e] or not rx.search(t[m.end():e]): continue
+        ev.append((m.start(), 'x', m, e))
+    for m in re.finditer(r'^[ \t]*#[ \t]*(define|undef)[ \t]+(\w+)(.*)$', t, re.M):
+        if m.group(2) in V: ev.append((m.start(), m.group(1), m, None))
+    for pos, kind, m, e in sorted(ev, key=lambda x: x[0]):
+        ls = t.rfind('\n', 0, pos) + 1
+        if kind == 'x':
+            D = stmt_decls(t[m.end():e])
+            if D is None: raise SystemExit('%s: cannot parse %r' % (fname, t[m.start():e + 1][:200]))
+            keep = [d for d in D if d[0] not in V]; lines = []
+            for name, base, decl in D:
+                if name not in V: continue
+                cont, off = V[name]; v = view_expr(base, decl, cont, off)
+                if cur.get(name) not in (None, v) and re.search(r'\b%s\b' % name, t[ls:pos]):
+                    print('   CHECK %s: %s is used ahead of its redeclaration in one line' % (fname, name))
+                if cont not in declared and not re.search(r'\b%s\b' % cont, t[:pos]) and not re.search(r'\b%s\b' % cont, known):
+                    DD = declarations(text)
+                    lines.append('extern %s;' % (' '.join(DD[cont]).replace('@', cont) if cont in DD else 'unsigned char %s[]' % cont))
+                declared.add(cont)
+                if cur.get(name) == v: continue
+                if name in cur: lines.append('#undef %s' % name)
+                lines.append('#define %s %s /* STANDIN: view, %s + 0x%x */' % (name, v, cont, off)); cur[name] = v
+            if keep:
+                parts = split_top(t[m.end():e]); base0 = D[0][1]
+                if D[0][0] in V:
+                    ks = [text[m.end():e][sum(len(q) + 1 for q in parts[:i]):][:len(parts[i])] for i, d in enumerate(D) if d[0] not in V]
+                    new = 'extern ' + base0 + ' ' + ','.join(ks).lstrip() + ';'
+                else:
+                    ks = [text[m.end():e][sum(len(q) + 1 for q in parts[:i]):][:len(parts[i])] for i, d in enumerate(D) if d[0] not in V]
+                    new = 'extern' + ','.join(ks) + ';'
             else: new = ''
-            cuts.append((m.start(), e + 1, new))
-        for s, e, new in sorted(cuts, reverse=True): text = text[:s] + new + text[e:]
-        ls = text.rfind('\n', 0, first) + 1
-        pre = '' if re.search(r'\b%s\b' % cont, blank_comments(text[:ls])) else \
-              'extern %s;\n' % (' '.join(D[cont]).replace('@', cont) if cont in D else 'unsigned char %s[]' % cont)
-        text = text[:ls] + '%s#define %s %s /* STANDIN: a name of its own in the original image, %d bytes into %s */\n' % (pre, name, view, off, cont) + text[ls:]
-        open(f, 'w', encoding='latin1').write(text); print('view in', os.path.basename(f))
-    for f in glob.glob(src(prog, 'b*.asm')):
-        L = labels(f); k = next((i for i, (n, s) in enumerate(L) if n == name), None)
-        if k is None: continue
-        L[k - 1] = (L[k - 1][0], L[k - 1][1] + L[k][1]); del L[k]
-        write_asm(f, 'm' + os.path.basename(f)[1:-4], L, "part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md).")
+            edits.append((m.start(), e + 1, new))
+            if lines: edits.append((ls, ls, '\n'.join(lines) + '\n'))
+        elif kind == 'define':
+            name = m.group(2); body = text[m.start(3):m.end(3)]
+            if body.startswith('('): raise SystemExit('%s: function-like macro %s' % (fname, name))
+            if body.rstrip().endswith('\\'): raise SystemExit('%s: continued macro %s' % (fname, name))
+            if 'STANDIN: view,' in body: continue
+            if name not in cur: raise SystemExit('%s: #define %s ahead of a declaration' % (fname, name))
+            nb = re.sub(r'\b%s\b' % name, lambda _: cur[name], body)
+            edits.append((m.start(), m.end(), '#undef %s\n#define %s%s' % (name, name, nb)))
+        else:
+            name = m.group(2)
+            if name in cur: edits.append((m.end(), m.end(), '\n#define %s %s' % (name, cur[name])))
+    for a, b, r in sorted(edits, key=lambda x: (x[0], x[1]), reverse=True): text = text[:a] + r + text[b:]
+    return text, cur
+
+def cmd_views(prog, V):
+    """V {name: (container, offset)}: every name becomes a view of its container in the C files, headers and a*.asm"""
+    hcur = {}; htext = {}
+    for h in sorted(glob.glob(os.path.join(ROOT, 'include', '*.h'))):
+        text = read(h); new, cur = views_in_text(text, V, {}, os.path.basename(h)); hcur[os.path.basename(h)] = cur; htext[os.path.basename(h)] = new
+        if new != text: open(h, 'w', encoding='latin1').write(new); print('views in', os.path.basename(h))
+    for f in sorted(glob.glob(src(prog, 'm*.c'))):
+        text = read(f); cur = {}; known = ''
+        for h in re.findall(r'#include\s+"(\w+\.h)"', text): cur.update(hcur.get(h, {})); known += htext.get(h, '')
+        new, _ = views_in_text(text, V, cur, os.path.basename(f), known)
+        if new != text: open(f, 'w', encoding='latin1').write(new); print('views in', os.path.basename(f))
+    rx = re.compile(r'\b(%s)\b' % '|'.join(V))
+    for f in sorted(glob.glob(src(prog, 'a*.asm'))):
+        text = read(f)
+        if not rx.search(text): continue
+        out = []; have = set(re.findall(r'^\s*extrn\s+(\w+)', text, re.M)); need = []
+        for l in text.split('\n'):
+            m = re.match(r'\s*extrn\s+(\w+)', l)
+            if m and m.group(1) in V:
+                c = V[m.group(1)][0]
+                if c not in have: have.add(c); out.append('extrn %s:byte' % c)
+                continue
+            out.append(rx.sub(lambda m: '%s+%d' % V[m.group(1)], l))
+        open(f, 'w', encoding='latin1').write('\n'.join(out)); print('views in', os.path.basename(f))
+    for f, E in bmap(prog).items():
+        if not any(n in V for a, n, s in E): continue
+        L = []
+        for a, n, s in E:
+            if n in V:
+                if not L: raise SystemExit('%s starts with the view %s' % (f, n))
+                L[-1] = (L[-1][0], L[-1][1] + s)
+            else: L.append((n, s))
+        write_asm(f, 'm' + os.path.basename(f)[1:-4], L, NOTE)
+
+def cmd_contain(prog, cont, size):
+    """every label inside the `size` bytes of the object `cont` becomes a view of it"""
+    a0 = addr_of(cont); V = {n: (cont, a - a0) for E in bmap(prog).values() for a, n, s in E if n and a0 < a < a0 + size}
+    print('%d views of %s' % (len(V), cont))
+    if V: cmd_views(prog, V)
+
+def cmd_view(prog, name, cont, off): cmd_views(prog, {name: (cont, off)})
 
 def cmd_check(prog):
     work = os.path.join(ROOT, 'build', prog, 'cc'); bad = 0
@@ -413,6 +540,8 @@ if __name__ == '__main__':
     elif a[0] == 'convert': cmd_convert(a[1], a[2], opt('--first'), opt('--last'), opt('--at'), '--dry' in a, '--trim' in a,
                                         {x.split('=')[0]: int(x.split('=')[1], 0) for i, x in enumerate(a) if i and a[i - 1] == '--size'})
     elif a[0] == 'view': cmd_view(a[1], a[2], a[3], int(a[4], 0))
+    elif a[0] == 'own': cmd_own(a[1], a[2], int(a[3], 16), int(a[4], 16))
+    elif a[0] == 'contain': cmd_contain(a[1], a[2], int(a[3], 0))
     elif a[0] == 'check': sys.exit(1 if cmd_check(a[1]) else 0)
     elif a[0] == 'name': print(fit(a[1], a[2]))
     else: raise SystemExit(__doc__)
