@@ -18,7 +18,8 @@ Every byte of the two LE images comes out of the Watcom linker, from ordinary ob
 
 - `src/CODE1/m*.c` (20 files), `src/CODE2/m*.c` (35 files): one C file per original module, compiled by `WCC386`.
 - `src/CODE1/a*.asm` (5), `src/CODE2/a*.asm` (6): the modules that were written in assembler, assembled by `WASM`.
-- `src/<PROG>/b*.asm` (3 and 6) and `src/<PROG>/xib.asm`: stand-ins, see "Stand-ins".
+- `src/CODE1/d*.c` (5), `src/CODE2/d*.c` (8): C files that hold only uninitialised data, see "Stand-ins".
+- `src/CODE2/b307e8.asm` and `src/<PROG>/xib.asm`: stand-ins, see "Stand-ins".
 - the modules of the Watcom C library named in `link/<PROG>/order.txt`, copied unchanged out of the installation's
   `.LIB` files (`tools/omflib.py`; the same bytes `wlib lib *module` extracts).
 
@@ -97,18 +98,20 @@ Nothing else is stored: there is no table of addresses, no fixup order table and
 
 Constructs that exist only because they reproduce the original bytes, not because the original source looked so:
 
-- **`STANDIN` lines in the C files** (369 marks in 39 files, the `BSS` blocks and views included): expressions, temporaries or filler objects written so
+- **`STANDIN` lines in the C files** (543 marks in 57 files, the `BSS` blocks and views included): expressions, temporaries or filler objects written so
   that the compiler makes the original's register choices or data layout. Each is marked with a comment.
 - **Names of the uninitialised variables** (`B<address>_xx`, 352 names) and the `/* BSS: ... */` block at the top
-  of 22 C files. WCC386 writes a module's `_BSS` by size class and symbol-table order, not in definition order; the
+  of 44 C files. WCC386 writes a module's `_BSS` by size class and symbol-table order, not in definition order; the
   names are fitted so that every one lies in the same hash chain of the compiler's symbol table, and the block defines
   the module's objects from the highest address down, which then yields the original layout. The block also holds
-  filler arrays (`F<address>_xx`) for bytes no code names. A few names that lie inside a larger object are macros
-  (views) in the files that use them. Rule, scheme and tool (`tools/bssfit.py`): `docs/BSS.md`.
-- **`b<module>.asm`: uninitialised data not yet defined in C** (CODE.1: `b10010`, `b150c0`, `b15880`, 9728 bytes;
-  CODE.2: `b13a78`, `b186c4`, `b1c704`, `b1eee0`, `b26810`, `b2c0c0`, 68340 bytes): one `_BSS` segment with the
-  variables as public labels in address order, linked right after the module. These ranges hold records whose members
-  carry labels of their own, and their division into modules is not settled (`docs/BSS.md`, "State").
+  filler arrays (`F<address>_xx`) for bytes no code names. Names that lie inside a larger object (members of the party records, of the monster table, ...) are macros
+  (views, `container + offset`) in the files that use them. Rule, scheme and tool (`tools/bssfit.py`): `docs/BSS.md`.
+- **Data-only C files `d<address>.c`** (CODE.1: 5, CODE.2: 8). Inside one object file the size classes of `_BSS` only
+  descend; where they rise at a dword boundary another object file of the original begins. The modules of this
+  repository were cut by their code, and there are more such boundaries than modules, so the data of the extra object
+  files stands in a C file of its own, linked at its place. Which functions were compiled in those files is not known.
+- **`src/CODE2/b307e8.asm`**: the level header at 0x75618 (676 bytes), the one object still defined in assembler,
+  because one function needs a member of it as a global of its own (`docs/BSS.md`, "State").
 - **`xib.asm`**: an empty paragraph-aligned `XIB` segment. In both originals the C library's initialiser table starts
   on a paragraph boundary although every library object declares it word-aligned; some object of the original link
   aligned it, the image does not say which.
@@ -142,7 +145,7 @@ Constructs that exist only because they reproduce the original bytes, not becaus
 
 ## Layout
 
-    src/CODE1, src/CODE2     C modules (m*.c), assembler modules (a*.asm), stand-in definitions (b*.asm, xib.asm)
+    src/CODE1, src/CODE2     C modules (m*.c), assembler modules (a*.asm), data-only C files (d*.c), stand-in definitions (b307e8.asm, xib.asm)
     include/                 shared headers of the C modules
     link/CODE1, link/CODE2   order.txt, options.lnk, alignfix.csv
     tools/build.py           the build driver          tools/dos.py        DOSBox-X runner
