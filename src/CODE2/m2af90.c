@@ -414,10 +414,12 @@ extern void FUN_0002b760(struct T7_MOB *m, char *z, int n); /* module prototype 
 /* struct FIX: defined above */
 struct MOB { int a, b; unsigned char c8, c9, ca, cb0 : 6, held : 1, cb7 : 1; short cell, type, s10, cnt; unsigned short f0 : 1, f1 : 1, f2 : 1, dir : 3, step : 3, f9 : 5, top : 2; };
 extern void FUN_0003df2c(int *, int *, int, int); 
-extern unsigned char DAT_0005c02f; extern short B00075619_b0;
+#define B00075619_b0 (*(short *)((char *)&B00075618_b1 + 1)) /* STANDIN: view, B00075618_b1 + 0x1 */
+extern unsigned char DAT_0005c02f; 
 void FUN_0002bbd8(struct MOB *m, char *mon, char *z)
 {
     int tries, ang, sp; union FIX nx, ny, dy, dx; short xs;
+    { int d; d = B000755d0_ao; } /* STANDIN: dead read of a scalar this function does not use - one zero-savings -oa memory node in the pass-1 conflict list, in place of the node the map width had as a global of its own (it is a view of the level record) */
     tries = 0;
     if (m->held) {
         if (((short *)m)[9] == 0) FUN_0002b760(m, z, 1);

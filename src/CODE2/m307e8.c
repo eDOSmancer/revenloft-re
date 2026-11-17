@@ -1,4 +1,6 @@
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+#include "world.h"
+struct LEV B00075618_b1; /* the level header, 0x2a4 bytes (class 5 like the ints: first declared, last emitted) */
 int B00075614_lm;
 int B00075610_a9;
 int B0007560c_hn;
