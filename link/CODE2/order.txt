@@ -29,7 +29,6 @@ c    m2c0c0   -3s -ox -oe -oa -ot -w0
 asm  b2c0c0   -3p -c
 c    m307e8   -3s -ox -oe -oa -ot -w0
 c    m32e40   -3s -ox -oe -oa -ot -w0
-asm  b32e40   -3p -c
 c    m33df0   -3s -ox -oe -ot -w0
 asm  a373e7   -3p -mf -c
 lib  cmp386   CLIB3S.LIB
