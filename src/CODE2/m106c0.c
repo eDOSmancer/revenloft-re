@@ -65,7 +65,11 @@ int FUN_00010700(int x, int y, int i)
 /* FUN_00010794 @ 00010794: index of the first floor object at (x, y) from object i on, or -1 (a separate loop counter k = i, not i itself) (the count is a member of struct LCNT, recipe 27: not cached under the module's -oa) */
  
 #include "world.h"
-extern volatile unsigned char DAT_00055fcb; extern short B0006761a_hN, B0006761e_g2;
+extern unsigned char B00067618_e7[];
+#define B0006761a_hN (*(short *)((char *)&B00067618_e7 + 2)) /* STANDIN: view, B00067618_e7 + 0x2 */
+extern unsigned char B0006761c_g8[];
+#define B0006761e_g2 (*(short *)((char *)&B0006761c_g8 + 2)) /* STANDIN: view, B0006761c_g8 + 0x2 */
+extern volatile unsigned char DAT_00055fcb; 
 #define OBJ_Y(i) (*(short *)((char *)&B0006761a_hN + (i) * 0x16))
 #define OBJ_X(i) (*(short *)((char *)&B0006761e_g2 + (i) * 0x16))
 int FUN_00010794(int x, int y, int i)

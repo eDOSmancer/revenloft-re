@@ -549,7 +549,7 @@ extern void FUN_0003df2c(int, int, int, int);
 
 /* FUN_00031880: in area 16, once all four marker objects (type 0x89) stand on their four cells, solve the puzzle */
 #include "world.h"
-#define B00067618_e7 ((struct OBJ *)B00067618_e7)
+#define M00067618_e7 ((struct OBJ *)B00067618_e7)
 void *memset(void *, int, unsigned);
 extern int FUN_0002c1dc(int);
 extern void FUN_0002c124(int), FUN_00023ef8(int), FUN_00025050(int);
@@ -565,9 +565,9 @@ void FUN_00031880(void)
     if (FUN_0002c1dc(0x44)) return;
     memset(found, 0, sizeof(found));
     for (i = 0; i < B00075618_b1.n4; i++) {
-        if (B00067618_e7[i].type == 0x89) {
+        if (M00067618_e7[i].type == 0x89) {
             for (k = 0; k < 4; k++) {
-                if (B00067618_e7[i].x == cell[k * 2] && B00067618_e7[i].y == cell[k * 2 + 1]) {
+                if (M00067618_e7[i].x == cell[k * 2] && M00067618_e7[i].y == cell[k * 2 + 1]) {
                     found[k] = 1;
                     break;
                 }
@@ -581,7 +581,7 @@ void FUN_00031880(void)
     }
 }
 
-#undef B00067618_e7
+#undef M00067618_e7
 #undef OBJ
 /* ---- from build/var/mod/parts/p3195c.c */
 extern void FUN_00031880(void); /* module prototype */
@@ -593,7 +593,7 @@ extern void FUN_00031880(void); /* module prototype */
    swapping the first product's operands (fixes the first site), x + W * y, x + y * W, y * W + x at the second
    site (the product stays in eax); 6 experiments. Blocked. */
 #include "world.h"
-#define B00067618_e7 ((char *)B00067618_e7)
+#define M00067618_e7 ((char *)B00067618_e7)
 #define FUN_0003df2c ((void (*)(int *, int *, int, int))FUN_0003df2c)
 void *memmove(void *, const void *, unsigned);
 extern void FUN_0002a344(short, unsigned char); extern short FUN_0003d5d0(int, int, int);
@@ -635,22 +635,22 @@ void FUN_0003195c(int sx, int t, int flag, int px, int py, int thrown, int redra
     }
     n = B00075618_b1.n4;
     if (n == 300) {
-        memmove(B00067618_e7, B00067618_e7 + 0x16, 0x19b2);
+        memmove(M00067618_e7, M00067618_e7 + 0x16, 0x19b2);
         n = 299;
     }
     o = n * 0x16;
-    *(short *)(B00067618_e7 + o + 0xe) = t;
-    *(int *)(B00067618_e7 + o) = pos[1];
-    *(int *)(B00067618_e7 + o + 4) = pos[0];
-    *(short *)(B00067618_e7 + o + 0xc) = cell;
-    ((struct FB *)(B00067618_e7 + o + 0x14))->z = 0;
-    ((struct FB *)(B00067618_e7 + o + 0x14))->flag = flag;
+    *(short *)(M00067618_e7 + o + 0xe) = t;
+    *(int *)(M00067618_e7 + o) = pos[1];
+    *(int *)(M00067618_e7 + o + 4) = pos[0];
+    *(short *)(M00067618_e7 + o + 0xc) = cell;
+    ((struct FB *)(M00067618_e7 + o + 0x14))->z = 0;
+    ((struct FB *)(M00067618_e7 + o + 0x14))->flag = flag;
     B00075618_b1.n4++;
     if (redraw) FUN_0002a344(-1, 0);
     if (t == 0x89) FUN_00031880();
 }
 
-#undef B00067618_e7
+#undef M00067618_e7
 #undef FUN_0003df2c
 /* ---- from build/var/mod/parts/p31adc.c */
 /* FUN_00031adc @ 00031adc */

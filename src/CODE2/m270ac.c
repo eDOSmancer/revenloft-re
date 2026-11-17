@@ -262,7 +262,7 @@ extern void FUN_00027a68(void); /* module prototype */
 #include "world.h"
 #define DAT_0005cf44 (*(unsigned char **)&DAT_0005cf44)
 #define M00064d80_ay ((struct ENT *)B00064d80_ay)
-#define B00067618_e7 ((struct ENT *)B00067618_e7)
+#define M00067618_e7 ((struct ENT *)B00067618_e7)
 #define M000698e0_b7 ((short *)B000698e0_b7)
 #define B00072230_c4 (*(char **)&B00072230_c4)
 #define B00072238_dL ((struct ENT *)B00072238_dL)
@@ -403,15 +403,15 @@ void FUN_000281b4(int lvl)
         for (k = 0; k < B00075618_b1.n4; k++) {
             FUN_000412ec(&rec, 0xb, fh);
             if (rec.kind == 0x54) rec.kind = 0x58;
-            B00067618_e7[k].a = rec.a;
-            B00067618_e7[k].b = rec.b;
-            B00067618_e7[k].c = rec.c;
-            B00067618_e7[k].d = rec.d;
-            B00067618_e7[k].kind = rec.kind;
-            B00067618_e7[k].w10 = 0;
-            B00067618_e7[k].dir = 0;
-            B00067618_e7[k].c3 = 0;
-            B00067618_e7[k].cell = B00067618_e7[k].c * B00075618_b1.w + B00067618_e7[k].a;
+            M00067618_e7[k].a = rec.a;
+            M00067618_e7[k].b = rec.b;
+            M00067618_e7[k].c = rec.c;
+            M00067618_e7[k].d = rec.d;
+            M00067618_e7[k].kind = rec.kind;
+            M00067618_e7[k].w10 = 0;
+            M00067618_e7[k].dir = 0;
+            M00067618_e7[k].c3 = 0;
+            M00067618_e7[k].cell = M00067618_e7[k].c * B00075618_b1.w + M00067618_e7[k].a;
         }
     } else {
         for (k = cnt; k < B00075618_b1.w; k++) {
@@ -434,7 +434,7 @@ void FUN_000281b4(int lvl)
         FUN_000412ec(M00064d80_ay, B00075618_b1.nent * 0x16, fh);
         FUN_000412ec(&k, 2, fh);
         FUN_000412ec(B00072238_dL, B00075618_b1.ndoor * 0x16, fh);
-        FUN_000412ec(B00067618_e7, B00075618_b1.n4 * 0x16, fh);
+        FUN_000412ec(M00067618_e7, B00075618_b1.n4 * 0x16, fh);
     }
     FUN_00027a68();
     if (DAT_0005c02f) FUN_00030850();
@@ -491,7 +491,7 @@ void FUN_000281b4(int lvl)
 
 #undef DAT_0005cf44
 #undef M00064d80_ay
-#undef B00067618_e7
+#undef M00067618_e7
 #undef M000698e0_b7
 #undef B00072230_c4
 #undef B00072238_dL

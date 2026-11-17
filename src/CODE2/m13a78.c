@@ -1,3 +1,17 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+unsigned char G00062b44_gJ[13];
+unsigned char F00062b44_hK[3];
+int B00062b44_bl;
+unsigned char G00062b30_f6[12];
+unsigned char F00062b30_g7[4];
+void *B00062b30_k9[];
+unsigned char B00062a30_mJ[256];
+char B00062990_ll[160];
+char B000628f0_jm[160];
+char B00062850_hl[160];
+char B000627b0_dn[160];
+char B00062760_fl[80];
+/* BSS end */
 /* Module: FUN_00013a78, FUN_00013c04, FUN_00013de4, FUN_00013ea4, FUN_00013f78, FUN_00014040, FUN_00014100,
    FUN_00014228, FUN_000143f4, FUN_000144d0, FUN_0001461c, FUN_000150dc, FUN_0001518c, FUN_00015578,
    FUN_00015698, FUN_00015984, FUN_00015a14, FUN_00015aa4, FUN_00015bdc, FUN_00015c84, FUN_00015d34,
@@ -1308,7 +1322,7 @@ void FUN_00016548(void)
 #pragma pack(1)
 struct G { unsigned char n, cols, maxw, y0, kind; short *slots; unsigned char mask; };
 #pragma pack()
-extern char DAT_0005c020[], B00062990_ll[], B00072200_ew[], DAT_00056461[], B000748ec_bk[], DAT_0005a808[];
+extern char DAT_0005c020[], B00062990_ll[160], B00072200_ew[], DAT_00056461[], B000748ec_bk[], DAT_0005a808[];
 extern int DAT_0005c6c8, B000755d0_ao, B000755d4_ak, DAT_0005c658, DAT_0005fd08, DAT_0005cf4c, DAT_0005c038, DAT_0005a7e4, DAT_0005f920, DAT_0005f91c;
 extern short DAT_0005f03c, DAT_0005f03e, DAT_00056dae, DAT_00058600; extern unsigned char DAT_00058602, DAT_000567ec[], DAT_00056fa0[]; extern struct G DAT_00057330[];
 extern int FUN_000412c8(char *), FUN_000412b4(char *); extern void FUN_00041380(char *), FUN_000412dc(int); extern unsigned FUN_00040700(void);
@@ -1456,7 +1470,7 @@ void FUN_00016c68(void)
 #include "records.h"
 #define M000718e0_iO ((struct PC *)&B000718e0_iO)
 extern unsigned char DAT_0005d681, DAT_0005d682, DAT_0005c02f, DAT_0005cf5a, DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d;
-extern char B00062990_ll[], DAT_0005c020[], B00072200_ew[], B000748ec_bk[], DAT_0005a808[];
+extern char B00062990_ll[160], DAT_0005c020[], B00072200_ew[], B000748ec_bk[], DAT_0005a808[];
 extern unsigned char DAT_000567ec[], DAT_00056fa0[]; extern int DAT_0005d8a8;
 extern int B000755d0_ao, B000755d4_ak, DAT_0005fd08, DAT_0005cf4c, DAT_00056f90, DAT_00056f94, DAT_00056f98, DAT_00056f9c, DAT_0005c6c8, DAT_0005bf44, DAT_0005c038;
 extern short DAT_0005f03c, DAT_0005f03e, DAT_00056dae;
@@ -1644,7 +1658,7 @@ void FUN_00017378(void)
 #include <dos.h>
 #define FUN_000412ec ((void (*)(void *, int, int))FUN_000412ec)
 #define FUN_00041304 ((int (*)(void *, int, int))FUN_00041304)
-extern char B000628f0_jm[], B00062850_hl[], B000627b0_dn[];
+extern char B000628f0_jm[160], B00062850_hl[160], B000627b0_dn[160];
 extern int FUN_0004127c(char *), FUN_000412a0(char *), FUN_000412c8(char *), FUN_000412b4(char *);
 extern void *FUN_0004104c(int); extern void FUN_000412dc(int), FUN_00041380(char *), FUN_000410b0(void *);
 int FUN_000173a0(char *src, char *dst)
@@ -1697,7 +1711,7 @@ int FUN_000173a0(char *src, char *dst)
 #define B00062b30_k9 ((int *)B00062b30_k9)
 #define FUN_0003a380 ((void (*)(int, int, int, int))FUN_0003a380)
 #define FUN_00040aec ((int (*)(void))FUN_00040aec)
-extern char B00062760_fl[]; extern int DAT_0005c050;
+extern char B00062760_fl[80]; extern int DAT_0005c050;
 extern void FUN_000391b0(unsigned char), FUN_0004060c(int, int, char *, int), FUN_00040354(int, int), FUN_0002a8c8(int, int, int, int, int);
 extern int FUN_00040288(char *, int);
 int FUN_000175cc(char *text, int row)
@@ -1778,7 +1792,7 @@ extern int FUN_000173a0(char *src, char *dst); /* module prototype */
 /* FUN_00017874 @ 00017874: prepare the save directory SAVE00: chdir into it (or report), back to the game directory, then copy the current game into it and continue with FUN_00017938 (tail call, falls through). FUN_00017938 is defined after FUN_00016c68 (round 50) */
 #include <direct.h>
 #include <string.h>
-extern unsigned char DAT_0005d681, DAT_0005d682; extern int FUN_000412a0(char *); extern char B00062990_ll[], DAT_0005668c[], DAT_0005c020[], *DAT_000560bc, *DAT_000560b0, *DAT_000560c0;
+extern unsigned char DAT_0005d681, DAT_0005d682; extern int FUN_000412a0(char *); extern char B00062990_ll[160], DAT_0005668c[], DAT_0005c020[], *DAT_000560bc, *DAT_000560b0, *DAT_000560c0;
 extern void FUN_0002c21c(char *), FUN_0003f580(char *); extern int FUN_00017938(void);
 void FUN_00017874(void)
 {
