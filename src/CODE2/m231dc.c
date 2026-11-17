@@ -1,5 +1,5 @@
+typedef void (__far *PARA_BSS)(); /* STANDIN: the _BSS of this object file is paragraph-aligned in the original (unnamed bytes ahead of it up to the 16-byte boundary); a typedef of a far pointer type raises the alignment, as a far pointer or double variable of any function would (docs/BSS.md) */
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
-unsigned char F00062c10_d6[12];
 int B00062c10_h8;
 /* BSS end */
 /* Module: FUN_000231dc, FUN_00023248, FUN_00023268, FUN_00023284, FUN_0002329c, FUN_000232b4, FUN_000232dc,

@@ -1,3 +1,7 @@
+typedef void (__far *PARA_BSS)(); /* STANDIN: the _BSS of this object file is paragraph-aligned in the original (unnamed bytes ahead of it up to the 16-byte boundary); a typedef of a far pointer type raises the alignment, as a far pointer or double variable of any function would (docs/BSS.md) */
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+void *B00062bb0_hD[17];
+/* BSS end */
 /* Module: FUN_0001ea90, FUN_0001eabc, FUN_0001ead8, FUN_0001eb3c, FUN_0001ec1c */
 /* ---- from build/var/mod/parts/p1ea90.c */
 /* FUN_0001ea90 @ 0001ea90 */
@@ -14,7 +18,7 @@ void FUN_0001ea90(void)
 
 /* ---- from build/var/mod/parts/p1eabc.c */
 /* FUN_0001eabc @ 0001eabc: free the 17 buffers */
-extern void FUN_000410b0(void *); extern void *B00062bb0_hD[];
+extern void FUN_000410b0(void *); extern void *B00062bb0_hD[17];
 void FUN_0001eabc(void) { int k; for (k = 0; k < 17; k++) FUN_000410b0(B00062bb0_hD[k]); }
 
 /* ---- from build/var/mod/parts/p1ead8.c */
@@ -59,7 +63,7 @@ void FUN_0001eb3c(int n, int flag)
 #include "snd.h"
 extern void FUN_000391b0(unsigned char), FUN_0003975c(int, int, int, int, int), FUN_00039b40(int, int, int, int, int), FUN_0003a020(int), FUN_000425b0(unsigned char *, int, int, char *, int), FUN_00042404(char *, int, char, char, char, int), FUN_00039234(unsigned char *), FUN_000422ec(unsigned char *, int, int, unsigned char, unsigned char, unsigned char), FUN_0001ea90(void), FUN_0003e608(void), FUN_0001eb3c(int, int), FUN_0003a078(int, int, int, int, int, int, int), FUN_0003e614(unsigned, int), FUN_00042220(unsigned char *, int, int, unsigned char, unsigned char, unsigned char), FUN_00030294(void), FUN_000305b4(int);
 extern int FUN_0002a1f4(void), FUN_00040b40(void);
-extern int DAT_0005c050, B000758dc_cl, B000758d0_jK; extern unsigned char DAT_0005c054[]; extern void *B00062bb0_hD[];
+extern int DAT_0005c050, B000758dc_cl, B000758d0_jK; extern unsigned char DAT_0005c054[]; extern void *B00062bb0_hD[17];
 void FUN_0001ec1c(void)
 {
     int t, k;

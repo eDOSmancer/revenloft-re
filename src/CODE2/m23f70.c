@@ -1,3 +1,12 @@
+typedef void (__far *PARA_BSS)(); /* STANDIN: the _BSS of this object file is paragraph-aligned in the original (unnamed bytes ahead of it up to the 16-byte boundary); a typedef of a far pointer type raises the alignment, as a far pointer or double variable of any function would (docs/BSS.md) */
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+short B00064064_am[22];
+int B00064060_aa;
+struct TM B00064024_ck[5];
+int B00064020_bW;
+unsigned char B00063020_bP[4096];
+unsigned char B00062c20_jH[1024];
+/* BSS end */
 /* Module: FUN_00023f70, FUN_00023fd4, FUN_00024118, FUN_000241b8, FUN_00024218, FUN_0002430c, FUN_000246b8,
    FUN_000246dc, FUN_000248f0, FUN_00024a60, FUN_00024adc, FUN_00024be0, FUN_00024c40, FUN_00024ca4,
    FUN_00024e9c, FUN_00024fc0, FUN_00025050, FUN_00025144, FUN_00025168, FUN_0002520c, FUN_00025280,
@@ -10,7 +19,7 @@ extern unsigned char DAT_00057330;
 /* ---- from src/CODE2/f23f70.c */
 /* FUN_00023f70 @ 00023f70: load a script block */
 extern int FUN_0003ec74(int); extern void FUN_00041334(int, int); extern int FUN_000412ec(void *, unsigned, int);
-extern int B000758cc_fL, DAT_00057fcc, DAT_00057fec; extern unsigned char B00063020_bP[];
+extern int B000758cc_fL, DAT_00057fcc, DAT_00057fec; extern unsigned char B00063020_bP[4096];
 void FUN_00023f70(int a)
 {
     int n, h;
@@ -121,7 +130,7 @@ extern void FUN_00024118(unsigned char *s, unsigned char *d, int n); /* module p
 /* FUN_000241b8 @ 000241b8 */
 struct PX { unsigned short id, pad; };
 extern void FUN_0002c368(void *, int); 
-extern int DAT_00057fe8, DAT_00057ff4; extern struct PX DAT_00057fd8[4]; extern unsigned char DAT_0005759c[], B00062c20_jH[];
+extern int DAT_00057fe8, DAT_00057ff4; extern struct PX DAT_00057fd8[4]; extern unsigned char DAT_0005759c[], B00062c20_jH[1024];
 void FUN_000241b8(void)
 {
     int k; unsigned char *buf;
@@ -141,7 +150,7 @@ extern int FUN_00023fd4(int mode, int x, int y, int step, int w, char *str, int 
 /* FUN_00024218 @ 00024218: draw the four script picture slots (names and portraits) */
 /* struct PX: defined above */
 extern void FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_0004059c(int), FUN_0004060c(int, int, char *, int), FUN_00040354(int, int); extern char *FUN_0003e6f0(int);
-extern int DAT_0005c050, B000758cc_fL; extern struct PX DAT_00057fd8[4]; extern char DAT_00058000[]; extern unsigned char B00062c20_jH[];
+extern int DAT_0005c050, B000758cc_fL; extern struct PX DAT_00057fd8[4]; extern char DAT_00058000[]; extern unsigned char B00062c20_jH[1024];
 void FUN_00024218(int sel, int all)
 {
     int k;
@@ -451,7 +460,7 @@ extern void FUN_0002a9f8(void), FUN_0002c40c(int, int, int, int, int), FUN_0002a
 extern char *PTR_s_You_need_to_00057fb4; extern int DAT_00057fbc[], DAT_00057fd4, DAT_0005c050, B00064060_aa;
 #include "records.h"
 #define M000718e0_iO ((char *)&B000718e0_iO)
-extern struct MOUSE DAT_00059e31; extern short B00064064_am[];
+extern struct MOUSE DAT_00059e31; extern short B00064064_am[22];
 #define CF(k) (*(unsigned short *)(M000718e0_iO + (k) * 0x248 + 0x10))
 int FUN_00024ca4(void)
 {
@@ -505,7 +514,7 @@ int FUN_00024ca4(void)
 /* FUN_00024e9c @ 00024e9c: hand the found items to party member i (into free slots, else dropped at the party position); the extra 9 are always dropped */
 extern void FUN_0001f238(int, int, int), FUN_0003195c(int, int, int, int, int, int, int);
 #define B00071920_bM (*(char (*)[])((char *)&B000718e0_iO + 64)) /* STANDIN: view, B000718e0_iO + 0x40 */
-extern short B00064064_am[]; extern int B00064060_aa, B000755d0_ao, B000755d4_ak; 
+extern short B00064064_am[22]; extern int B00064060_aa, B000755d0_ao, B000755d4_ak; 
 void FUN_00024e9c(int i)
 {
     int k, j;
@@ -761,7 +770,7 @@ extern int FUN_000253fc(void); /* module prototype */
 struct XY { short x, y; };
 struct TM { int a, b, c; };
  extern int DAT_00057fec, DAT_00057ff4, DAT_00057ff0, DAT_00057ff8, DAT_00057fe8, DAT_00057fd0, DAT_00057fd4;
- extern struct TM B00064024_ck[]; extern unsigned char DAT_00058101, DAT_00058100, DAT_00058102, DAT_00057fb8; extern int DAT_0005c050;
+ extern struct TM B00064024_ck[5]; extern unsigned char DAT_00058101, DAT_00058100, DAT_00058102, DAT_00057fb8; extern int DAT_0005c050;
 extern int B000755d0_ao, B000755d4_ak, B000758cc_fL, B000758c8_as; extern short DAT_0005a6ba;
 extern void FUN_0003195c(int, int, int, int, int, int, int), FUN_0001f540(int);
 extern void FUN_0002c124(int), FUN_0002c160(int), FUN_0002c1a0(int), FUN_000391b0(unsigned char);
@@ -1037,24 +1046,25 @@ extern int FUN_00025534(void); /* module prototype */
 #define TM T28_TM
 /* FUN_00026034 @ 00026034: run due timed scripts */
 struct TM { int script, period, due; };
-extern struct TM B00064024_ck[5];
+#define M00064024_ck ((struct TM *)B00064024_ck) /* this function's names for the members of the timer records */
 extern unsigned FUN_00040700(void);  extern int DAT_00057fec;
 void FUN_00026034(void)
 {
     int k, old;
     for (k = 0; k < 5; k++) {
-        if (B00064024_ck[k].script != -1) {
-            if (FUN_00040700() > (unsigned)B00064024_ck[k].due) {
+        if (M00064024_ck[k].script != -1) {
+            if (FUN_00040700() > (unsigned)M00064024_ck[k].due) {
                 old = DAT_00057fec;
-                DAT_00057fec = B00064024_ck[k].script;
+                DAT_00057fec = M00064024_ck[k].script;
                 while (FUN_00025534() == 0) ;
                 DAT_00057fec = old;
-                B00064024_ck[k].due = FUN_00040700() + B00064024_ck[k].period;
+                M00064024_ck[k].due = FUN_00040700() + M00064024_ck[k].period;
             }
         }
     }
 }
 
+#undef M00064024_ck
 #undef TM
 /* ---- from src/CODE2/f2608c.c */
 extern void FUN_000241b8(void); /* module prototype */
@@ -1206,7 +1216,8 @@ extern void FUN_00038dcc(int), FUN_00029ccc(int), FUN_000396c0(int, int, int, in
 extern unsigned char DAT_0005bf38, DAT_00058100, DAT_00058102, DAT_00058101, DAT_00057fb8, DAT_0005d680, DAT_0005801b;
 extern int DAT_00057ff0, DAT_00057ff8, DAT_00057fd0, DAT_00057fd4, B000758cc_fL, DAT_0005c658, DAT_0005bf44;
 extern short DAT_0005a6ba, DAT_0005a6be, DAT_0005a6bc, B000755d2_ai, B000755d6_ae;
-extern struct R12 B00064018_co[];
+#define B00064018_co ((struct R12 *)((char *)&B00064024_ck - 12)) /* STANDIN: view, B00064024_ck - 12 (element -1 of the table: the code indexes from 1) */
+
 
 extern struct T B000698e0_b7[];
 
