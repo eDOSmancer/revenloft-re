@@ -111,7 +111,7 @@ Constructs that exist only because they reproduce the original bytes, not becaus
   boundary is a boundary between the code modules (each module defines its own data, the module with `main` and the
   one behind it define the shared data). In CODE.1 the range of the first module holds five object files whose code
   boundaries are not known; four of them and one in the next module stand in a C file of their own, linked at its place.
-- **Dead reads** (10 functions, marked): `{ int d; d = G; }` of a scalar the function does not use. Under `-oa` a scalar
+- **Dead reads** (11 places, 10 of them from the naming of the uninitialised data; marked): `{ int d; d = G; }` of a scalar the function does not use. Under `-oa` a scalar
   global is an entry in the register allocator's list; where a name of the original image turned out to lie inside
   another object (an element of a table, the high word of an int) the function lost that entry and came out with other
   registers, and the dead read puts an entry back (`docs/BSS.md`).
