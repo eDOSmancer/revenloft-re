@@ -1,3 +1,4 @@
+#include "farproc.h"
 /* Module: FUN_000270ac, FUN_000271d0, FUN_000271fc, FUN_00027838, FUN_00027a68, FUN_000281b4 */
 /* names inside DAT_0005819c (tools/dataview.py): views of the object the module defines */
 #define DAT_000581a4 (*(char *)((char *)DAT_0005819c + 0x8))

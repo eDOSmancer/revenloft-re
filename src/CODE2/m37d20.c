@@ -1,3 +1,4 @@
+#include "farproc.h"
 /* Module: FUN_00037d20, FUN_00037ecc, FUN_00037f24, FUN_00037ff0, FUN_00038020, FUN_00038078, FUN_00038098,
    FUN_000380dc, FUN_000380e8, FUN_00038110, FUN_00038164, FUN_00038168 */
 /* ---- from build/var/mod/parts/p37d20.c */

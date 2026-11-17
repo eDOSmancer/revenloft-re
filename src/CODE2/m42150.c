@@ -1,3 +1,4 @@
+#include "farproc.h"
 /* Module: FUN_00042150, FUN_00042220, FUN_000422ec, FUN_000423bc, FUN_00042404, FUN_00042468, FUN_000424cc,
    FUN_000424f8, FUN_00042588, FUN_000425b0 */
 /* ---- from build/var/mod/parts/p42150.c */

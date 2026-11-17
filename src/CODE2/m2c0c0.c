@@ -1,12 +1,6 @@
+#include "farproc.h"
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
 #include "records.h"
-struct OBJR B00072238_dL[450];   /* doors and fixtures; 0x7223a ... 0x7224c are members of record 0 (docs/TYPES.md) */
-void *B00072234_hx;
-char *B00072230_c4;
-int B0007222c_cz;
-int B00072228_il;   /* no code references it */
-int B00072224_hh;
-int B00072220_gw;
 int B00072200_ew[8];
 /* the party records, 4 x 0x248 bytes at 0x718e0, are one object (include/chars.h, docs/BSS.md) */
 struct PC B000718e0_iO[4];   /* the four character records (include/records.h, include/chars.h) */

@@ -1,3 +1,4 @@
+#include "farproc.h"
 /* Module: FUN_00010010, FUN_00010074, FUN_000100b8, FUN_000101fc, FUN_000102a8 */
 
 /* ---- from build/var/mod/parts/p10010.c */

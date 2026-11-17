@@ -1,3 +1,4 @@
+#include "farproc.h"
 /* Module: FUN_00047590, FUN_000475f0 */
 /* ---- from build/var/mod/parts/p47590.c */
 /* FUN_00047590 @ 00047590: read a length-prefixed packed block from fd: allocate n + 2 bytes, keep n in the first

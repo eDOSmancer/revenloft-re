@@ -1,3 +1,4 @@
+#include "farproc.h"
 /* Module: FUN_00013810, FUN_00013820, FUN_00013838 */
 /* ---- from build/var/mod/parts/p13810.c */
 /* FUN_00013810 @ 00013810: free the SINTAB table */

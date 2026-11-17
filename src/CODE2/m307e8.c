@@ -1,3 +1,4 @@
+#include "farproc.h"
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
 #include "records.h"
 short B000758fe_j6;
@@ -40,6 +41,13 @@ unsigned char B000755d0_ao[4];
 struct OBJR B000748ec_bk[150];
 int B000748e8_jD;
 int B000748e4_h8;
+struct OBJR B00072238_dL[450];   /* doors and fixtures; 0x7223a ... 0x7224c are members of record 0 (docs/TYPES.md) */
+void *B00072234_hx;
+char *B00072230_c4;
+int B0007222c_cz;
+int B00072228_il;   /* no code references it */
+int B00072224_hh;
+int B00072220_gw;
 /* BSS end */
 extern unsigned char B000755d4_ak[4];
 extern unsigned char B000755d0_ao[4];
@@ -1011,7 +1019,6 @@ extern void FUN_00031f70(void); /* module prototype */
 extern unsigned short B00077148_eJ;
 #define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
 #define B00067626_hm (*(unsigned short *)((char *)&B00067618_e7 + 14)) /* STANDIN: view, B00067618_e7 + 0xe */
-extern unsigned char B00072238_dL[];
 #define B00072246_dJ (*(unsigned short *)((char *)&B00072238_dL + 14)) /* STANDIN: view, B00072238_dL + 0xe */
 extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], B00077148_eJ;
 extern unsigned char DAT_00058602, DAT_0005cf68; 

@@ -1,3 +1,4 @@
+#include "farproc.h"
 /* Module: FUN_000474e0, FUN_0004757c */
 /* ---- from build/var/mod/parts/p474e0.c */
 /* FUN_000474e0 @ 000474e0: read a sound bank entry: copy the 0x1c-byte header that hdr+5 points at into a new
