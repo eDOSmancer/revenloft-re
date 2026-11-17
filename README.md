@@ -18,7 +18,7 @@ Every byte of the two LE images comes out of the Watcom linker, from ordinary ob
 
 - `src/CODE1/m*.c` (20 files), `src/CODE2/m*.c` (35 files): one C file per original module, compiled by `WCC386`.
 - `src/CODE1/a*.asm` (5), `src/CODE2/a*.asm` (6): the modules that were written in assembler, assembled by `WASM`.
-- `src/<PROG>/b*.asm` (9 and 20) and `src/<PROG>/xib.asm`: stand-ins, see "Stand-ins".
+- `src/<PROG>/b*.asm` (3 and 6) and `src/<PROG>/xib.asm`: stand-ins, see "Stand-ins".
 - the modules of the Watcom C library named in `link/<PROG>/order.txt`, copied unchanged out of the installation's
   `.LIB` files (`tools/omflib.py`; the same bytes `wlib lib *module` extracts).
 
@@ -97,16 +97,18 @@ Nothing else is stored: there is no table of addresses, no fixup order table and
 
 Constructs that exist only because they reproduce the original bytes, not because the original source looked so:
 
-- **`STANDIN` lines in the C files** (335 marks in 30 files): expressions, temporaries or filler objects written so
+- **`STANDIN` lines in the C files** (369 marks in 39 files, the `BSS` blocks and views included): expressions, temporaries or filler objects written so
   that the compiler makes the original's register choices or data layout. Each is marked with a comment.
-- **`b<module>.asm`: uninitialised data.** The C files declare their uninitialised globals `extern`; the definitions are
-  in `b<module>.asm`, one `_BSS` segment per module with the variables as public labels in address order, linked right
-  after the module. In the original they were defined in the C files. They cannot be here yet: WCC386 writes a
-  module's `_BSS` in symbol-hash order, and the hash depends on the original names, which are unknown (the names here
-  carry the address). Which module owns a variable is inferred from the references and the link order; two cases are
-  forced by the link: CODE.2 `b40d80.asm` (the block must precede the library's `iob`), and CODE.2 `b29c80.asm`
-  (the object of `m29c80.c` has a paragraph-aligned `_BSS`, which WLINK 10.0a honours, so the data from 0x72240 on is
-  contributed there).
+- **Names of the uninitialised variables** (`B<address>_xx`, 352 names) and the `/* BSS: ... */` block at the top
+  of 22 C files. WCC386 writes a module's `_BSS` by size class and symbol-table order, not in definition order; the
+  names are fitted so that every one lies in the same hash chain of the compiler's symbol table, and the block defines
+  the module's objects from the highest address down, which then yields the original layout. The block also holds
+  filler arrays (`F<address>_xx`) for bytes no code names. A few names that lie inside a larger object are macros
+  (views) in the files that use them. Rule, scheme and tool (`tools/bssfit.py`): `docs/BSS.md`.
+- **`b<module>.asm`: uninitialised data not yet defined in C** (CODE.1: `b10010`, `b150c0`, `b15880`, 9728 bytes;
+  CODE.2: `b13a78`, `b186c4`, `b1c704`, `b1eee0`, `b26810`, `b2c0c0`, 68340 bytes): one `_BSS` segment with the
+  variables as public labels in address order, linked right after the module. These ranges hold records whose members
+  carry labels of their own, and their division into modules is not settled (`docs/BSS.md`, "State").
 - **`xib.asm`**: an empty paragraph-aligned `XIB` segment. In both originals the C library's initialiser table starts
   on a paragraph boundary although every library object declares it word-aligned; some object of the original link
   aligned it, the image does not say which.
@@ -145,6 +147,8 @@ Constructs that exist only because they reproduce the original bytes, not becaus
     link/CODE1, link/CODE2   order.txt, options.lnk, alignfix.csv
     tools/build.py           the build driver          tools/dos.py        DOSBox-X runner
     tools/omflib.py          OMF library reader        tools/getloader.py  loader extraction helper
+    tools/bssfit.py          uninitialised data: fitted names, definitions block, checks (docs/BSS.md)
+    docs/BSS.md              how WCC386 orders a module's _BSS and how the sources reproduce it
     expected.sha1, build.cfg, Makefile
 
 ## Ownership
