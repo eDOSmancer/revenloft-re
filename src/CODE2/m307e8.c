@@ -1008,7 +1008,8 @@ extern void FUN_00031f70(void); /* module prototype */
 #define DAT_0005759c ((char *)DAT_0005759c)
 extern unsigned short B00077148_eJ;
 #define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
-extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], B00077148_eJ, B00067626_hm, B00072246_dJ;
+#define B00067626_hm (*(unsigned short *)((char *)&B00067618_e7 + 14)) /* STANDIN: view, B00067618_e7 + 0xe */
+extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], B00077148_eJ, B00072246_dJ;
 extern unsigned char DAT_00058602, DAT_0005cf68; 
 extern int FUN_0003ac80(int), FUN_0001f4b0(short), FUN_0002c1dc(int), FUN_0003ad18(int), FUN_0003ade0(int), FUN_0003acdc(int);
 extern int FUN_00034478(int, int), FUN_000343e0(int, int);

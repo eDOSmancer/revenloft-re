@@ -1130,7 +1130,9 @@ int FUN_0001aa30(int i)
 #include "world.h"
 #define FUN_00038110 ((void (*)(void *, int, int, int))FUN_00038110)
  extern unsigned char *FUN_0002e8c8(int, int);
-extern int B00065a2c_ay;
+extern unsigned char B00065a18_cn[];
+#define B00065a2c_ay (*(int *)((char *)&B00065a18_cn + 20)) /* STANDIN: view, B00065a18_cn + 0x14 */
+
 void FUN_0001abc4(int i)
 {
     int pos = *(int *)((char *)&B00065a2c_ay + i * 0x1c);
@@ -1152,7 +1154,7 @@ void FUN_0001abc4(int i)
 #define FUN_00038110 ((void (*)(void *, int, int, int))FUN_00038110)
 struct OBJ { unsigned char kind; unsigned char f0 : 2, open : 1, f3 : 3, b6 : 1, b7 : 1; signed char c2; unsigned char p3, p4, p5, c6; };
 extern void FUN_000102a8(int), FUN_0002c77c(int, int);  extern int FUN_00030c0c(int, int, struct OBJ *), FUN_00030cf4(int), FUN_0002c924(void);
-extern int B00065a2c_ay;
+
 void FUN_0001ac2c(int i)
 {
     int pos = *(int *)((char *)&B00065a2c_ay + i * 0x1c);

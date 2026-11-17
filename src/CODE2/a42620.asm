@@ -26,12 +26,6 @@ extrn DAT_0005cf50:byte
 extrn DAT_0005ef4d:byte
 extrn B00065618_e1:byte
 extrn B00065a18_cn:byte
-extrn B00065a1c_ai:byte
-extrn B00065a20_bf:byte
-extrn B00065a24_aj:byte
-extrn B00065a28_bn:byte
-extrn B00065a2c_ay:byte
-extrn B00065a30_af:byte
 extrn B00068fe0_eN:byte
 extrn B000698e0_b7:byte
 extrn B00072220_gw:byte
@@ -819,24 +813,24 @@ L_00043085:
     mul edx
     db 08bh, 0f0h    ; mov esi, eax (WASM encodes it differently)
     pop eax
-    mov dword ptr [esi + B00065a30_af], eax
+    mov dword ptr [esi + B00065a18_cn+24], eax
     mov eax, dword ptr [ebp - 8]
     mov dword ptr [esi + B00065a18_cn], eax
     mov eax, dword ptr [ebp - 4]
-    mov dword ptr [esi + B00065a28_bn], eax
+    mov dword ptr [esi + B00065a18_cn+16], eax
     mov ebx, dword ptr [ebp - 0xc]
     shl ebx, 1
     movzx eax, word ptr [ebx + B00075618_b1+394]
     add eax, dword ptr [ebp - 0x10]
-    mov dword ptr [esi + B00065a1c_ai], eax
+    mov dword ptr [esi + B00065a18_cn+4], eax
     movzx eax, word ptr [ebx + B00075618_b1+266]
     add eax, dword ptr [ebp - 0x10]
-    mov dword ptr [esi + B00065a20_bf], eax
+    mov dword ptr [esi + B00065a18_cn+8], eax
     mov eax, dword ptr [DAT_0005fcd4]
-    mov dword ptr [esi + B00065a24_aj], eax
+    mov dword ptr [esi + B00065a18_cn+12], eax
     mov eax, dword ptr [DAT_0005fcdc]
-    mov dword ptr [esi + B00065a2c_ay], eax
-    cmp dword ptr [esi + B00065a20_bf], 0x93
+    mov dword ptr [esi + B00065a18_cn+20], eax
+    cmp dword ptr [esi + B00065a18_cn+8], 0x93
     jne short L_000430fd
     mov dword ptr [B00072220_gw], 0
 L_000430fd:
@@ -926,24 +920,24 @@ L_00043216:
     mul edx
     db 08bh, 0f0h    ; mov esi, eax (WASM encodes it differently)
     pop eax
-    mov dword ptr [esi + B00065a30_af], eax
+    mov dword ptr [esi + B00065a18_cn+24], eax
     mov eax, dword ptr [ebp - 8]
     mov dword ptr [esi + B00065a18_cn], eax
     mov eax, dword ptr [ebp - 4]
-    mov dword ptr [esi + B00065a28_bn], eax
+    mov dword ptr [esi + B00065a18_cn+16], eax
     mov ebx, dword ptr [ebp - 0xc]
     shl ebx, 1
     movzx eax, word ptr [ebx + B00075618_b1+138]
     add eax, dword ptr [ebp - 0x10]
-    mov dword ptr [esi + B00065a1c_ai], eax
+    mov dword ptr [esi + B00065a18_cn+4], eax
     movzx eax, word ptr [ebx + B00075618_b1+10]
     add eax, dword ptr [ebp - 0x10]
-    mov dword ptr [esi + B00065a20_bf], eax
+    mov dword ptr [esi + B00065a18_cn+8], eax
     mov eax, dword ptr [DAT_0005fcd4]
-    mov dword ptr [esi + B00065a24_aj], eax
+    mov dword ptr [esi + B00065a18_cn+12], eax
     mov eax, dword ptr [DAT_0005fcdc]
-    mov dword ptr [esi + B00065a2c_ay], eax
-    cmp dword ptr [esi + B00065a20_bf], 0x93
+    mov dword ptr [esi + B00065a18_cn+20], eax
+    cmp dword ptr [esi + B00065a18_cn+8], 0x93
     jne short L_0004328e
     mov dword ptr [B00072220_gw], 0
 L_0004328e:
@@ -1001,19 +995,19 @@ L_000432f6:
     pop eax
     mov dword ptr [edi + B00065a18_cn], eax
     pop eax
-    mov dword ptr [edi + B00065a30_af], eax
-    mov dword ptr [edi + B00065a28_bn], esi
+    mov dword ptr [edi + B00065a18_cn+24], eax
+    mov dword ptr [edi + B00065a18_cn+16], esi
     mov eax, dword ptr [DAT_0005fcd4]
-    mov dword ptr [edi + B00065a24_aj], eax
+    mov dword ptr [edi + B00065a18_cn+12], eax
     mov eax, dword ptr [DAT_0005fcdc]
-    mov dword ptr [edi + B00065a2c_ay], eax
+    mov dword ptr [edi + B00065a18_cn+20], eax
     mov ebx, dword ptr [DAT_0005c6f4 + 0ch]
     shl ebx, 1
     movzx eax, word ptr [ebx + B00075618_b1+138]
-    mov dword ptr [edi + B00065a1c_ai], eax
+    mov dword ptr [edi + B00065a18_cn+4], eax
     movzx eax, word ptr [ebx + B00075618_b1+10]
-    mov dword ptr [edi + B00065a20_bf], eax
-    cmp dword ptr [edi + B00065a20_bf], 0x93
+    mov dword ptr [edi + B00065a18_cn+8], eax
+    cmp dword ptr [edi + B00065a18_cn+8], 0x93
     jne short L_00043395
     mov dword ptr [B00072220_gw], 0
 L_00043395:
@@ -1072,19 +1066,19 @@ L_000433fe:
     pop eax
     mov dword ptr [edi + B00065a18_cn], eax
     pop eax
-    mov dword ptr [edi + B00065a30_af], eax
-    mov dword ptr [edi + B00065a28_bn], esi
+    mov dword ptr [edi + B00065a18_cn+24], eax
+    mov dword ptr [edi + B00065a18_cn+16], esi
     mov eax, dword ptr [DAT_0005fcd4]
-    mov dword ptr [edi + B00065a24_aj], eax
+    mov dword ptr [edi + B00065a18_cn+12], eax
     mov eax, dword ptr [DAT_0005fcdc]
-    mov dword ptr [edi + B00065a2c_ay], eax
+    mov dword ptr [edi + B00065a18_cn+20], eax
     mov ebx, dword ptr [DAT_0005c6f4 + 0ch]
     shl ebx, 1
     movzx eax, word ptr [ebx + B00075618_b1+138]
-    mov dword ptr [edi + B00065a1c_ai], eax
+    mov dword ptr [edi + B00065a18_cn+4], eax
     movzx eax, word ptr [ebx + B00075618_b1+10]
-    mov dword ptr [edi + B00065a20_bf], eax
-    cmp dword ptr [edi + B00065a20_bf], 0x93
+    mov dword ptr [edi + B00065a18_cn+8], eax
+    cmp dword ptr [edi + B00065a18_cn+8], 0x93
     jne short L_0004349d
     mov dword ptr [B00072220_gw], 0
 L_0004349d:
@@ -1343,13 +1337,13 @@ FUN_00043808:
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
     mov esi, dword ptr [ebp + 0x14]
-    mov eax, dword ptr [edi + B00065a20_bf]
+    mov eax, dword ptr [edi + B00065a18_cn+8]
     mov dword ptr [esi], eax
     mov esi, dword ptr [ebp + 0x18]
-    mov eax, dword ptr [edi + B00065a28_bn]
+    mov eax, dword ptr [edi + B00065a18_cn+16]
     shr eax, 6
     mov dword ptr [esi], eax
-    mov eax, dword ptr [edi + B00065a2c_ay]
+    mov eax, dword ptr [edi + B00065a18_cn+20]
     mov edx, 0
     movsx ebx, word ptr [B00075618_b1+1]
     div ebx

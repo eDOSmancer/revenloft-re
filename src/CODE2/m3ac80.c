@@ -406,7 +406,8 @@ struct DE5 { unsigned short f0, dist, h, idx, kind, fa, f0c, f0e, f10, f12, f14;
 struct O5 { int a, b; unsigned char f80 : 3, glow : 1, f84 : 4; unsigned char f9, fa, fb; unsigned short s, type; short timer, w12; unsigned short w14; };
 struct IT5 { unsigned char f0; unsigned char b0 : 1, big : 1, b2 : 6; unsigned char rest[0x14]; };
 struct TY5 { unsigned char pad[0x31]; unsigned char nolabel : 1, b1 : 7; unsigned char rest[0x13]; };
-extern struct IT5 B0006762c_ey[]; extern char *B000758dc_cl; extern short DAT_0005f03c, DAT_0005f03e;
+#define B0006762c_ey ((struct IT5 *)((char *)&B00067618_e7 + 20)) /* STANDIN: view, B00067618_e7 + 0x14 */
+ extern char *B000758dc_cl; extern short DAT_0005f03c, DAT_0005f03e;
 extern void *memset(void *, int, unsigned);
 extern void FUN_000435dc(void), FUN_00039738(int *), FUN_000396c0(int, int, int, int), FUN_00046cec(int, int, int, int, int, int), FUN_0003978c(int, int, int, int, int);
 /* FUN_0003c294 @ 0003c294: build and draw the 3-D view list: collect creatures, objects, items and missiles, then draw them farthest first (creature labels in the debug views) */

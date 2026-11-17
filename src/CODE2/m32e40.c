@@ -373,7 +373,9 @@ extern int FUN_0003388c(struct O *p, int flag); /* module prototype */
 #define M00071913_a2 ((unsigned char *)&B00071913_a2)
 void *memmove(void *, const void *, unsigned);
 extern int FUN_0003c9dc(unsigned, unsigned); extern void FUN_00038110(int, int, int, int);
-  extern char B0006762e_es[];  extern int B000758bc_al;
+extern struct FO B00067618_e7[];
+#define B0006762e_es ((char *)((char *)&B00067618_e7 + 22)) /* STANDIN: view, B00067618_e7 + 0x16 */
+    extern int B000758bc_al;
 struct FB { unsigned short lo : 3, d3 : 3, mid : 3, fly : 1, flag : 1, own : 3, top : 2; };
 struct FO { int x, y, dir; short cell, item, z, pw; struct FB fb; };
 extern struct FO B00067618_e7[];

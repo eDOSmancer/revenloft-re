@@ -144,8 +144,14 @@ extern int B000755d0_ao;
 #define B000755d2_ai (*(short *)((char *)&B000755d0_ao + 2)) /* STANDIN: view, B000755d0_ao + 0x2 */
 extern int B000755d4_ak;
 #define B000755d6_ae (*(short *)((char *)&B000755d4_ak + 2)) /* STANDIN: view, B000755d4_ak + 0x2 */
-extern short B00067626_hm, B00067624_e3; extern int B000755d4_ak, B000755d0_ao, B00067618_e7, B0006761c_g8;
-extern struct FB B0006762c_ey; extern char B0006762e_es[6577]; struct PC { char pad[0x40]; short inv[21]; char rest[0x248 - 0x40 - 42]; }; 
+#define B0006761c_g8 (*(int *)((char *)&B00067618_e7 + 4)) /* STANDIN: view, B00067618_e7 + 0x4 */
+extern int B00067618_e7;
+#define B00067626_hm (*(short *)((char *)&B00067618_e7 + 14)) /* STANDIN: view, B00067618_e7 + 0xe */
+#define B00067624_e3 (*(short *)((char *)&B00067618_e7 + 12)) /* STANDIN: view, B00067618_e7 + 0xc */
+ extern int B000755d4_ak, B000755d0_ao, B00067618_e7;
+#define B0006762e_es ((char *)((char *)&B00067618_e7 + 22)) /* STANDIN: view, B00067618_e7 + 0x16 */
+#define B0006762c_ey (*(struct FB *)((char *)&B00067618_e7 + 20)) /* STANDIN: view, B00067618_e7 + 0x14 */
+  struct PC { char pad[0x40]; short inv[21]; char rest[0x248 - 0x40 - 42]; }; 
 void FUN_0001ca38(int who)
 {
     int k; short c;

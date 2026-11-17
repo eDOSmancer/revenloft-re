@@ -94,7 +94,9 @@ void FUN_000100b8(void)
 #include "chars.h"
 #include "world.h"
 extern int FUN_0002c1dc(int), FUN_00024a60(char *); extern void FUN_0002c124(int);
- extern int DAT_0005bf44;  extern unsigned short B0006994c_hI;
+extern struct CELL B000698e0_b7[];
+#define B0006994c_hI (*(unsigned short *)((char *)&B000698e0_b7 + 108)) /* STANDIN: view, B000698e0_b7 + 0x6c */
+ extern int DAT_0005bf44;  
 int FUN_000101fc(void)
 {
     int k, r;

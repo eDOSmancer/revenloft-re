@@ -1,3 +1,41 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+unsigned char G00072246_aa[2];
+unsigned char F00072246_aP[2];
+unsigned short B00072246_dJ;
+unsigned short B00072244_c8;
+unsigned char G0007223e_b6[2];
+unsigned char F0007223e_c7[2];
+short B0007223e_dx;
+unsigned short B0007223c_dz;
+short B0007223a_et;
+unsigned short B00072238_dL;
+void *B00072234_hx;
+char *B00072230_c4;
+int B0007222c_cz;
+unsigned char F00072224_a6[4];
+int B00072224_hh;
+int B00072220_gw;
+int B00072200_ew[8];
+/* STANDIN: the party records, 4 x 0x248 bytes at 0x718e0 (include/chars.h), defined as seven adjacent pieces cut at the names of the 2nd and 3rd record and at the four flag words (+0x10): these stay objects of their own (as views FUN_0001ccf4 / FUN_00033e1c are no longer expanded inline, docs/BSS.md) */
+unsigned char B00071fc8_l9[568];
+unsigned char B00071d80_d5[584];
+char B00071d70_aF[16];
+unsigned char B00071b38_c0[568];
+char B00071b28_gs[16];
+unsigned char B000718f0_hO[568];
+unsigned char B000718e0_iO[16];
+unsigned char B000698e0_b7[32768];
+char B00069660_dl[640];
+char B000693e0_hM[640];
+unsigned char B00068fe0_eN[1024];
+unsigned char B00067618_e7[6600];
+unsigned char B00065a18_cn[7168];
+int B00065618_e1[256];
+unsigned char B00064d80_ay[2200];
+char B00064580_eK[2048];
+/* BSS end */
+extern unsigned char B000718f0_hO[568];
+#define PARTY_HEAD_SIZED /* STANDIN: see include/chars.h */
 /* Module: FUN_0002c0c0, FUN_0002c124, FUN_0002c160, FUN_0002c1a0, FUN_0002c1dc, FUN_0002c21c, FUN_0002c258,
    FUN_0002c2c4, FUN_0002c2cc, FUN_0002c328, FUN_0002c368, FUN_0002c40c, FUN_0002c77c, FUN_0002c924,
    FUN_0002ca2c, FUN_0002cd48, FUN_0002ce68, FUN_0002e4a0, FUN_0002e534, FUN_0002e594, FUN_0002e74c,
@@ -33,7 +71,7 @@ void FUN_0002c0c0(int a)
    over per-case conflict segments, ShellSort + K/tA/tS/R model, verified against the real compiler).
    The macro/call choice per site and the named r exist only for the bytes (marked STANDIN). */
 #include <stdlib.h>
-extern int B00072200_ew[];
+extern int B00072200_ew[8];
 extern unsigned DAT_0005bf44;
 extern void FUN_0003d9fc(void);
 extern int FUN_0001f4b0(int), FUN_00024a60(char *);
@@ -41,7 +79,7 @@ void FUN_0002c124(int i) { B00072200_ew[i / 32] |= 1 << (i % 32); }
 
 /* ---- from build/var/mod/parts/p2c160.c */
 /* FUN_0002c160, FUN_0002c1dc: bit clear / test in B00072200_ew */
-extern int B00072200_ew[];
+extern int B00072200_ew[8];
 void FUN_0002c160(int i) { B00072200_ew[i / 32] &= ~(1 << (i % 32)); }
 
 /* ---- from build/var/mod/parts/p2c1a0.c */
@@ -53,7 +91,7 @@ void FUN_0002c1a0(int i) { B00072200_ew[i / 32] ^= 1 << (i % 32); }
 
 #undef B00072200_ew
 /* ---- from build/var/mod/parts/p2c1dc.c */
-extern int B00072200_ew[];
+extern int B00072200_ew[8];
 extern unsigned DAT_0005bf44;
 extern void FUN_0003d9fc(void);
 extern int FUN_0001f4b0(int), FUN_00024a60(char *);
@@ -65,7 +103,7 @@ int FUN_0002c1dc(int i) { return (B00072200_ew[i / 32] & (1 << (i % 32))) >> (i 
 char *strcpy(char *, const char *);
 #pragma intrinsic(strcpy)
 extern int FUN_00040700(void);
-extern int DAT_0005cf54; extern unsigned char DAT_0005cf59; extern char B00064580_eK[];
+extern int DAT_0005cf54; extern unsigned char DAT_0005cf59; extern char B00064580_eK[2048];
 void FUN_0002c21c(const char *s)
 {
     DAT_0005cf54 = FUN_00040700() + 0x5a;
@@ -76,7 +114,7 @@ void FUN_0002c21c(const char *s)
 /* ---- from build/var/mod/parts/p2c258.c */
 /* FUN_0002c258 @ 0002c258 */
 extern void FUN_000391b0(unsigned char); extern void FUN_0003939c(int, int, int, int); extern void FUN_0004060c(int, int, void *, int); extern void FUN_0002a8c8(int, int, int, int, int);
-extern unsigned char DAT_0005cf59; extern int DAT_0005c050, B0007222c_cz; extern char B00064580_eK[];
+extern unsigned char DAT_0005cf59; extern int DAT_0005c050, B0007222c_cz; extern char B00064580_eK[2048];
 void FUN_0002c258(void)
 {
     if (DAT_0005cf59) {
@@ -187,7 +225,7 @@ void FUN_0002c40c(int win, int x, int y, int w, int h)
 /* ---- from build/var/mod/parts/p2c77c.c */
 extern void FUN_0002c368(unsigned char *buf, int n); /* module prototype */
 extern void FUN_0002c40c(int win, int x, int y, int w, int h); /* module prototype */
-/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
+/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO[16];
 #define M000718e0_iO ((char *)&B000718e0_iO)
 /* FUN_0002c77c @ 0002c77c: party member i says string s: bubble sized to the text, portrait, text, wait for a click */
 void *memset(void *, int, unsigned);
@@ -236,7 +274,8 @@ void FUN_0002c77c(int i, int s)
 /* FUN_0002c924 @ 0002c924: pick a random living, able party member */
 #include "chars.h"
 int rand(void);
-extern unsigned short B000718f0_hO;
+#define B000718f0_hO (*(unsigned short *)((char *)&B000718f0_hO)) /* STANDIN: the first bytes of the object */
+
 #define CH10(k) (*(unsigned short *)((char *)&B000718f0_hO + (k) * 0x248))
 int FUN_0002c924(void)
 {
@@ -314,7 +353,7 @@ extern int FUN_0002c924(void); /* module prototype */
 extern int FUN_0002ca2c(int n); /* module prototype */
 /* FUN_0002cd48 @ 0002cd48: unless flag f (+0x80) is already set, say the first of up to four lines whose condition t holds (t == 0x21: always, by the party leader), then set the flag (FUN_0002c924 takes no arguments: the pushed s is the second argument of FUN_0002c77c) */
  
-extern int B00072200_ew[];
+extern int B00072200_ew[8];
 void FUN_0002cd48(int f, int t1, int s1, int t2, int s2, int t3, int s3, int t4, int s4)
 {
     int r, s;
@@ -346,7 +385,7 @@ void FUN_0002cd48(int f, int t1, int s1, int t2, int s2, int t3, int s3, int t4,
 extern void FUN_0002c77c(int i, int s); /* module prototype */
 extern int FUN_0002ca2c(int n); /* module prototype */
 extern void FUN_0002cd48(int f, int t1, int s1, int t2, int s2, int t3, int s3, int t4, int s4); /* module prototype */
-extern int B00072200_ew[];
+extern int B00072200_ew[8];
 extern unsigned DAT_0005bf44;
 extern void FUN_0003d9fc(void);
 extern int FUN_0001f4b0(int), FUN_00024a60(char *);
@@ -718,7 +757,7 @@ void FUN_0002ce68(void)
 extern unsigned FUN_00029cc4(void);
 #define B000719eb_cp (*(unsigned *)((char *)&B000718e0_iO + 267)) /* STANDIN: view, B000718e0_iO + 0x10b */
 #define B00071a7e_dD (*(unsigned *)((char *)&B000718e0_iO + 414)) /* STANDIN: view, B000718e0_iO + 0x19e */
-extern unsigned short B000718f0_hO;  extern unsigned char DAT_0005cf5a[];
+  extern unsigned char DAT_0005cf5a[];
 void FUN_0002e4a0(void)
 {
     unsigned t = FUN_00029cc4();
@@ -753,7 +792,7 @@ void FUN_0002e534(void)
 #define M000718e0_iO ((struct CHR *)&B000718e0_iO)
 #define FUN_00040700 ((int (*)(void))FUN_00040700)
 struct CHR { char name[0x10]; unsigned short st; char p12[0x122]; unsigned char slow : 1, b1 : 7; char rest[0x113]; };
- extern char B00064580_eK[], *DAT_0005bed8, *DAT_0005bedc; extern int DAT_0005cf54; extern unsigned char DAT_0005cf59;
+ extern char B00064580_eK[2048], *DAT_0005bed8, *DAT_0005bedc; extern int DAT_0005cf54; extern unsigned char DAT_0005cf59;
 extern void FUN_0001cd44(int, int); 
 void FUN_0002e594(int t)
 {
@@ -797,7 +836,7 @@ extern void FUN_00041f94(void); extern int FUN_0001f2d4(int, int);
 #define B000718fc_i0 (*(short *)((char *)&B000718e0_iO + 28)) /* STANDIN: view, B000718e0_iO + 0x1c */
 #define B000718fe_ar (*(short *)((char *)&B000718e0_iO + 30)) /* STANDIN: view, B000718e0_iO + 0x1e */
 #define B000718f4_h3 (*(unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
-extern int DAT_0005bf58, DAT_0005bf50, DAT_0005bf54, DAT_0005a7e4; extern unsigned DAT_0005cf4c; extern unsigned short B000718f0_hO;  extern unsigned char DAT_0005cf5a[];  
+extern int DAT_0005bf58, DAT_0005bf50, DAT_0005bf54, DAT_0005a7e4; extern unsigned DAT_0005cf4c;   extern unsigned char DAT_0005cf5a[];  
 #define CH16(o) (*(unsigned short *)((char *)&B000718f0_hO + (o)))
 #define HP(o) (*(short *)((char *)&B000718fc_i0 + (o)))
 #define MAXHP(o) (*(short *)((char *)&B000718fe_ar + (o)))
@@ -1092,7 +1131,7 @@ extern void FUN_0002edac(void); /* module prototype */
 #define FUN_0003f29c ((void *(*)(int, int))FUN_0003f29c)
 extern void FUN_000391b0(unsigned char), FUN_000434c4(void), FUN_00044998(void), FUN_00039b40(int, int, int, int, int), FUN_000414b0(int), FUN_00043e28(int), FUN_00044a74(void), FUN_00043de0(int);
 extern void FUN_00044de8(void), FUN_0002bdac(void), FUN_0003c294(void), FUN_000374a4(void), FUN_0003f868(void); 
-extern int DAT_0005c050, DAT_0005fdbc, DAT_0005c044, DAT_0005c048, DAT_0005bff0, DAT_0005c658, B00072220_gw, B00065618_e1[], DAT_0005ff50, DAT_0005f920, B000758f8_h3, DAT_0005ff4c, DAT_0005ff44, DAT_0005ff48;
+extern int DAT_0005c050, DAT_0005fdbc, DAT_0005c044, DAT_0005c048, DAT_0005bff0, DAT_0005c658, B00072220_gw, B00065618_e1[256], DAT_0005ff50, DAT_0005f920, B000758f8_h3, DAT_0005ff4c, DAT_0005ff44, DAT_0005ff48;
   extern unsigned short B000755d4_ak, B000755d0_ao; extern unsigned char DAT_0005c026, DAT_0005c027, DAT_0005c028, DAT_0005bfe4[];  extern void *DAT_0005c040;
 void FUN_0002f1c8(void)
 {
@@ -1154,7 +1193,7 @@ void FUN_0002f1c8(void)
 /* ---- from build/var/mod/parts/p2f3fc.c */
 /* FUN_0002f3fc @ 0002f3fc: status icon of party member i */
 #include "chars.h"
-extern unsigned short B000718f0_hO;
+
 #define CH10(i) (*(unsigned short *)((char *)&B000718f0_hO + (i) * 0x248))
 int FUN_0002f3fc(int i)
 {
@@ -1405,7 +1444,7 @@ extern void FUN_0002c2cc(void); /* module prototype */
 char *strcpy(char *, const char *);
 #pragma intrinsic(strcpy)
 extern void FUN_00029ccc(int), FUN_00040aec(void), FUN_00029cf4(void); extern int FUN_00040700(void), FUN_00040b40(void);
-extern unsigned char DAT_0005bf38, DAT_0005cf59; extern int DAT_0005cf54; extern char B00064580_eK[], *PTR_s_Game_is_paused_0005bee0; extern short B0006457c_bO;
+extern unsigned char DAT_0005bf38, DAT_0005cf59; extern int DAT_0005cf54; extern char B00064580_eK[2048], *PTR_s_Game_is_paused_0005bee0; extern short B0006457c_bO;
 void FUN_0002fb80(void)
 {
     char *s;
@@ -1457,7 +1496,7 @@ extern void FUN_00032d8c(void), FUN_0002a220(void);
 extern short B000758fc_kL, B000758fe_j6, B00064570_dX, B00064572_eN, B00064574_eL, B00064576_dR, B00064578_eP, B0006457a_ay, B0006457c_bO, DAT_0005a6c2;
 extern short DAT_0005c000[], DAT_0005bff4[], DAT_0005c00c[];
 extern int DAT_0005c6e8, DAT_0005c6ec, DAT_0005c6f0, DAT_0005cf54, DAT_0005c050, DAT_0005cf6c, DAT_0005c658; extern unsigned DAT_0005bf44;
-extern unsigned DAT_0005cf4c; extern char *PTR_DAT_0005bee4; extern char B00064580_eK[];
+extern unsigned DAT_0005cf4c; extern char *PTR_DAT_0005bee4; extern char B00064580_eK[2048];
 extern unsigned char DAT_0005cf59, DAT_0005c02f, DAT_0005cf4a;
 void FUN_0002fc14(void)
 {
@@ -1715,7 +1754,7 @@ extern void FUN_0002a1d0(void); extern void FUN_000410b0(void *); extern void FU
 extern void *DAT_0005c65c, *DAT_0005c660;
 extern int B000755e0_bo, B000755e4_bk, B000755e8_ag, B000755ec_aH, B000755f0_co, B000755f4_ck, B000755f8_bg, B000755fc_ax;
 extern int B00075600_b9, B00075604_mM, B00075608_c1, B0007560c_hn, B00075610_a9, B000748e4_h8, B000748e8_jD;
-extern int B00072200_ew[];
+extern int B00072200_ew[8];
 #include "world.h"
 struct POS { unsigned short f; short i; };
 /* STANDIN: the party cells 0x755d0 / 0x755d4 read as records through the level record (B00075618_b1 - 0x48 / - 0x44): the module declares them as unsigned short scalars (FUN_0002f1c8 needs their -oa memory nodes), main needs no node for them */
@@ -1738,7 +1777,7 @@ extern void FUN_0002a1d0(void); extern void FUN_000410b0(void *); extern void FU
 extern void *DAT_0005c65c, *DAT_0005c660;
 extern int B000755e0_bo, B000755e4_bk, B000755e8_ag, B000755ec_aH, B000755f0_co, B000755f4_ck, B000755f8_bg, B000755fc_ax;
 extern int B00075600_b9, B00075604_mM, B00075608_c1, B0007560c_hn, B00075610_a9, B000748e4_h8, B000748e8_jD;
-extern int B00072200_ew[];
+extern int B00072200_ew[8];
 extern int DAT_0005c658; extern unsigned DAT_0005bf44;
 
 void main(void)

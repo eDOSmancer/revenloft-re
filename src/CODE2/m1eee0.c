@@ -1507,7 +1507,9 @@ extern int DAT_00057f70, DAT_00057f6c, DAT_00056f90[], DAT_0005c038;
 extern short DAT_00059e33;
 extern unsigned char B000748ec_bk[];
 #define B00074900_bn ((struct OB *)((char *)&B000748ec_bk + 20)) /* STANDIN: view, B000748ec_bk + 0x14 */
-extern struct OB B0006762c_ey[];
+extern unsigned char B00067618_e7[];
+#define B0006762c_ey ((struct OB *)((char *)&B00067618_e7 + 20)) /* STANDIN: view, B00067618_e7 + 0x14 */
+
 void FUN_00022470(int a)
 {
     unsigned char *pb; /* STANDIN: declaration order pb, tmp, b, k, c, pa, u, e, t (pass-1 tie order) */

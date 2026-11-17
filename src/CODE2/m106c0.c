@@ -67,7 +67,8 @@ int FUN_00010700(int x, int y, int i)
 #include "world.h"
 extern unsigned char B00067618_e7[];
 #define B0006761a_hN (*(short *)((char *)&B00067618_e7 + 2)) /* STANDIN: view, B00067618_e7 + 0x2 */
-extern unsigned char B0006761c_g8[];
+#define B0006761c_g8 (*(unsigned char (*)[])((char *)&B00067618_e7 + 4)) /* STANDIN: view, B00067618_e7 + 0x4 */
+
 #define B0006761e_g2 (*(short *)((char *)&B0006761c_g8 + 2)) /* STANDIN: view, B0006761c_g8 + 0x2 */
 extern volatile unsigned char DAT_00055fcb; 
 #define OBJ_Y(i) (*(short *)((char *)&B0006761a_hN + (i) * 0x16))
