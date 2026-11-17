@@ -1,0 +1,6 @@
+# WLINK directives of CODE.2.  The build appends `option stub=`, `option map` and one FILE line per entry of order.txt.
+name code
+format os2 le
+option osname='DOS/4G'
+option nodefaultlibs
+option stack=8192
