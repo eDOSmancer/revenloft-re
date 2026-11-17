@@ -1,3 +1,6 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+unsigned char B000640a0_hC[16];
+/* BSS end */
 /* Module: FUN_00029c80, FUN_00029cc4, FUN_00029ccc, FUN_00029cf4, FUN_00029d18, FUN_0002a064, FUN_0002a0b0,
    FUN_0002a1d0, FUN_0002a1f4, FUN_0002a220, FUN_0002a344, FUN_0002a3b8, FUN_0002a510, FUN_0002a5b0,
    FUN_0002a724, FUN_0002a8c8, FUN_0002a9f8, FUN_0002aacc, FUN_0002ab20, FUN_0002a288, FUN_0002ac0c,
@@ -32,7 +35,7 @@ int FUN_00029cc4(void) { return DAT_0005a7e4; }
 /* FUN_00029ccc @ 00029ccc: push onto a small undo stack (14 entries) */
 extern unsigned char DAT_0005a7ec;
 extern int DAT_0005a7e8;
-extern unsigned char B000640a0_hC[];
+extern unsigned char B000640a0_hC[16];
 void FUN_00029ccc(int v)
 {
     if (DAT_0005a7ec < 14) {
@@ -46,7 +49,7 @@ void FUN_00029ccc(int v)
 /* FUN_00029cf4 @ 00029cf4: pop from the undo stack (module flag -oa caches the counter in dl) */
 extern unsigned char DAT_0005a7ec;
 extern int DAT_0005a7e8;
-extern unsigned char B000640a0_hC[];
+extern unsigned char B000640a0_hC[16];
 void FUN_00029cf4(void)
 {
     if (DAT_0005a7ec) DAT_0005a7e8 = B000640a0_hC[--DAT_0005a7ec];
