@@ -1,10 +1,7 @@
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
-unsigned char G00062b44_gJ[13];
-unsigned char F00062b44_hK[3];
-int B00062b44_bl;
-unsigned char G00062b30_f6[12];
-unsigned char F00062b30_g7[4];
-void *B00062b30_k9[];
+char B00062b70_ah[48];
+struct LSP *B00062b58_ap[6];
+void *B00062b30_k9[10];
 unsigned char B00062a30_mJ[256];
 char B00062990_ll[160];
 char B000628f0_jm[160];
@@ -1141,7 +1138,7 @@ extern void FUN_00015eec(void); /* module prototype */
 int rand(void);
 extern void FUN_000391b0(unsigned char), FUN_0003e374(int, int, int, int, unsigned char), FUN_0004060c(int, int, char *, int), FUN_000405a8(int, int, char *, int), FUN_0002a510(int), FUN_0002a9f8(void);
 extern void *FUN_00040070(int, int, int, int, int);
-extern int DAT_0005c050; extern char *B000758dc_cl; extern char *DAT_000560e4, *DAT_000560e8; extern void *B00062b30_k9[];
+extern int DAT_0005c050; extern char *B000758dc_cl; extern char *DAT_000560e4, *DAT_000560e8; extern void *B00062b30_k9[10];
 void FUN_00016008(void)
 {
     int x, y, k;
@@ -1180,7 +1177,7 @@ void FUN_00016008(void)
 
 extern void FUN_000391b0(unsigned char), FUN_0003e374(int, int, int, int, unsigned char), FUN_0004060c(int, int, char *, int), FUN_000405a8(int, int, char *, int), FUN_0002a510(int), FUN_0002a9f8(void);
 extern void *FUN_00040070(int, int, int, int, int);
-extern int DAT_0005c050; extern char *B000758dc_cl; extern char *DAT_000560e4, *DAT_000560e8; extern void *B00062b30_k9[];
+extern int DAT_0005c050; extern char *B000758dc_cl; extern char *DAT_000560e4, *DAT_000560e8; extern void *B00062b30_k9[10];
 
 extern int FUN_0002a1f4(void); extern void FUN_0003a380(int, int, int, void *), FUN_0002a8c8(int, int, int, int, int);
 extern short DAT_00059e33; extern unsigned char DAT_0005c025;
@@ -1204,7 +1201,7 @@ void FUN_000162ac(void)
 
 extern void FUN_000391b0(unsigned char), FUN_0003e374(int, int, int, int, unsigned char), FUN_0004060c(int, int, char *, int), FUN_000405a8(int, int, char *, int), FUN_0002a510(int), FUN_0002a9f8(void);
 extern void *FUN_00040070(int, int, int, int, int);
-extern int DAT_0005c050; extern char *B000758dc_cl; extern char *DAT_000560e4, *DAT_000560e8; extern void *B00062b30_k9[];
+extern int DAT_0005c050; extern char *B000758dc_cl; extern char *DAT_000560e4, *DAT_000560e8; extern void *B00062b30_k9[10];
 
 
 extern unsigned char DAT_0005c02e, DAT_0005c054[]; extern int DAT_0005c034; extern char *DAT_0005f050;
@@ -1237,10 +1234,11 @@ void FUN_00016354(void)
 #include "world.h"
 #define FUN_0003a380 ((void (*)(int, int, int, int))FUN_0003a380)
 extern int FUN_0002a1f4(void); extern void FUN_000391b0(unsigned char), FUN_0003975c(int, int, int, int, int), FUN_0002a8c8(int, int, int, int, int);
-extern short DAT_00059e33; extern unsigned char DAT_0005c02a, DAT_0005c02d; extern int DAT_0005c050, B00062b44_bl; extern char *B000758dc_cl;
+extern short DAT_00059e33; extern unsigned char DAT_0005c02a, DAT_0005c02d; extern int DAT_0005c050; extern char *B000758dc_cl;
 void FUN_00016444(void)
 {
     int v;
+    { int d; d = DAT_0005c034; } /* STANDIN: dead read of a scalar this function does not use - one zero-savings -oa memory node in the pass-1 conflict list; the handle below is element 5 of the 10-entry table (no node), not a variable of its own */
     while (FUN_0002a1f4()) {
         v = DAT_00059e33 - 0x90;
         if (v < 0) v = 0;
@@ -1248,7 +1246,7 @@ void FUN_00016444(void)
         if (v != DAT_0005c02a) {
             DAT_0005c02a = v;
             FUN_000391b0(DAT_0005c050);
-            FUN_0003a380(0, 0xa5, 0x78, B00062b44_bl);
+            FUN_0003a380(0, 0xa5, 0x78, B00062b30_k9[5]);
             FUN_0003975c(1, 0xa5, v + 0x78, (int)B000758dc_cl + 0x40, 0);
             FUN_0002a8c8(DAT_0005c050, 0xa5, 0x78, 0x19, 0xc8);
         }
@@ -1272,7 +1270,7 @@ extern void FUN_00030994(void), FUN_0002a510(int), FUN_0002a9f8(void);
 extern void FUN_00038098(unsigned char), FUN_000390a8(int), FUN_00038e58(int, int, int), FUN_00040040(void *);
 extern short DAT_00059e31, DAT_00059e33, DAT_00059e35;
 extern unsigned char DAT_0005c026, DAT_0005c027, DAT_0005c028, DAT_0005c029, DAT_0005c02b, DAT_0005c02c;
-extern int DAT_0005c050; extern void *B00062b30_k9[];
+extern int DAT_0005c050; extern void *B00062b30_k9[10];
 void FUN_00016548(void)
 {
     int x, y, i;
@@ -1610,7 +1608,7 @@ extern void FUN_00017070(int a); /* module prototype */
 int rand(void);
 extern void FUN_000391b0(unsigned char), FUN_0003975c(int, int, int, int, int), FUN_0003e374(int, int, int, int, unsigned char), FUN_0004060c(int, int, char *, int), FUN_000405a8(int, int, char *, int), FUN_0002a510(int), FUN_0002a9f8(void);
 
-extern int DAT_0005c050; extern char *DAT_000560e4, *DAT_000560e8; extern void *B00062b30_k9[]; extern char *B000758dc_cl;
+extern int DAT_0005c050; extern char *DAT_000560e4, *DAT_000560e8; extern void *B00062b30_k9[10]; extern char *B000758dc_cl;
 
 void FUN_000171b8(int m)
 {
@@ -1642,7 +1640,7 @@ void FUN_000171b8(int m)
 /* ---- from src/CODE2/f17378.c */
 /* FUN_00017378 @ 00017378: delete all files of the current directory through an FCB ("???????????", DOS 13h) */
 #include <string.h>
-extern char B00062b70_ah[];
+extern char B00062b70_ah[48];
 void fcb_delete(char *fcb);
 #pragma aux fcb_delete = 0xb4 0x13 0xcd 0x21 parm [edx] modify [eax];
 void FUN_00017378(void)
