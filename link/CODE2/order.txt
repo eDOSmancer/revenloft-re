@@ -6,7 +6,6 @@ lib  istable  CLIB3S.LIB
 c    m10010   -3s -ox -oe -oa -ot -w0
 asm  xib      -3p -c
 c    m106c0   -3s -ox -oe -oa -ot -j -w0
-asm  b106c0   -3p -c
 c    m13810   -3s -ox -oe -ot -w0
 c    m13a78   -3s -ox -oe -oa -ot -j -w0
 asm  b13a78   -3p -c
