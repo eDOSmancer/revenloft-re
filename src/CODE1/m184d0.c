@@ -36,7 +36,8 @@ int FUN_000184f8(void) { if (*DAT_00032a9c) return DAT_00032a9c[1]; return 0; }
 /* ---- from build/var/mod/parts/p18514.c */
 #define SR T3_SR
 struct SR { short size, n, w; unsigned char hb, flag; unsigned char data[1]; };
-extern unsigned char B000367f8_eu[];
+#include "records.h"
+extern struct PC B000367f8_eu[4];
 #define B0003680b_eu ((unsigned char *)((char *)&B000367f8_eu + 19)) /* STANDIN: view, B000367f8_eu + 0x13 */
 extern int DAT_000304cc, DAT_000304d0; 
 extern void FUN_00011464(int, int, int, int, int, int, int, int, int, int, int, int, int), FUN_000115b0(int, int, int, int), FUN_000166c0(void *, int, int, int, int), FUN_000165c0(int, int, int, int), FUN_000165e8(int, int, int, int);

@@ -1,4 +1,5 @@
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+#include "records.h"
 int B0003713c_eu;
 unsigned char B00037138_eu[4];
 int B00037134_eu;
@@ -9,7 +10,7 @@ int B00037124_eu;
 int B00037120_eu;
 int B0003711c_eu;
 int B00037118_eu;
-unsigned char B000367f8_eu[2336];
+struct PC B000367f8_eu[4];   /* the four character records (file CHARS); the layout is that of CODE.2 (include/records.h) */
 unsigned char B000364f8_eu[768];
 unsigned char B000363f8_eu[256];
 unsigned char B00035ff8_eu[1024];
@@ -135,7 +136,7 @@ extern int DAT_000304cc, B0003713c_eu;
 #define B0003680b_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 19)) /* STANDIN: view, B000367f8_eu + 0x13 */
 #define B0003680c_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 20)) /* STANDIN: view, B000367f8_eu + 0x14 */
 #define B00036812_eu ((unsigned char *)((char *)&B000367f8_eu + 26)) /* STANDIN: view, B000367f8_eu + 0x1a */
-extern unsigned char DAT_000304c4[], B00035ff8_eu[], B000367f8_eu[];
+extern unsigned char DAT_000304c4[], B00035ff8_eu[];
 #define B0003680d_eu ((signed char *)((char *)&B000367f8_eu + 21)) /* STANDIN: view, B000367f8_eu + 0x15 */
 #define B0003680a_eu (*(signed char (*)[])((char *)&B000367f8_eu + 18)) /* STANDIN: view, B000367f8_eu + 0x12 */
 
@@ -154,7 +155,7 @@ void FUN_000104b0(int step)
     if (step >= 5) {
         FUN_00016c60(0, 0x114, 0xd7, 0x14, 7);
         FUN_00016c60(0, 0x129, 0xd7, B0003680b_eu[R] * 0x17 + B0003713c_eu + B0003680a_eu[R], 1);
-        k = DAT_000304cc; if (DAT_000304c4[k]) FUN_00017d80(0x116, 0xd7, 0x30, B000367f8_eu + k * 0x248, 0);
+        k = DAT_000304cc; if (DAT_000304c4[k]) FUN_00017d80(0x116, 0xd7, 0x30, B000367f8_eu[k].name, 0);
     }
     if (step >= 6) FUN_000138a4(0x114, 0x10c);
 }
@@ -1139,8 +1140,7 @@ extern int FUN_00010010(int n, int d, int b, int bonus); /* module prototype */
 /* FUN_0001334c: roll the six ability scores (3d6) of the current character and the exceptional strength percentile */
 #define B0003682a_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 50)) /* STANDIN: view, B000367f8_eu + 0x32 */
 #define B00036836_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 62)) /* STANDIN: view, B000367f8_eu + 0x3e */
-void *memset(void *, int, unsigned);  extern int DAT_000304cc; extern unsigned char B000367f8_eu[];
-void FUN_0001334c(void) { int k; memset(B000367f8_eu + DAT_000304cc * 0x248 + 0x32, 0, 14); for (k = 0; k < 6; k++) B0003682a_eu[DAT_000304cc * 0x248 + k * 2] = FUN_00010010(3, 6, 0, 0) + 3; if (B0003682a_eu[DAT_000304cc * 0x248] >= 0x12 && B0003680c_eu[DAT_000304cc * 0x248] != 2 && (M0003680d_eu[DAT_000304cc * 0x248] == 1 || M0003680d_eu[DAT_000304cc * 0x248] == 2 || M0003680d_eu[DAT_000304cc * 0x248] == 0 || M0003680e_eu[DAT_000304cc * 0x248] == 0 || B0003680f_eu[DAT_000304cc * 0x248] == 0)) B00036836_eu[DAT_000304cc * 0x248] = FUN_00010010(1, 100, 0, 0); }
+void *memset(void *, int, unsigned);  extern int DAT_000304cc; void FUN_0001334c(void) { int k; memset(&B000367f8_eu[DAT_000304cc].f32, 0, 14); for (k = 0; k < 6; k++) B0003682a_eu[DAT_000304cc * 0x248 + k * 2] = FUN_00010010(3, 6, 0, 0) + 3; if (B0003682a_eu[DAT_000304cc * 0x248] >= 0x12 && B0003680c_eu[DAT_000304cc * 0x248] != 2 && (M0003680d_eu[DAT_000304cc * 0x248] == 1 || M0003680d_eu[DAT_000304cc * 0x248] == 2 || M0003680d_eu[DAT_000304cc * 0x248] == 0 || M0003680e_eu[DAT_000304cc * 0x248] == 0 || B0003680f_eu[DAT_000304cc * 0x248] == 0)) B00036836_eu[DAT_000304cc * 0x248] = FUN_00010010(1, 100, 0, 0); }
 
 #undef M0003680d_eu
 #undef M0003680e_eu
@@ -1746,8 +1746,8 @@ extern void FUN_00014cb0(void); /* module prototype */
 extern void FUN_00014d54(void); /* module prototype */
 #define M00036903_eu ((char *)B00036903_eu)
 #define FUN_000165a4 ((void (*)(int))FUN_000165a4)
-void *memset(void *, int, unsigned); extern void FUN_000195bc(void *, int), FUN_00019724(char *, int, int), FUN_000164dc(int), FUN_0001c254(unsigned char *, int, int, char *, int), FUN_00016618(unsigned char *), FUN_00019ac4(void), FUN_00016588(int), FUN_000152ac(void);  extern unsigned char B000364f8_eu[], B000367f8_eu[]; 
-void FUN_00014dc4(void) { int p, k; FUN_000195bc("RES", 0xb); FUN_00019724("Ravenloft", 1, 0x3c); FUN_00014d54(); FUN_00014cb0(); FUN_000164dc(3); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); FUN_00016618(B000364f8_eu); FUN_00019ac4(); FUN_00014b18(); FUN_00014b00(); FUN_00014a0c(); memset(B000364f8_eu, 0, 0x300); FUN_00016618(B000364f8_eu); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); *(int *)&B00037138_eu = 1; FUN_00016588(B00037138_eu); FUN_000165a4(B00037138_eu ^ 1); FUN_000152ac(); memset(B000367f8_eu, -1, 0x920); for (p = 0; p < 4; p++) { B00036809_eu[p * 0x248] |= 0x80; for (k = 0; k < 4; k++) ((int *)(M00036903_eu + p * 0x248))[k] = 0; } }
+void *memset(void *, int, unsigned); extern void FUN_000195bc(void *, int), FUN_00019724(char *, int, int), FUN_000164dc(int), FUN_0001c254(unsigned char *, int, int, char *, int), FUN_00016618(unsigned char *), FUN_00019ac4(void), FUN_00016588(int), FUN_000152ac(void);  extern unsigned char B000364f8_eu[]; 
+void FUN_00014dc4(void) { int p, k; FUN_000195bc("RES", 0xb); FUN_00019724("Ravenloft", 1, 0x3c); FUN_00014d54(); FUN_00014cb0(); FUN_000164dc(3); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); FUN_00016618(B000364f8_eu); FUN_00019ac4(); FUN_00014b18(); FUN_00014b00(); FUN_00014a0c(); memset(B000364f8_eu, 0, 0x300); FUN_00016618(B000364f8_eu); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); *(int *)&B00037138_eu = 1; FUN_00016588(B00037138_eu); FUN_000165a4(B00037138_eu ^ 1); FUN_000152ac(); memset(B000367f8_eu, -1, sizeof B000367f8_eu); for (p = 0; p < 4; p++) { B00036809_eu[p * 0x248] |= 0x80; for (k = 0; k < 4; k++) ((int *)(M00036903_eu + p * 0x248))[k] = 0; } }
 
 #undef M00036903_eu
 #undef FUN_000165a4
@@ -1757,8 +1757,8 @@ void FUN_00014dc4(void) { int p, k; FUN_000195bc("RES", 0xb); FUN_00019724("Rave
 #define B00036814_eu ((short *)((char *)&B000367f8_eu + 28)) /* STANDIN: view, B000367f8_eu + 0x1c */
 #define B0003682b_eu ((unsigned char *)((char *)&B000367f8_eu + 51)) /* STANDIN: view, B000367f8_eu + 0x33 */
 #define B00036929_eu ((unsigned char *)((char *)&B000367f8_eu + 305)) /* STANDIN: view, B000367f8_eu + 0x131 */
-void *memset(void *, int, unsigned); extern void FUN_000163a4(char *), FUN_000162f0(int), FUN_00016320(void *, int, int); extern int FUN_000162d8(char *), FUN_000162c0(char *); extern unsigned char B000367f8_eu[];  
-void FUN_00014ef0(void) { int k, p, fd; for (p = 0; p < 2; p++) { memset(B000367f8_eu + p * 0x248 + 0x10b, 0, B000367f8_eu + (p + 1) * 0x248 - (B000367f8_eu + p * 0x248 + 0x10b)); B00036813_eu[p * 0x248] = 10; *(short *)((char *)B00036814_eu + p * 0x248) = *(short *)((char *)B00036816_eu + p * 0x248); for (k = 0; k < 7; k++) B0003682b_eu[p * 0x248 + k * 2] = B0003682a_eu[p * 0x248 + k * 2]; B00036929_eu[p * 0x248] = 0; if (M0003680d_eu[p * 0x248] == 3 || M0003680e_eu[p * 0x248] == 3 || B0003680f_eu[p * 0x248] == 3) B00036929_eu[p * 0x248] |= 1; if (M0003680d_eu[p * 0x248] == 4 || M0003680e_eu[p * 0x248] == 4 || B0003680f_eu[p * 0x248] == 4) B00036929_eu[p * 0x248] |= 2; } FUN_000163a4("CHARS"); FUN_000162f0(FUN_000162d8("CHARS")); fd = FUN_000162c0("CHARS"); FUN_00016320(B000367f8_eu, 0x920, fd); FUN_000162f0(fd); }
+void *memset(void *, int, unsigned); extern void FUN_000163a4(char *), FUN_000162f0(int), FUN_00016320(void *, int, int); extern int FUN_000162d8(char *), FUN_000162c0(char *);  
+void FUN_00014ef0(void) { int k, p, fd; for (p = 0; p < 2; p++) { memset(B000367f8_eu[p].r10b, 0, (char *)&B000367f8_eu[p + 1] - (char *)B000367f8_eu[p].r10b); B00036813_eu[p * 0x248] = 10; *(short *)((char *)B00036814_eu + p * 0x248) = *(short *)((char *)B00036816_eu + p * 0x248); for (k = 0; k < 7; k++) B0003682b_eu[p * 0x248 + k * 2] = B0003682a_eu[p * 0x248 + k * 2]; B00036929_eu[p * 0x248] = 0; if (M0003680d_eu[p * 0x248] == 3 || M0003680e_eu[p * 0x248] == 3 || B0003680f_eu[p * 0x248] == 3) B00036929_eu[p * 0x248] |= 1; if (M0003680d_eu[p * 0x248] == 4 || M0003680e_eu[p * 0x248] == 4 || B0003680f_eu[p * 0x248] == 4) B00036929_eu[p * 0x248] |= 2; } FUN_000163a4("CHARS"); FUN_000162f0(FUN_000162d8("CHARS")); fd = FUN_000162c0("CHARS"); FUN_00016320(B000367f8_eu, sizeof B000367f8_eu, fd); FUN_000162f0(fd); }
 
 #undef M0003680d_eu
 #undef M0003680e_eu

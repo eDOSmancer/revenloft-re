@@ -1,7 +1,8 @@
 /* Module: FUN_00015d90, FUN_00015f4c */
 /* ---- from build/var/mod/parts/p15d90.c */
 /* Round 24: matches only under -ol; module 0x15d90 needs FUN_00015f4c under the same set. Without -ol the first difference is the register of the hoisted C0 address (edx here, eax in the original; C0 and C1 addresses CSEd into the common dominator of both else branches): an allocation tie, no lever found (modmat: -oa, -oi, -or, -oc change nothing) */
-extern unsigned char B000367f8_eu[];
+#include "records.h"
+extern struct PC B000367f8_eu[4];
 #define B0003680d_eu ((signed char *)((char *)&B000367f8_eu + 21)) /* STANDIN: view, B000367f8_eu + 0x15 */
 #define B0003680e_eu ((signed char *)((char *)&B000367f8_eu + 22)) /* STANDIN: view, B000367f8_eu + 0x16 */
 #define B0003680f_eu ((signed char *)((char *)&B000367f8_eu + 23)) /* STANDIN: view, B000367f8_eu + 0x17 */
