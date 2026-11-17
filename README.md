@@ -32,16 +32,16 @@ relocation (fixup) tables including the order of their records are WLINK's outpu
 
 ## Prerequisites
 
-- **Watcom C/C++32 10.0a** (September 1994): `BIN/WCC386.EXE`, `BIN/WASM.EXE`, `BIN/WLINK.EXE`, `BIN/DOS4GW.EXE`, `H/`,
-  `LIB386/DOS/CLIB3S.LIB` (SHA-1 `47ff4bf2f41b1758806352990fdf3ba67a98bde1`).
-- **Watcom C/C++32 9.5 with patch levels A and B** ("9.5b"): `BIN/WCC386.EXE` (the patched compiler, 628178 bytes),
-  `BIN/WLINK.EXE`, `BIN/DOS4GW.EXE`, `H/`, `LIB386/DOS/CLIB3S.LIB`.
+- **Watcom C/C++32 10.0a** (September 1994). Files the build opens: `BIN/WCC386.EXE`, `BIN/W32RUN.EXE`, `BIN/WASM.EXE`,
+  `BIN/WLINK.EXE`, the headers in `H/`, and `LIB386/DOS/CLIB3S.LIB` (SHA-1 `47ff4bf2f41b1758806352990fdf3ba67a98bde1`).
+- **Watcom C/C++32 9.5 with patch levels A and B** ("9.5b"). Files the build opens: `BIN/WCC386.EXE` (the patched
+  compiler, 628178 bytes), `BIN/WLINK.EXE`, the headers in `H/`, and `LIB386/DOS/CLIB3S.LIB`.
   The C library of CODE.1 is the 9.5 library **with the modules of patches A and B**. The build takes the unpatched
   `LIB386/DOS/CLIB3S.LIB` (SHA-1 `d68694d5c982ecbc8d8a93aaa2fdd57e17ae1543`) and the two patch files `3CSDL.A` (17408
   bytes) and `3CSDL.B` (25088 bytes) of the patch distributions, which are OMF libraries holding the replacement
   modules; `order.txt` says for each module which of the three it comes from (72 / 9 / 4 modules). A `CLIB3S.LIB`
   that already has both patches applied works as well: point `3CSDL.A` and `3CSDL.B` at it.
-  9.5 has no assembler of its own in this set-up; `WASM` of 10.0a assembles the files of both programs.
+  The 9.5 set used here has no assembler; `WASM` of 10.0a assembles the files of both programs.
 - **DOSBox-X** (`dosbox-x` in `PATH`, or `DOSBOX=/path`): runs the DOS tools headless. Developed with 2026.10.01.
 - **Python 3** (standard library only) and `make`, `timeout` (coreutils).
 - **The DOS/4GW Professional loader**, see below.
@@ -135,7 +135,8 @@ Constructs that exist only because they reproduce the original bytes, not becaus
   SHA-1 check will say so.
 - The alignment bytes (above) are a patch, not source.
 - The build is tied to the exact tool versions listed; other patch levels of compiler or library give other bytes.
-- Run one build at a time (each tool run starts a DOSBox-X process).
+- Run one build at a time (each tool run starts a DOSBox-X process). DOSBox-X also reads the user's own
+  configuration file (`~/.config/dosbox-x/`); the build passes its settings with `-conf` on top of it.
 
 ## Layout
 
