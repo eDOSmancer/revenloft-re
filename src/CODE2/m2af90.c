@@ -1,3 +1,13 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+short B0006457c_bO;
+short B0006457a_ay;
+short B00064578_eP;
+short B00064576_dR;
+short B00064574_eL;
+short B00064572_eN;
+short B00064570_dX;
+unsigned char B000640b0_h3[1216];
+/* BSS end */
 /* Module: FUN_0002af90, FUN_0002b1c4, FUN_0002b27c, FUN_0002b394, FUN_0002b3f8, FUN_0002b4f8, FUN_0002b6ec,
    FUN_0002b760, FUN_0002bbd8, FUN_0002bdac */
 /* ---- from build/var/mod/parts/p2af90.c */
@@ -6,7 +16,7 @@
    and one copy out and back on dx (dx / dy / sx tie at savings 58; tietrace forced order dx, dy, sx = MATCH). */
 #include <stdlib.h>
 void *memset(void *, int, unsigned);
-extern unsigned char B000640b0_h3[];
+extern unsigned char B000640b0_h3[1216];
 int FUN_0002af90(int px, int py, int r, int n)
 {
     int k; int dx; int dy; int j; int sx; int sy;
