@@ -569,7 +569,10 @@ extern void FUN_00011a04(void); /* module prototype */
 extern void FUN_00011bd4(void); /* module prototype */
 /* FUN_00011cd0: character creation menu: pick member slot 1 or 2 (start the adventure when it is already made, else start making it), or leave */
 extern void FUN_00017830(void *); 
-extern int DAT_000304cc; extern unsigned char DAT_000304c4[], DAT_000304c5; extern int B00036903_eu[], B00036907_eu[]; extern void *DAT_0003095c, *DAT_00030960;
+extern unsigned char B0003685a_eu[];
+#define B00036903_eu ((int *)((char *)&B0003685a_eu + 169)) /* STANDIN: view, B0003685a_eu + 0xa9 */
+#define B00036907_eu ((int *)((char *)&B0003685a_eu + 173)) /* STANDIN: view, B0003685a_eu + 0xad */
+extern int DAT_000304cc; extern unsigned char DAT_000304c4[], DAT_000304c5;  extern void *DAT_0003095c, *DAT_00030960;
 void FUN_00011cd0(void) { int done, k; unsigned r; FUN_00011a04(); if (DAT_000304c4[0] && DAT_000304c5) FUN_00011464(0, -1, -1, 1, 1, -1, -1, -1, -1, -1, 1, -1, -1); else FUN_00011464(0, -1, -1, 1, 1, -1, -1, -1, -1, -1, 2, -1, -1); done = 0; do { r = FUN_0001043c(); if (r > 0) { if (r >= 3 && r <= 4) { k = r - 3; DAT_000304cc = k; if (DAT_000304c4[k]) FUN_00011bd4(); else { FUN_000115b0(-1, -1, -1, -1); ++DAT_000304d0; DAT_000304cc = k; k *= 0x248; *(int *)((char *)B00036903_eu + k) = 0; *(int *)((char *)B00036907_eu + k) = 0; done = 1; } } } else { DAT_000304cc = -1; done = 1; } } while (!done); if (DAT_0003095c) { FUN_00017830(DAT_0003095c); DAT_0003095c = 0; } if (DAT_00030960) { FUN_00017830(DAT_00030960); DAT_00030960 = 0; } }
 
 /* ---- from build/var/mod/parts/p11dd8.c */
@@ -1073,7 +1076,9 @@ void FUN_00013138(void) { int done, s, r; ++DAT_000304d0; FUN_00011464(6, -1, -1
 /* ---- from build/var/mod/parts/p13208.c */
 #define B0003680f_eu ((signed char *)B0003680f_eu)
 /* FUN_00013208: share the starting experience between the classes of the current character and set each class level from the level table */
-extern int DAT_000304cc; extern signed char B0003680d_eu[], B0003680e_eu[]; extern unsigned B0003681e_eu[]; extern unsigned short DAT_0003057c[], B00036818_eu[];
+extern char B0003681c_eu[];
+#define B0003681e_eu ((unsigned *)((char *)&B0003681c_eu + 2)) /* STANDIN: view, B0003681c_eu + 0x2 */
+extern int DAT_000304cc; extern signed char B0003680d_eu[], B0003680e_eu[];  extern unsigned short DAT_0003057c[], B00036818_eu[];
 #define P (DAT_000304cc * 0x248)
 void FUN_00013208(void) { int n, k, lv; n = 1; if (B0003680e_eu[P] != -1) n = 2; if (B0003680f_eu[P] != -1) n++; for (k = 0; k < n; k++) { *(unsigned *)((char *)B0003681e_eu + P + k * 4) = 35004 / n; for (lv = 0; lv < 20; lv++) if (*(unsigned *)((char *)B0003681e_eu + P + k * 4) / 1000 < *(unsigned short *)((char *)DAT_0003057c + B0003680d_eu[P + k] * 40 + lv * 2)) break; *(unsigned short *)((char *)B00036818_eu + k * 2 + P) = lv; } }
 
@@ -1689,12 +1694,12 @@ extern void FUN_00014b00(void); /* module prototype */
 extern void FUN_00014b18(void); /* module prototype */
 extern void FUN_00014cb0(void); /* module prototype */
 extern void FUN_00014d54(void); /* module prototype */
-#define B00036903_eu ((char *)B00036903_eu)
+#define M00036903_eu ((char *)B00036903_eu)
 #define FUN_000165a4 ((void (*)(int))FUN_000165a4)
 void *memset(void *, int, unsigned); extern void FUN_000195bc(void *, int), FUN_00019724(char *, int, int), FUN_000164dc(int), FUN_0001c254(unsigned char *, int, int, char *, int), FUN_00016618(unsigned char *), FUN_00019ac4(void), FUN_00016588(int), FUN_000152ac(void);  extern unsigned char B000364f8_eu[], B00037138_eu, B000367f8_eu[], B00036809_eu[]; 
-void FUN_00014dc4(void) { int p, k; FUN_000195bc("RES", 0xb); FUN_00019724("Ravenloft", 1, 0x3c); FUN_00014d54(); FUN_00014cb0(); FUN_000164dc(3); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); FUN_00016618(B000364f8_eu); FUN_00019ac4(); FUN_00014b18(); FUN_00014b00(); FUN_00014a0c(); memset(B000364f8_eu, 0, 0x300); FUN_00016618(B000364f8_eu); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); *(int *)&B00037138_eu = 1; FUN_00016588(B00037138_eu); FUN_000165a4(B00037138_eu ^ 1); FUN_000152ac(); memset(B000367f8_eu, -1, 0x920); for (p = 0; p < 4; p++) { B00036809_eu[p * 0x248] |= 0x80; for (k = 0; k < 4; k++) ((int *)(B00036903_eu + p * 0x248))[k] = 0; } }
+void FUN_00014dc4(void) { int p, k; FUN_000195bc("RES", 0xb); FUN_00019724("Ravenloft", 1, 0x3c); FUN_00014d54(); FUN_00014cb0(); FUN_000164dc(3); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); FUN_00016618(B000364f8_eu); FUN_00019ac4(); FUN_00014b18(); FUN_00014b00(); FUN_00014a0c(); memset(B000364f8_eu, 0, 0x300); FUN_00016618(B000364f8_eu); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); *(int *)&B00037138_eu = 1; FUN_00016588(B00037138_eu); FUN_000165a4(B00037138_eu ^ 1); FUN_000152ac(); memset(B000367f8_eu, -1, 0x920); for (p = 0; p < 4; p++) { B00036809_eu[p * 0x248] |= 0x80; for (k = 0; k < 4; k++) ((int *)(M00036903_eu + p * 0x248))[k] = 0; } }
 
-#undef B00036903_eu
+#undef M00036903_eu
 #undef FUN_000165a4
 /* ---- from build/var/mod/parts/p14ef0.c */
 #define B0003680d_eu ((unsigned char *)B0003680d_eu)

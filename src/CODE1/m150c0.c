@@ -1,3 +1,12 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+short B000371da_eu;
+struct MCUR B000371d4_eu;
+struct SREGS B000371c8_eu;
+union REGS B000371ac_eu;
+union REGS B00037190_eu;
+struct CSAVE B00037178_eu;
+char B00037140_eu[56];
+/* BSS end */
 /* Module: FUN_000150c0, FUN_00015230, FUN_0001527c, FUN_000152ac, FUN_0001538c, FUN_000153b4, FUN_000153e4,
    FUN_00015454, FUN_0001550c, FUN_000155dc, FUN_000156dc, FUN_00015780, FUN_000157dc */
 #include "vmode.h"
@@ -89,7 +98,8 @@ extern void FUN_00015780(void); /* module prototype */
 extern void FUN_000157dc(void); /* module prototype */
 #define FUN_000165a4 ((void (*)(unsigned char))FUN_000165a4)
 /* FUN_00015454 */
-void *memmove(void *, const void *, unsigned); extern void FUN_00019ae8(void), FUN_00018740(int), FUN_0001a390(int), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu; extern int DAT_0003097c; extern unsigned char B000373ee_eu, B000373ef_eu[][0x400];
+#define B000373ef_eu ((unsigned char (*)[0x400])((char *)&B000373ee_eu + 1)) /* STANDIN: view, B000373ee_eu + 0x1 */
+void *memmove(void *, const void *, unsigned); extern void FUN_00019ae8(void), FUN_00018740(int), FUN_0001a390(int), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu; extern int DAT_0003097c; extern unsigned char B000373ee_eu;
 void FUN_00015454(int pg) { FUN_00019ae8(); if (B000371da_eu) { DAT_0003097c = 1; B000373ee_eu = pg; B000373ec_eu = 0; FUN_000157dc(); FUN_000165a4(pg); FUN_00018740(pg); FUN_0001a390(pg ^ 1); B000373ee_eu = pg ^ 1; memmove(B000373ef_eu[pg ^ 1], B000373ef_eu[pg], 0x400); FUN_00015780(); FUN_00018788(); B000373ee_eu = pg; B000373ec_eu = 1; DAT_0003097c = 0; } }
 
 #undef FUN_000165a4
@@ -98,31 +108,31 @@ extern void FUN_00015780(void); /* module prototype */
 extern void FUN_000157dc(void); /* module prototype */
 #define FUN_000165a4 ((void (*)(unsigned char))FUN_000165a4)
 /* FUN_0001550c */
-void *memmove(void *, const void *, unsigned); extern void FUN_00019ae8(void), FUN_00018740(int), FUN_0001a3e8(int, int, int, int, int, int, int), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu; extern int DAT_0003097c; extern unsigned char B000373ee_eu, B000373ef_eu[][0x400];
+void *memmove(void *, const void *, unsigned); extern void FUN_00019ae8(void), FUN_00018740(int), FUN_0001a3e8(int, int, int, int, int, int, int), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu; extern int DAT_0003097c; extern unsigned char B000373ee_eu;
 void FUN_0001550c(int pg, int x, int y, int w, int h) { FUN_00019ae8(); if (B000371da_eu) { DAT_0003097c = 1; B000373ee_eu = pg; B000373ec_eu = 0; FUN_000157dc(); FUN_000165a4(pg); FUN_00018740(pg); FUN_0001a3e8(pg ^ 1, x, y, x, y, w, h); B000373ee_eu = pg ^ 1; memmove(B000373ef_eu[pg ^ 1], B000373ef_eu[pg], 0x400); FUN_00015780(); FUN_00018788(); B000373ee_eu = pg; B000373ec_eu = 1; DAT_0003097c = 0; } }
 
 #undef FUN_000165a4
 /* ---- from build/var/mod/parts/p155dc.c */
 extern void FUN_00015780(void); /* module prototype */
 extern void FUN_000157dc(void); /* module prototype */
-void *memmove(void *, const void *, unsigned); extern void FUN_0001a3e8(int, int, int, int, int, int, int); extern short B000371da_eu, B000373ec_eu, B000373e6_eu, B000373e8_eu; extern int DAT_0003097c; extern unsigned char B000373ee_eu, B000373ef_eu[][0x400];
+void *memmove(void *, const void *, unsigned); extern void FUN_0001a3e8(int, int, int, int, int, int, int); extern short B000371da_eu, B000373ec_eu, B000373e6_eu, B000373e8_eu; extern int DAT_0003097c; extern unsigned char B000373ee_eu;
 void FUN_000155dc(int pg, int x, int y, int w, int h) { int old; if (B000371da_eu) { DAT_0003097c = 1; if (B000373e6_eu + 0x20 < x || B000373e6_eu > x + w || B000373e8_eu + 0x10 < y || B000373e8_eu > y + h) FUN_0001a3e8(pg ^ 1, x, y, x, y, w, h); else { old = B000373ee_eu; B000373ee_eu = pg; B000373ec_eu--; FUN_000157dc(); FUN_0001a3e8(pg ^ 1, x, y, x, y, w, h); memmove(B000373ef_eu[pg ^ 1], B000373ef_eu[pg], 0x400); FUN_00015780(); B000373ee_eu = old; B000373ec_eu++; } DAT_0003097c = 0; } }
 
 /* ---- from build/var/mod/parts/p156dc.c */
 extern void FUN_00015780(void); /* module prototype */
 /* FUN_000156dc */
-void *memmove(void *, const void *, unsigned); extern void FUN_00018740(int), FUN_0001a390(int), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu; extern int DAT_0003097c; extern unsigned char B000373ee_eu, B000373ef_eu[][0x400];
+void *memmove(void *, const void *, unsigned); extern void FUN_00018740(int), FUN_0001a390(int), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu; extern int DAT_0003097c; extern unsigned char B000373ee_eu;
 void FUN_000156dc(void) { int old; if (B000371da_eu) { old = B000373ee_eu; DAT_0003097c = 1; FUN_00018740(DAT_000323e6); FUN_0001a390(DAT_000323e6 ^ 1); B000373ee_eu = DAT_000323e6 ^ 1; memmove(B000373ef_eu[B000373ee_eu], B000373ef_eu[old], 0x400); FUN_00015780(); FUN_00018788(); B000373ee_eu = old; DAT_0003097c = 0; B000373ec_eu++; } }
 
 /* ---- from build/var/mod/parts/p15780.c */
 /* FUN_00015780 */
-extern void FUN_00018740(int), FUN_00016744(unsigned char *, int, int, int, int), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu, B000373e6_eu, B000373e8_eu; extern unsigned char B000373ee_eu, B000373ef_eu[][0x400];
+extern void FUN_00018740(int), FUN_00016744(unsigned char *, int, int, int, int), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu, B000373e6_eu, B000373e8_eu; extern unsigned char B000373ee_eu;
 void FUN_00015780(void) { if (B000371da_eu && !--B000373ec_eu) { FUN_00018740(B000373ee_eu); FUN_00016744(B000373ef_eu[B000373ee_eu], B000373e6_eu, B000373e8_eu, 0x20, 0x10); FUN_00018788(); } }
 
 /* ---- from build/var/mod/parts/p157dc.c */
 extern void FUN_0001527c(short *a, short *b, short *c); /* module prototype */
 /* FUN_000157dc */
-extern void FUN_00018740(int), FUN_000166c0(unsigned char *, int, int, int, int), FUN_00016d54(int, int, int, void *), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu, B000373e6_eu, B000373e8_eu, B000373ea_eu; extern unsigned char B000373ee_eu, B000373ef_eu[][0x400]; extern char B000371dc_eu[];
+extern void FUN_00018740(int), FUN_000166c0(unsigned char *, int, int, int, int), FUN_00016d54(int, int, int, void *), FUN_00018788(void); extern short B000371da_eu, B000373ec_eu, B000373e6_eu, B000373e8_eu, B000373ea_eu; extern unsigned char B000373ee_eu; extern char B000371dc_eu[];
 void FUN_000157dc(void) { if (B000371da_eu) { if (!B000373ec_eu) { FUN_00018740(B000373ee_eu); FUN_0001527c(&B000373e6_eu, &B000373e8_eu, &B000373ea_eu); FUN_000166c0(B000373ef_eu[B000373ee_eu], B000373e6_eu, B000373e8_eu, 0x20, 0x10); FUN_00016d54(0, B000373e6_eu, B000373e8_eu, B000371dc_eu); FUN_00018788(); } B000373ec_eu++; } }
 
 /* ---- module data _DATA 0003097c-00030980 (docs/data/dataown.CODE1.csv: certain), generated by tools/data2c.py */

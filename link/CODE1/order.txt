@@ -5,9 +5,13 @@
 lib  istable  CLIB3S.LIB
 c    m10010   -3s -s -of+ -ot -d1+ -ol -w0
 asm  b10010   -3p -c
+c    d36814   -3s -s -of+ -ot -d1+ -ol -w0
+c    d3682c   -3s -s -of+ -ot -d1+ -ol -w0
+c    d36838   -3s -s -of+ -ot -d1+ -ol -w0
+c    d36a54   -3s -s -of+ -ot -d1+ -ol -w0
 asm  xib      -3p -c
 c    m150c0   -3s -s -of+ -ot -d1+ -ol -w0
-asm  b150c0   -3p -c
+c    d371dc   -3s -s -of+ -ot -d1+ -ol -w0
 c    m15880   -3s -s -of+ -ot -d1+ -ol -w0
 asm  b15880   -3p -c
 c    m15d90   -3s -s -of+ -ot -d1+ -ol -w0
