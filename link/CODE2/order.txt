@@ -47,7 +47,6 @@ asm  b3c800   -3p -c
 c    m3e340   -3s -ox -oe -oa -ot -w0
 asm  b3e340   -3p -c
 c    m3f960   -3s -ox -oe -oa -ot -w0
-asm  b3f960   -3p -c
 c    m40700   -3s -ox -oe -ot -w0
 asm  b40700   -3p -c
 lib  rand     CLIB3S.LIB

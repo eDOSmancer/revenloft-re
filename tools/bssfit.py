@@ -3,12 +3,14 @@
 
 usage: tools/bssfit.py classes PROG                 size classes of every label still in a b*.asm (where a module may end)
        tools/bssfit.py rename  PROG                 give every label of the b*.asm files its fitted name, in all sources
-       tools/bssfit.py convert PROG MODULE [--first NAME] [--last NAME] [--at TEXT] [--dry]
+       tools/bssfit.py convert PROG MODULE [--first NAME] [--last NAME] [--at TEXT] [--trim] [--dry]
                                                     move the labels of b<module>.asm (or the run NAME..NAME) into m<module>.c
        tools/bssfit.py check   PROG                 _BSS of every compiled module object: publics in address-name order
        tools/bssfit.py name    PROG STEM            the fitted name for a 10-character stem (e.g. B0007b67c_)
 PROG is CODE1 or CODE2.  `convert` compiles probes under DOSBox-X (build/bss/), verifies the layout of the module's object
-and then rewrites m<module>.c and b<module>.asm; it does not touch link/<PROG>/order.txt.
+first; then it rewrites m<module>.c, b<module>.asm and
+link/<PROG>/order.txt.  --at: insert the block ahead of this text instead of at the top of the file; --trim: no filler for
+the last 1-3 bytes of the module (the linker's alignment of the next piece).
 """
 import sys, os, re, glob, struct, shutil, json
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -288,7 +290,7 @@ def cmd_rename(prog):
 BEGIN = '/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */'
 END = '/* BSS end */'
 
-def cmd_convert(prog, module, first=None, last=None, at=None, dry=False):
+def cmd_convert(prog, module, first=None, last=None, at=None, dry=False, trim=False):
     path = src(prog, 'b%s.asm' % module[1:]); L = labels(path); cpath = src(prog, module + '.c'); text = read(cpath)
     if BEGIN in text: raise SystemExit('%s already has a BSS block (convert the whole run in one step)' % module)
     names = [n for n, s in L]
@@ -315,6 +317,8 @@ def cmd_convert(prog, module, first=None, last=None, at=None, dry=False):
             expect.append((off, n))
         off += size
     if off != sum(s for n, s in mid): raise SystemExit('internal: sizes')
+    if trim and not tail and objs[-1][0] is None and objs[-1][1] < 4:      # the linker's alignment of the next _BSS piece
+        off -= objs[-1][1]; decls.pop(); expect.pop()
     block = BEGIN + '\n' + '\n'.join(decls[::-1]) + '\n' + END + '\n'
     if prog == 'CODE2' and dims:                 # 10.0a: a later declaration with an empty bound would shrink the object
         t = blank_comments(text); cuts = []
@@ -342,6 +346,11 @@ def cmd_convert(prog, module, first=None, last=None, at=None, dry=False):
     if tail: write_asm(path, module, tail, note)
     else: os.remove(path)
     if head: write_asm(src(prog, 'c%s.asm' % module[1:]), module, head, note + '  Linked ahead of the module.')
+    op = os.path.join(ROOT, 'link', prog, 'order.txt'); o = open(op).read().split('\n'); b = 'b' + module[1:]
+    i = next(i for i, l in enumerate(o) if l.split()[:2] == ['asm', b])
+    if head: o.insert(next(i for i, l in enumerate(o) if l.split()[:2] == ['c', module]), o[i].replace(b, 'c' + module[1:])); i += 1
+    if not tail: del o[i]
+    open(op, 'w').write('\n'.join(o))
     print('   left in assembler: %d bytes ahead, %d bytes behind' % (sum(s for n, s in head), sum(s for n, s in tail)))
 
 def cmd_check(prog):
@@ -360,7 +369,7 @@ if __name__ == '__main__':
     opt = lambda k: a[a.index(k) + 1] if k in a else None
     if a[0] == 'classes': cmd_classes(a[1])
     elif a[0] == 'rename': cmd_rename(a[1])
-    elif a[0] == 'convert': cmd_convert(a[1], a[2], opt('--first'), opt('--last'), opt('--at'), '--dry' in a)
+    elif a[0] == 'convert': cmd_convert(a[1], a[2], opt('--first'), opt('--last'), opt('--at'), '--dry' in a, '--trim' in a)
     elif a[0] == 'check': sys.exit(1 if cmd_check(a[1]) else 0)
     elif a[0] == 'name': print(fit(a[1], a[2]))
     else: raise SystemExit(__doc__)
