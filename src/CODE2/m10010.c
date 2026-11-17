@@ -43,7 +43,7 @@ void FUN_00010074(void)
 
 /* ---- from build/var/mod/parts/p100b8.c */
 /* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 /* FUN_000100b8: matched 2026-11-10 in module 0x10010. The else-branch loops count k only (the compiler makes the 0x248 offset itself; with an explicit off it strength-reduces name into a fourth induction register), and the flag is set before the possession byte. */
 /* FUN_000100b8 @ 000100b8: Strahd's possession: pick the first ordinary party member (not Irmgarde, Vladislav or Tatian) and mark them possessed */
 int strcmp(const char *, const char *);
@@ -74,7 +74,7 @@ void FUN_000100b8(void)
         if (k == 4) {
             for (k = 0; k < 4; k++) {
                 if (!(*(unsigned short *)((char *)&B000718f0_hO + k * 0x248) & 0xe000)) {
-                    name = B000718e0_iO + k * 0x248;
+                    name = M000718e0_iO + k * 0x248;
                     if (strcmp(name, "IRMGARDE") && strcmp(name, "VLADISLAV") && strcmp(name, "TATIAN")) break;
                 }
             }
@@ -86,7 +86,7 @@ void FUN_000100b8(void)
     }
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from build/var/mod/parts/p101fc.c */
 /* FUN_000101fc @ 000101fc */
 #include "chars.h"

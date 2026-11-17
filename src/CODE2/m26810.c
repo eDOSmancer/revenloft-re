@@ -1,6 +1,6 @@
 /* Module 0x26810 (FUN_00026810 .. FUN_00026d04), module-context file, -3s -ox -oe -oa -ot -w0, functions in address order
    (round 71 lane BT; FUN_00026934 after FUN_000268c8).
-   FUN_00026d04 matches with STANDIN copy chains at reads 0 (2 temps) and 13 (2 temps; round 76, with the file-name strings as literals: before, with the strings extern, 5 and 15). They leave no code; they move the
+   FUN_00026d04 matches with STANDIN copy chains at reads 0 (3 temps) and 13 (14 temps since the BSS round: refitted when the party-record members became views; round 76: 2 and 2, with the file-name strings as literals: before, with the strings extern, 5 and 15). They leave no code; they move the
    instruction ids and the instruction-chunk reuse that decide where BlkTooBig cuts the long block of inlined FUN_00026a58
    calls for the scheduler. The cut also depends on never-written ins->id fields of recycled chunks (ALLOCATOR.md, stale
    instruction id), whose values differ between DOSBox-X (the build route) and the Unicorn emulator for this file: this form
@@ -91,7 +91,9 @@ int FUN_00026a58(int k, int f)
 #include "chars.h"
 struct NB { unsigned char lo : 4, hi : 4; };
 
-extern signed char DAT_0005817c[][4]; extern unsigned char B0007194a_al;
+extern unsigned char B000718e0_iO;
+#define B0007194a_al (*(unsigned char *)((char *)&B000718e0_iO + 106)) /* STANDIN: view, B000718e0_iO + 0x6a */
+extern signed char DAT_0005817c[][4]; 
 void FUN_00026a88(int i)
 {
     int r, j;
@@ -103,12 +105,14 @@ void FUN_00026a88(int i)
 /* FUN_00026adc @ 00026adc: initialise a new party: members 2 and 3 absent, clear the tables, give each present member class equipment and spells */
 void *memset(void *, int, unsigned);
 extern int FUN_0001dbd4(int); extern void FUN_00013ea4(int, int), FUN_00026a88(int), FUN_00013de4(int, int);
-extern char B000719eb_cp[], B00071b28_gs[], B00071c33_jl[], B00071d70_aF[]; extern unsigned short B000718f0_hO, B00071b38_c0, B00071d80_d5, B00071fc8_l9;
-#define B000718e0_iO ((char *)&B000718e0_iO)
-#define C8(k, o) (*(signed char *)(B000718e0_iO + (k) * 0x248 + (o)))
-#define CB(k, o) (*(unsigned char *)(B000718e0_iO + (k) * 0x248 + (o)))
-#define CS(k, o) (*(short *)(B000718e0_iO + (k) * 0x248 + (o)))
-#define CI(k, o) (*(int *)(B000718e0_iO + (k) * 0x248 + (o)))
+#define B000719eb_cp ((char *)((char *)&B000718e0_iO + 267)) /* STANDIN: view, B000718e0_iO + 0x10b */
+#define B00071c33_jl ((char *)((char *)&B000718e0_iO + 851)) /* STANDIN: view, B000718e0_iO + 0x353 */
+extern char B00071b28_gs[], B00071d70_aF[]; extern unsigned short B000718f0_hO, B00071b38_c0, B00071d80_d5, B00071fc8_l9;
+#define M000718e0_iO ((char *)&B000718e0_iO)
+#define C8(k, o) (*(signed char *)(M000718e0_iO + (k) * 0x248 + (o)))
+#define CB(k, o) (*(unsigned char *)(M000718e0_iO + (k) * 0x248 + (o)))
+#define CS(k, o) (*(short *)(M000718e0_iO + (k) * 0x248 + (o)))
+#define CI(k, o) (*(int *)(M000718e0_iO + (k) * 0x248 + (o)))
 void FUN_00026adc(void)
 {
     int k;
@@ -119,15 +123,15 @@ void FUN_00026adc(void)
     memset(B000719eb_cp, 0, B00071b28_gs - B000719eb_cp);
     memset(B00071c33_jl, 0, B00071d70_aF - B00071c33_jl);
     for (k = 0; k < 4; k++) {
-        memset(B000718e0_iO + k * 0x248 + 0x6a, 0xff, 0x50);
-        memset(B000718e0_iO + k * 0x248 + 0xba, 0xff, 0x50);
+        memset(M000718e0_iO + k * 0x248 + 0x6a, 0xff, 0x50);
+        memset(M000718e0_iO + k * 0x248 + 0xba, 0xff, 0x50);
         CI(k, 0x113) = 0;
         CI(k, 0x117) = 0;
         CI(k, 0x19e) = 0;
         CI(k, 0x1a2) = 0;
         CI(k, 0x1a6) = 0;
         CI(k, 0x12b) = 0;
-        if (*(unsigned short *)(B000718e0_iO + k * 0x248 + 0x10) & 0x8000) continue;
+        if (*(unsigned short *)(M000718e0_iO + k * 0x248 + 0x10) & 0x8000) continue;
         CB(k, 0x1b) = 10;
         CB(k, 0x10a) = FUN_0001dbd4(k);
         CB(k, 0x131) = 0;
@@ -161,7 +165,7 @@ extern int FUN_000412a0(const char *); extern int FUN_000412ec(void *, unsigned,
 void FUN_00026cd0(void)
 {
     int h = FUN_000412a0("CHARS");
-    FUN_000412ec(B000718e0_iO, 0x920, h);
+    FUN_000412ec(M000718e0_iO, 0x920, h);
     FUN_000412dc(h);
     FUN_00026adc();
 }
@@ -180,10 +184,11 @@ void FUN_00026d04(void)
     FUN_00026810();
     FUN_000268c8();
     f = FUN_000412a0("INIT");
-    { /* STANDIN: copy chain (2 block-local temps, propagated away; they advance the instruction-id counter that places the BlkTooBig block cuts) */
+    { /* STANDIN: copy chain (3 block-local temps, propagated away; they advance the instruction-id counter that places the BlkTooBig block cuts) */
         int t0 = FUN_00026a58(0, f); /* STANDIN */
         int t1 = t0; /* STANDIN */
-        B000758dc_cl = t1; /* STANDIN */
+        int t2 = t1; /* STANDIN */
+        B000758dc_cl = t2; /* STANDIN */
     }
     B000758d8_j3 = FUN_00026a58(1, f);
     B000758e4_h7 = FUN_00026a58(2, f);
@@ -197,10 +202,22 @@ void FUN_00026d04(void)
     B000758c0_kK = FUN_00026a58(10, f);
     B000758bc_al = FUN_00026a58(11, f);
     B000758d4_jG = FUN_00026a58(12, f);
-    { /* STANDIN: copy chain (2 block-local temps, propagated away; they advance the instruction-id counter that places the BlkTooBig block cuts) */
+    { /* STANDIN: copy chain (14 block-local temps, propagated away; they advance the instruction-id counter that places the BlkTooBig block cuts) */
         int t0 = FUN_00026a58(13, f); /* STANDIN */
         int t1 = t0; /* STANDIN */
-        B000758c8_as = t1; /* STANDIN */
+        int t2 = t1; /* STANDIN */
+        int t3 = t2; /* STANDIN */
+        int t4 = t3; /* STANDIN */
+        int t5 = t4; /* STANDIN */
+        int t6 = t5; /* STANDIN */
+        int t7 = t6; /* STANDIN */
+        int t8 = t7; /* STANDIN */
+        int t9 = t8; /* STANDIN */
+        int t10 = t9; /* STANDIN */
+        int t11 = t10; /* STANDIN */
+        int t12 = t11; /* STANDIN */
+        int t13 = t12; /* STANDIN */
+        B000758c8_as = t13; /* STANDIN */
     }
     B000758ec_bl = FUN_00026a58(14, f);
     B000758cc_fL = FUN_00026a58(15, f);

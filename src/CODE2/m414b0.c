@@ -189,7 +189,9 @@ void FUN_00041c58(int p)
 
 /* ---- from build/var/mod/parts/p41e74.c */
 /* FUN_00041e74 @ 00041e74: 8 if a living party member carries a light (status bits 0x402), else 0; debug-info module */
-extern unsigned short B000718f0_hO[], B00071a12_dx[];
+extern unsigned char B000718e0_iO[];
+#define B00071a12_dx ((unsigned short *)((char *)&B000718e0_iO + 306)) /* STANDIN: view, B000718e0_iO + 0x132 */
+extern unsigned short B000718f0_hO[];
 int FUN_00041e74(void)
 {
     int i, r;

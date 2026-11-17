@@ -7,7 +7,10 @@
    */
 /* ---- from src/CODE2/f186c4.c */
 /* FUN_000186c4 @ 000186c4 */
-extern short B0007193c_aB, B0007193e_bP, DAT_000567ca[];
+extern unsigned char B000718e0_iO;
+#define B0007193c_aB (*(short *)((char *)&B000718e0_iO + 92)) /* STANDIN: view, B000718e0_iO + 0x5c */
+#define B0007193e_bP (*(short *)((char *)&B000718e0_iO + 94)) /* STANDIN: view, B000718e0_iO + 0x5e */
+extern short DAT_000567ca[];
 extern void FUN_00034a9c(int, int);
 void FUN_000186c4(int i, int k)
 {
@@ -20,7 +23,7 @@ void FUN_000186c4(int i, int k)
 /* FUN_0001871c @ 0001871c: spell effect e of member who wears off: toggle its bit, post "<name>'s <effect> wears off.", clear its duration and undo the effect */
 #include <string.h>
 #include <stdio.h>
-#define B000718e0_iO ((struct CHR *)&B000718e0_iO)
+#define M000718e0_iO ((struct CHR *)&B000718e0_iO)
 #pragma pack(1)
 struct CHR { char name[0x35]; unsigned char b35; char p36[0xed]; int f123; unsigned char f127; char p128[0xa]; int fx; int dur[0x22]; int f1be; char p1c2[0x28]; int f1ea; char p1ee[4]; int f1f2; char rest[0x52]; };
 #pragma pack()
@@ -29,29 +32,29 @@ extern int DAT_0005f91c, DAT_0005fd08; extern short DAT_0005f03c, DAT_0005f03e, 
 extern void FUN_0002c368(char *, int), FUN_0002c21c(char *), FUN_00041f38(int), FUN_0002202c(int, int);
 void FUN_0001871c(int who, unsigned e)
 {
-    B000718e0_iO[who].fx ^= 1 << e;
-    sprintf(DAT_0005759c, DAT_0005669c, B000718e0_iO[who].name);
+    M000718e0_iO[who].fx ^= 1 << e;
+    sprintf(DAT_0005759c, DAT_0005669c, M000718e0_iO[who].name);
     FUN_0002c368(DAT_0005759c + strlen(DAT_0005759c), e + 0x24c);
     strcat(DAT_0005759c, DAT_000566a0);
     FUN_0002c21c(DAT_0005759c);
     (&DAT_0005cf5a)[who] = 1;
-    B000718e0_iO[who].dur[e] = 0;
+    M000718e0_iO[who].dur[e] = 0;
     switch (e) {
     case 1:
     case 10:
         FUN_00041f38(DAT_0005f91c);
         break;
     case 6:
-        B000718e0_iO[who].f1f2--;
+        M000718e0_iO[who].f1f2--;
         break;
     case 11:
-        B000718e0_iO[who].f1ea = 0;
+        M000718e0_iO[who].f1ea = 0;
         break;
     case 12:
-        FUN_0002202c(who, -B000718e0_iO[who].f123);
+        FUN_0002202c(who, -M000718e0_iO[who].f123);
         break;
     case 13:
-        B000718e0_iO[who].b35 -= B000718e0_iO[who].f127;
+        M000718e0_iO[who].b35 -= M000718e0_iO[who].f127;
         break;
     case 17:
         DAT_0005fd08--;
@@ -71,13 +74,13 @@ void FUN_0001871c(int who, unsigned e)
         (&DAT_0005cf5a)[1] = 1;
         (&DAT_0005cf5a)[2] = 1;
         (&DAT_0005cf5a)[3] = 1;
-        B000718e0_iO[0].fx &= ~0x200000;
-        B000718e0_iO[1].fx &= ~0x200000;
-        B000718e0_iO[2].fx &= ~0x200000;
-        B000718e0_iO[3].fx &= ~0x200000;
+        M000718e0_iO[0].fx &= ~0x200000;
+        M000718e0_iO[1].fx &= ~0x200000;
+        M000718e0_iO[2].fx &= ~0x200000;
+        M000718e0_iO[3].fx &= ~0x200000;
         break;
     case 23:
-        FUN_0002202c(who, -B000718e0_iO[who].f1be);
+        FUN_0002202c(who, -M000718e0_iO[who].f1be);
         break;
     case 25:
         DAT_0005f03e--;
@@ -85,16 +88,19 @@ void FUN_0001871c(int who, unsigned e)
     }
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #pragma pack()
 /* ---- from src/CODE2/f1893c.c */
 extern void FUN_000186c4(int i, int k); /* module prototype */
 extern void FUN_0001871c(int who, unsigned e); /* module prototype */
 /* FUN_0001893c @ 0001893c: expire the party's timed effects (spell durations, hunger, condition timers) (one char base for the character record keeps the stores in source order) */
 #include "dice.h"
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 extern int FUN_00029cc4(void), FUN_00022098(int); extern void FUN_0002202c(int, int);
- extern int B00071aa2_ht, DAT_00071aa6, DAT_00071ace, B00071a12_dx, DAT_00071a16; extern unsigned char B00071912_a3;
+#define B00071912_a3 (*(unsigned char *)((char *)&B000718e0_iO + 50)) /* STANDIN: view, B000718e0_iO + 0x32 */
+#define B00071aa2_ht (*(int *)((char *)&B000718e0_iO + 450)) /* STANDIN: view, B000718e0_iO + 0x1c2 */
+#define B00071a12_dx (*(int *)((char *)&B000718e0_iO + 306)) /* STANDIN: view, B000718e0_iO + 0x132 */
+ extern int DAT_00071aa6, DAT_00071ace, DAT_00071a16; 
 #define CH(sym, k) (*(int *)((char *)&sym + (k) * 0x248))
 #define CHJ(sym, k, j) (*(int *)((char *)&sym + (k) * 0x248 + (j) * 4))
 void FUN_0001893c(void)
@@ -102,34 +108,34 @@ void FUN_0001893c(void)
     int now, k, j, r;
     now = FUN_00029cc4();
     for (k = 0; k < 4; k++) {
-        if (*(unsigned short *)(B000718e0_iO + k * 0x248 + 0x10) >= 0x4000) continue;
-        if ((*(int *)(B000718e0_iO + (k) * 0x248 + 0x1c2))) {
+        if (*(unsigned short *)(M000718e0_iO + k * 0x248 + 0x10) >= 0x4000) continue;
+        if ((*(int *)(M000718e0_iO + (k) * 0x248 + 0x1c2))) {
             for (j = 0; j < 9; j++) {
-                if ((*(int *)(B000718e0_iO + (k) * 0x248 + (j) * 4 + 0x1c6)) && (*(int *)(B000718e0_iO + (k) * 0x248 + (j) * 4 + 0x1c6)) <= now) {
-                    (*(int *)(B000718e0_iO + (k) * 0x248 + 0x1c2)) ^= 1 << j;
+                if ((*(int *)(M000718e0_iO + (k) * 0x248 + (j) * 4 + 0x1c6)) && (*(int *)(M000718e0_iO + (k) * 0x248 + (j) * 4 + 0x1c6)) <= now) {
+                    (*(int *)(M000718e0_iO + (k) * 0x248 + 0x1c2)) ^= 1 << j;
                     (&DAT_0005cf5a)[k] = 1;
-                    (*(int *)(B000718e0_iO + (k) * 0x248 + (j) * 4 + 0x1c6)) = 0;
+                    (*(int *)(M000718e0_iO + (k) * 0x248 + (j) * 4 + 0x1c6)) = 0;
                     FUN_000186c4(k, j);
                 }
             }
         }
-        if ((*(int *)(B000718e0_iO + (k) * 0x248 + 0x1ee)) && (*(int *)(B000718e0_iO + (k) * 0x248 + 0x1ee)) <= now) {
+        if ((*(int *)(M000718e0_iO + (k) * 0x248 + 0x1ee)) && (*(int *)(M000718e0_iO + (k) * 0x248 + 0x1ee)) <= now) {
             FUN_0002202c(k, 1);
-            (*(int *)(B000718e0_iO + (k) * 0x248 + 0x1ee)) = 0;
-            if (FUN_00022098(k) != *(unsigned char *)(B000718e0_iO + k * 0x248 + 0x32)) {
+            (*(int *)(M000718e0_iO + (k) * 0x248 + 0x1ee)) = 0;
+            if (FUN_00022098(k) != *(unsigned char *)(M000718e0_iO + k * 0x248 + 0x32)) {
                 r = FUN_0002c328(2, 4, 0, 0) * 0x2a30;
-                (*(int *)(B000718e0_iO + (k) * 0x248 + 0x1ee)) = FUN_00029cc4() + r;
+                (*(int *)(M000718e0_iO + (k) * 0x248 + 0x1ee)) = FUN_00029cc4() + r;
             }
         }
-        if ((*(int *)(B000718e0_iO + (k) * 0x248 + 0x132))) {
+        if ((*(int *)(M000718e0_iO + (k) * 0x248 + 0x132))) {
             for (j = 0; j < 0x1a; j++) {
-                if ((*(int *)(B000718e0_iO + (k) * 0x248 + (j) * 4 + 0x136)) > 0 && (*(int *)(B000718e0_iO + (k) * 0x248 + (j) * 4 + 0x136)) <= now) FUN_0001871c(k, j);
+                if ((*(int *)(M000718e0_iO + (k) * 0x248 + (j) * 4 + 0x136)) > 0 && (*(int *)(M000718e0_iO + (k) * 0x248 + (j) * 4 + 0x136)) <= now) FUN_0001871c(k, j);
             }
         }
     }
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef CH
 #undef CHJ
 /* ---- from src/CODE2/f18a80.c */
@@ -141,7 +147,7 @@ void FUN_0001893c(void)
 /* FUN_00018a80 @ 00018a80: launch projectile type t from (x, y) in direction dir, cast by member who (0..3, or a creature): fill the next missile slot, play its sound when audible, step it out of the caster's square, and for a party caster clear the cast state */
 #include <stdlib.h>
 #include "world.h"
-#define B000718e0_iO ((struct CHR *)&B000718e0_iO)
+#define M000718e0_iO ((struct CHR *)&B000718e0_iO)
 union FX { int v; struct { unsigned short f; short i; } s; };
 struct MS { int a, b, dir; unsigned short cell, type; short timer, w12; unsigned short b0 : 1, st : 2, face : 3, f6 : 4, b10 : 1, own : 3, b14 : 2; };
 struct CELL { unsigned short lo : 6, seen : 1, rest : 9; };
@@ -190,13 +196,13 @@ void FUN_00018a80(int t, int dir, int who, union FX x, union FX y)
             FUN_00029cf4();
         }
         if (who >= 0 && who < 4) {
-            B000718e0_iO[who].f14a = 0; B000718e0_iO[who].f15a = 0; B000718e0_iO[who].st &= 0xfddf; (&DAT_0005cf5a)[who] = 1;
+            M000718e0_iO[who].f14a = 0; M000718e0_iO[who].f15a = 0; M000718e0_iO[who].st &= 0xfddf; (&DAT_0005cf5a)[who] = 1;
         }
     }
 }
 
 #undef CHR
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from src/CODE2/f18c88.c */
 #define B000748ec_bk ((struct SP *)B000748ec_bk)
 /* FUN_00018c88 @ 00018c88: unload spell slot i */
@@ -225,7 +231,7 @@ struct PRJ { int a, b; short c8, ca; unsigned short s, type; short timer, w12; u
 struct O { int a, b; unsigned char f8, f9, fa; unsigned char fb0 : 1, dead : 1, fb2 : 6; unsigned short s, type; short timer, hp; unsigned short w14; };
 extern struct O B00064d80_ay[];  extern unsigned char *B00072230_c4, DAT_000566c8[];
 #include "records.h"
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 
 extern int FUN_0002c328(int, int, int, int), FUN_00033f50(int); extern void FUN_0001e284(void *, unsigned char *, int, int, int);
 #pragma aux FUN_0002c328 modify [ebx ecx edx];
@@ -239,9 +245,9 @@ int FUN_00018cf4(struct PRJ *p, int f)
         c = p->owner;
         if (c == 4) mult = 3;
         else {
-            if (4 == B000718e0_iO[c].cls[0]) mult = B000718e0_iO[c].lvl[0];
-            if (4 == B000718e0_iO[c].cls[1]) mult = B000718e0_iO[c].lvl[1];
-            if (B000718e0_iO[c].cls[2] == 4) mult = B000718e0_iO[c].lvl[2];
+            if (4 == M000718e0_iO[c].cls[0]) mult = M000718e0_iO[c].lvl[0];
+            if (4 == M000718e0_iO[c].cls[1]) mult = M000718e0_iO[c].lvl[1];
+            if (M000718e0_iO[c].cls[2] == 4) mult = M000718e0_iO[c].lvl[2];
         }
     }
     for (i = 0; i < B00075618_b1.nent; i += 1) {
@@ -294,7 +300,7 @@ int FUN_00018cf4(struct PRJ *p, int f)
     return r;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 
 /* ---- from src/CODE2/wip/f19070.c */
 /* NEAR MISS (round 40: unchanged, 146 masked lines. Re-read: frame y0 [0], x0 [4], mult [8], flag [0xc], i [0x10]; x1 ebp, y1 ebx; the owner's class reads go through edx. The int flag word *(int *)(B000718e0_iO + i * 0x248 + 0x132) & 0x80000 (the module's own view of the status word, recipe 43) gives the original's test byte ptr [ebp+0x134],8 but moves the slots (mult [0], i [4], x0 [8], y0 [0xc], flag [0x10]; 232 masked lines) - still not kept, apply with the slot fix. Declaration orders (6) and the orders of the four bound initialisers (6) do not move x0/y0/mult; tietrace on the int-flag form: class C, x1 (t10) ties with y1, t21, t24, t27 at savings 692 and takes edx after t21/t24 (the owner offsets) took ebp; no forced order of that group gives the original (best 230).) */
@@ -312,15 +318,16 @@ struct CHR { char p0[0x10]; unsigned short st; char p12[3]; signed char cls[3]; 
 
 #include "dice.h"
 #define DAT_000566c8 ((struct DICE *)DAT_000566c8)
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 #define B000755d0_ao ((unsigned )B000755d0_ao)
 #define B000755d4_ak ((unsigned )B000755d4_ak)
 extern int FUN_00024a60(char *), FUN_0001f2d4(int, int), FUN_0001cf2c(int, int); extern void FUN_0001cd44(int, int);
-#define CH(i) ((struct CHR *)(B000718e0_iO + (i) * 0x248))
+#define CH(i) ((struct CHR *)(M000718e0_iO + (i) * 0x248))
 #undef DAT_000566c8
-#undef B000718e0_iO
-extern unsigned short B000718f0_hO[]; extern int B00071a14_ff;
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#undef M000718e0_iO
+#define B00071a14_ff (*(int *)((char *)&B000718e0_iO + 308)) /* STANDIN: view, B000718e0_iO + 0x134 */
+extern unsigned short B000718f0_hO[]; 
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 void FUN_00019070(struct MS *p, int f)
 {
     unsigned char *dice; int off; int c, mult, k, d, w;
@@ -334,9 +341,9 @@ void FUN_00019070(struct MS *p, int f)
         if (c == 4) mult = 3;
         else if (c == 7) mult = 5;
         else {
-            if (B000718e0_iO[c].cls[0] == 4) mult = B000718e0_iO[c].lvl[0];
-            if (B000718e0_iO[c].cls[1] == 4) mult = B000718e0_iO[c].lvl[1];
-            if (B000718e0_iO[c].cls[2] == 4) mult = B000718e0_iO[c].lvl[2];
+            if (M000718e0_iO[c].cls[0] == 4) mult = M000718e0_iO[c].lvl[0];
+            if (M000718e0_iO[c].cls[1] == 4) mult = M000718e0_iO[c].lvl[1];
+            if (M000718e0_iO[c].cls[2] == 4) mult = M000718e0_iO[c].lvl[2];
         }
     } else if (p->type == 0x59 || p->type == 0x57) {
         p->hit = 0;
@@ -379,7 +386,7 @@ void FUN_00019070(struct MS *p, int f)
 
 #undef CHR
 #undef DAT_000566c8
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B000755d0_ao
 #undef B000755d4_ak
 #undef MS
@@ -553,16 +560,16 @@ int FUN_000196e0(int a, int b, int c, int d, int flag, int i)
 extern unsigned char FUN_0001f218(int, int);
 extern void FUN_0001f238(int, int, int), FUN_0002ea90(int, int, int);
 extern struct OPENC DAT_00056fa0[];
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 int FUN_00019790(int it, int i, int snd, int bit, int k, int a, int b)
 {
     unsigned h1, h2; int c1, c2, ok2, w, ok1, ret, y, y2; /* STANDIN: y / y2 name the two redraw x values (tail allocation order); ok2 declared after c2 and ahead of w / ok1 (ids: the h2 / ok2 rough-sort tie at 11 goes to ok2, h1 stays first in the pass-1 tie at 22) */
 
-    h1 = B000718e0_iO[i].inv[14];
-    h2 = B000718e0_iO[i].inv[15];
+    h1 = M000718e0_iO[i].inv[14];
+    h2 = M000718e0_iO[i].inv[15];
     c1 = FUN_0001f218(i, 0xe);
     c2 = FUN_0001f218(i, 0xf);
-    if (bit != -1 && (B000718e0_iO[i].f1c2 & bit)) return 0;
+    if (bit != -1 && (M000718e0_iO[i].f1c2 & bit)) return 0;
     ret = 1;
     ok2 = 1;
     ok1 = 1;
@@ -596,24 +603,24 @@ int FUN_00019790(int it, int i, int snd, int bit, int k, int a, int b)
         DAT_00056fa0[i].item = -1;
     }
     if (it == 0x80) {
-        B000718e0_iO[i].inv[14] = it;
-        B000718e0_iO[i].inv[15] = it;
+        M000718e0_iO[i].inv[14] = it;
+        M000718e0_iO[i].inv[15] = it;
         FUN_0001f238(i, 0xe, 0);
         FUN_0001f238(i, 0xf, 0);
     } else if (it == 0xa5) {
         if (!ok1 && !ok2) ret = 0;
         else {
             if (ok1) {
-                B000718e0_iO[i].inv[14] = it;
+                M000718e0_iO[i].inv[14] = it;
                 FUN_0001f238(i, 0xe, 0);
             }
             if (ok2) {
-                B000718e0_iO[i].inv[15] = it;
+                M000718e0_iO[i].inv[15] = it;
                 FUN_0001f238(i, 0xf, 0);
             }
         }
     } else {
-        B000718e0_iO[i].inv[14 + w] = it;
+        M000718e0_iO[i].inv[14 + w] = it;
         FUN_0001f238(i, w + 0xe, 0);
         ret = 1;
     }
@@ -628,13 +635,13 @@ int FUN_00019790(int it, int i, int snd, int bit, int k, int a, int b)
     y2 = (w ^ 1) * 33 + 4 + i % 2 * 0x35 + i / 2 * 0xd3;
     FUN_0002a8c8(DAT_0005c050, 0x114, y2, 0x20, 0x10);
     if (bit != -1) {
-        B000718e0_iO[i].f1c2 |= bit;
-        (&B000718e0_iO[i].f1c6)[k] = a * b + FUN_00029cc4();
+        M000718e0_iO[i].f1c2 |= bit;
+        (&M000718e0_iO[i].f1c6)[k] = a * b + FUN_00029cc4();
     }
     return ret;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from src/CODE2/f19b4c.c */
 #define FX T13_FX
 /* FUN_00019b4c @ 00019b4c: play spell effect fx over the portrait of party member who, or over every standing member when all is set */
@@ -686,7 +693,7 @@ void FUN_00019b4c(int who, int fx, int all)
 /* ---- from src/CODE2/wip/f19d90.c */
 /* NEAR MISS Round 34: MATCH in module 0x186c4 (DOSBox modmerge 20 -> 21/32) with the volatile on hp removed (68 -> 0 lines: the workaround kept hp out of the conflict list). Earlier: (round 31): the static say stand-in written out (module 0x186c4 has no function with its body; a mid-file static leaves a copy): 15 -> 68 masked lines in module (the first "cannot be resurrected" block: name in eax, orig esi), module 19 -> 20/32 (FUN_00019b4c no longer holds the copy); volatile hp still a stand-in. Round 22: read only (three spots). */
 #define PC T14_PC
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 int sprintf(char *, const char *, ...);
 extern int FUN_0002c328(int, int, int, int), FUN_00032e40(int, int);
 extern void FUN_0002c21c(char *);
@@ -695,7 +702,7 @@ struct PC { char name[0x10]; unsigned short flags; char p12[2]; unsigned char ra
 extern char DAT_0005759c[];
 extern char *PTR_s__s_is_still_alive__000566c4, *PTR_s__s_cannot_be_resurrected__000566b8, *PTR_s__s_is_resurrected__000566b4, *PTR_s_you_cannot_resurrect_an_elf__000566bc;
 extern unsigned char DAT_0005cf5a; /* STANDIN: scalar declaration of DAT_0005cf5a, see the first one (module head) */
-#define FL1(p) (((unsigned char *)&B000718e0_iO[p].flags)[1])
+#define FL1(p) (((unsigned char *)&M000718e0_iO[p].flags)[1])
 #pragma aux FUN_0002c328 modify [ebx ecx edx];
 int FUN_00019d90(int spell, int m, int c)
 {
@@ -704,32 +711,32 @@ int FUN_00019d90(int spell, int m, int c)
     switch (spell) {
     case -1:
         FL1(m) &= 0xf3;
-        B000718e0_iO[m].hp += FUN_0002c328(r, 4, 0, 8);
-        if (B000718e0_iO[m].hp > B000718e0_iO[m].maxhp) B000718e0_iO[m].hp = B000718e0_iO[m].maxhp;
+        M000718e0_iO[m].hp += FUN_0002c328(r, 4, 0, 8);
+        if (M000718e0_iO[m].hp > M000718e0_iO[m].maxhp) M000718e0_iO[m].hp = M000718e0_iO[m].maxhp;
         break;
     case 0x7b:
-        if (!(B000718e0_iO[m].flags & 0x4000)) {
-            sprintf(DAT_0005759c, PTR_s__s_is_still_alive__000566c4, B000718e0_iO[m].name);
+        if (!(M000718e0_iO[m].flags & 0x4000)) {
+            sprintf(DAT_0005759c, PTR_s__s_is_still_alive__000566c4, M000718e0_iO[m].name);
             r = 0;
             FUN_0002c21c(DAT_0005759c);
             break;
         }
-        if (B000718e0_iO[m].flags & 0x8000) break;
-        if (B000718e0_iO[m].race != 5) {
-            if (B000718e0_iO[m].lv[0] == 0 || B000718e0_iO[m].lv[1] == 0 || B000718e0_iO[m].lv[2] == 0) {
-                sprintf(DAT_0005759c, PTR_s__s_cannot_be_resurrected__000566b8, B000718e0_iO[m].name);
+        if (M000718e0_iO[m].flags & 0x8000) break;
+        if (M000718e0_iO[m].race != 5) {
+            if (M000718e0_iO[m].lv[0] == 0 || M000718e0_iO[m].lv[1] == 0 || M000718e0_iO[m].lv[2] == 0) {
+                sprintf(DAT_0005759c, PTR_s__s_cannot_be_resurrected__000566b8, M000718e0_iO[m].name);
                 FUN_0002c21c(DAT_0005759c);
                 r = 0;
-            } else if (B000718e0_iO[m].b37 && B000718e0_iO[m].b37 - B000718e0_iO[m].b36 < 5) {
-                B000718e0_iO[m].hp = 1;
+            } else if (M000718e0_iO[m].b37 && M000718e0_iO[m].b37 - M000718e0_iO[m].b36 < 5) {
+                M000718e0_iO[m].hp = 1;
                 FL1(m) &= 0xbf;
                 (&DAT_0005cf5a)[m] = 1;
-                B000718e0_iO[m].b37--;
-                sprintf(DAT_0005759c, PTR_s__s_is_resurrected__000566b4, B000718e0_iO[m].name);
+                M000718e0_iO[m].b37--;
+                sprintf(DAT_0005759c, PTR_s__s_is_resurrected__000566b4, M000718e0_iO[m].name);
                 r = 1;
                 FUN_0002c21c(DAT_0005759c);
             } else {
-                sprintf(DAT_0005759c, PTR_s__s_cannot_be_resurrected__000566b8, B000718e0_iO[m].name);
+                sprintf(DAT_0005759c, PTR_s__s_cannot_be_resurrected__000566b8, M000718e0_iO[m].name);
                 r = 0;
                 FUN_0002c21c(DAT_0005759c);
             }
@@ -740,55 +747,55 @@ int FUN_00019d90(int spell, int m, int c)
         break;
     case 0x51:
         hp = FUN_0002c328(r, 8, 0, 0);
-        if (B000718e0_iO[c].st132 & 0x8000) {
-            B000718e0_iO[c].st132 &= 0xffff7fff;
+        if (M000718e0_iO[c].st132 & 0x8000) {
+            M000718e0_iO[c].st132 &= 0xffff7fff;
             hp = 8;
         }
-        B000718e0_iO[m].hp += hp;
-        if (B000718e0_iO[m].hp > B000718e0_iO[m].maxhp) B000718e0_iO[m].hp = B000718e0_iO[m].maxhp;
+        M000718e0_iO[m].hp += hp;
+        if (M000718e0_iO[m].hp > M000718e0_iO[m].maxhp) M000718e0_iO[m].hp = M000718e0_iO[m].maxhp;
         break;
     case 0x6e:
         hp = FUN_0002c328(2, 8, 0, r);
-        if (B000718e0_iO[c].st132 & 0x8000) {
+        if (M000718e0_iO[c].st132 & 0x8000) {
             hp = 0x10;
-            B000718e0_iO[c].st132 &= 0xffff7fff;
+            M000718e0_iO[c].st132 &= 0xffff7fff;
         }
-        B000718e0_iO[m].hp += hp;
-        if (B000718e0_iO[m].hp > B000718e0_iO[m].maxhp) B000718e0_iO[m].hp = B000718e0_iO[m].maxhp;
+        M000718e0_iO[m].hp += hp;
+        if (M000718e0_iO[m].hp > M000718e0_iO[m].maxhp) M000718e0_iO[m].hp = M000718e0_iO[m].maxhp;
         break;
     case 0x78:
         hp = FUN_0002c328(3, 8, 0, 3);
-        if (B000718e0_iO[c].st132 & 0x8000) {
+        if (M000718e0_iO[c].st132 & 0x8000) {
             hp = 0x1b;
-            B000718e0_iO[c].st132 &= 0xffff7fff;
+            M000718e0_iO[c].st132 &= 0xffff7fff;
         }
-        B000718e0_iO[m].hp += hp;
-        if (B000718e0_iO[m].hp > B000718e0_iO[m].maxhp) B000718e0_iO[m].hp = B000718e0_iO[m].maxhp;
+        M000718e0_iO[m].hp += hp;
+        if (M000718e0_iO[m].hp > M000718e0_iO[m].maxhp) M000718e0_iO[m].hp = M000718e0_iO[m].maxhp;
         break;
     case 0x82:
-        B000718e0_iO[m].flags &= 0x1c0;
+        M000718e0_iO[m].flags &= 0x1c0;
         (&DAT_0005cf5a)[m] = 1;
-        B000718e0_iO[m].hp = B000718e0_iO[m].maxhp;
+        M000718e0_iO[m].hp = M000718e0_iO[m].maxhp;
         break;
     case 0x71:
-        if (B000718e0_iO[m].flags & 0x800) FL1(m) &= 0xf7;
+        if (M000718e0_iO[m].flags & 0x800) FL1(m) &= 0xf7;
         break;
     case 0x64:
-        if (B000718e0_iO[m].flags & 0x400) FL1(m) &= 0xfb;
+        if (M000718e0_iO[m].flags & 0x400) FL1(m) &= 0xfb;
         break;
     case 0x68:
-        if (B000718e0_iO[m].flags & 0x1000) FL1(m) &= 0xef;
+        if (M000718e0_iO[m].flags & 0x1000) FL1(m) &= 0xef;
         break;
     case 0x57:
         hp = FUN_00032e40(r, c) * 2;
-        B000718e0_iO[m].hp += hp;
-        if (B000718e0_iO[m].hp > B000718e0_iO[m].maxhp) B000718e0_iO[m].hp = B000718e0_iO[m].maxhp;
+        M000718e0_iO[m].hp += hp;
+        if (M000718e0_iO[m].hp > M000718e0_iO[m].maxhp) M000718e0_iO[m].hp = M000718e0_iO[m].maxhp;
         break;
     }
     return r;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef PC
 #undef FL1
 /* ---- from src/CODE2/f1a254.c (round 62 second blind rewrite) */
@@ -802,7 +809,7 @@ extern int FUN_00019d90(int spell, int m, int c); /*-*/
 /*-*/
 extern void FUN_0002f494(int), FUN_0002c21c(char *), FUN_0002c258(void), FUN_0002c2cc(void), FUN_00032d70(void);
 #include "dice.h"
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 #define FUN_00038110 ((void (*)(int, int, int, int))FUN_00038110)
 extern int FUN_0002a1f4(void), FUN_00029cc4(void), FUN_00032e40(int, int);
 extern unsigned char DAT_0005cf5a, DAT_0005d681, DAT_0005d682; /* STANDIN: scalar declaration of DAT_0005cf5a, see the first one (module head) */
@@ -843,29 +850,29 @@ int FUN_0001a254(int eff, int spell, int a, int dur, int snd, int lvl, int flag,
                 if (mx >= DAT_0005d684[k][0] && mx <= DAT_0005d684[k][2] && my >= DAT_0005d684[k][1] && my <= DAT_0005d684[k][3]) {
                     i = k / 4 - 1;
                     if (spell == 0x7b) {
-                        if (B000718e0_iO[i].fl & 0x8000) break;
+                        if (M000718e0_iO[i].fl & 0x8000) break;
                     } else if (spell == 0x68) {
-                        if (!(B000718e0_iO[i].fl & 0x1000)) break;
+                        if (!(M000718e0_iO[i].fl & 0x1000)) break;
                     } else if (spell == 0x71) {
-                        if (!(B000718e0_iO[i].fl & 0x800)) break;
+                        if (!(M000718e0_iO[i].fl & 0x800)) break;
                     } else if (spell == 0x5d) {
-                        if (!(B000718e0_iO[i].fl & 0x800)) break;
+                        if (!(M000718e0_iO[i].fl & 0x800)) break;
                     } else if (spell == 0x64) {
-                        if (!(B000718e0_iO[i].fl & 0x400)) break;
-                    } else if (B000718e0_iO[i].fl >= 0x4000) break;
+                        if (!(M000718e0_iO[i].fl & 0x400)) break;
+                    } else if (M000718e0_iO[i].fl >= 0x4000) break;
                     if (snd >= 0) FUN_00038110(B000758d4_jG + snd, 0xff, 0, 1);
                     if (a >= 0) {
                         FUN_00019b4c(i, a, 0);
                         if (!flag) {
-                            B000718e0_iO[i].f132 |= eff;
-                            if (dur) B000718e0_iO[i].t[spell] = FUN_00029cc4() + dur * mul;
-                            if (eff == 0x40) B000718e0_iO[i].f1f2 += FUN_0002c328(1, 4, 0, FUN_00032e40(4, lvl) / 2);
-                            if (eff == 0x800) B000718e0_iO[i].f1ea += FUN_0002c328(1, 8, 0, 0);
+                            M000718e0_iO[i].f132 |= eff;
+                            if (dur) M000718e0_iO[i].t[spell] = FUN_00029cc4() + dur * mul;
+                            if (eff == 0x40) M000718e0_iO[i].f1f2 += FUN_0002c328(1, 4, 0, FUN_00032e40(4, lvl) / 2);
+                            if (eff == 0x800) M000718e0_iO[i].f1ea += FUN_0002c328(1, 8, 0, 0);
                         } else r = FUN_00019d90(spell, i, lvl);
                     } else r = FUN_00019d90(spell, i, lvl);
                     if (spell == 0) {
-                        B000718e0_iO[i].t[0] = 0;
-                        B000718e0_iO[i].r10b[3] = FUN_00032e40(4, i) + 8;
+                        M000718e0_iO[i].t[0] = 0;
+                        M000718e0_iO[i].r10b[3] = FUN_00032e40(4, i) + 8;
                     }
                     done = 1;
                     break;
@@ -887,7 +894,7 @@ int FUN_0001a254(int eff, int spell, int a, int dur, int snd, int lvl, int flag,
     return r;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef FUN_00038110
 #undef MS
 #undef DAT_0005d684
@@ -927,7 +934,8 @@ void FUN_0001a60c(void)
 extern void FUN_00019b4c(int who, int fx, int all); /* module prototype */
 /* FUN_0001a668 @ 0001a668: camp overnight: fade, run the night, restore the party flags and set the wake-up timers */
 extern void FUN_00038110(char *, int, int, int), FUN_0002f494(int); extern int FUN_00032e40(int, int), FUN_00029cc4(void);
-extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682; extern int B00062ba0_hT, B00062ba4_hh, B00071a14_ff, B00071a6a_fy;
+#define B00071a6a_fy (*(int *)((char *)&B000718e0_iO + 394)) /* STANDIN: view, B000718e0_iO + 0x18a */
+extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682; extern int B00062ba0_hT, B00062ba4_hh;
 void FUN_0001a668(int i)
 {
     int k, off, t;
@@ -967,7 +975,7 @@ extern void FUN_00019b4c(int who, int fx, int all); /* module prototype */
 #include "chars.h"
 #define FUN_00038110 ((void (*)(void *, int, int, int))FUN_00038110)
 extern void FUN_0002f494(int);
-extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682; extern int B00062ba0_hT, B00062ba4_hh, B00071a12_dx;
+extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682; extern int B00062ba0_hT, B00062ba4_hh;
 void FUN_0001a794(int i)
 {
     int k, off;
@@ -1005,7 +1013,11 @@ extern void FUN_00019b4c(int who, int fx, int all); /* module prototype */
 #define FUN_0002202c ((int (*)(int, int))FUN_0002202c)
 /* FUN_0001a8a0 @ 0001a8a0: party member i prays/meditates: fade, run the time, set the next prayer time and memorise spells; 0 when already done (n = q; n++ keeps n in the register of the quotient as in the original under the module's -oa; n = q + 1 put it in a new one) */
 extern void FUN_00038110(char *, int, int, int), FUN_0002f494(int); extern int FUN_00032e40(int, int), FUN_00029cc4(void);
-extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682, B000718f4_h3, B00071912_a3; extern int B00062ba0_hT, B00062ba4_hh, B00071a13_eo, B00071a46_dE, B00071a03_do;
+#define B00071a13_eo (*(int *)((char *)&B000718e0_iO + 307)) /* STANDIN: view, B000718e0_iO + 0x133 */
+#define B00071a46_dE (*(int *)((char *)&B000718e0_iO + 358)) /* STANDIN: view, B000718e0_iO + 0x166 */
+#define B00071a03_do (*(int *)((char *)&B000718e0_iO + 291)) /* STANDIN: view, B000718e0_iO + 0x123 */
+#define B000718f4_h3 (*(unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
+extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682; extern int B00062ba0_hT, B00062ba4_hh;
 #define CH(sym, i) (*(int *)((char *)&sym + (i) * 0x248))
 #define CH8(sym, i) (*((unsigned char *)&sym + (i) * 0x248))
 int FUN_0001a8a0(int i)
@@ -1057,7 +1069,10 @@ int FUN_0001a8a0(int i)
 extern void FUN_00019b4c(int who, int fx, int all); /* module prototype */
 /* FUN_0001aa30 @ 0001aa30: party member i studies the spell book: fade, run the time, set the next study time and learn spells; 0 when already done */
 extern void FUN_00038110(char *, int, int, int), FUN_0002f494(int); extern int FUN_00032e40(int, int), FUN_00029cc4(void);
-extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682, B000718f4_h3, B00071915_a0; extern int B00062ba0_hT, B00062ba4_hh, B00071a13_eo, B00071a4a_dy, B00071a07_dk;
+#define B00071a4a_dy (*(int *)((char *)&B000718e0_iO + 362)) /* STANDIN: view, B000718e0_iO + 0x16a */
+#define B00071a07_dk (*(int *)((char *)&B000718e0_iO + 295)) /* STANDIN: view, B000718e0_iO + 0x127 */
+#define B00071915_a0 (*(unsigned char *)((char *)&B000718e0_iO + 53)) /* STANDIN: view, B000718e0_iO + 0x35 */
+extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682; extern int B00062ba0_hT, B00062ba4_hh;
 #define CH(sym, i) (*(int *)((char *)&sym + (i) * 0x248))
 #define CH8(sym, i) (*((unsigned char *)&sym + (i) * 0x248))
 int FUN_0001aa30(int i)
@@ -1168,7 +1183,7 @@ extern void FUN_0001871c(int who, unsigned e); /* module prototype */
 extern void FUN_0001893c(void); /* module prototype */
 /* FUN_0001ad24 @ 0001ad24: end the timed effects of party member who (-1: all four): first the 26 condition bits, then the 9 spell-effect slots */
 
-extern int B00071a12_dx, B00071aa2_ht; extern unsigned char DAT_0005cf5a; /* STANDIN: scalar declaration of DAT_0005cf5a, see the first one (module head) */
+ extern unsigned char DAT_0005cf5a; /* STANDIN: scalar declaration of DAT_0005cf5a, see the first one (module head) */
 #define CH(k, a) (*(int *)((char *)&a + (k) * 0x248))
 void FUN_0001ad24(int who)
 {
@@ -1428,7 +1443,7 @@ void FUN_0001b410(int i)
 #include "dice.h"
 #include "world.h"
 #define B00064d80_ay ((char *)B00064d80_ay)
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 #define B00072230_c4 ((char *)B00072230_c4)
 #define FUN_0001e284 ((void (*)(char *, char *, int, int, int))FUN_0001e284)
 void *memset(void *, int, unsigned);
@@ -1438,7 +1453,7 @@ extern int FUN_00032e40(int, int);
 #define EU(k, o) (*(unsigned short *)(B00064d80_ay + (k) + (o)))
 /* Round 54 (8 compiles + trace): slots k / roll / lv rotated (here k, roll, lv top-down; original roll, lv, k) and dy in EBX (original EBP); sw.py: only an inserted size-1/2 temp at input 12 .. 59 (or t85 moved). Byte views of the int flag tests change the code (test dword stays in 10.0a: 17-23), byte |= 0x10 (13), k += 1 / k = 0 before the for / nent > k (13). */
 #undef B00064d80_ay
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B00072230_c4
 #undef FUN_0001e284
 #pragma pack(1)
@@ -1448,13 +1463,13 @@ struct PC61 { char p0[0x132]; int st; char rest[0x248 - 0x136]; };
 #pragma pack()
 #define B00064d80_ay ((struct E61 *)B00064d80_ay)
 #define B00072230_c4 ((struct MT61 *)B00072230_c4)
-#define B000718e0_iO ((struct PC61 *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC61 *)&B000718e0_iO)
 #define FUN_0001e284 ((void (*)(struct E61 *, struct MT61 *, int, int, int))FUN_0001e284)
 void FUN_0001b518(int i, int evil)
 {
     int left[5];
     int k, lvl, roll, n, t, r, dy, dx;
-    if (B000718e0_iO[i].st & 0x200) return;
+    if (M000718e0_iO[i].st & 0x200) return;
     memset(left, 0, sizeof(left));
     roll = FUN_0002c328(1, 0x14, 0, 0);
     if (evil) lvl = FUN_00032e40(i, 1) - 2;
@@ -1487,7 +1502,7 @@ void FUN_0001b518(int i, int evil)
 
 #undef B00064d80_ay
 #undef B000698e0_b7
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B00072230_c4
 #undef FUN_0001e284
 #undef EI
@@ -1541,10 +1556,10 @@ extern void FUN_0002c77c(int, int);
 #define FUN_00038110 ((void (*)(int, int, int, int))FUN_00038110)
 extern int FUN_00032e40(int, int), FUN_00029cc4(void);
 #undef B00064d80_ay
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B00072230_c4
 #undef MASK
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 #define B00064d80_ay ((struct MF *)B00064d80_ay)
 #define MTF(t, o) (*(int *)(B00072230_c4 + B00064d80_ay[t].type * 0x45 + (o)))
 #define PF ((unsigned char *)DAT_0005d684 - 0x72a) /* STANDIN: the portrait flags DAT_0005cf5a[] addressed through the neighbouring array DAT_0005d684, so that this function takes no address of DAT_0005cf5a: the scalar store of the inlined FUN_0001a60c keeps its -oa memory node (pass-1 list as with the old alias) */
@@ -1586,33 +1601,33 @@ int FUN_0001b950(unsigned sp, int who)
         r = FUN_0001a254(1, 0, 0, 0, 3, who, 0, 0x438);
         break;
     case 4:
-        B000718e0_iO[who].f132 |= 2;
+        M000718e0_iO[who].f132 |= 2;
         t = FUN_00032e40(4, who);
         t *= 0x2a30;
         d = t; /* STANDIN: the product copied to a local for the sum (sum in a fresh register, lea edx,[eax+edi]) */
-        B000718e0_iO[who].t[1] = FUN_00029cc4() + d;
+        M000718e0_iO[who].t[1] = FUN_00029cc4() + d;
         PF[who] = 1; /* STANDIN: PF view */
         FUN_00038110(B000758d4_jG + 0x34, 0xff, 0, 1);
         FUN_00041f38(DAT_0005f91c);
         break;
     case 0x55:
-        B000718e0_iO[who].f132 |= 0x400;
+        M000718e0_iO[who].f132 |= 0x400;
         t = FUN_00032e40(3, who) + 10;
         t *= 0x2a30;
-        B000718e0_iO[who].t[10] = t + FUN_00029cc4();
+        M000718e0_iO[who].t[10] = t + FUN_00029cc4();
         PF[who] = 1; /* STANDIN: PF view */
         FUN_00038110(B000758d4_jG + 0x35, 0xff, 0, 1);
         FUN_00041f38(DAT_0005f91c);
         break;
     case 3:
-        B000718e0_iO[who].f132 |= 0x40000;
-        B000718e0_iO[who].t[18] = FUN_00029cc4() + 0x438;
+        M000718e0_iO[who].f132 |= 0x40000;
+        M000718e0_iO[who].t[18] = FUN_00029cc4() + 0x438;
         DAT_0005f03c++;
         PF[who] = 1; /* STANDIN: PF view */
         FUN_00038110(B000758d4_jG + 0x14, 0xff, 0, 1);
         break;
     case 0x70:
-        B000718e0_iO[who].f132 |= 0x8000;
+        M000718e0_iO[who].f132 |= 0x8000;
         PF[who] = 1; /* STANDIN: PF view */
         FUN_00038110(B000758d4_jG + 0x22, 0xff, 0, 1);
         break;
@@ -1826,11 +1841,11 @@ int FUN_0001b950(unsigned sp, int who)
         r = FUN_0001a254(-1, 0x57, 3, -1, 0x10, who, 1, 0);
         break;
     case 0x36:
-        if (!(B000718e0_iO[who].f132 & 0x20000)) DAT_0005fd08++;
+        if (!(M000718e0_iO[who].f132 & 0x20000)) DAT_0005fd08++;
         FUN_00038110(B000758d4_jG + 0x46, 0xff, 0, 1);
-        B000718e0_iO[who].f132 |= 0x20000;
+        M000718e0_iO[who].f132 |= 0x20000;
         t = FUN_00032e40(3, who) * 0x438;
-        B000718e0_iO[who].t[17] = FUN_00029cc4() + t;
+        M000718e0_iO[who].t[17] = FUN_00029cc4() + t;
         PF[who] = 1; /* STANDIN: PF view */
         break;
     case 0x21:
@@ -1844,17 +1859,17 @@ int FUN_0001b950(unsigned sp, int who)
         FUN_0002c77c(who, 0x31d);
         break;
     case 0x53:
-        if (!(B000718e0_iO[who].f132 & 0x100000)) DAT_00056dae++;
+        if (!(M000718e0_iO[who].f132 & 0x100000)) DAT_00056dae++;
         FUN_00038110(B000758d4_jG + 0x13, 0xff, 0, 1);
-        B000718e0_iO[who].f132 |= 0x100000;
-        B000718e0_iO[who].t[20] = FUN_00029cc4() + 0x2a30;
+        M000718e0_iO[who].f132 |= 0x100000;
+        M000718e0_iO[who].t[20] = FUN_00029cc4() + 0x2a30;
         PF[0] = 1; /* STANDIN: PF view */
         PF[1] = 1; /* STANDIN: PF view */
         PF[2] = 1; /* STANDIN: PF view */
         PF[3] = 1; /* STANDIN: PF view */
         break;
     case 0x58:
-        if (B000718e0_iO[who].cls[0] == 1) FUN_0001b518(who, 1);
+        if (M000718e0_iO[who].cls[0] == 1) FUN_0001b518(who, 1);
         else FUN_0001b518(who, 0);
         r = -2;
         break;
@@ -1874,7 +1889,7 @@ int FUN_0001b950(unsigned sp, int who)
 #undef MTF
 #undef B00064d80_ay
 #undef B00064d80_ay
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B00072230_c4
 #undef FUN_00018a80
 #undef FUN_00038110

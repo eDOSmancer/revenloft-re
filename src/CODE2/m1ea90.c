@@ -1,3 +1,20 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+void *B00072234_hx;
+char *B00072230_c4;
+int B0007222c_cz;
+unsigned char F00072224_a6[4];
+int B00072224_hh;
+int B00072220_gw;
+char B00072200_ew[32];
+/* STANDIN: the party records, 4 x 0x248 bytes at 0x718e0 (include/chars.h), defined as seven adjacent pieces cut at the names of the 2nd and 3rd record and at the four flag words (+0x10): these stay objects of their own because FUN_0001d550, FUN_0001ccf4 and FUN_00033e1c only compile to the original code with plain globals there. Every other member label of the image is a view of B000718e0_iO + offset in its users. Which object file between m1c704 and m270ac owned 0x718e0-0x72238 cannot be told (docs/BSS.md). */
+unsigned char B00071fc8_l9[568];
+unsigned char B00071d80_d5[584];
+unsigned char B00071d70_aF[16];
+unsigned char B00071b38_c0[568];
+unsigned char B00071b28_gs[16];
+unsigned char B000718f0_hO[568];
+unsigned char B000718e0_iO[16];
+/* BSS end */
 /* Module: FUN_0001ea90, FUN_0001eabc, FUN_0001ead8, FUN_0001eb3c, FUN_0001ec1c */
 /* ---- from build/var/mod/parts/p1ea90.c */
 /* FUN_0001ea90 @ 0001ea90 */

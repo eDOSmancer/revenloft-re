@@ -165,7 +165,7 @@ void FUN_00024218(int sel, int all)
 /* ---- from src/CODE2/f2430c.c */
 /* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
 #define B00063020_bP ((unsigned short *)B00063020_bP)
-#define B000718e0_iO ((unsigned char *)&B000718e0_iO)
+#define M000718e0_iO ((unsigned char *)&B000718e0_iO)
 /* Round 53 (module 0x23f70 -oa, 2 compiles): the walk as `for (;; DAT_00057fec += 2) { p = &B00063020_bP[DAT_00057fec]; ...}` (one more 2/4 constant in the loop): 173 lines; without p (table at each use): compiler error exit. The constant tie (1 / 4 / 2 at eight uses) stands; one more use of 2 or 4 or one fewer of 1 in the loop decides it (found = 1 is the extra use of 1 here). */
 /* FUN_0002430c @ 0002430c: evaluate the current script condition list against the active character; -oa without loop optimisation (-ol would cache the constant 1 in ebp) */
 /* Round 49 (2 compiles, 1 trace): the replay on a new trace agrees with round 47 (constants 1 / 4 / 2 tie at 322 for EBP in pass 2; 4 or 2 first needs one INSERTED node: savings 0..283 at pre-sort 0 (for 4) / 1 (for 2), or 323..363 at 4, 6, 9, ...; no removal). The character record as struct PC (c->align, c->race, c->cls[k], c->ab[k]) compiles to the same 4 lines: neutral, not kept. Most likely untested cause unchanged: one more value in the loop in the original (a constant or a cross-block local). */
@@ -192,7 +192,7 @@ int FUN_0002430c(void)
     unsigned short *p;
     unsigned char *c;
     one = 1; /* STANDIN: copy-propagated back to an immediate; the loop CONST_TEMP for 1 is then created after those for 2 and 4 (pass-2 pre-sort position 3 instead of 1), so 2 wins the 322-savings tie for EBP; 2 has no MOV use, EBP stays untouched and found = 1 stays mov ecx,1 as in the original */
-    c = B000718e0_iO + DAT_00057ffc * 0x248;
+    c = M000718e0_iO + DAT_00057ffc * 0x248;
     found = 0;
     for (p = &B00063020_bP[DAT_00057fec];; p += 2, DAT_00057fec += 2) {
         if (*p == 0x21) break;
@@ -243,7 +243,7 @@ int FUN_0002430c(void)
 }
 
 #undef B00063020_bP
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from src/CODE2/f246b8.c */
 /* FUN_000246b8 @ 000246b8 */
 extern void FUN_000380dc(int); extern void FUN_00037f24(int);
@@ -311,40 +311,40 @@ extern int FUN_0001dbd4(int); extern void FUN_00013ea4(int, int), FUN_00013de4(i
 extern int DAT_00057fec; 
 #include "records.h"
 #define B00063020_bP ((unsigned short *)B00063020_bP)
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 extern struct PC DAT_0005a808[];
 void FUN_000248f0(int who)
 {
     int t = B00063020_bP[DAT_00057fec++];
-    memmove(&B000718e0_iO[who], (void *)(t * 0x248 + (int)DAT_0005a808), sizeof(struct PC));
-    memset((char *)B000718e0_iO[who].r10b, 0, (char *)&B000718e0_iO[who + 1] - (char *)B000718e0_iO[who].r10b);
-    B000718e0_iO[who].cost = FUN_0001dbd4(who);
-    B000718e0_iO[who].sp = 0;
-    if (B000718e0_iO[who].cls[0] == 1) {
-        B000718e0_iO[who].sp |= 4;
-        FUN_00013ea4(who, B000718e0_iO[who].lvl[0]);
+    memmove(&M000718e0_iO[who], (void *)(t * 0x248 + (int)DAT_0005a808), sizeof(struct PC));
+    memset((char *)M000718e0_iO[who].r10b, 0, (char *)&M000718e0_iO[who + 1] - (char *)M000718e0_iO[who].r10b);
+    M000718e0_iO[who].cost = FUN_0001dbd4(who);
+    M000718e0_iO[who].sp = 0;
+    if (M000718e0_iO[who].cls[0] == 1) {
+        M000718e0_iO[who].sp |= 4;
+        FUN_00013ea4(who, M000718e0_iO[who].lvl[0]);
     }
-    if (B000718e0_iO[who].cls[0] == 4 || B000718e0_iO[who].cls[1] == 4 || B000718e0_iO[who].cls[2] == 4) {
-        B000718e0_iO[who].inv[0] = 0xa6;
-        B000718e0_iO[who].sp |= 2;
+    if (M000718e0_iO[who].cls[0] == 4 || M000718e0_iO[who].cls[1] == 4 || M000718e0_iO[who].cls[2] == 4) {
+        M000718e0_iO[who].inv[0] = 0xa6;
+        M000718e0_iO[who].sp |= 2;
     }
-    if (B000718e0_iO[who].cls[0] == 3) {
-        B000718e0_iO[who].sp |= 1;
-        FUN_00013de4(who, B000718e0_iO[who].lvl[0]);
+    if (M000718e0_iO[who].cls[0] == 3) {
+        M000718e0_iO[who].sp |= 1;
+        FUN_00013de4(who, M000718e0_iO[who].lvl[0]);
     }
-    if (B000718e0_iO[who].cls[1] == 3) {
-        B000718e0_iO[who].sp |= 1;
-        FUN_00013de4(who, B000718e0_iO[who].lvl[1]);
+    if (M000718e0_iO[who].cls[1] == 3) {
+        M000718e0_iO[who].sp |= 1;
+        FUN_00013de4(who, M000718e0_iO[who].lvl[1]);
     }
-    if (B000718e0_iO[who].cls[2] == 3) {
-        B000718e0_iO[who].sp |= 1;
-        FUN_00013de4(who, B000718e0_iO[who].lvl[2]);
+    if (M000718e0_iO[who].cls[2] == 3) {
+        M000718e0_iO[who].sp |= 1;
+        FUN_00013de4(who, M000718e0_iO[who].lvl[2]);
     }
-    B000718e0_iO[who].fl |= 0x80;
+    M000718e0_iO[who].fl |= 0x80;
 }
 
 #undef B00063020_bP
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from src/CODE2/f24a60.c */
 /* FUN_00024a60: index of the party record named name whose flag word (+0x10) has bit 7 set, -1 if none */
 /* Round 47: matches in module 0x23f70 under the module flags (-ox -oe -oa -ot, loop optimisation on) written as the plain index
@@ -353,21 +353,21 @@ void FUN_000248f0(int who)
    form (a stepped char pointer p beside o = i * 0x248) had the product reduced under -ol and matched only without it; the
    "module needs -ol, this function not" contradiction of recipe 41 is gone for this function. */
 #include "records.h"
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 int strcmp(const char *, const char *);
 
 int FUN_00024a60(const char *name)
 {
     int i;
     for (i = 0; i < 4; i++) {
-        if (strcmp(B000718e0_iO[i].name, name) == 0 && (B000718e0_iO[i].fl & 0x80)) return i;
+        if (strcmp(M000718e0_iO[i].name, name) == 0 && (M000718e0_iO[i].fl & 0x80)) return i;
     }
     return -1;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from src/CODE2/f24adc.c */
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 /* FUN_00024adc @ 00024adc: when character c is one of the named NPCs, show its portrait/voice and play its greeting */
 int strcmp(const char *, const char *);
 struct N { char *name; int pic, voice; };
@@ -378,13 +378,13 @@ void FUN_00024adc(int c)
 {
     int i;
     for (i = 0; i < 10; i++) {
-        if (strcmp(PTR_s_GLORIANNA_00058104[i].name, B000718e0_iO + c * 0x248) == 0) {
-            if (!(*(unsigned short *)(B000718e0_iO + c * 0x248 + 0x10) & 0x4000)) {
+        if (strcmp(PTR_s_GLORIANNA_00058104[i].name, M000718e0_iO + c * 0x248) == 0) {
+            if (!(*(unsigned short *)(M000718e0_iO + c * 0x248 + 0x10) & 0x4000)) {
                 DAT_0005bf2c = PTR_s_GLORIANNA_00058104[i].voice;
                 FUN_0002c77c(c, PTR_s_GLORIANNA_00058104[i].pic);
             }
             FUN_0002c160(i + 4);
-            if (*(unsigned short *)(B000718e0_iO + c * 0x248 + 0x10) & 0x4000) FUN_0002c124(i + 0xf);
+            if (*(unsigned short *)(M000718e0_iO + c * 0x248 + 0x10) & 0x4000) FUN_0002c124(i + 0xf);
             switch (i) {
             case 0: FUN_0002c124(0x19); return;
             case 1: FUN_0002c124(0x1c); return;
@@ -398,7 +398,7 @@ void FUN_00024adc(int c)
     }
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from src/CODE2/f24be0.c */
 /* FUN_00024be0 @ 00024be0: store a party member back into the NPC template it came from */
 #include "chars.h"
@@ -449,9 +449,9 @@ extern int FUN_0002a1f4(void);
 extern void FUN_0002a9f8(void), FUN_0002c40c(int, int, int, int, int), FUN_0002a510(int), FUN_00032d70(void);
 extern char *PTR_s_You_need_to_00057fb4; extern int DAT_00057fbc[], DAT_00057fd4, DAT_0005c050, B00064060_aa;
 #include "records.h"
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 extern struct MOUSE DAT_00059e31; extern short B00064064_am[];
-#define CF(k) (*(unsigned short *)(B000718e0_iO + (k) * 0x248 + 0x10))
+#define CF(k) (*(unsigned short *)(M000718e0_iO + (k) * 0x248 + 0x10))
 int FUN_00024ca4(void)
 {
     int k, x, m, y, top, who, done;
@@ -484,8 +484,8 @@ int FUN_00024ca4(void)
             }
         }
     }
-    memmove(B00064064_am, B000718e0_iO + who * 0x248 + 0x40, 0x2a);
-    B00064060_aa = *(int *)(B000718e0_iO + who * 0x248 + 0x12b);
+    memmove(B00064064_am, M000718e0_iO + who * 0x248 + 0x40, 0x2a);
+    B00064060_aa = *(int *)(M000718e0_iO + who * 0x248 + 0x12b);
     if (CF(who) & 0x80) {
         FUN_00024adc(who);
         FUN_00024be0(who);
@@ -498,12 +498,13 @@ int FUN_00024ca4(void)
     return who;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef CF
 /* ---- from src/CODE2/f24e9c.c */
 /* FUN_00024e9c @ 00024e9c: hand the found items to party member i (into free slots, else dropped at the party position); the extra 9 are always dropped */
 extern void FUN_0001f238(int, int, int), FUN_0003195c(int, int, int, int, int, int, int);
-extern short B00064064_am[]; extern int B00064060_aa, B000755d0_ao, B000755d4_ak; extern char B00071920_bM[];
+#define B00071920_bM (*(char (*)[])((char *)&B000718e0_iO + 64)) /* STANDIN: view, B000718e0_iO + 0x40 */
+extern short B00064064_am[]; extern int B00064060_aa, B000755d0_ao, B000755d4_ak; 
 void FUN_00024e9c(int i)
 {
     int k, j;
@@ -956,14 +957,14 @@ int rand(void); void *memset(void *, int, unsigned);
 extern void FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_00040508(int, int, int, char *, int), FUN_00040354(int, int); extern void FUN_0002a5b0(int, short, unsigned char);
 #include "records.h"
 #define B00062c20_jH ((char (*)[256])B00062c20_jH)
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
  extern int B000758cc_fL, DAT_00057ffc, DAT_0005c050;  extern struct CURSOR DAT_000585fc;
 void FUN_00025e38(int a)
 {
     int r, k, best;
     r = (unsigned)(rand() * 6) >> 15;
     for (k = 0, best = 0; k < r + 4; k++) {
-        if (!(B000718e0_iO[k % 4].fl & 0xd040)) best = k;
+        if (!(M000718e0_iO[k % 4].fl & 0xd040)) best = k;
     }
     best %= 4;
     FUN_000391b0(DAT_0005c050);
@@ -973,7 +974,7 @@ void FUN_00025e38(int a)
     FUN_00026400();
     memset(DAT_00057fbc, 0, 0x10);
     FUN_0003e510(0xdc, 0, B000758cc_fL + 2, 9);
-    FUN_00040508(0xe7, 0, 0x140, B000718e0_iO[best].name, 1);
+    FUN_00040508(0xe7, 0, 0x140, M000718e0_iO[best].name, 1);
     FUN_00040354(0x3a, 1);
     FUN_00023fd4(0, 0xf6, 0x1f, 0xa, 0x10a, B00062c20_jH[a], 1);
     DAT_00057ffc = best;
@@ -983,7 +984,7 @@ void FUN_00025e38(int a)
 }
 
 #undef B00062c20_jH
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from ? */
 /* Round 61 (blind rewrite): this body MATCHES in the module compile (realcc on the merged module: FUN_00026400 292/292, FUN_00025e38 with the 0x25f7e chunk, FUN_000263c4, FUN_00026524; module 30 of 35). Alone it cannot match (split layout, see srcpos.csv), so it stays here until module 0x23f70 is whole. What fixed it: y derived from the counter (k*0x50 + 0xd + (k >= 2)) with continue; the bar x written inline as 0x50 - len + 0x136; three separate colour calls instead of a ternary; in loop 2 the marker y as its own statement before the call. The old draft (stepped y, named bar-x local) is in git history. */
 /* FUN_00026400: draw the party panel: portrait, name plate and hit-point bar of each character */
@@ -991,7 +992,7 @@ void FUN_00025e38(int a)
 extern void FUN_000391b0(unsigned char), FUN_000398f0(int, int, int, int, int, unsigned char *), FUN_00039b40(int, int, int, int, int);
 extern void FUN_0003975c(int, int, int, int, int), FUN_0003e510(int, int, int, int);
 extern int FUN_0002f3fc(int), FUN_0001ef14(int);
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 extern int DAT_00057fbc[], B000758cc_fL, B000758e4_h7, DAT_0005c050;
 extern unsigned char DAT_0005cf70[];
 #define DAT_0005cf70 ((char (*)[256])DAT_0005cf70)
@@ -1000,16 +1001,16 @@ void FUN_00026400(void)
     int k, y, pic, face, len;
     FUN_000391b0(DAT_0005c050);
     for (k = 0; k < 4; k++) {
-        if (B000718e0_iO[k].fl >= 0x8000) continue;
-        pic = B000758e4_h7 + B000718e0_iO[k].sex * 0x17 + (signed char)B000718e0_iO[k].f12;
-        if (B000718e0_iO[k].fl & 0x100) pic += 0x2e;
+        if (M000718e0_iO[k].fl >= 0x8000) continue;
+        pic = B000758e4_h7 + M000718e0_iO[k].sex * 0x17 + (signed char)M000718e0_iO[k].f12;
+        if (M000718e0_iO[k].fl & 0x100) pic += 0x2e;
         face = FUN_0002f3fc(k);
         if (DAT_00057fbc[k]) face = 0;
         y = k * 0x50 + 0xd + (k >= 2);
         FUN_000398f0(0, 0x136, y, pic, 1, (unsigned char *)DAT_0005cf70[face]);
-        if (B000718e0_iO[k].fl & 0x4000) continue;
+        if (M000718e0_iO[k].fl & 0x4000) continue;
         FUN_00039b40(0x136, y + 0x30, 0x50, 6, 0);
-        len = ((B000718e0_iO[k].maxhp >> 1) + FUN_0001ef14(k) * 0x50) / B000718e0_iO[k].maxhp;
+        len = ((M000718e0_iO[k].maxhp >> 1) + FUN_0001ef14(k) * 0x50) / M000718e0_iO[k].maxhp;
         y += 0x31;
         if (len > 0x50) FUN_00039b40(0x136, y, 0x50, 4, 0x1b);
         else if (len > 0x14) FUN_00039b40(0x50 - len + 0x136, y, len, 4, 0x43);
@@ -1017,14 +1018,14 @@ void FUN_00026400(void)
     }
     FUN_0003975c(0, 0x136, 0x8e, B000758cc_fL + 6, 9);
     for (k = 0; k < 4; k++) {
-        if (B000718e0_iO[k].fl & 0x8000) {
+        if (M000718e0_iO[k].fl & 0x8000) {
             y = k * 0x50 + k / 2 + 0xb;
             FUN_0003e510(0x134, y, B000758cc_fL + 4, 9);
         }
     }
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef DAT_0005cf70
 /* ---- from src/CODE2/f26034.c */
 extern int FUN_00025534(void); /* module prototype */
@@ -1168,7 +1169,7 @@ extern int DAT_00057fbc[], B000758cc_fL, B000758e4_h7, DAT_0005c050;
 extern unsigned char DAT_0005cf70[];
 
 #undef DAT_0005cf70
-#undef B000718e0_iO
+#undef M000718e0_iO
 
 /* FUN_000263c4 @ 000263c4: clear the dialogue screen's frame (two panels) and draw the party panel (FUN_00026400, whose head
    10.0a moves behind this function's tail jump); no caller in the program */

@@ -66,7 +66,11 @@ extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_0002
 
 /* ---- from build/var/mod/parts/p33eac.c */
 /* FUN_00033eac @ 00033eac */
-extern signed char B000718f5_h2, B000718f6_h5, B000718f7_h4;
+extern unsigned char B000718e0_iO;
+#define B000718f5_h2 (*(signed char *)((char *)&B000718e0_iO + 21)) /* STANDIN: view, B000718e0_iO + 0x15 */
+#define B000718f6_h5 (*(signed char *)((char *)&B000718e0_iO + 22)) /* STANDIN: view, B000718e0_iO + 0x16 */
+#define B000718f7_h4 (*(signed char *)((char *)&B000718e0_iO + 23)) /* STANDIN: view, B000718e0_iO + 0x17 */
+
 int FUN_00033eac(int i, int v)
 {
     if (*((signed char *)&B000718f5_h2 + i * 0x248) == v || *((signed char *)&B000718f6_h5 + i * 0x248) == v || *((signed char *)&B000718f7_h4 + i * 0x248) == v) return 1;
@@ -160,14 +164,14 @@ extern int FUN_00034060(unsigned k); /* module prototype */
 /* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
 /* FUN_000340a8 @ 000340a8: (round 20: character record, item table and the solo flag in the list-count block as structs; matches under both flag sets; under -oa two allocation ties remain) may party member p use item it (class, level and solo-character rules); the it == -1 case of the solo rule jumps with goto into the final ok = 0 block */
 #include "world.h"
-#define B000718e0_iO ((struct CHR *)&B000718e0_iO)
+#define M000718e0_iO ((struct CHR *)&B000718e0_iO)
 
 struct F2 { unsigned short f : 2, rest : 14; };
 struct IT { char name[0x2f]; unsigned char cls, wt; signed char sub; unsigned char p0, p1; signed char acb; unsigned short fk : 2, fr : 14; unsigned char ac, d[6], y[3]; };   
 struct CHR { char p0[0x10]; unsigned short st; char p12[3]; signed char cls[3]; char p18[8]; short lvl[3]; char p26[0x222]; };
 
-#define CL(p, n) B000718e0_iO[p].cls[n]
-#define LV(p, n) B000718e0_iO[p].lvl[n]
+#define CL(p, n) M000718e0_iO[p].cls[n]
+#define LV(p, n) M000718e0_iO[p].lvl[n]
 int FUN_000340a8(int p, int it, int *kind)
 {
     int ok = 1, t;
@@ -190,7 +194,7 @@ int FUN_000340a8(int p, int it, int *kind)
             }
             if (FUN_00033eac(p, 3) && ((struct IT *)B000755d8_aw)[it].cls == 10) ok = 0;
         }
-        if (B00075618_b1.solo == 0xff && p >= 2 && (B000718e0_iO[0].st != 0x8000 || B000718e0_iO[1].st != 0x8000)) {
+        if (B00075618_b1.solo == 0xff && p >= 2 && (M000718e0_iO[0].st != 0x8000 || M000718e0_iO[1].st != 0x8000)) {
             if (it == -1) goto zero;
             if (((struct IT *)B000755d8_aw)[it].fk != 2 && !FUN_00033f50(it)) ok = 0;
         }
@@ -207,7 +211,7 @@ int FUN_000340a8(int p, int it, int *kind)
     return ok;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef CL
 #undef LV
 /* ---- from build/var/mod/parts/p343e0.c */
@@ -221,7 +225,8 @@ extern int FUN_00033f50(int k); /* module prototype */
 #define B000718f0_hO (*(unsigned short *)&B000718f0_hO)
 #define B00071b38_c0 (*(unsigned short *)&B00071b38_c0)
 
-  extern short B0007193c_aB;
+#define B0007193c_aB (*(short *)((char *)&B000718e0_iO + 92)) /* STANDIN: view, B000718e0_iO + 0x5c */
+  
 int FUN_000343e0(int i, int k)
 {
     int item = *(short *)(k * 2 + (char *)&B0007193c_aB + i * 0x248);
@@ -278,7 +283,7 @@ extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_0002
 
 /* ---- from build/var/mod/parts/p33eac.c */
 /* FUN_00033eac @ 00033eac */
-extern signed char B000718f5_h2, B000718f6_h5, B000718f7_h4;
+
 
 
 /* ---- from build/var/mod/parts/p33ee4.c */
@@ -304,15 +309,15 @@ extern int FUN_00033f50(int k); /* module prototype */
 
 /* ---- lane P draft */
 #include "records.h"
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 
 
 
 int FUN_00034478(int who, int hand)
 {
     int res, b, r, lt, a, l, rt; /* STANDIN: declaration order (searched; res first decides the res / table-base slot tie, the rest the remaining ties) */
-    l = B000718e0_iO[who].inv[14];
-    r = B000718e0_iO[who].inv[15];
+    l = M000718e0_iO[who].inv[14];
+    r = M000718e0_iO[who].inv[15];
     lt = 0;
     rt = 0;
     a = FUN_000340a8(who, l, &lt);
@@ -323,7 +328,7 @@ int FUN_00034478(int who, int hand)
         b = a = 1;
         { int c, x, y, cc; if (B00075618_b1.solo == 0xff && who >= 2 && ((x = B000718f0_hO[0], cc = x, x = cc, x) < 0x4000 || (y = B00071b38_c0[0], cc = y, y = cc, y) < 0x4000)) c = 0; else c = 1; if (!c) { a = 0; b = 0; } } /* STANDIN: FUN_00033e1c(who) written out as its expansion; named loads copied out and back raise their conflict savings (B5 tie order) */
     } else {
-        if (B000718e0_iO[who].fl & 0x7240) { a = 0; b = 0; }
+        if (M000718e0_iO[who].fl & 0x7240) { a = 0; b = 0; }
         if (l == -1) {
             { int c, s, x, y, cc; if ((s = B00075618_b1.solo, cc = s, s = cc, s) == 0xff && who >= 2 && ((x = B000718f0_hO[0], cc = x, x = cc, x) < 0x4000 || (y = B00071b38_c0[0], cc = y, y = cc, y) < 0x4000)) c = 0; else c = 1; if (!c) a = 0; } /* STANDIN: FUN_00033e1c(who) written out as its expansion; named loads copied out and back raise their conflict savings (B5 tie order) */
         }
@@ -374,16 +379,16 @@ int FUN_00034478(int who, int hand)
             { int to2, c2; to2 = r * 0x41; c2 = to2; to2 = c2; c2 = to2; to2 = c2; /* STANDIN: named item offset, copy out and back lifts it above the table base (second pair: B5 tie order) */ if (((struct ITEM *)((char *)ITEMS + to2))->kind == 2) a = 0; }
         }
     }
-    if (B000718e0_iO[who].r10b[0]) a = 0;
-    if (B000718e0_iO[who].r10b[1]) b = 0;
+    if (M000718e0_iO[who].r10b[0]) a = 0;
+    if (M000718e0_iO[who].r10b[1]) b = 0;
     if (hand == 0) res = a;
     if (hand == 1) res = b;
     return res;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from build/var/mod/parts/p34a9c.c */
-#define B0007193c_aB ((char *)&B0007193c_aB)
+#define M0007193c_aB ((char *)&B0007193c_aB)
 /* FUN_00034a9c @ 00034a9c: empty inventory slot s of party member who and redraw it on the panel */
 extern void FUN_0001f238(int, int, int), FUN_000391b0(unsigned char), FUN_0002ea90(int, int, int), FUN_0002a8c8(int, int, int, int, int);
 extern int DAT_0005c050; 
@@ -392,19 +397,20 @@ void FUN_00034a9c(int who, int s)
     int o, x;
     o = s * 0x21;
     x = o + 4 + who % 2 * 0x35 + who / 2 * 0xd3;
-    *(short *)(B0007193c_aB + who * 0x248 + s * 2) = -1;
+    *(short *)(M0007193c_aB + who * 0x248 + s * 2) = -1;
     FUN_0001f238(who, s + 0xe, 0);
     FUN_000391b0(DAT_0005c050);
     FUN_0002ea90(who, s, -1);
     FUN_0002a8c8(DAT_0005c050, 0x113, x, 0x7d, 0x35);
 }
 
-#undef B0007193c_aB
+#undef M0007193c_aB
 /* ---- from build/var/mod/parts/p34b48.c */
 /* FUN_00034b48 @ 00034b48: show a status icon for party member i and arm its timer */
 #include "chars.h"
 extern void FUN_000391b0(unsigned char), FUN_0002ea90(int, int, int), FUN_0002a8c8(int, int, int, int, int); extern int FUN_00029cc4(void);
-extern int DAT_0005c050, B000719eb_cp;
+#define B000719eb_cp (*(int *)((char *)&B000718e0_iO + 267)) /* STANDIN: view, B000718e0_iO + 0x10b */
+extern int DAT_0005c050;
 void FUN_00034b48(int i, int k, int c, int dur)
 {
     int idx = k * 33 + 4 + (i % 2) * 53 + (i / 2) * 211;
@@ -651,14 +657,14 @@ extern void FUN_00034a9c(int who, int s); /* module prototype */
 extern unsigned char FUN_0001f218(int, int), FUN_0001f274(int, int); extern void FUN_00033d84(int, int, int, int), FUN_0001f290(int, int, int), FUN_0002c21c(char *);
 #include "records.h"
 #define DAT_00057330 (*(unsigned char *)&DAT_00057330)
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
  extern int DAT_0005c050;   extern unsigned short DAT_0005f038[]; extern struct DRAWE B00077148_eJ[][400]; extern struct MONR B00064d80_ay[];
 extern char *PTR_s_YOU_HAVE_NO_STONES_IN_YO_0005d8c8, *PTR_s_YOU_MUST_HOLD_A_SLING_ST_0005d8cc;
 void FUN_000354d4(int i, int b, int slot)
 {
     int item; int j; int v; int sel; int found; int wid; int id; int t; int n; struct DRAWE *rec; int k;
     sel = -1;
-    wid = B000718e0_iO[i].inv[14 + slot];
+    wid = M000718e0_iO[i].inv[14 + slot];
     if (wid != -1) {
         found = 0;
         if (ITEMS[wid].cls == 0xd) {
@@ -714,7 +720,7 @@ void FUN_000354d4(int i, int b, int slot)
 }
 
 #undef DAT_00057330
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from build/var/mod/parts/p356c4.c */
 /* FUN_000356c4 @ 000356c4: remove the 0x9b door whose cell flag is set and update the 0x29/0x2a/0x2c entities */
  
@@ -873,7 +879,7 @@ void FUN_00035a10(int a, int b)
 #include <string.h>
 #include <stdio.h>
 #define DAT_0005759c ((char *)DAT_0005759c)
-#define B000718e0_iO ((struct CHR *)&B000718e0_iO)
+#define M000718e0_iO ((struct CHR *)&B000718e0_iO)
 #define FUN_0002c368 ((void (*)(char *, char *))FUN_0002c368)
 struct CHR { char name[0x5c]; short mem[0xf6]; };
  extern char *DAT_0005d89c, *DAT_0005d8a0, *DAT_0005d8a4; extern unsigned char DAT_0005cf5a[];
@@ -881,13 +887,13 @@ extern unsigned char FUN_0001f218(int, int); extern void FUN_0001f238(int, int, 
 void FUN_00035acc(char *sp, int who, int slot)
 {
     int t; char *cn; char *nm; int saved; int r;
-    saved = B000718e0_iO[who].mem[slot];
+    saved = M000718e0_iO[who].mem[slot];
     t = FUN_0001f218(who, slot + 0xe);
-    B000718e0_iO[who].mem[slot] = -1;
+    M000718e0_iO[who].mem[slot] = -1;
     FUN_0001f238(who, slot + 0xe, 0);
     r = FUN_0001b950(sp, who);
     nm = sp + 0x42;
-    cn = B000718e0_iO[who].name;
+    cn = M000718e0_iO[who].name;
     if (r == 1) {
         sprintf(DAT_0005759c, DAT_0005d89c, cn);
         FUN_0002c368(DAT_0005759c + strlen(DAT_0005759c), nm);
@@ -900,7 +906,7 @@ void FUN_00035acc(char *sp, int who, int slot)
         FUN_0002c21c(DAT_0005759c);
     } else {
         FUN_0002c21c(DAT_0005d8a4);
-        B000718e0_iO[who].mem[slot] = saved;
+        M000718e0_iO[who].mem[slot] = saved;
         FUN_0001f238(who, slot + 0xe, t);
     }
     DAT_0005cf5a[who] = 1;
@@ -908,7 +914,7 @@ void FUN_00035acc(char *sp, int who, int slot)
 
 #undef CHR
 #undef DAT_0005759c
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef FUN_0002c368
 /* ---- from build/var/mod/parts/p35c38.c */
 /* FUN_00035c38 @ 00035c38 */
@@ -1010,7 +1016,7 @@ extern void FUN_00035d24(int i, int b, short n); /* module prototype */
 #include "world.h"
 #include "dice.h"
 #define DAT_0005759c ((char *)DAT_0005759c)
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 #define B000758bc_al (*(int *)&B000758bc_al)
 #define FUN_00038110 ((void (*)(int, int, int, int))FUN_00038110)
 
@@ -1034,8 +1040,8 @@ void FUN_00036018(int i, int j, int tgt)
 {
     struct ITEM *tc3, *tb3; int o5, o2, k279, o3, id, type, dir, o4, k, ok, o, o6, to3, k272; /* STANDIN: declaration order (searched; decides the remaining switch-index and record-product ties) */
     FUN_00029ccc(0);
-    { int c; k = i * 0x248; c = k; k = c; } /* STANDIN: named i*0x248, copy out and back lifts it above the two index temps */ if (((struct PC *)((char *)B000718e0_iO + k))->r10b[j]) return;
-    id = ((struct PC *)((char *)B000718e0_iO + k))->inv[14 + j]; /* STANDIN: uses the named offset above */
+    { int c; k = i * 0x248; c = k; k = c; } /* STANDIN: named i*0x248, copy out and back lifts it above the two index temps */ if (((struct PC *)((char *)M000718e0_iO + k))->r10b[j]) return;
+    id = ((struct PC *)((char *)M000718e0_iO + k))->inv[14 + j]; /* STANDIN: uses the named offset above */
     type = ITEMS[id].cls;
     if (id == -1) type = 10;
     if (FUN_00033f50(id)) {
@@ -1191,16 +1197,16 @@ void FUN_00036018(int i, int j, int tgt)
             FUN_000351a0(8, 8, 0x66, 0x1e, 0xe);
             break;
         case 0xe6:
-            if (B000718e0_iO[i].inv[(j + 0xe) ^ 1] == 0x7a) FUN_00034f60(6, 6, 0x40, 0x1e, 0xf);
+            if (M000718e0_iO[i].inv[(j + 0xe) ^ 1] == 0x7a) FUN_00034f60(6, 6, 0x40, 0x1e, 0xf);
             else FUN_000351a0(6, 6, 0x40, 0x1e, 0xe);
             break;
         case 0xe7:
-            if (B000718e0_iO[i].inv[(j + 0xe) ^ 1] == 0x7a) FUN_00034f60(4, 3, 0x40, 0x1e, 0xf);
+            if (M000718e0_iO[i].inv[(j + 0xe) ^ 1] == 0x7a) FUN_00034f60(4, 3, 0x40, 0x1e, 0xf);
             else FUN_000351a0(4, 3, 0x40, 0x1e, 0xe);
             break;
         case 0x7a:
-            if (B000718e0_iO[i].inv[(j + 0xe) ^ 1] == 0xe6) FUN_00034f60(6, 6, 0x40, 0x1e, 0xf);
-            { int x, c; x = (j + 0xe) ^ 1; c = x; x = c; /* STANDIN: named slot index, copy out and back lifts it above j + 0xe */ if (B000718e0_iO[i].inv[x] == 0xe7) {
+            if (M000718e0_iO[i].inv[(j + 0xe) ^ 1] == 0xe6) FUN_00034f60(6, 6, 0x40, 0x1e, 0xf);
+            { int x, c; x = (j + 0xe) ^ 1; c = x; x = c; /* STANDIN: named slot index, copy out and back lifts it above j + 0xe */ if (M000718e0_iO[i].inv[x] == 0xe7) {
                 FUN_00034f60(4, 3, 0x40, 0x1e, 0xf);
                 FUN_0002c124(0x4f);
             } } /* STANDIN: closes the block of the named slot index */
@@ -1219,8 +1225,8 @@ void FUN_00036018(int i, int j, int tgt)
             break;
         case 0x4b:
             to3 = id * 0x41; tb3 = ITEMS; tc3 = tb3; tb3 = tc3; /* STANDIN: table base loaded after the product, copy out and back */ if (DAT_000567ec[((struct ITEM *)((char *)tb3 + to3))->sub]) {
-                B000718e0_iO[i].f132 |= 0x2000000;
-                { int v, c; v = FUN_00029cc4() + 0x708; c = v; v = c; /* STANDIN: copy out and back lifts the sum above i*0x248 */ B000718e0_iO[i].t[25] = v; }
+                M000718e0_iO[i].f132 |= 0x2000000;
+                { int v, c; v = FUN_00029cc4() + 0x708; c = v; v = c; /* STANDIN: copy out and back lifts the sum above i*0x248 */ M000718e0_iO[i].t[25] = v; }
                 o4 = id << 6; o4 += id; /* STANDIN: item offset in two statements (product node before the table base) */
                 { int s = ((struct ITEM *)((char *)ITEMS + o4))->sub; DAT_0005f03e++; /* STANDIN: the charge index is read before the counter is bumped */
                 if (!--DAT_000567ec[s]) FUN_00034a9c(i, j); }
@@ -1263,23 +1269,23 @@ void FUN_00036018(int i, int j, int tgt)
             break;
         case 0x3d:
             FUN_00038110(B000758bc_al + 2, 0xff, 1, 1);
-            B000718e0_iO[i].f132 |= 0x80000;
-            B000718e0_iO[i].t[19] = FUN_0002c328(1, 4, 0, 4) * 0x2a30 + FUN_00029cc4();
+            M000718e0_iO[i].f132 |= 0x80000;
+            M000718e0_iO[i].t[19] = FUN_0002c328(1, 4, 0, 4) * 0x2a30 + FUN_00029cc4();
             FUN_00034a9c(i, j);
             DAT_0005cf5a[i] = 1;
             break;
         case 0x3e:
             FUN_00038110(B000758bc_al + 2, 0xff, 1, 1);
-            { int v2, c2; v2 = FUN_0002202c(i, 0x14); c2 = v2; v2 = c2; /* STANDIN: as above */ B000718e0_iO[i].f1be = v2; }
-            B000718e0_iO[i].f132 |= 0x800000;
-            k272 = FUN_0002c328(1, 4, 0, 4); k272 *= 0x2a30; /* STANDIN: product in two statements (product node before the call result) */ B000718e0_iO[i].t[23] = k272 + FUN_00029cc4();
+            { int v2, c2; v2 = FUN_0002202c(i, 0x14); c2 = v2; v2 = c2; /* STANDIN: as above */ M000718e0_iO[i].f1be = v2; }
+            M000718e0_iO[i].f132 |= 0x800000;
+            k272 = FUN_0002c328(1, 4, 0, 4); k272 *= 0x2a30; /* STANDIN: product in two statements (product node before the call result) */ M000718e0_iO[i].t[23] = k272 + FUN_00029cc4();
             FUN_00034a9c(i, j);
             DAT_0005cf5a[i] = 1;
             break;
         case 0x40:
             FUN_00038110(B000758bc_al + 2, 0xff, 1, 1);
-            B000718e0_iO[i].f132 |= 0x1000000;
-            k279 = FUN_0002c328(1, 4, 0, 4); k279 *= 0x2a30; /* STANDIN: product in two statements (product node before the call result) */ B000718e0_iO[i].t[24] = k279 + FUN_00029cc4();
+            M000718e0_iO[i].f132 |= 0x1000000;
+            k279 = FUN_0002c328(1, 4, 0, 4); k279 *= 0x2a30; /* STANDIN: product in two statements (product node before the call result) */ M000718e0_iO[i].t[24] = k279 + FUN_00029cc4();
             FUN_00034a9c(i, j);
             DAT_0005cf5a[i] = 1;
             break;
@@ -1291,15 +1297,15 @@ void FUN_00036018(int i, int j, int tgt)
             break;
         case 0x42:
             ok = 0;
-            if (B000718e0_iO[i].hp != B000718e0_iO[i].maxhp || !(B000718e0_iO[i].fl & 0xc00)) {
+            if (M000718e0_iO[i].hp != M000718e0_iO[i].maxhp || !(M000718e0_iO[i].fl & 0xc00)) {
                 FUN_00034a9c(i, j);
                 FUN_00019d90(-1, i, i);
                 ok = 1;
                 DAT_0005cf5a[i] = 1;
             }
             { int c; c = ok; ok = c; } /* STANDIN: copy out and back lifts ok above the party-record temps */
-            if (ok) sprintf(DAT_0005759c, PTR_s_feels_better_0005d8d4, B000718e0_iO[i].name);
-            else sprintf(DAT_0005759c, DAT_0005d8d8, B000718e0_iO[i].name);
+            if (ok) sprintf(DAT_0005759c, PTR_s_feels_better_0005d8d4, M000718e0_iO[i].name);
+            else sprintf(DAT_0005759c, DAT_0005d8d8, M000718e0_iO[i].name);
             FUN_0002c21c(DAT_0005759c);
             break;
         case 0x7e: case 0x80: case 0x85: case 0x86:
@@ -1331,7 +1337,7 @@ void FUN_00036018(int i, int j, int tgt)
 }
 
 #undef DAT_0005759c
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B000758bc_al
 #undef FUN_00038110
 

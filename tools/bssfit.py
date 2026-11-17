@@ -399,15 +399,15 @@ def cmd_own(prog, module, start, end):
         i = next(i for i, l in enumerate(o) if l.split()[:2] == ['c', module]); o.insert(i + 1, 'asm  b%s   -3p -c' % module[1:])
     open(op, 'w').write('\n'.join(o)); print('b%s.asm: %x-%x' % (module[1:], E[0][0], E[-1][0] + E[-1][2]))
 
-def view_expr(base, decl, cont, off):
+def view_expr(base, decl, cont, off, lv=False):
     addr = '((char *)&%s + %d)' % (cont, off) if off else '((char *)&%s)' % cont
     if decl == '@': return '(*(%s *)%s)' % (base, addr)
     m = re.fullmatch(r'(\**)\s*@', decl)
     if m: return '(*(%s %s*)%s)' % (base, m.group(1), addr)
     m = re.fullmatch(r'(\**)\s*@\s*\[[^\]]*\]', decl)
-    if m: return '((%s %s*)%s)' % (base, m.group(1), addr)
+    if m and not lv: return '((%s %s*)%s)' % (base, m.group(1), addr)
     m = re.fullmatch(r'@\s*\[[^\]]*\]((\s*\[[^\]]*\])+)', decl)
-    if m: return '((%s (*)%s)%s)' % (base, m.group(1).replace(' ', ''), addr)
+    if m and not lv: return '((%s (*)%s)%s)' % (base, m.group(1).replace(' ', ''), addr)
     return '(*(%s %s)%s)' % (base, decl.replace('@', '(*)'), addr)
 
 def stmt_decls(st):
@@ -425,9 +425,9 @@ def stmt_decls(st):
         out.append((name, base, decl))
     return out
 
-def views_in_text(text, V, cur, fname, known=''):
+def views_in_text(text, V, hdr, fname):
     """rewrite one C text: V {name: (container, offset)}; cur {name: view text} carried in from the headers it includes"""
-    t = blank_comments(text); rx = re.compile(r'\b(%s)\b' % '|'.join(V)); edits = []; cur = dict(cur); declared = set()
+    t = blank_comments(text); rx = re.compile(r'\b(%s)\b' % '|'.join(V)); edits = []; cur = {}; declared = set(); known = ''
     if not rx.search(t): return text, cur
     ev = []
     for m in re.finditer(r'\bextern\b', t):
@@ -436,19 +436,26 @@ def views_in_text(text, V, cur, fname, known=''):
         ev.append((m.start(), 'x', m, e))
     for m in re.finditer(r'^[ \t]*#[ \t]*(define|undef)[ \t]+(\w+)(.*)$', t, re.M):
         if m.group(2) in V: ev.append((m.start(), m.group(1), m, None))
+    for m in re.finditer(r'#include\s+"(\w+\.h)"', t):
+        if m.group(1) in hdr: ev.append((m.start(), 'inc', m, None))
     for pos, kind, m, e in sorted(ev, key=lambda x: x[0]):
         ls = t.rfind('\n', 0, pos) + 1
+        if kind == 'inc':
+            cur.update(hdr[m.group(1)][0]); known += ' '.join(declarations(hdr[m.group(1)][1])); continue
         if kind == 'x':
             D = stmt_decls(t[m.end():e])
             if D is None: raise SystemExit('%s: cannot parse %r' % (fname, t[m.start():e + 1][:200]))
             keep = [d for d in D if d[0] not in V]; lines = []
             for name, base, decl in D:
                 if name not in V: continue
-                cont, off = V[name]; v = view_expr(base, decl, cont, off)
+                cont, off = V[name]; v = view_expr(base, decl, cont, off, bool(re.search(r'&\s*%s\b' % name, t)))
                 if cur.get(name) not in (None, v) and re.search(r'\b%s\b' % name, t[ls:pos]):
                     print('   CHECK %s: %s is used ahead of its redeclaration in one line' % (fname, name))
                 if cont not in declared and not re.search(r'\b%s\b' % cont, t[:pos]) and not re.search(r'\b%s\b' % cont, known):
                     DD = declarations(text)
+                    for h in re.findall(r'#include\s+"(\w+\.h)"', t):
+                        if h in hdr:
+                            for n, d in declarations(hdr[h][1]).items(): DD.setdefault(n, d)
                     lines.append('extern %s;' % (' '.join(DD[cont]).replace('@', cont) if cont in DD else 'unsigned char %s[]' % cont))
                 declared.add(cont)
                 if cur.get(name) == v: continue
@@ -479,16 +486,36 @@ def views_in_text(text, V, cur, fname, known=''):
     for a, b, r in sorted(edits, key=lambda x: (x[0], x[1]), reverse=True): text = text[:a] + r + text[b:]
     return text, cur
 
+def demacro_text(text, names):
+    """local macros that reuse an object's name (`#define B.. ((T *)&B..)` ... `#undef B..`) get a name of their own
+    (M...), so that the object's name always means the object: same preprocessed text"""
+    t = blank_comments(text); ev = [m for m in re.finditer(r'^[ \t]*#[ \t]*(define|undef)[ \t]+(\w+)(.*)$', t, re.M) if m.group(2) in names]
+    edits = []; open_ = {}
+    for m in ev + [None]:
+        if m is not None:
+            name = m.group(2)
+            if m.group(1) == 'define' and (m.group(3).startswith('(') or m.group(3).rstrip().endswith('\\')): raise SystemExit('macro form of %s' % name)
+        for name2 in ([m.group(2)] if m is not None else list(open_)):
+            if name2 in open_:
+                s = open_.pop(name2); e = m.start() if m is not None else len(t)
+                for u in re.finditer(r'\b%s\b' % name2, t[s:e]): edits.append((s + u.start(), s + u.end(), 'M' + name2[1:]))
+        if m is None: break
+        edits.append((m.start(2), m.end(2), 'M' + name[1:]))
+        if m.group(1) == 'define': open_[name] = m.end()
+    for a, b, r in sorted(edits, reverse=True): text = text[:a] + r + text[b:]
+    return text
+
 def cmd_views(prog, V):
     """V {name: (container, offset)}: every name becomes a view of its container in the C files, headers and a*.asm"""
-    hcur = {}; htext = {}
+    hcur = {}; htext = {}; names = set(V) | set(c for c, o in V.values())
+    for f in sorted(glob.glob(src(prog, 'm*.c'))):
+        text = read(f); new = demacro_text(text, names)
+        if new != text: open(f, 'w', encoding='latin1').write(new)
     for h in sorted(glob.glob(os.path.join(ROOT, 'include', '*.h'))):
-        text = read(h); new, cur = views_in_text(text, V, {}, os.path.basename(h)); hcur[os.path.basename(h)] = cur; htext[os.path.basename(h)] = new
+        text = read(h); new, cur = views_in_text(text, V, {}, os.path.basename(h)); hcur[os.path.basename(h)] = (cur, new)
         if new != text: open(h, 'w', encoding='latin1').write(new); print('views in', os.path.basename(h))
     for f in sorted(glob.glob(src(prog, 'm*.c'))):
-        text = read(f); cur = {}; known = ''
-        for h in re.findall(r'#include\s+"(\w+\.h)"', text): cur.update(hcur.get(h, {})); known += htext.get(h, '')
-        new, _ = views_in_text(text, V, cur, os.path.basename(f), known)
+        text = read(f); new, _ = views_in_text(text, V, hcur, os.path.basename(f))
         if new != text: open(f, 'w', encoding='latin1').write(new); print('views in', os.path.basename(f))
     rx = re.compile(r'\b(%s)\b' % '|'.join(V))
     for f in sorted(glob.glob(src(prog, 'a*.asm'))):
@@ -513,9 +540,10 @@ def cmd_views(prog, V):
             else: L.append((n, s))
         write_asm(f, 'm' + os.path.basename(f)[1:-4], L, NOTE)
 
-def cmd_contain(prog, cont, size):
-    """every label inside the `size` bytes of the object `cont` becomes a view of it"""
-    a0 = addr_of(cont); V = {n: (cont, a - a0) for E in bmap(prog).values() for a, n, s in E if n and a0 < a < a0 + size}
+def cmd_contain(prog, cont, size, keep=()):
+    """every label inside the `size` bytes of the object `cont` becomes a view of it (not the labels in `keep`: these stay
+    objects of their own, defined next to each other)"""
+    a0 = addr_of(cont); V = {n: (cont, a - a0) for E in bmap(prog).values() for a, n, s in E if n and a0 < a < a0 + size and n not in keep and n[1:9] not in keep}
     print('%d views of %s' % (len(V), cont))
     if V: cmd_views(prog, V)
 
@@ -541,7 +569,7 @@ if __name__ == '__main__':
                                         {x.split('=')[0]: int(x.split('=')[1], 0) for i, x in enumerate(a) if i and a[i - 1] == '--size'})
     elif a[0] == 'view': cmd_view(a[1], a[2], a[3], int(a[4], 0))
     elif a[0] == 'own': cmd_own(a[1], a[2], int(a[3], 16), int(a[4], 16))
-    elif a[0] == 'contain': cmd_contain(a[1], a[2], int(a[3], 0))
+    elif a[0] == 'contain': cmd_contain(a[1], a[2], int(a[3], 0), a[a.index('--keep') + 1:] if '--keep' in a else ())
     elif a[0] == 'check': sys.exit(1 if cmd_check(a[1]) else 0)
     elif a[0] == 'name': print(fit(a[1], a[2]))
     else: raise SystemExit(__doc__)

@@ -564,7 +564,8 @@ short FUN_0003d5d0(int x, int y, int who)
 #undef O
 /* ---- from build/var/mod/parts/p3d9fc.c */
 /* FUN_0003d9fc @ 0003d9fc: the first able elf in the party may get a vision (1 in 2) */
-extern unsigned short B000718f0_hO[]; extern unsigned char B000718f4_h3[];
+#define B000718f4_h3 ((unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
+extern unsigned short B000718f0_hO[]; 
 extern int FUN_0002c328(int, int, int, int); extern void FUN_0002c77c(int, int);
 void FUN_0003d9fc(void)
 {
@@ -588,7 +589,7 @@ void FUN_0003d9fc(void)
 struct CELL { unsigned short lo : 10, b10 : 1, b11 : 1, rest : 4; };
 #define B000698e0_b7 ((struct CELL *)B000698e0_b7)
 extern short B00077108_dk[];
-extern unsigned short B000718f0_hO[]; extern unsigned char B000718f4_h3[];
+extern unsigned short B000718f0_hO[]; 
 extern int FUN_0002c328(int, int, int, int); extern void FUN_0002c77c(int, int);
 void FUN_0003da7c(int c)
 {

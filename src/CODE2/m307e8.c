@@ -358,7 +358,12 @@ extern void FUN_00033438(int, int, int), FUN_0001f290(int, int, int), FUN_0002c2
 extern unsigned char DAT_0005d681[];
 extern struct BAG DAT_00057330[];
 struct FL { unsigned short x : 15, busy : 1; };
-extern char B00071946_l7[], B0007193c_aB[], B0007193e_bP[], B00071920_bM[];
+extern unsigned char B000718e0_iO[];
+#define B00071946_l7 ((char *)((char *)&B000718e0_iO + 102)) /* STANDIN: view, B000718e0_iO + 0x66 */
+#define B0007193c_aB ((char *)((char *)&B000718e0_iO + 92)) /* STANDIN: view, B000718e0_iO + 0x5c */
+#define B0007193e_bP ((char *)((char *)&B000718e0_iO + 94)) /* STANDIN: view, B000718e0_iO + 0x5e */
+#define B00071920_bM ((char *)((char *)&B000718e0_iO + 64)) /* STANDIN: view, B000718e0_iO + 0x40 */
+
 struct MSGQ { char *s; int q; }; extern struct MSGQ PTR_s_NOT_ENOUGH_SPACE_IN_INVENTORY_0005d678; /* STANDIN: message pointer as a record member - removes its -oa memory node */
 #define RS(f) (*(short *)((f) + m * 0x248))
 #define ITEM(i, o) ITEMP[(i) * 0x41 + (o)]
@@ -445,7 +450,8 @@ extern void FUN_000391b0(unsigned char), FUN_0001f238(int, int, int), FUN_0002ea
 extern void FUN_0002a8c8(int, int, int, int, int), FUN_00036018(int, int, int);
 extern unsigned char FUN_0001f218(int, int);
 extern int FUN_00034478(int, int);
-extern char B0007193c_aB[], B00071a7e_dD[];
+#define B00071a7e_dD ((char *)((char *)&B000718e0_iO + 414)) /* STANDIN: view, B000718e0_iO + 0x19e */
+
 #include "records.h"
 extern struct CURSOR DAT_000585fc; /* STANDIN: held item DAT_00058600 / DAT_00058602 as CURSOR members .id / .f - removes two -oa memory nodes */
 extern int DAT_0005c050;

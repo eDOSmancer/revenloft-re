@@ -188,7 +188,7 @@ void FUN_0002c40c(int win, int x, int y, int w, int h)
 extern void FUN_0002c368(unsigned char *buf, int n); /* module prototype */
 extern void FUN_0002c40c(int win, int x, int y, int w, int h); /* module prototype */
 /* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 /* FUN_0002c77c @ 0002c77c: party member i says string s: bubble sized to the text, portrait, text, wait for a click */
 void *memset(void *, int, unsigned);
 extern void *FUN_0004104c(int); extern void FUN_0002a9f8(void), FUN_000391b0(unsigned char), FUN_00024118(unsigned char *, char *, int);
@@ -206,8 +206,8 @@ void FUN_0002c77c(int i, int s)
     FUN_00024118(DAT_0005759c, buf, 0x800);
     n = FUN_00023fd4(1, 0x7e, 0x55, 0xc, 0x96, buf, 1);
     n++;
-    pic = *(unsigned char *)(B000718e0_iO + i * 0x248 + 0x13) * 0x17 + B000758e4_h7 + *(signed char *)(B000718e0_iO + i * 0x248 + 0x12);
-    if (*(unsigned short *)(B000718e0_iO + i * 0x248 + 0x10) & 0x100) pic += 0x2e;
+    pic = *(unsigned char *)(M000718e0_iO + i * 0x248 + 0x13) * 0x17 + B000758e4_h7 + *(signed char *)(M000718e0_iO + i * 0x248 + 0x12);
+    if (*(unsigned short *)(M000718e0_iO + i * 0x248 + 0x10) & 0x100) pic += 0x2e;
     FUN_0002c40c(DAT_0005c050, 0x20, 0x50, n * 0xc + 0x5e, 0xa0);
     FUN_0003975c(0, 0x24, 0x86, pic, 1);
     FUN_00023fd4(1, 0x7e, 0x55, 0xc, 0x96, buf, 1);
@@ -231,7 +231,7 @@ void FUN_0002c77c(int i, int s)
     FUN_000410b0(buf);
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from build/var/mod/parts/p2c924.c */
 /* FUN_0002c924 @ 0002c924: pick a random living, able party member */
 #include "chars.h"
@@ -256,14 +256,14 @@ int FUN_0002c924(void)
 /* MATCH (round 47): the record pointer is `p = &B000718e0_iO[i]` at the loop top of an index loop (recipes 127 / 144), struct PC from include/records.h. The stepped pointer in the for clauses put `mov eax, OFFSET` ahead of the hoisted load of n; as a strength-reduction temp its initialiser follows it, as in the original. Earlier notes (rounds 40-41: `for (...; i < 4 && r == -1; ...)`, q = p for the cases) still hold. */
 /* FUN_0002ca2c @ 0002ca2c: first able party member that meets condition n (alignment, high/low ability, race, gender, class), -1 if none */
 #include "records.h"
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 
 int FUN_0002ca2c(int n)
 {
     int r, i; struct PC *p, *q;
     r = -1;
     for (i = 0; i < 4 && r == -1; i++) {
-        p = &B000718e0_iO[i];
+        p = &M000718e0_iO[i];
         q = p;
         if (p->fl & 0xf240) continue;
         switch (n) {
@@ -306,7 +306,7 @@ int FUN_0002ca2c(int n)
     return r;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from build/var/mod/parts/p2cd48.c */
 extern int FUN_0002c1dc(int i); /* module prototype */
 extern void FUN_0002c77c(int i, int s); /* module prototype */
@@ -716,7 +716,9 @@ void FUN_0002ce68(void)
 /* FUN_0002e4a0 @ 0002e4a0: expire the five per-character timers */
 #include "chars.h"
 extern unsigned FUN_00029cc4(void);
-extern unsigned short B000718f0_hO; extern unsigned B000719eb_cp, B00071a7e_dD; extern unsigned char DAT_0005cf5a[];
+#define B000719eb_cp (*(unsigned *)((char *)&B000718e0_iO + 267)) /* STANDIN: view, B000718e0_iO + 0x10b */
+#define B00071a7e_dD (*(unsigned *)((char *)&B000718e0_iO + 414)) /* STANDIN: view, B000718e0_iO + 0x19e */
+extern unsigned short B000718f0_hO;  extern unsigned char DAT_0005cf5a[];
 void FUN_0002e4a0(void)
 {
     unsigned t = FUN_00029cc4();
@@ -748,7 +750,7 @@ void FUN_0002e534(void)
 /* FUN_0002e594 @ 0002e594: poison and disease tick for the living party members: damage them and post "<name> FEELS THE EFFECT OF POISON/DISEASE." (poison only every fourth tick for members with slow poison) */
 #include <string.h>
 #define DAT_0005759c ((char *)DAT_0005759c)
-#define B000718e0_iO ((struct CHR *)&B000718e0_iO)
+#define M000718e0_iO ((struct CHR *)&B000718e0_iO)
 #define FUN_00040700 ((int (*)(void))FUN_00040700)
 struct CHR { char name[0x10]; unsigned short st; char p12[0x122]; unsigned char slow : 1, b1 : 7; char rest[0x113]; };
  extern char B00064580_eK[], *DAT_0005bed8, *DAT_0005bedc; extern int DAT_0005cf54; extern unsigned char DAT_0005cf59;
@@ -757,19 +759,19 @@ void FUN_0002e594(int t)
 {
     int i;
     for (i = 0; i < 4; i++) {
-        if (B000718e0_iO[i].st & 0xc000) continue;
-        if (B000718e0_iO[i].st & 0x800) {
-            if (B000718e0_iO[i].slow && t % 4) return;
+        if (M000718e0_iO[i].st & 0xc000) continue;
+        if (M000718e0_iO[i].st & 0x800) {
+            if (M000718e0_iO[i].slow && t % 4) return;
             FUN_0001cd44(i, 1);
-            strcpy(DAT_0005759c, B000718e0_iO[i].name);
+            strcpy(DAT_0005759c, M000718e0_iO[i].name);
             strcat(DAT_0005759c, DAT_0005bed8);
             DAT_0005cf54 = FUN_00040700() + 0x5a;
             strcpy(B00064580_eK, DAT_0005759c);
             DAT_0005cf59 = 1;
         }
-        if (B000718e0_iO[i].st & 0x400) {
+        if (M000718e0_iO[i].st & 0x400) {
             FUN_0001cd44(i, 3);
-            strcpy(DAT_0005759c, B000718e0_iO[i].name);
+            strcpy(DAT_0005759c, M000718e0_iO[i].name);
             strcat(DAT_0005759c, DAT_0005bedc);
             DAT_0005cf54 = FUN_00040700() + 0x5a;
             strcpy(B00064580_eK, DAT_0005759c);
@@ -779,7 +781,7 @@ void FUN_0002e594(int t)
 }
 
 #undef DAT_0005759c
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef FUN_00040700
 /* ---- from build/var/mod/parts/p2e74c.c */
 /* FUN_0002e74c @ 0002e74c: set the game clock and its last-update mark */
@@ -791,7 +793,11 @@ extern void FUN_0002e594(int t); /* module prototype */
 /* FUN_0002e75c @ 0002e75c: advance the game clock: every 0x438 ticks an hour passes (healing, hunger), every 0x21c ticks the torch flickers */
 struct ST { unsigned char f : 8; };
 extern void FUN_00041f94(void); extern int FUN_0001f2d4(int, int);
-extern int DAT_0005bf58, DAT_0005bf50, DAT_0005bf54, DAT_0005a7e4; extern unsigned DAT_0005cf4c; extern unsigned short B000718f0_hO; extern signed char B000718f5_h2; extern unsigned char B000718f4_h3, DAT_0005cf5a[]; extern short B000718fc_i0, B000718fe_ar; extern struct ST B000719a1_bm;
+#define B000719a1_bm (*(struct ST *)((char *)&B000718e0_iO + 193)) /* STANDIN: view, B000718e0_iO + 0xc1 */
+#define B000718fc_i0 (*(short *)((char *)&B000718e0_iO + 28)) /* STANDIN: view, B000718e0_iO + 0x1c */
+#define B000718fe_ar (*(short *)((char *)&B000718e0_iO + 30)) /* STANDIN: view, B000718e0_iO + 0x1e */
+#define B000718f4_h3 (*(unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
+extern int DAT_0005bf58, DAT_0005bf50, DAT_0005bf54, DAT_0005a7e4; extern unsigned DAT_0005cf4c; extern unsigned short B000718f0_hO;  extern unsigned char DAT_0005cf5a[];  
 #define CH16(o) (*(unsigned short *)((char *)&B000718f0_hO + (o)))
 #define HP(o) (*(short *)((char *)&B000718fc_i0 + (o)))
 #define MAXHP(o) (*(short *)((char *)&B000718fe_ar + (o)))
@@ -924,13 +930,13 @@ void FUN_0002ea78(void) { FUN_0002a510(DAT_0005c050); DAT_0005c050 ^= 1; }
 /* ---- from build/var/mod/parts/p2ea90.c */
 /* FUN_0002ea90 @ 0002ea90: draw the hand button h of party member i (item picture or the bare-hand glyph) in palette state st (-1: derive it) */
 #include "world.h"
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 #define FUN_00029cc4 ((int (*)(void))FUN_00029cc4)
 #define FUN_0003f29c ((unsigned char *(*)(int, int))FUN_0003f29c)
 extern void FUN_00039b40(int, int, int, int, int), FUN_0003a258(int, unsigned char *), FUN_000398f0(int, int, int, int, int, unsigned char *), FUN_0003e374(int, int, int, int, unsigned char), FUN_0003975c(int, int, int, int, int), FUN_00040508(int, int, int, char *, int);
 extern int FUN_00034478(int, int);  extern char *FUN_0003e6f0(int);
  extern short DAT_00056dae; extern int B000758dc_cl, DAT_0005cf60[]; extern unsigned char DAT_0005cf70[], DAT_0005cf68;
-#define CH(i, o) (B000718e0_iO + (i) * 0x248 + (o))
+#define CH(i, o) (M000718e0_iO + (i) * 0x248 + (o))
 void FUN_0002ea90(int i, int h, int st)
 {
     int y, it, off;
@@ -968,7 +974,7 @@ void FUN_0002ea90(int i, int h, int st)
     }
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef FUN_00029cc4
 #undef FUN_0003f29c
 #undef CH
@@ -1166,7 +1172,7 @@ int FUN_0002f3fc(int i)
 extern void FUN_0002ea90(int i, int h, int st); /* module prototype */
 extern int FUN_0002f3fc(int i); /* module prototype */
 #define DAT_0005d681 ((unsigned char *)&DAT_0005d681)
-#define B000718e0_iO ((unsigned char *)&B000718e0_iO)
+#define M000718e0_iO ((unsigned char *)&B000718e0_iO)
 #define FUN_0003f29c ((int *(*)(int, int))FUN_0003f29c)
 /* FUN_0002f494 @ 0002f494: redraw the dirty party portraits: dead marker or face, health bar, status overlays and hands, then flip each slot */
 extern void FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_0003e4a4(int, int, int, int, int *), FUN_0003975c(int, int, int, int, int), FUN_000398f0(int, int, int, int, int, unsigned char *), FUN_00039b40(int, int, int, int, int), FUN_0003e374(int, int, int, int, unsigned char), FUN_00040508(int, int, int, char *, int), FUN_00032f40(int, int), FUN_0002a8c8(int, int, int, int, int), FUN_00033024(int, int);
@@ -1176,10 +1182,10 @@ extern char *FUN_0003e6f0(int);
 extern int DAT_0005c050; extern unsigned char DAT_0005cf5a[], DAT_0005d682, DAT_0005cf70[];
 extern int B000758dc_cl, DAT_0005c034, B000758e4_h7, DAT_0005d8a8[];
 
-#define RW(o) (*(unsigned short *)(B000718e0_iO + (o) + k * 0x248))
-#define RS(o) (*(short *)(B000718e0_iO + (o) + k * 0x248))
-#define RI(o) (*(int *)(B000718e0_iO + (o) + k * 0x248))
-#define RB(o) (B000718e0_iO[(o) + k * 0x248])
+#define RW(o) (*(unsigned short *)(M000718e0_iO + (o) + k * 0x248))
+#define RS(o) (*(short *)(M000718e0_iO + (o) + k * 0x248))
+#define RI(o) (*(int *)(M000718e0_iO + (o) + k * 0x248))
+#define RB(o) (M000718e0_iO[(o) + k * 0x248])
 void FUN_0002f494(int flip)
 {
     int k, y, vis, p, r, face, pct, yy, x;
@@ -1232,7 +1238,7 @@ void FUN_0002f494(int flip)
 }
 
 #undef DAT_0005d681
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef FUN_0003f29c
 #undef RW
 #undef RS

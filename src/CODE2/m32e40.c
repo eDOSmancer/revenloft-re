@@ -7,7 +7,11 @@ char B00075900_a9[33];
 /* ---- from build/var/mod/parts/p32e40.c */
 /* FUN_00032e40 @ 00032e40: level of a character in a given class (three class slots) */
 #include "chars.h"
-extern signed char B000718f6_h5, B000718f7_h4; extern short B00071902_aC, B00071904_aA;
+#define B00071902_aC (*(short *)((char *)&B000718e0_iO + 34)) /* STANDIN: view, B000718e0_iO + 0x22 */
+#define B00071904_aA (*(short *)((char *)&B000718e0_iO + 36)) /* STANDIN: view, B000718e0_iO + 0x24 */
+#define B000718f6_h5 (*(signed char *)((char *)&B000718e0_iO + 22)) /* STANDIN: view, B000718e0_iO + 0x16 */
+#define B000718f7_h4 (*(signed char *)((char *)&B000718e0_iO + 23)) /* STANDIN: view, B000718e0_iO + 0x17 */
+ 
 int FUN_00032e40(int cls, int i)
 {
     if (CH_CLASS_S(i) == cls) return CH_LVLIDX(i);
@@ -42,7 +46,8 @@ void FUN_00032e90(struct PRJ *p, int flag)
 /* FUN_00032f40 @ 00032f40: draw the class icon of party member i on the status bar in palette row c (the x position goes through a local) */
 #include "chars.h"
 extern void FUN_000398f0(int, int, int, int, int, void *);
-extern unsigned short B000718f0_hO; extern unsigned char B00071a11_dy, DAT_0005cf70[]; extern int B000758dc_cl, DAT_0005c034;
+#define B00071a11_dy (*(unsigned char *)((char *)&B000718e0_iO + 305)) /* STANDIN: view, B000718e0_iO + 0x131 */
+extern unsigned short B000718f0_hO; extern unsigned char DAT_0005cf70[]; extern int B000758dc_cl, DAT_0005c034;
 #define CB(i) (*((unsigned char *)&B00071a11_dy + (i) * 0x248))
 void FUN_00032f40(int i, int c)
 {
@@ -66,7 +71,9 @@ extern void FUN_00032f40(int i, int c); /* module prototype */
 extern void FUN_0003e510(int, int, int, int), FUN_0003975c(int, int, int, int, int), FUN_0004059c(unsigned char *), FUN_0004060c(int, int, char *, int), FUN_0002a8c8(int, int, int, int, int);
 extern int FUN_0002f3fc(int);
 extern int DAT_0005d8a8[], DAT_0005d8b0[], DAT_0005d8b8[], B000758dc_cl, DAT_0005c034, DAT_0005c050;
-extern unsigned char B00071a0f_bd[], B00071a10_dz[], DAT_0005cf70[], DAT_0005d270[], B00075921_aX[6095], DAT_0005d681[]; extern char B00075900_a9[33];
+#define B00071a0f_bd ((unsigned char *)((char *)&B000718e0_iO + 303)) /* STANDIN: view, B000718e0_iO + 0x12f */
+#define B00071a10_dz ((unsigned char *)((char *)&B000718e0_iO + 304)) /* STANDIN: view, B000718e0_iO + 0x130 */
+extern unsigned char DAT_0005cf70[], DAT_0005d270[], B00075921_aX[6095], DAT_0005d681[]; extern char B00075900_a9[33];
 void FUN_00033024(int s, int flip)
 {
     int a, b, who, c, top, k;
@@ -104,10 +111,14 @@ void FUN_00033024(int s, int flip)
 extern int FUN_0001eee0(int), FUN_0001f2b4(int);
 extern void FUN_0002c368(char *, int);
 extern int DAT_0005d8b0[];
-extern unsigned char B000718f4_h3[];
+#define B000718f4_h3 ((unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
+
 struct MEM { unsigned char lo : 4, hi : 4; };
-extern struct MEM B0007194a_al[], B0007199a_mo[];
-extern short B00071940_lM[];
+#define B0007194a_al ((struct MEM *)((char *)&B000718e0_iO + 106)) /* STANDIN: view, B000718e0_iO + 0x6a */
+#define B0007199a_mo ((struct MEM *)((char *)&B000718e0_iO + 186)) /* STANDIN: view, B000718e0_iO + 0xba */
+
+#define B00071940_lM ((short *)((char *)&B000718e0_iO + 96)) /* STANDIN: view, B000718e0_iO + 0x60 */
+
 struct SP { char name[0x1e]; unsigned char lvl, k, who, prs; };
 
 void FUN_000331c0(int m, int lvl)
@@ -177,7 +188,7 @@ extern void FUN_000331c0(int m, int lvl); /* module prototype */
 #include <string.h>
 #include <stdio.h>
 #include "records.h"
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 #define B00075900_a9 ((struct SPL (*)[90])B00075900_a9)
 
 
@@ -194,25 +205,25 @@ void FUN_00033438(int s, int x, int y)
     if (!s) b = 2;
     else b = 0xd5;
     { int c; c = b; b = c; c = b; b = c; } /* STANDIN: b copied out and back twice: savings 10 -> 18, b sorts ahead of the s*4 temp (EDI) and stays ahead when other ties move */
-    if (B000718e0_iO[DAT_0005d8a8[s]].fl >= 0x4000) return;
+    if (M000718e0_iO[DAT_0005d8a8[s]].fl >= 0x4000) return;
     if (DAT_0005d8b8[s]) return;
-    top = B000718e0_iO[DAT_0005d8a8[s]].f130;
+    top = M000718e0_iO[DAT_0005d8a8[s]].f130;
     if (b <= y && b + 6 >= y) {
         if (x <= 0x15f) {
             if (top > 0) {
                 DAT_0005d681[s] = 2;
-                B000718e0_iO[DAT_0005d8a8[s]].f130 -= 6;
+                M000718e0_iO[DAT_0005d8a8[s]].f130 -= 6;
             }
         } else if (top + 6 < DAT_0005d8b0[s]) {
             DAT_0005d681[s] = 2;
-            B000718e0_iO[DAT_0005d8a8[s]].f130 += 6;
+            M000718e0_iO[DAT_0005d8a8[s]].f130 += 6;
         }
         return;
     }
     if (x >= 0x136 && x <= 0x146) {
         { int c, t; t = (y - (b + 10)) / 16; c = t; t = c; y = t; } /* STANDIN: new y through t, copied out and back: the division result sorts ahead of the record offset (eax; push eax) and y stays in memory */
-        B000718e0_iO[DAT_0005d8a8[s]].f130 = 0;
-        B000718e0_iO[DAT_0005d8a8[s]].f12f = y;
+        M000718e0_iO[DAT_0005d8a8[s]].f130 = 0;
+        M000718e0_iO[DAT_0005d8a8[s]].f12f = y;
         FUN_000331c0(DAT_0005d8a8[s], y);
         DAT_0005d681[s] = 2;
         return;
@@ -225,20 +236,20 @@ void FUN_00033438(int s, int x, int y)
     sp = e->lvl * 10; sp += e->idx; sp += e->kind * 0x50; /* STANDIN: three statements: lvl * 10 formed in sp's register (esi) */
     r = FUN_0001b950(sp, DAT_0005d8a8[s]);
     if (r == 1) {
-        if (e->kind == 0) { int o, i, c; o = e->who * 0x248 + e->lvl * 10; i = e->idx; c = i; i = c; (&B000718e0_iO[0].mage[0][0])[o + i].hi--; } /* STANDIN: = mage[lvl][idx]; index sum named, idx copied out and back (r==1 mage tie) */
-        else { int o, i, c; o = e->who * 0x248 + e->lvl * 10; c = o; o = c; c = o; o = c; c = o; o = c; i = e->idx; c = i; i = c; c = i; i = c; (&B000718e0_iO[0].priest[0][0])[o + i].hi--; } /* STANDIN: = priest[lvl][idx]; sum copied out and back 3x, idx 2x: raises this arm so the second s*4 (lea edx,[ebx*4] at 0x33556) sorts ahead of the 12*s row-base copy, sum eax / idx edx */
+        if (e->kind == 0) { int o, i, c; o = e->who * 0x248 + e->lvl * 10; i = e->idx; c = i; i = c; (&M000718e0_iO[0].mage[0][0])[o + i].hi--; } /* STANDIN: = mage[lvl][idx]; index sum named, idx copied out and back (r==1 mage tie) */
+        else { int o, i, c; o = e->who * 0x248 + e->lvl * 10; c = o; o = c; c = o; o = c; c = o; o = c; i = e->idx; c = i; i = c; c = i; i = c; (&M000718e0_iO[0].priest[0][0])[o + i].hi--; } /* STANDIN: = priest[lvl][idx]; sum copied out and back 3x, idx 2x: raises this arm so the second s*4 (lea edx,[ebx*4] at 0x33556) sorts ahead of the 12*s row-base copy, sum eax / idx edx */
         FUN_000331c0(e->who, e->lvl);
-        sprintf(DAT_0005759c, DAT_0005d89c, B000718e0_iO[e->who].name);
+        sprintf(DAT_0005759c, DAT_0005d89c, M000718e0_iO[e->who].name);
         FUN_0002c368(DAT_0005759c + strlen(DAT_0005759c), sp + 0x42);
         FUN_0002c21c(DAT_0005759c);
     } else if (r == 0) {
         FUN_0002c21c(DAT_0005d8a0);
-        if (e->kind == 0) { int o, c; o = e->who * 0x248 + e->lvl * 10; c = o; o = c; (&B000718e0_iO[0].mage[0][0])[o + e->idx].hi--; } /* STANDIN: = mage[lvl][idx]; index sum named, copied out and back (savings +4: r==0 mage sum in eax) */
-        else { int o, i, c; o = e->who * 0x248 + e->lvl * 10; i = e->idx; c = i; i = c; (&B000718e0_iO[0].priest[0][0])[o + i].hi--; } /* STANDIN: = priest[lvl][idx]; same spelling (tail tie) */
+        if (e->kind == 0) { int o, c; o = e->who * 0x248 + e->lvl * 10; c = o; o = c; (&M000718e0_iO[0].mage[0][0])[o + e->idx].hi--; } /* STANDIN: = mage[lvl][idx]; index sum named, copied out and back (savings +4: r==0 mage sum in eax) */
+        else { int o, i, c; o = e->who * 0x248 + e->lvl * 10; i = e->idx; c = i; i = c; (&M000718e0_iO[0].priest[0][0])[o + i].hi--; } /* STANDIN: = priest[lvl][idx]; same spelling (tail tie) */
         FUN_000331c0(e->who, e->lvl);
     } else if (r == -2) {
         FUN_000331c0(e->who, e->lvl);
-        sprintf(DAT_0005759c, DAT_0005d89c, B000718e0_iO[e->who].name);
+        sprintf(DAT_0005759c, DAT_0005d89c, M000718e0_iO[e->who].name);
         FUN_0002c368(DAT_0005759c + strlen(DAT_0005759c), sp + 0x42);
         FUN_0002c21c(DAT_0005759c);
     } else {
@@ -248,7 +259,7 @@ void FUN_00033438(int s, int x, int y)
     DAT_0005d681[s] = 2;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B00075900_a9
 /* ---- from build/var/mod/parts/p337e4.c */
 /* FUN_000337e4 @ 000337e4: put an item into the first free pack slot (or a hand) of party member i */
@@ -277,7 +288,7 @@ void FUN_000337e4(int item, int b, int i)
 extern void FUN_000337e4(int item, int b, int i); /* module prototype */
 /* MATCH (round 27): alone and in module 0x32e40. The original reloads p->type before the 0x5a compare: the two compares convert p->type to different types (0x5aU unsigned, 0x58 int), so the cg CSE does not share the CONVERT (the 0x59/0x57 pair, both int, shares it). Earlier: 2 lines in module 0x32e40 (was 4): p->timer * B00071913_a2[...] in this operand order gives the original load order of the multiply. Left: the reload of p->type between the 0x58 and 0x5a compares (ours CSEs it; the 0x59/0x57 test later shares the load in both). Tried this round: (type == 0x58 && hit || type == 0x5a && hit) && st == 1 (3 lines, +7 bytes), the fully written-out disjunction (7 lines). Earlier: NEAR MISS 677/681, 8 lines under the module flags -3s -ox -oe -oa -ot (2026-11-10): returns int, as the callers' code needs (FUN_00033b38 compares the result with cmp eax,1, no cwde; with the short definition the module's one prototype made it sign-extend), and the st branch ends in an else instead of an inner return (the int version with the inner return added a mov edx,esi copy). Left: the original reloads p->type (movzx eax,[ebx+0xe]) between the 0x58 and 0x5a compares; here the load is shared (everything after is the 4-byte shift). Q1: no call between the two compares. Q2: the original's first load does not reach the second compare. Q3/Q4: n/a (no register differs). Tried 2026-11-10 (5): int return (16 lines, extra copy), int + else (8), short r (17), type as a 16-bit bitfield (37). Earlier: goto, split ifs, a volatile second read, a repeated condition, ((short *)p)[7] for the second compare (6 lines, movsx, other schedule), unsigned-short spellings, a copy q = p, two && groups (+19), a ?: form (+39). */
 #include "world.h"
-#define B00071913_a2 ((unsigned char *)&B00071913_a2)
+#define M00071913_a2 ((unsigned char *)&B00071913_a2)
 #define FUN_00018cf4 ((int (*)(struct O *, int))FUN_00018cf4)
 #define FUN_00019070 ((void (*)(struct O *, int))FUN_00019070)
 struct O { int a, b, dir; short s; unsigned short type; short pad; short timer; unsigned short lo : 3, face : 3, mid : 3, busy : 1, side : 1, owner : 3, st : 2; };
@@ -339,7 +350,7 @@ int FUN_0003388c(struct O *p, int flag)
             p->timer = 0x1e - ((unsigned char *)B000755d8_aw)[p->type * 0x41 + 0x30] / 10 * 10;
             p->timer /= 2;
             if (p->timer < 0) p->timer = 0;
-            p->timer = (p->timer * B00071913_a2[p->owner * 0x248] + 9) / 0x12;
+            p->timer = (p->timer * M00071913_a2[p->owner * 0x248] + 9) / 0x12;
             p->busy = 1;
         } else {
             FUN_000337e4(p->type, p->side, p->owner);
@@ -350,7 +361,7 @@ int FUN_0003388c(struct O *p, int flag)
     return r;
 }
 
-#undef B00071913_a2
+#undef M00071913_a2
 #undef FUN_00018cf4
 #undef FUN_00019070
 /* ---- from build/var/mod/parts/p33b38.c */
@@ -358,8 +369,8 @@ extern int FUN_0003388c(struct O *p, int flag); /* module prototype */
 /* FUN_00033b38 @ 00033b38: throw item it from (x, y) (16.16) in direction ang by party member who (-1: none): add a flying object and step it until it stops */
  
 #include "world.h"
-#define B000718e0_iO ((char *)&B000718e0_iO)
-#define B00071913_a2 ((unsigned char *)&B00071913_a2)
+#define M000718e0_iO ((char *)&B000718e0_iO)
+#define M00071913_a2 ((unsigned char *)&B00071913_a2)
 void *memmove(void *, const void *, unsigned);
 extern int FUN_0003c9dc(unsigned, unsigned); extern void FUN_00038110(int, int, int, int);
   extern char B0006762e_es[];  extern int B000758bc_al;
@@ -388,7 +399,7 @@ void FUN_00033b38(int it, int flag, int ang, int who, int x, int y)
     e->pw = 0x1e - *(unsigned char *)(((char *)B000755d8_aw) + it * 0x41 + 0x30) / 10 * 10;
     e->pw /= 2;
     if (e->pw < 0) e->pw = 0;
-    if (who != -1) e->pw = (e->pw * B00071913_a2[who * 0x248] + 9) / 0x12;
+    if (who != -1) e->pw = (e->pw * M00071913_a2[who * 0x248] + 9) / 0x12;
     if (*(unsigned char *)(((char *)B000755d8_aw) + it * 0x41 + 0x2f) == 0xf || *(unsigned char *)(((char *)B000755d8_aw) + it * 0x41 + 0x2f) == 0xd) e->pw = 0x7fff;
     B00075618_b1.n4++;
     ang += 0x16;
@@ -407,8 +418,8 @@ void FUN_00033b38(int it, int flag, int ang, int who, int x, int y)
     FUN_00038110(B000758bc_al + 1, 0xff, 1, 3);
 }
 
-#undef B000718e0_iO
-#undef B00071913_a2
+#undef M000718e0_iO
+#undef M00071913_a2
 /* ---- from build/var/mod/parts/p33d84.c */
 extern void FUN_00033b38(int it, int flag, int ang, int who, int x, int y); /* module prototype */
 /* FUN_00033d84 @ 00033d84 */

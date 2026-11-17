@@ -5,7 +5,7 @@
    Verified module (2026-11-17; was a module file from tools/modfile.py, round 23). */
 /* ---- from src/CODE2/f1c704.c */
 /* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
-#define B000718e0_iO ((struct CHR *)&B000718e0_iO)
+#define M000718e0_iO ((struct CHR *)&B000718e0_iO)
 /* FUN_0001c704 @ 0001c704: advance the active hand (0..7) to the next one holding a usable weapon. Round 20: natural form
    (character record as a struct, declarations in order) matches under the module's -oa; the earlier -oa-less fit needed
    s declared before h and cast views of the record */
@@ -21,9 +21,9 @@ void FUN_0001c704(void)
         k = DAT_0005cf68;
         h = k / 2;
         s = k % 2;
-        if (B000718e0_iO[h].st < 0x2000) {
+        if (M000718e0_iO[h].st < 0x2000) {
             if (FUN_00034478(h, s)) {
-                item = B000718e0_iO[h].hand[s];
+                item = M000718e0_iO[h].hand[s];
                 if (item == -1) break;
                 if (FUN_00033e58(item)) break;
                 if (FUN_00033f50(item)) break;
@@ -34,7 +34,7 @@ void FUN_0001c704(void)
     DAT_0005cf5a[start / 2] = 1;
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from src/CODE2/wip/f1c7c4.c */
 /* NEAR MISS (round 22): 16 lines under the module set -oa (module 0x1c704), same shape as without -oa. First difference: the original loads t first into edx and lv into eax (lv reuses the i*0x248 base register); ours loads lv first; with t assigned first (18 lines) t takes eax: instrument: the return-value temp t3 (sav 12) hints eax to t (sav 12) ahead of lv (sav 8). Tried under -oa: both declaration orders x both assignment orders (only the assignment order changes code), lv as the return variable, no lv variable (50), no t variable (worse). 9 real compiles. Open: what lowers t below lv (a use of t the original lacks?). */
 #include "chars.h"
@@ -50,7 +50,10 @@ extern int FUN_0001c7c4(int i); /* module prototype */
 #include "dice.h"
 #include "world.h"
 extern int FUN_0001fe44(int);
- extern unsigned char B000719ea_cm; extern int B00071a12_dx; extern short B00071948_au;
+#define B00071948_au (*(short *)((char *)&B000718e0_iO + 104)) /* STANDIN: view, B000718e0_iO + 0x68 */
+#define B00071a12_dx (*(int *)((char *)&B000718e0_iO + 306)) /* STANDIN: view, B000718e0_iO + 0x132 */
+#define B000719ea_cm (*(unsigned char *)((char *)&B000718e0_iO + 266)) /* STANDIN: view, B000718e0_iO + 0x10a */
+   
 int FUN_0001c80c(int i, char *obj, char *tgt, int item, int flag)
 {
     int bonus, n, need, r, off;
@@ -111,7 +114,7 @@ int FUN_0001c910(int d, char *obj, int item)
 #include "chars.h"
 #include "dice.h"
 extern int FUN_0001efa0(int); extern void FUN_0001871c(int, unsigned);
-extern int B00071a12_dx;
+
 int FUN_0001c9a0(int i, unsigned char *obj, char *tgt)
 {
     int r, need, ac, x, fl;
@@ -134,7 +137,7 @@ int FUN_0001c9a0(int i, unsigned char *obj, char *tgt)
 /* FUN_0001ca38 @ 0001ca38: drop the inventory of party member who at the party position (front of the floor-object list) */
  
 #include "world.h"
-#define B000718e0_iO ((struct PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 void *memmove(void *, const void *, unsigned);
 struct FB { unsigned short lo : 3, d3 : 3, mid : 3, rest : 7; };
 extern short B000755d6_ae, B000755d2_ai, B00067626_hm, B00067624_e3; extern int B000755d4_ak, B000755d0_ao, B00067618_e7, B0006761c_g8;
@@ -143,10 +146,10 @@ void FUN_0001ca38(int who)
 {
     int k; short c;
     for (k = 0; k < 21; k++) {
-        if (B000718e0_iO[who].inv[k] == -1) continue;
+        if (M000718e0_iO[who].inv[k] == -1) continue;
         memmove(B0006762e_es, &B00067618_e7, B00075618_b1.n4 * 0x16);
         c = (short)(B000755d6_ae * B00075618_b1.w);
-        B00067626_hm = B000718e0_iO[who].inv[k];
+        B00067626_hm = M000718e0_iO[who].inv[k];
         B00067618_e7 = B000755d4_ak;
         B0006762c_ey.d3 = 0;
         B0006762c_ey.mid = 0;
@@ -156,7 +159,7 @@ void FUN_0001ca38(int who)
     }
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 /* ---- from src/CODE2/f1cadc.c */
 /* FUN_0001cadc @ 0001cadc: the 400 falling raindrops/stars animation */
 int rand(void);
@@ -244,52 +247,55 @@ void FUN_0001ccf4(void)
 
 /* ---- from src/CODE2/wip/f1cd44.c */
 extern void FUN_0001cbc8(void); /* module prototype */
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 /* Round 18 (module 0x1c704, 2 lines): the load of the dmg copy is scheduled after imul ebx,edi,0x248 (scheduler order of two independent instructions that feed the first store). Tried: int j = 0 / declared first (recipe 50), dmg assigned instead of initialised, `= dmg = dm`, the first store from dm: no change. */
 /* MATCH in module (round 27): no copy of dmg; the all-dead test reads the four flag words through the record array (not four -oa scalar nodes; with one memory node the i/dmg tie goes the original way, tiemodel and instrument, then 10.0a). Earlier: NEAR MISS 416/416, 1 instr placement: a local copy of dmg gives the original registers and one char base for the character record keeps the death-block store order. Left: the copy load mov esi,[esp+0x14] is scheduled after imul ebx,edi,0x248 (original before). Copies of i, both copies and unsigned dmg do not move it */
 /* FUN_0001cd44 @ 0001cd44: party member i takes dmg points of damage (absorbed by shields first); handles death and the all-dead check */
 
 extern int FUN_00029cc4(void), FUN_00024a60(char *), FUN_0002c1dc(int); extern void FUN_0001ad24(int);
-extern int DAT_00071a92, DAT_00071a86, DAT_000719f7, B00071a12_dx, B00071aca_he, B000719f3_iO, DAT_0005bf44, DAT_0005d8a8[]; extern unsigned short B000718f0_hO, B00071b38_c0, B00071d80_d5, B00071fc8_l9; extern short B000718fc_i0; extern unsigned char DAT_0005d681; extern char s_IRMGARDE_00050578[];
+#define B000718fc_i0 (*(short *)((char *)&B000718e0_iO + 28)) /* STANDIN: view, B000718e0_iO + 0x1c */
+#define B00071aca_he (*(int *)((char *)&B000718e0_iO + 490)) /* STANDIN: view, B000718e0_iO + 0x1ea */
+#define B000719f3_iO (*(int *)((char *)&B000718e0_iO + 275)) /* STANDIN: view, B000718e0_iO + 0x113 */
+extern int DAT_00071a92, DAT_00071a86, DAT_000719f7, DAT_0005bf44, DAT_0005d8a8[]; extern unsigned short B000718f0_hO, B00071b38_c0, B00071d80_d5, B00071fc8_l9;  extern unsigned char DAT_0005d681; extern char s_IRMGARDE_00050578[];
 #define CH(sym, i) (*(int *)((char *)&sym + (i) * 0x248))
 #define CH16(sym, i) (*(short *)((char *)&sym + (i) * 0x248))
 #define CHU16(sym, i) (*(unsigned short *)((char *)&sym + (i) * 0x248))
 void FUN_0001cd44(int i, int dmg)
 {
     int j;
-    (*(int *)(B000718e0_iO + (i) * 0x248 + 0x1b2)) = dmg;
-    (*(int *)(B000718e0_iO + (i) * 0x248 + 0x1a6)) = FUN_00029cc4() + 0x36;
-    if ((*(int *)(B000718e0_iO + (i) * 0x248 + 0x117)) != 0) {
-        (*(int *)(B000718e0_iO + (i) * 0x248 + 0x117)) -= dmg;
-        if ((*(int *)(B000718e0_iO + (i) * 0x248 + 0x117)) <= 0) {
-            (*(int *)(B000718e0_iO + (i) * 0x248 + 0x117)) = 0;
-            (*(int *)(B000718e0_iO + (i) * 0x248 + 0x132)) &= ~1;
+    (*(int *)(M000718e0_iO + (i) * 0x248 + 0x1b2)) = dmg;
+    (*(int *)(M000718e0_iO + (i) * 0x248 + 0x1a6)) = FUN_00029cc4() + 0x36;
+    if ((*(int *)(M000718e0_iO + (i) * 0x248 + 0x117)) != 0) {
+        (*(int *)(M000718e0_iO + (i) * 0x248 + 0x117)) -= dmg;
+        if ((*(int *)(M000718e0_iO + (i) * 0x248 + 0x117)) <= 0) {
+            (*(int *)(M000718e0_iO + (i) * 0x248 + 0x117)) = 0;
+            (*(int *)(M000718e0_iO + (i) * 0x248 + 0x132)) &= ~1;
         }
     }
-    if ((*(int *)(B000718e0_iO + (i) * 0x248 + 0x1ea)) != 0) {
-        if (dmg >= (*(int *)(B000718e0_iO + (i) * 0x248 + 0x1ea))) {
-            dmg -= (*(int *)(B000718e0_iO + (i) * 0x248 + 0x1ea));
-            (*(int *)(B000718e0_iO + (i) * 0x248 + 0x1ea)) = 0;
+    if ((*(int *)(M000718e0_iO + (i) * 0x248 + 0x1ea)) != 0) {
+        if (dmg >= (*(int *)(M000718e0_iO + (i) * 0x248 + 0x1ea))) {
+            dmg -= (*(int *)(M000718e0_iO + (i) * 0x248 + 0x1ea));
+            (*(int *)(M000718e0_iO + (i) * 0x248 + 0x1ea)) = 0;
         } else {
-            (*(int *)(B000718e0_iO + (i) * 0x248 + 0x1ea)) -= dmg;
+            (*(int *)(M000718e0_iO + (i) * 0x248 + 0x1ea)) -= dmg;
             dmg = 0;
         }
     }
-    if ((*(int *)(B000718e0_iO + (i) * 0x248 + 0x113)) != 0) {
-        if (dmg >= (*(int *)(B000718e0_iO + (i) * 0x248 + 0x113))) {
-            dmg -= (*(int *)(B000718e0_iO + (i) * 0x248 + 0x113));
-            (*(int *)(B000718e0_iO + (i) * 0x248 + 0x113)) = 0;
+    if ((*(int *)(M000718e0_iO + (i) * 0x248 + 0x113)) != 0) {
+        if (dmg >= (*(int *)(M000718e0_iO + (i) * 0x248 + 0x113))) {
+            dmg -= (*(int *)(M000718e0_iO + (i) * 0x248 + 0x113));
+            (*(int *)(M000718e0_iO + (i) * 0x248 + 0x113)) = 0;
         } else {
-            (*(int *)(B000718e0_iO + (i) * 0x248 + 0x113)) -= dmg;
+            (*(int *)(M000718e0_iO + (i) * 0x248 + 0x113)) -= dmg;
             dmg = 0;
         }
     }
-    (*(short *)(B000718e0_iO + (i) * 0x248 + 0x1c)) -= dmg;
+    (*(short *)(M000718e0_iO + (i) * 0x248 + 0x1c)) -= dmg;
     DAT_0005cf5a[i] = 1;
-    if ((*(short *)(B000718e0_iO + (i) * 0x248 + 0x1c)) <= 0) {
-        (*(short *)(B000718e0_iO + (i) * 0x248 + 0x1c)) = 0;
-        (*(unsigned short *)(B000718e0_iO + (i) * 0x248 + 0x10)) |= 0x4000;
-        (*(unsigned short *)(B000718e0_iO + (i) * 0x248 + 0x10)) &= 0xe3ff;
+    if ((*(short *)(M000718e0_iO + (i) * 0x248 + 0x1c)) <= 0) {
+        (*(short *)(M000718e0_iO + (i) * 0x248 + 0x1c)) = 0;
+        (*(unsigned short *)(M000718e0_iO + (i) * 0x248 + 0x10)) |= 0x4000;
+        (*(unsigned short *)(M000718e0_iO + (i) * 0x248 + 0x10)) &= 0xe3ff;
         FUN_0001ad24(i);
         j = i / 2;
         if ((&DAT_0005d681)[j] && i == DAT_0005d8a8[j]) {
@@ -299,10 +305,10 @@ void FUN_0001cd44(int i, int dmg)
         }
         if (i == FUN_00024a60("IRMGARDE") && FUN_0002c1dc(0x46) == 0) DAT_0005bf44 = 0x6a;
     }
-    if (((*(unsigned short *)(B000718e0_iO + 0 * 0x248 + 0x10)) & 0xd040) && ((*(unsigned short *)(B000718e0_iO + 1 * 0x248 + 0x10)) & 0xd040) && ((*(unsigned short *)(B000718e0_iO + 2 * 0x248 + 0x10)) & 0xd040) && ((*(unsigned short *)(B000718e0_iO + 3 * 0x248 + 0x10)) & 0xd040)) FUN_0001cbc8();
+    if (((*(unsigned short *)(M000718e0_iO + 0 * 0x248 + 0x10)) & 0xd040) && ((*(unsigned short *)(M000718e0_iO + 1 * 0x248 + 0x10)) & 0xd040) && ((*(unsigned short *)(M000718e0_iO + 2 * 0x248 + 0x10)) & 0xd040) && ((*(unsigned short *)(M000718e0_iO + 3 * 0x248 + 0x10)) & 0xd040)) FUN_0001cbc8();
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef CH
 #undef CH16
 #undef CHU16
@@ -330,18 +336,19 @@ int FUN_0001cf2c(int i, int bonus)
 }
 
 /* ---- from src/CODE2/f1cf88.c */
-#define B000718f5_h2 ((signed char *)&B000718f5_h2)
-#define B00071900_bm ((short *)&B00071900_bm)
+#define M000718f5_h2 ((signed char *)&B000718f5_h2)
+#define M00071900_bm ((short *)&B00071900_bm)
 /* FUN_0001cf88 @ 0001cf88: average hit points per level over the character's classes (switch on the slot k, an original bug); declaration order and the level load ahead of the end test from tools/sweep/permute.py */
 extern signed char DAT_00056821[], DAT_000567fa[];
-extern unsigned char B00071917_a6[]; 
+#define B00071917_a6 ((unsigned char *)((char *)&B000718e0_iO + 55)) /* STANDIN: view, B000718e0_iO + 0x37 */
+ 
 int FUN_0001cf88(int c)
 {
     int l, tot, hd, lvl, b, h, k, cl;
     tot = 0;
     for (k = 0; k != 3; k++) {
-        cl = B000718f5_h2[c * 0x248 + k];
-        lvl = *(short *)((char *)B00071900_bm + c * 0x248 + k * 2);
+        cl = M000718f5_h2[c * 0x248 + k];
+        lvl = *(short *)((char *)M00071900_bm + c * 0x248 + k * 2);
         if (cl == -1) break;
         hd = DAT_00056821[cl];
         b = DAT_000567fa[cl / 3 * 0x13 + B00071917_a6[c * 0x248]];
@@ -358,16 +365,17 @@ int FUN_0001cf88(int c)
     return tot / k;
 }
 
-#undef B000718f5_h2
-#undef B00071900_bm
+#undef M000718f5_h2
+#undef M00071900_bm
 /* ---- from src/CODE2/f1d0b0.c */
 extern int FUN_0001cf88(int c); /* module prototype */
-#define B000718fc_i0 ((short *)&B000718fc_i0)
+#define M000718fc_i0 ((short *)&B000718fc_i0)
 /* FUN_0001d0b0 @ 0001d0b0: character c loses the hit points of a level l of class k (level drain): max hit points drop, current ones are clamped */
 extern int FUN_0002c328(int, int, int, int);
 #pragma aux FUN_0002c328 modify [ebx ecx edx];
 extern signed char DAT_00056821[], DAT_000567fa[];
-extern unsigned char B00071917_a6[]; extern short B000718fe_ar[];
+#define B000718fe_ar ((short *)((char *)&B000718e0_iO + 30)) /* STANDIN: view, B000718e0_iO + 0x1e */
+ 
 void FUN_0001d0b0(int c, int k, int l)
 {
     int h, s, b, mx;
@@ -385,32 +393,35 @@ void FUN_0001d0b0(int c, int k, int l)
     *(short *)((char *)B000718fe_ar + c * 0x248) -= s;
     if (*(short *)((char *)B000718fe_ar + c * 0x248) < 1) *(short *)((char *)B000718fe_ar + c * 0x248) = 1;
     if (*(short *)((char *)B000718fe_ar + c * 0x248) > mx) *(short *)((char *)B000718fe_ar + c * 0x248) = mx;
-    if (*(short *)((char *)B000718fc_i0 + c * 0x248) > *(short *)((char *)B000718fe_ar + c * 0x248)) *(short *)((char *)B000718fc_i0 + c * 0x248) = *(short *)((char *)B000718fe_ar + c * 0x248);
+    if (*(short *)((char *)M000718fc_i0 + c * 0x248) > *(short *)((char *)B000718fe_ar + c * 0x248)) *(short *)((char *)M000718fc_i0 + c * 0x248) = *(short *)((char *)B000718fe_ar + c * 0x248);
 }
 
-#undef B000718fc_i0
+#undef M000718fc_i0
 /* ---- from src/CODE2/f1d1e0.c */
 extern void FUN_0001d0b0(int c, int k, int l); /* module prototype */
 #define DAT_0005d681 ((unsigned char *)&DAT_0005d681)
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 #define B000718f0_hO ((char *)&B000718f0_hO)
-#define B000718fc_i0 ((char *)&B000718fc_i0)
-#define B00071900_bm ((char *)&B00071900_bm)
+#define M000718fc_i0 ((char *)&B000718fc_i0)
+#define M00071900_bm ((char *)&B00071900_bm)
 /* FUN_0001d1e0 @ 0001d1e0: drain one level from party member p: pick the class (highest level, ties at random), lower it and reset its XP to the middle of the new level, update spell/turning tables and announce it; at level 1 the character dies */
 int rand(void);
 int sprintf(char *, const char *, ...);
 struct ST { unsigned char lo : 2, s3 : 3, b5 : 1, dead : 1, b7 : 1; };
 extern struct ST DAT_000718f1[];
-#define CB(o, i) ((signed char)B000718e0_iO[(i) + (o)])
-extern char B00071902_aC[], B00071904_aA[], DAT_0005759c[], *PTR_s__s_loses_a_level__000567dc;
-extern int B00071906_aG[], DAT_0005d8a8[];
+#define CB(o, i) ((signed char)M000718e0_iO[(i) + (o)])
+#define B00071902_aC ((char *)((char *)&B000718e0_iO + 34)) /* STANDIN: view, B000718e0_iO + 0x22 */
+#define B00071904_aA ((char *)((char *)&B000718e0_iO + 36)) /* STANDIN: view, B000718e0_iO + 0x24 */
+extern char DAT_0005759c[], *PTR_s__s_loses_a_level__000567dc;
+#define B00071906_aG ((int *)((char *)&B000718e0_iO + 38)) /* STANDIN: view, B000718e0_iO + 0x26 */
+extern int DAT_0005d8a8[];
 extern unsigned short DAT_00057d9a[][20], DAT_00057d9c[][20];
 extern unsigned char DAT_0005cf5a[];
 extern void FUN_00013c04(int, int), FUN_00013a78(int, int), FUN_0002c21c(char *);
-#define LV(p, c) (*(short *)(B000718e0_iO + 0x20 + (c) * 2 + (p) * 0x248))
-#define L0 (*(short *)(B000718e0_iO + 0x20 + p * 0x248))
-#define L1 (*(short *)(B000718e0_iO + 0x22 + p * 0x248))
-#define L2 (*(short *)(B000718e0_iO + 0x24 + p * 0x248))
+#define LV(p, c) (*(short *)(M000718e0_iO + 0x20 + (c) * 2 + (p) * 0x248))
+#define L0 (*(short *)(M000718e0_iO + 0x20 + p * 0x248))
+#define L1 (*(short *)(M000718e0_iO + 0x22 + p * 0x248))
+#define L2 (*(short *)(M000718e0_iO + 0x24 + p * 0x248))
 void FUN_0001d1e0(int p)
 {
     int c, lv;
@@ -428,7 +439,7 @@ void FUN_0001d1e0(int p)
     lv = LV(p, c);
     if (lv > 1) {
         LV(p, c)--;
-        *(int *)(B000718e0_iO + 0x26 + p * 0x248 + c * 4) = DAT_00057d9a[CB(0x15, p * 0x248 + c)][LV(p, c)] * 1000 + (DAT_00057d9c[CB(0x15, p * 0x248 + c)][LV(p, c)] - DAT_00057d9a[CB(0x15, p * 0x248 + c)][LV(p, c)]) * 1000 / 2;
+        *(int *)(M000718e0_iO + 0x26 + p * 0x248 + c * 4) = DAT_00057d9a[CB(0x15, p * 0x248 + c)][LV(p, c)] * 1000 + (DAT_00057d9c[CB(0x15, p * 0x248 + c)][LV(p, c)] - DAT_00057d9a[CB(0x15, p * 0x248 + c)][LV(p, c)]) * 1000 / 2;
         if (CB(0x15, p * 0x248) == 1) FUN_00013c04(p, L0);
         if (CB(0x15, p * 0x248) == 4) FUN_00013a78(p, L0);
         if (CB(0x16, p * 0x248) == 4) FUN_00013a78(p, L1);
@@ -438,16 +449,16 @@ void FUN_0001d1e0(int p)
         if (CB(0x17, p * 0x248) == 3) FUN_00013c04(p, L2);
         DAT_0005cf5a[p] = 1;
         if (DAT_0005d681[p / 2] && DAT_0005d8a8[p / 2] == p) DAT_0005d681[p / 2] = 2;
-        sprintf(DAT_0005759c, PTR_s__s_loses_a_level__000567dc, B000718e0_iO + p * 0x248);
+        sprintf(DAT_0005759c, PTR_s__s_loses_a_level__000567dc, M000718e0_iO + p * 0x248);
         FUN_0002c21c(DAT_0005759c);
         FUN_0001d0b0(p, CB(0x15, c + p * 0x248), lv);
         return;
     }
     if (lv == 1) {
-        *(short *)(B000718e0_iO + 0x1c + p * 0x248) = 0;
+        *(short *)(M000718e0_iO + 0x1c + p * 0x248) = 0;
         LV(p, c) = 0;
-        ((struct ST *)(B000718e0_iO + 0x11 + p * 0x248))->dead = 1;
-        ((struct ST *)(B000718e0_iO + 0x11 + p * 0x248))->s3 = 0;
+        ((struct ST *)(M000718e0_iO + 0x11 + p * 0x248))->dead = 1;
+        ((struct ST *)(M000718e0_iO + 0x11 + p * 0x248))->s3 = 0;
         if (DAT_0005d681[p / 2] && DAT_0005d8a8[p / 2] == p) {
             DAT_0005cf5a[p / 2 * 2] = 1;
             DAT_0005d681[p / 2] = 0;
@@ -457,10 +468,10 @@ void FUN_0001d1e0(int p)
 }
 
 #undef DAT_0005d681
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B000718f0_hO
-#undef B000718fc_i0
-#undef B00071900_bm
+#undef M000718fc_i0
+#undef M00071900_bm
 #undef CB
 #undef LV
 #undef L0
@@ -468,7 +479,7 @@ void FUN_0001d1e0(int p)
 #undef L2
 /* ---- from src/CODE2/f1d4e8.c */
 /* FUN_0001d4e8 @ 0001d4e8 */
-extern unsigned short B000718f0_hO; extern int B00071a12_dx;
+extern unsigned short B000718f0_hO; 
 #define CH_FLAGS(k) (*(int *)((char *)&B00071a12_dx + (k) * 0x248))
 int FUN_0001d4e8(int i, unsigned char *m)
 {
@@ -486,7 +497,7 @@ extern void FUN_0001e284(struct M *m, unsigned char *def, int ctx, int dmg, int 
 #define PC T17_PC
 #include "records.h"
 #undef PC
-#define B000718e0_iO ((struct T17_PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct T17_PC *)&B000718e0_iO)
 #define DAT_0005d681 ((unsigned char *)&DAT_0005d681)
 #define M T63_M
 struct M { int a, b; short w8; unsigned short lo : 9, done : 1, m10 : 2, ai : 2, hi : 2; short wc; unsigned short type; short w10; short hp; unsigned short b0 : 1, fl : 2, dir : 3, mid : 8, st : 2; };
@@ -501,8 +512,8 @@ void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
     int ang, dmg, k, first, who, h, dy, dx, fl, vlad;
     if (m->type == 0xf) {
         for (k = 0; k < 4; k++)
-            if (B000718e0_iO[k].fl < 0x4000 && !FUN_0001cee4(k))
-                FUN_0001cd44(k, B000718e0_iO[k].hp + B000718e0_iO[k].f1ea + B000718e0_iO[k].r10b[2]);
+            if (M000718e0_iO[k].fl < 0x4000 && !FUN_0001cee4(k))
+                FUN_0001cd44(k, M000718e0_iO[k].hp + M000718e0_iO[k].f1ea + M000718e0_iO[k].r10b[2]);
         FUN_00038110(*(unsigned short *)(def + 0x3f) + B000758c0_kK, 0xff, 0, 1);
         return;
     }
@@ -548,31 +559,31 @@ void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
     if (FUN_0001c9a0(who, def, m)) {
         dmg = FUN_0002c328(def[0x1e], def[0x1f], def[0x20], 0);
         fl = 0;
-        if ((*(int *)(def + 0x3a) & 0x20) && (B000718e0_iO[who].f132 & 0x4000)) fl = 1;
+        if ((*(int *)(def + 0x3a) & 0x20) && (M000718e0_iO[who].f132 & 0x4000)) fl = 1;
         if (!vlad) {
             if (*(int *)(def + 0x3a) & 2) {
-                if (B000718e0_iO[who].f132 & 0x4000) fl = 1;
+                if (M000718e0_iO[who].f132 & 0x4000) fl = 1;
                 else if (!FUN_0001cee4(who)) FUN_0001d1e0(who);
             }
             if (*(int *)(def + 0x3a) & 4) {
                 if (m->type == 8) {
                     if (m->st == 1) {
-                        if (B000718e0_iO[who].f132 & 0x4000) fl = 1;
+                        if (M000718e0_iO[who].f132 & 0x4000) fl = 1;
                         else if (!FUN_0001cee4(who)) {
                             FUN_0002202c(who, -1);
-                            B000718e0_iO[who].f1ee = FUN_00029cc4() + FUN_0002c328(2, 4, 0, 0) * 0x2a30;
+                            M000718e0_iO[who].f1ee = FUN_00029cc4() + FUN_0002c328(2, 4, 0, 0) * 0x2a30;
                         }
                     }
-                } else if (B000718e0_iO[who].f132 & 0x4000) fl = 1;
+                } else if (M000718e0_iO[who].f132 & 0x4000) fl = 1;
                 else if (!FUN_0001cee4(who)) {
                     FUN_0002202c(who, -1);
-                    B000718e0_iO[who].f1ee = FUN_00029cc4() + FUN_0002c328(2, 4, 0, 0) * 0x2a30;
+                    M000718e0_iO[who].f1ee = FUN_00029cc4() + FUN_0002c328(2, 4, 0, 0) * 0x2a30;
                 }
             }
-            if ((*(int *)(def + 0x39) & 0x20) && (m->type != 0x11 || B000718e0_iO[who].race != 5)
-                && B000718e0_iO[who].inv[14] != 0x86 && B000718e0_iO[who].inv[15] != 0x86
+            if ((*(int *)(def + 0x39) & 0x20) && (m->type != 0x11 || M000718e0_iO[who].race != 5)
+                && M000718e0_iO[who].inv[14] != 0x86 && M000718e0_iO[who].inv[15] != 0x86
                 && !FUN_0001f2d4(who, 0x45) && !FUN_0001cee4(who)) {
-                B000718e0_iO[who].fl |= 0x1000;
+                M000718e0_iO[who].fl |= 0x1000;
                 h = who / 2;
                 if (DAT_0005d681[h] && who == DAT_0005d8a8[h]) {
                     DAT_0005cf5a[h * 2] = 1;
@@ -580,14 +591,14 @@ void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
                     DAT_0005cf5a[h * 2 + 1] = 1;
                 }
             }
-            if ((*(int *)(def + 0x39) & 1) && !FUN_0001cee4(who)) B000718e0_iO[who].fl |= 0x800;
-            if ((*(int *)(def + 0x3a) & 0x10) && B000718e0_iO[who].cls[0] != 1 && !FUN_0001cee4(who)) B000718e0_iO[who].fl |= 0x400;
+            if ((*(int *)(def + 0x39) & 1) && !FUN_0001cee4(who)) M000718e0_iO[who].fl |= 0x800;
+            if ((*(int *)(def + 0x3a) & 0x10) && M000718e0_iO[who].cls[0] != 1 && !FUN_0001cee4(who)) M000718e0_iO[who].fl |= 0x400;
         }
-        if (!vlad || B000718e0_iO[who].hp - dmg > 10) FUN_0001cd44(who, dmg);
+        if (!vlad || M000718e0_iO[who].hp - dmg > 10) FUN_0001cd44(who, dmg);
         if (fl) {
             FUN_0001e284((struct M *)m, def, ctx, FUN_0002c328(2, 6, 0, 0), 0);
-            B000718e0_iO[who].t[14] = 0;
-            B000718e0_iO[who].f132 &= ~0x4000;
+            M000718e0_iO[who].t[14] = 0;
+            M000718e0_iO[who].f132 &= ~0x4000;
         }
         DAT_0005cf5a[who] = 1;
         FUN_00038110(*(unsigned short *)(def + 0x3f) + B000758c0_kK, 0xff, 0, 1);
@@ -599,7 +610,7 @@ void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
     FUN_00038110(B000758bc_al + 9, 0xff, 0, 1);
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef DAT_0005d681
 #undef M
 
@@ -666,21 +677,23 @@ int FUN_0001dbd4(int i)
 #undef CB
 #undef CW
 /* ---- from src/CODE2/f1dc7c.c */
-#define B000718f5_h2 ((signed char *)&B000718f5_h2)
-#define B000718fc_i0 ((short *)&B000718fc_i0)
+#define M000718f5_h2 ((signed char *)&B000718f5_h2)
+#define M000718fc_i0 ((short *)&B000718fc_i0)
 /* FUN_0001dc7c @ 0001dc7c: character c gains the hit points of a new level l in class slot k (hit die, constitution bonus, fixed gain at high levels, split for multiclass) */
 extern int FUN_0002c328(int, int, int, int);
 #pragma aux FUN_0002c328 modify [ebx ecx edx];
-extern signed char B000718f6_h5[], B000718f7_h4[], DAT_00056821[], DAT_000567fa[];
-extern unsigned char B00071917_a6[]; extern short B000718fe_ar[];
+#define B000718f6_h5 ((signed char *)((char *)&B000718e0_iO + 22)) /* STANDIN: view, B000718e0_iO + 0x16 */
+#define B000718f7_h4 ((signed char *)((char *)&B000718e0_iO + 23)) /* STANDIN: view, B000718e0_iO + 0x17 */
+extern signed char DAT_00056821[], DAT_000567fa[];
+ 
 void FUN_0001dc7c(int c, int k, int l)
 {
     int r, h, b, s;
-    r = FUN_0002c328(1, DAT_00056821[B000718f5_h2[c * 0x248 + k]], 0, 0);
+    r = FUN_0002c328(1, DAT_00056821[M000718f5_h2[c * 0x248 + k]], 0, 0);
     h = r;
-    b = DAT_000567fa[B000718f5_h2[c * 0x248 + k] / 3 * 0x13 + B00071917_a6[c * 0x248]];
+    b = DAT_000567fa[M000718f5_h2[c * 0x248 + k] / 3 * 0x13 + B00071917_a6[c * 0x248]];
     if (r < 1) h = 1;
-    switch ((unsigned char)B000718f5_h2[c * 0x248 + k]) {
+    switch ((unsigned char)M000718f5_h2[c * 0x248 + k]) {
     case 0: case 1: case 2: if (l < 10) s = h + b; else s = b + 3; break;
     case 4: if (l < 11) s = h + b; else s = b + 1; break;
     case 3: if (l < 10) s = h + b; else s = b + 2; break;
@@ -692,23 +705,23 @@ void FUN_0001dc7c(int c, int k, int l)
         else s /= 2;
     }
     *(short *)((char *)B000718fe_ar + c * 0x248) += s;
-    *(short *)((char *)B000718fc_i0 + c * 0x248) += s;
+    *(short *)((char *)M000718fc_i0 + c * 0x248) += s;
 }
 
-#undef B000718f5_h2
-#undef B000718fc_i0
+#undef M000718f5_h2
+#undef M000718fc_i0
 /* ---- from src/CODE2/wip/f1dda4.c */
 /* NEAR MISS (round 23, in module 0x1c704 -oa, 31 worklist lines) a. first difference: nm = name is stored before the c-loop guard (cmp nc,0) here, after it (in the preheader) in the original; decision: the copy is a statement inside the loop that loop-invariant motion hoists to the preheader, not a statement ahead of the loop. c. nm = name moved into the loop body (hoisted to the preheader like the original): 31 -> 29 lines (2 real); left: the preheader order (the copy after the share division here, before it there) and the n/per slots. Earlier: 612/612, 18 lines (-oa): the per-class share reuses n (merge sweep); left: the nm = name copy is stored before the who*0x248 setup here, after it in the original */
 extern int FUN_0001dbd4(int i); /* module prototype */
 extern void FUN_0001dc7c(int c, int k, int l); /* module prototype */
-#define B000718e0_iO ((char *)&B000718e0_iO)
+#define M000718e0_iO ((char *)&B000718e0_iO)
 #define B000718f0_hO ((char *)&B000718f0_hO)
-#define B000718f5_h2 ((char *)&B000718f5_h2)
-#define B000718f6_h5 ((char *)B000718f6_h5)
-#define B000718f7_h4 ((char *)B000718f7_h4)
-#define B00071900_bm ((char *)&B00071900_bm)
-#define B00071906_aG ((char *)B00071906_aG)
-#define B000719ea_cm ((unsigned char *)&B000719ea_cm)
+#define M000718f5_h2 ((char *)&B000718f5_h2)
+#define M000718f6_h5 ((char *)B000718f6_h5)
+#define M000718f7_h4 ((char *)B000718f7_h4)
+#define M00071900_bm ((char *)&B00071900_bm)
+#define M00071906_aG ((char *)B00071906_aG)
+#define M000719ea_cm ((unsigned char *)&B000719ea_cm)
 /* FUN_0001dda4 @ 0001dda4: share xp among the active party members and their classes; announce and apply level gains */
 int sprintf(char *, const char *, ...);
 extern int FUN_000150dc(int, int);  extern void FUN_00013ea4(int, int), FUN_00013de4(int, int), FUN_0002c21c(char *);
@@ -730,39 +743,39 @@ void FUN_0001dda4(int xp)
     for (who = 0; who < 4; who++) {
         if (U16(B000718f0_hO, who * 0x248) & 0xf240) continue;
         nc = 1;
-        if (S8(B000718f6_h5, who * 0x248) != -1) nc = 2;
-        if (S8(B000718f7_h4, who * 0x248) != -1) nc++;
+        if (S8(M000718f6_h5, who * 0x248) != -1) nc = 2;
+        if (S8(M000718f7_h4, who * 0x248) != -1) nc++;
         for (c = 0; c < nc; c++) { int lvl;
             per = ((nc >> 1) + share) / nc;
             n = per;
             if (!n) n = 1;
-            U32(B00071906_aG, who * 0x248 + c * 4) += n;
+            U32(M00071906_aG, who * 0x248 + c * 4) += n;
             for (lvl = 0; lvl < 20; lvl++)
-                if (DAT_00057d9c[S8(B000718f5_h2, who * 0x248 + c)][lvl] > U32(B00071906_aG, who * 0x248 + c * 4) / 1000) break;
-            if (S16(B00071900_bm, who * 0x248 + c * 2) != lvl) {
-                S16(B00071900_bm, who * 0x248 + c * 2) = lvl;
+                if (DAT_00057d9c[S8(M000718f5_h2, who * 0x248 + c)][lvl] > U32(M00071906_aG, who * 0x248 + c * 4) / 1000) break;
+            if (S16(M00071900_bm, who * 0x248 + c * 2) != lvl) {
+                S16(M00071900_bm, who * 0x248 + c * 2) = lvl;
                 if (FUN_000150dc(0, who) >= 0) {
-                    if (S8(B000718f5_h2, who * 0x248) == 1) FUN_00013ea4(who, lvl);
+                    if (S8(M000718f5_h2, who * 0x248) == 1) FUN_00013ea4(who, lvl);
                     else FUN_00013de4(who, lvl);
                 }
-                sprintf(DAT_0005759c, PTR_s__s_gains_a__000567e4, B000718e0_iO + who * 0x248);
+                sprintf(DAT_0005759c, PTR_s__s_gains_a__000567e4, M000718e0_iO + who * 0x248);
                 FUN_0002c21c(DAT_0005759c);
                 FUN_0001dc7c(who, c, lvl);
             }
-            if (S16(B00071900_bm, who * 0x248 + c * 2) > S16(B00071900_bm, best * 2 + who * 0x248)) best = c;
+            if (S16(M00071900_bm, who * 0x248 + c * 2) > S16(M00071900_bm, best * 2 + who * 0x248)) best = c;
         }
-        B000719ea_cm[who * 0x248] = FUN_0001dbd4(who);
+        M000719ea_cm[who * 0x248] = FUN_0001dbd4(who);
     }
 }
 
-#undef B000718e0_iO
+#undef M000718e0_iO
 #undef B000718f0_hO
-#undef B000718f5_h2
-#undef B000718f6_h5
-#undef B000718f7_h4
-#undef B00071900_bm
-#undef B00071906_aG
-#undef B000719ea_cm
+#undef M000718f5_h2
+#undef M000718f6_h5
+#undef M000718f7_h4
+#undef M00071900_bm
+#undef M00071906_aG
+#undef M000719ea_cm
 #undef U16
 #undef S16
 #undef U32
@@ -942,7 +955,8 @@ alive:
 
 /* ---- from src/CODE2/f1e578.c */
 /* FUN_0001e578 @ 0001e578 (character flag words are ints tested with masks) */
-extern int B00071a12_dx, B00071a3a_di; extern unsigned char DAT_0005cf5a[];
+#define B00071a3a_di (*(int *)((char *)&B000718e0_iO + 346)) /* STANDIN: view, B000718e0_iO + 0x15a */
+ extern unsigned char DAT_0005cf5a[];
 #define CH_FLAGS(k) (*(int *)((char *)&B00071a12_dx + (k) * 0x248))
 void FUN_0001e578(int i)
 {
@@ -973,16 +987,18 @@ extern void FUN_0001e578(int i); /* module prototype */
 #include <stdio.h>
 #include "world.h"
 #define B00064d80_ay ((struct ENT *)B00064d80_ay)
-#define B000718e0_iO ((char *)&B000718e0_iO)
-#define B00071913_a2 ((unsigned char *)&B00071913_a2)
-#define B0007191f_dW ((unsigned char *)&B0007191f_dW)
-#define B000719f3_iO ((int *)&B000719f3_iO)
-#define B00071a12_dx ((int *)&B00071a12_dx)
+#define M000718e0_iO ((char *)&B000718e0_iO)
+#define M00071913_a2 ((unsigned char *)&B00071913_a2)
+#define M0007191f_dW ((unsigned char *)&B0007191f_dW)
+#define M000719f3_iO ((int *)&B000719f3_iO)
+#define M00071a12_dx ((int *)&B00071a12_dx)
 struct IT { unsigned char b[0x31]; signed char sub; unsigned char p[3]; unsigned short kind : 2, speed : 4, rest : 10; unsigned char ac, nd, ds, add, y[6]; };
 struct ENT { char a[0xe]; unsigned short kind; short x, hp; char z[2]; };
   extern char *B00072230_c4, DAT_0005759c[], *DAT_000567e8;
 extern unsigned char DAT_000567ec[]; extern signed char DAT_0005684b[];
-extern int B000758d4_jG, B000758bc_al, B00071a7e_dD[], B00071a8a_eK[];
+#define B00071a7e_dD ((int *)((char *)&B000718e0_iO + 414)) /* STANDIN: view, B000718e0_iO + 0x19e */
+#define B00071a8a_eK ((int *)((char *)&B000718e0_iO + 426)) /* STANDIN: view, B000718e0_iO + 0x1aa */
+extern int B000758d4_jG, B000758bc_al;
 extern int FUN_00033eac(int, int), FUN_00032e40(int, int), FUN_00029cc4(void);
 extern void FUN_00038110(int, int, int, int), FUN_0002c21c(char *), FUN_00034b48(int, int, int, int);
 /* Round 54 (4 compiles + trace): a block pointer `it` at the dice call (41) or function-wide (65), `.add + bonus` (8), braces on the solo test (8). The trace shows the -oa memory nodes at the end of the pre-sort list (75-79), so the 0..1-savings insert at 58 of round 49 is not a memory node. */
@@ -1002,8 +1018,8 @@ int FUN_0001e5f0(int who, int hand, unsigned wpn, int tgt)
         m = B00072230_c4 + e->kind * 0x45;
         r = FUN_0001c80c(who, e, m, wpn, 1);
         if (r) {
-            cls = B00071913_a2[who * 0x248];
-            str = B0007191f_dW[who * 0x248];
+            cls = M00071913_a2[who * 0x248];
+            str = M0007191f_dW[who * 0x248];
             if (0x12 == cls && (FUN_00033eac(who, 1) || FUN_00033eac(who, 5) || FUN_00033eac(who, 0) || FUN_00033eac(who, 2))) x = 0;
             else x = 1;
             if (x) n = DAT_0005684b[cls];
@@ -1051,17 +1067,17 @@ int FUN_0001e5f0(int who, int hand, unsigned wpn, int tgt)
                 }
             } else dmg = FUN_0001c910(dmg, m, wpn);
             FUN_0001e284(e, m, t, dmg, 0);
-            if (0x7f == wpn) B000719f3_iO[who * 0x92] = dmg;
+            if (0x7f == wpn) M000719f3_iO[who * 0x92] = dmg;
             goto timing;
         }
-        sprintf(DAT_0005759c, DAT_000567e8, B000718e0_iO + who * 0x248, e->kind * 0x45 + B00072230_c4);
+        sprintf(DAT_0005759c, DAT_000567e8, M000718e0_iO + who * 0x248, e->kind * 0x45 + B00072230_c4);
         FUN_0002c21c(DAT_0005759c);
     }
     FUN_00038110(B000758bc_al + 9, 0xff, 1, 1);
 timing:
     if (wpn == -1 || (0x7e <= wpn && wpn <= 0x86)) delay = 0x12;
     else delay = ((struct IT *)B000755d8_aw)[wpn].speed * 9;
-    if (0x1000010 & B00071a12_dx[who * 0x92]) delay /= 2;
+    if (0x1000010 & M00071a12_dx[who * 0x92]) delay /= 2;
     if (r) {
         *(int *)((char *)B00071a7e_dD + hand * 4 + who * 0x248) = FUN_00029cc4() + delay / 2;
         *(int *)((char *)B00071a8a_eK + hand * 4 + who * 0x248) = dmg;
@@ -1071,11 +1087,11 @@ timing:
 }
 
 #undef B00064d80_ay
-#undef B000718e0_iO
-#undef B00071913_a2
-#undef B0007191f_dW
-#undef B000719f3_iO
-#undef B00071a12_dx
+#undef M000718e0_iO
+#undef M00071913_a2
+#undef M0007191f_dW
+#undef M000719f3_iO
+#undef M00071a12_dx
 #undef ENT
 
 /* ---- module data _DATA 000567dc-00056cd8 (docs/data/dataown.CODE2.csv: inferred (ref; some shared)), generated by tools/data2c.py */

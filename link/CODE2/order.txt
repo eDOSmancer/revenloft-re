@@ -15,11 +15,9 @@ c    m1c704   -3s -ox -oe -oa -ot -w0
 asm  b1c704   -3p -c
 c    m1ea90   -3s -ox -oe -ot -w0
 c    m1eee0   -3s -ox -oe -oa -ot -w0
-asm  b1eee0   -3p -c
 c    m231dc   -3s -ox -oe -oa -ot -w0
 c    m23f70   -3s -ox -oe -oa -ot -j -w0
 c    m26810   -3s -ox -oe -oa -ot -w0
-asm  b26810   -3p -c
 c    m270ac   -3s -ox -oe -ot -w0
 c    m28d90   -3s -ox -oe -oa -ot -j -w0
 c    m29c80   -3s -ox -oe -oa -ot -w0

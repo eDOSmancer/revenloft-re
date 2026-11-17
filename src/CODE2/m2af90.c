@@ -257,7 +257,9 @@ void FUN_0002b4f8(struct MOB *m, char *mon, char *z)
 /* ---- from build/var/mod/parts/p2b6ec.c */
 /* FUN_0002b6ec @ 0002b6ec (module 0x2af90, -oa: n is declared before cnt, which gives n ebx and cnt ecx as in the original, and cnt is cleared first; tools/modclimb.py found the order) */
 #include "chars.h"
-extern unsigned short B000718f0_hO; extern int B00071a12_dx; 
+extern unsigned char B000718e0_iO;
+#define B00071a12_dx (*(int *)((char *)&B000718e0_iO + 306)) /* STANDIN: view, B000718e0_iO + 0x132 */
+extern unsigned short B000718f0_hO;  
 /* struct MT: defined above */
 extern struct MT *B00072230_c4;
 #define CH10(k) (*(unsigned short *)((char *)&B000718f0_hO + (k) * 0x248))
