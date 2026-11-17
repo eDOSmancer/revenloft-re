@@ -3,14 +3,15 @@
 
 usage: tools/bssfit.py classes PROG                 size classes of every label still in a b*.asm (where a module may end)
        tools/bssfit.py rename  PROG                 give every label of the b*.asm files its fitted name, in all sources
-       tools/bssfit.py convert PROG MODULE [--first NAME] [--last NAME] [--at TEXT] [--trim] [--dry]
+       tools/bssfit.py convert PROG MODULE [--first NAME] [--last NAME] [--at TEXT] [--trim] [--size NAME=N ...] [--dry]
                                                     move the labels of b<module>.asm (or the run NAME..NAME) into m<module>.c
        tools/bssfit.py check   PROG                 _BSS of every compiled module object: publics in address-name order
        tools/bssfit.py name    PROG STEM            the fitted name for a 10-character stem (e.g. B0007b67c_)
 PROG is CODE1 or CODE2.  `convert` compiles probes under DOSBox-X (build/bss/), verifies the layout of the module's object
 first; then it rewrites m<module>.c, b<module>.asm and
 link/<PROG>/order.txt.  --at: insert the block ahead of this text instead of at the top of the file; --trim: no filler for
-the last 1-3 bytes of the module (the linker's alignment of the next piece).
+the last 1-3 bytes of the module (the linker's alignment of the next piece); --size: NAME is an object of N bytes (a name the module itself does not
+declare; other modules may declare only its first member).
 """
 import sys, os, re, glob, struct, shutil, json
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -247,7 +248,7 @@ def program_names(prog):
             if n: out[n] = 'm' + os.path.basename(f)[1:-4]
     return out
 
-def gather(prog, module, L):
+def gather(prog, module, L, force={}):
     """per label of L: the declaration to use and its size -> items for solve(), {name: (base, decl, from module)}"""
     names = [n for n, s in L if n]; info = {}
     own = sizes(prog, module, names)
@@ -258,6 +259,9 @@ def gather(prog, module, L):
             if re.search(r'\b%s\b' % n, read(src(prog, m + '.c'))):
                 s = sizes(prog, m, names)
                 if n in s: info[n] = s[n] + (m,); break
+    for n, v in force.items():                                # --size NAME=N: an object of N bytes, whatever is declared
+        if n in info and info[n][3] == module: raise SystemExit('%s is declared in %s: change the declaration there' % (n, module))
+        info[n] = (('unsigned char', '@[%d]' % v), v, False, module)
     items = []
     for n, gap in L:
         if not n: items.append((None, gap, 0, False)); continue
@@ -290,13 +294,13 @@ def cmd_rename(prog):
 BEGIN = '/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */'
 END = '/* BSS end */'
 
-def cmd_convert(prog, module, first=None, last=None, at=None, dry=False, trim=False):
+def cmd_convert(prog, module, first=None, last=None, at=None, dry=False, trim=False, force={}):
     path = src(prog, 'b%s.asm' % module[1:]); L = labels(path); cpath = src(prog, module + '.c'); text = read(cpath)
     if BEGIN in text: raise SystemExit('%s already has a BSS block (convert the whole run in one step)' % module)
     names = [n for n, s in L]
     i0 = names.index(first) if first else 0; i1 = names.index(last) + 1 if last else len(L)
     head, mid, tail = L[:i0], L[i0:i1], L[i1:]
-    items, info = gather(prog, module, mid); objs = solve(items)
+    items, info = gather(prog, module, mid, force); objs = solve(items)
     if objs is None: raise SystemExit('%s: no cut with non-increasing size classes' % module)
     # names and declarations, address order
     decls = []; expect = []; off = 0; prev = 'F' + module[1:].rjust(8, '0') + '_'; k = 0; dims = {}
@@ -369,7 +373,8 @@ if __name__ == '__main__':
     opt = lambda k: a[a.index(k) + 1] if k in a else None
     if a[0] == 'classes': cmd_classes(a[1])
     elif a[0] == 'rename': cmd_rename(a[1])
-    elif a[0] == 'convert': cmd_convert(a[1], a[2], opt('--first'), opt('--last'), opt('--at'), '--dry' in a, '--trim' in a)
+    elif a[0] == 'convert': cmd_convert(a[1], a[2], opt('--first'), opt('--last'), opt('--at'), '--dry' in a, '--trim' in a,
+                                        {x.split('=')[0]: int(x.split('=')[1], 0) for i, x in enumerate(a) if i and a[i - 1] == '--size'})
     elif a[0] == 'check': sys.exit(1 if cmd_check(a[1]) else 0)
     elif a[0] == 'name': print(fit(a[1], a[2]))
     else: raise SystemExit(__doc__)
