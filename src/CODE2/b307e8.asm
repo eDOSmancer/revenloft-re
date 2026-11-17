@@ -1,5 +1,8 @@
 ; b307e8.asm - uninitialised data (_BSS) of module m307e8.c, 676 bytes
-; STANDIN: part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md).
+; STANDIN: the level header at 0x75618 (struct LEV of include/world.h, 0x2a4 bytes) with the labels of the members that code
+;   names as variables of their own.  Not defined in C because FUN_0002bbd8 (m2af90.c) compiles to the original code only
+;   with the map width 0x75619 as a global of its own; as a member or view of the record the allocator swaps eax / edx at
+;   one place (docs/BSS.md).  The words ahead of and behind the record are defined in m307e8.c and d758bc.c.
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
