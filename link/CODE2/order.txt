@@ -56,7 +56,6 @@ lib  fputc    CLIB3S.LIB
 c    m411e0   -3s -ox -oe -ot -w0
 lib  fflush   CLIB3S.LIB
 c    m414b0   -3s -ot -d2 -oe -s -w0
-asm  b414b0   -3p -c
 lib  sprintf  CLIB3S.LIB
 c    m42150   -3s -ox -oe -ot -w0
 asm  a42620   -3p -mf -c

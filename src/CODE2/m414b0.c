@@ -1,9 +1,15 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+unsigned char G0007b764_ay[5];
+unsigned char F0007b764_bv[3];
+struct SKY **B0007b764_fp;
+short B0007b750_el[10];
+/* BSS end */
 /* Module: FUN_000414b0, FUN_000418b4, FUN_00041a14, FUN_00041c58, FUN_00041e74, FUN_00041edc, FUN_00041f38, FUN_00041f94 */
 /* ---- from build/var/mod/parts/p414b0.c */
 /* FUN_000414b0 @ 000414b0: draw the outdoor sky for sky set n: the cloud band (random tiles, darker at night) then the sky pictures (sun, moon, mountains) placed by the view angle, wrapping round 360 degrees */
 #include "world.h"
 struct SKY { short id, ang, w, y; };
-extern short B0007b750_el[]; extern struct SKY **B0007b764_fp; extern int DAT_0005c658; extern unsigned char DAT_0005f918;
+extern short B0007b750_el[10]; extern struct SKY **B0007b764_fp; extern int DAT_0005c658; extern unsigned char DAT_0005f918;
 extern void FUN_000396c0(int, int, int, int), FUN_00039838(int, int, int, int, int, unsigned char), FUN_0003986c(int, int, int, int, int, unsigned char);
 extern void srand(unsigned); extern unsigned rand(void); extern int FUN_00040700(void);
 void FUN_000414b0(int n)
