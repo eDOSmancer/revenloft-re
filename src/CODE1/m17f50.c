@@ -1,3 +1,6 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+volatile unsigned char B000389d0_eu[24];
+/* BSS end */
 /* Module: FUN_00017f50, LAB_00017f5c, FUN_00017f8c, FUN_00017fa8, FUN_0001802c, FUN_0001808c, FUN_000180bc, FUN_00018270, FUN_00018278, FUN_0001828c, FUN_000182a4, FUN_000182c0, FUN_000182ec, FUN_00018304, FUN_0001831c, LAB_00018338, FUN_00018398, FUN_00018424, FUN_00018484 */
 #include "vmode.h"
 #define DAT_000323d7 (VID_000323d4.w)

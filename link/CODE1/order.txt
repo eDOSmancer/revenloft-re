@@ -22,7 +22,6 @@ lib  strcpy   CLIB3S.LIB
 c    m172d0   -3s -s -of+ -ot -d1+ -ol -w0
 asm  b172d0   -3p -c
 c    m17f50   -3s -s -of+ -ot -d1+ -ol -w0
-asm  b17f50   -3p -c
 lib  memset   CLIB3S.LIB
 c    m184d0   -3s -s -of+ -ot -d1+ -ol -w0
 asm  b184d0   -3p -c
