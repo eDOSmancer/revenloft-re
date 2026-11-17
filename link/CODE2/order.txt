@@ -42,7 +42,6 @@ asm  a39922   -3p -mf -c
 c    m3ac80   -3s -ot -d2 -oe -s -w0
 asm  b3ac80   -3p -c
 c    m3c800   -3s -ot -d2 -oe -s -w0
-asm  b3c800   -3p -c
 c    m3e340   -3s -ox -oe -oa -ot -w0
 asm  b3e340   -3p -c
 c    m3f960   -3s -ox -oe -oa -ot -w0
