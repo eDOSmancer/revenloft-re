@@ -30,48 +30,79 @@ Every byte of the two LE images comes out of the Watcom linker, from ordinary ob
 There is no other post-processing: code, data, uninitialised data, the stack, the LE header, the page map and the
 relocation (fixup) tables including the order of their records are WLINK's output.
 
-## Prerequisites
+## Building
 
-- **Watcom C/C++32 10.0a** (September 1994). Files the build opens: `BIN/WCC386.EXE`, `BIN/W32RUN.EXE`, `BIN/WASM.EXE`,
-  `BIN/WLINK.EXE`, the headers in `H/`, and `LIB386/DOS/CLIB3S.LIB` (SHA-1 `47ff4bf2f41b1758806352990fdf3ba67a98bde1`).
-- **Watcom C/C++32 9.5 with patch levels A and B** ("9.5b"). Files the build opens: `BIN/WCC386.EXE` (the patched
-  compiler, 628178 bytes), `BIN/WLINK.EXE`, the headers in `H/`, and `LIB386/DOS/CLIB3S.LIB`.
-  The C library of CODE.1 is the 9.5 library **with the modules of patches A and B**. The build takes the unpatched
-  `LIB386/DOS/CLIB3S.LIB` (SHA-1 `d68694d5c982ecbc8d8a93aaa2fdd57e17ae1543`) and the two patch files `3CSDL.A` (17408
-  bytes) and `3CSDL.B` (25088 bytes) of the patch distributions, which are OMF libraries holding the replacement
-  modules; `order.txt` says for each module which of the three it comes from (72 / 9 / 4 modules). A `CLIB3S.LIB`
-  that already has both patches applied works as well: point `3CSDL.A` and `3CSDL.B` at it.
-  The 9.5 set used here has no assembler; `WASM` of 10.0a assembles the files of both programs.
-- **DOSBox-X** (`dosbox-x` in `PATH`, or `DOSBOX=/path`): runs the DOS tools headless. Developed with 2026.10.01.
-- **Python 3** (standard library only) and `make`, `timeout` (coreutils).
-- **The DOS/4GW Professional loader**, see below.
+You need Linux (or another system with the programs below), your own copies of the original Watcom tools, and a
+copy of the game for one 160 KB third-party loader. Nothing third-party is in this repository.
 
-## Configuration
+### 1. Host programs
 
-`build.cfg` holds the locations; an environment variable of the same name overrides an entry.
+- **DOSBox-X** (`dosbox-x` in `PATH`, or `DOSBOX=/path/to/dosbox-x`): runs the DOS tools headless. Developed with
+  2026.10.01.
+- **Python 3** (standard library only), `make`, and `timeout` (coreutils).
 
-| name        | what                                                                 |
-|-------------|----------------------------------------------------------------------|
-| `WATCOM10A` | root of the 10.0a installation (the directory with `BIN`, `H`, `LIB386`) |
-| `WATCOM95`  | root of the 9.5b installation                                         |
-| `3CSDL.A`, `3CSDL.B` | the DOS C library patch files of 9.5 patch levels A and B    |
-| `LOADER`    | the DOS/4GW Professional loader (a file you provide)                  |
+### 2. Setting up the tools
 
-The installations are mounted read-only in spirit: the build writes only below `build/`.
+Put the tools into the `tools/` subfolder of the checkout, in this layout (`tools/README.md` has the full list
+with checksums; `tools/watcom/` and `tools/dos4gw/` are ignored by git):
+
+    tools/watcom/w10a/          Watcom C/C++32 10.0a:  BIN/  H/  LIB386/DOS/CLIB3S.LIB
+    tools/watcom/w95b/          Watcom C/C++32 9.5b:   BIN/  H/  LIB386/DOS/CLIB3S.LIB
+    tools/watcom/w95b-patch/    3CSDL.A  3CSDL.B
+    tools/dos4gw/4gwpro.bin     the DOS/4GW Professional loader
+
+- **Watcom C/C++32 10.0a** (September 1994) compiles and links `CODE.2` and assembles the assembler files of both
+  programs. Files the build opens: `BIN/WCC386.EXE`, `BIN/W32RUN.EXE`, `BIN/WASM.EXE`, `BIN/WLINK.EXE`, the headers
+  in `H/`, and `LIB386/DOS/CLIB3S.LIB`.
+- **Watcom C/C++32 9.5 with patch levels A and B** ("9.5b") compiles and links `CODE.1`. Files the build opens:
+  `BIN/WCC386.EXE` (the patched compiler, 628178 bytes), `BIN/WLINK.EXE`, the headers in `H/`, and
+  `LIB386/DOS/CLIB3S.LIB`.
+- **The 9.5 C library patches.** The C library of `CODE.1` is the 9.5 library with the modules of patches A and B.
+  The build takes the unpatched `LIB386/DOS/CLIB3S.LIB` and the two patch files `3CSDL.A` and `3CSDL.B` from the
+  patch distributions (OMF libraries holding the replacement modules); `link/CODE1/order.txt` says for each module
+  which of the three it comes from (72 / 9 / 4 modules). If your `CLIB3S.LIB` already has both patches applied,
+  point `3CSDL.A` and `3CSDL.B` in `build.cfg` at it.
+- **The loader.** With a copy of the game at hand:
+
+      python3 tools/getloader.py /path/to/game/CODE.2
+
+  writes `tools/dos4gw/4gwpro.bin` and checks its SHA-1 (see "The loader" below). This is the only time an
+  original executable is read; the build itself never does.
+
+Keep the upper-case file and directory names of the original media (`BIN`, `H`, `LIB386/DOS`, `WCC386.EXE`).
+To keep the tools somewhere else, edit `build.cfg` or set an environment variable of the same name:
+
+| name        | default                              | what                                                    |
+|-------------|--------------------------------------|---------------------------------------------------------|
+| `WATCOM10A` | `tools/watcom/w10a`                  | root of the 10.0a installation (`BIN`, `H`, `LIB386`)   |
+| `WATCOM95`  | `tools/watcom/w95b`                  | root of the 9.5b installation                           |
+| `3CSDL.A`   | `tools/watcom/w95b-patch/3CSDL.A`    | DOS C library patch file of 9.5 patch level A           |
+| `3CSDL.B`   | `tools/watcom/w95b-patch/3CSDL.B`    | DOS C library patch file of 9.5 patch level B           |
+| `LOADER`    | `tools/dos4gw/4gwpro.bin`            | the DOS/4GW Professional loader                         |
+
+Relative paths are relative to the repository root. The build writes only below `build/`.
+
+### 3. Build and verify
 
     make            # both programs, about two minutes from scratch
     make code1      # or code2
     make clean
 
-Output: `build/CODE.1`, `build/CODE.2`; work files in `build/CODE1`, `build/CODE2` (objects, `link/LINK.LNK`, the
-WLINK map `link/CODE.MAP`).
+A successful run ends with
+
+    ba6b19b88c6b787ffb0ba88700b3930bdb6af35d  CODE.1  277787 bytes  OK
+    2487bd117223ba2865447fd8545ee9755227f10a  CODE.2  558689 bytes  OK
+
+and exit status 0. Output: `build/CODE.1`, `build/CODE.2`; work files in `build/CODE1`, `build/CODE2` (objects,
+`link/LINK.LNK`, the WLINK map `link/CODE.MAP`). To run the result, copy the two files over those of an installed
+copy of the game (they are identical to the originals, so nothing changes).
 
 ## The loader
 
 Both originals are bound with the DOS/4GW Professional 1.9x run-time: the first 162780 bytes of each file (up to the LE
 header) are that loader, SHA-1 `859e06e4d799b8f92e5ce2b412d12d621466a85b`, identical in both. It is a third-party
 binary that is not in a Watcom installation (the `DOS4GW.EXE` of 9.5 and 10.0a is a different program) and it is not
-in this repository. Provide it as the file `LOADER` points to; `tools/getloader.py <bound executable> <output>`
+in this repository. Provide it as the file `LOADER` points to; `tools/getloader.py <bound executable> [output]`
 cuts it out of any program bound with it (the game's own `CODE.1` / `CODE.2` are such programs) and checks the SHA-1.
 
 The LE headers of the originals show how they were made: the page offset in the header is 0x1EB8 more than the
@@ -89,7 +120,7 @@ loader.
 | `link/CODE1/alignfix.csv`, `link/CODE2/alignfix.csv` | 853, 3057 | 44 and 160 bytes (address, value) in the string constants of 5 and 19 modules. WCC386 aligns the next string literal by advancing its output position without writing, so these bytes are whatever the compiler's heap held before - in the originals, fragments of the game's own header and source text, which no longer exists. |
 | stub size 0x1EB8 (`tools/build.py`) | - | see "The loader". |
 | `expected.sha1` | 147 | the three SHA-1 values the build checks. |
-| `build.cfg` | 834 | locations of the external tools. |
+| `build.cfg` | - | locations of the external tools. |
 
 Nothing else is stored: there is no table of addresses, no fixup order table and no copy of original bytes.
 
@@ -141,6 +172,12 @@ Constructs that exist only because they reproduce the original bytes, not becaus
 
 ## Caveats
 
+- **Comments in the C files refer to things that are not here.** The files were matched function by function in a
+  separate analysis project, and many comments name its tools, notes and working directories (`tools/realcc.py`,
+  `docs/MODULES.md`, `build/var/...`, round numbers). They are history, not instructions; nothing in this repository
+  depends on them. They are left in place because the source text is part of what the byte-exact build was verified
+  with (see the next point).
+
 - **One compile is sensitive to the compiler's run-time environment.** `FUN_00026d04` in CODE.2 module `m26810.c`
   contains two stand-in copy chains whose length was fitted to the behaviour of WCC386 10.0a under DOSBox-X: the
   compiler reads a field it never initialised when it splits an oversized block, so the result depends on memory
@@ -157,6 +194,7 @@ Constructs that exist only because they reproduce the original bytes, not becaus
     src/CODE1, src/CODE2     C modules (m*.c), assembler modules (a*.asm), stand-in definition (xib.asm)
     include/                 shared headers of the C modules
     link/CODE1, link/CODE2   order.txt, options.lnk, alignfix.csv
+    tools/README.md          where the third-party tools go (tools/watcom, tools/dos4gw: not tracked)
     tools/build.py           the build driver          tools/dos.py        DOSBox-X runner
     tools/omflib.py          OMF library reader        tools/getloader.py  loader extraction helper
     tools/bssfit.py          uninitialised data: fitted names, definitions block, checks (docs/BSS.md)

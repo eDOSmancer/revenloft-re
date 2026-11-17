@@ -28,7 +28,8 @@ def config():
     cp = configparser.ConfigParser(); cp.optionxform = str
     cp.read(os.path.join(ROOT, 'build.cfg'))
     c = {k: os.environ.get(k, v) for k, v in cp['paths'].items()}
-    return {k: os.path.expanduser(os.path.expandvars(v)) for k, v in c.items()}
+    c = {k: os.path.expanduser(os.path.expandvars(v)) for k, v in c.items()}
+    return {k: v if os.path.isabs(v) else os.path.join(ROOT, v) for k, v in c.items()}   # relative: to the repository root
 
 def order(prog):
     out = []

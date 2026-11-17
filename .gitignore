@@ -1,2 +1,5 @@
 build/
 __pycache__/
+# third-party tools you provide yourself (never commit them)
+/tools/watcom/
+/tools/dos4gw/
