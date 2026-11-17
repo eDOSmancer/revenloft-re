@@ -3,7 +3,7 @@
 The original programs defined their uninitialised variables in the C files.  `wcc386` does not write a module's `_BSS`
 in the order of the definitions, so the layout depends on the names, which are not known.  This file states the rule
 both compilers follow, the naming scheme that reproduces the original layout with it, what `tools/bssfit.py` does, and
-what was learned about object extents and object-file boundaries, and the one object still defined in assembler.
+what was learned about object extents and object-file boundaries.  Every uninitialised object of both programs is defined in C.
 
 ## The emission rule
 
@@ -32,9 +32,19 @@ below leaves nothing to pad).  The list order is:
 
 What decides is the *first* declaration of a name in the file (`extern` or not): a later definition does not move the
 symbol.  `static` objects and objects no code references are emitted like the others.  The optimisation flags (`-oa`,
-`-ox`, `-d2`, `-s`, ...) do not enter.  The object's `_BSS` segment is dword-aligned; it is paragraph-aligned when the
-file has an object of 8-byte alignment (a `double` in a probe) and in the object of CODE.2 `m29c80.c`, with or without
-contents.
+`-ox`, `-d2`, `-s`, ...) do not enter.  The size class is global to the file: the buffers order symbols only *inside* a class, so one
+file never emits a lower class ahead of a higher one, however many symbols it has (probe with objects of three
+classes in three buffers, both compilers).
+
+**Function-local statics** are not in that list.  They follow all file-scope objects of the file, function by function
+in the order of the functions, the objects of a block last declared first (the names do not matter), an outer block
+ahead of its inner blocks, each aligned to its type; they are not sorted by class.  (Probes, both compilers.  No object
+of the two programs needs this: every candidate is used by several functions that are not expanded inline.)
+
+**Alignment of the segment.**  The object's `_BSS` segment is dword-aligned.  It is paragraph-aligned when the file has
+a far pointer or a `double` *object* - a local variable of any function is enough (`void (__far *h)()` in FUN_0002a064
+of CODE.2 `m29c80.c`), and so is a `typedef` of such a type; an `extern` declaration, a prototype, a structure member or
+`<i86.h>` is not.  The segment keeps that alignment when it is empty.
 
 One difference between the compilers matters: in **10.0a the last declaration gives the object its type**, so
 `char x[12];` followed anywhere by `extern char x[];` is emitted as an object of unknown bound (one byte, in class 6).
@@ -74,12 +84,14 @@ whose address is taken becomes `(*(T (*)[n])...)`, and local macros that reused 
 (same preprocessed text).  Views in the sources:
 
 - CODE.2: 51 members of the party records (container 0x718e0), 8 members of the monster table 0x64d80 (100 x 22 bytes),
-  0x6761a, 0x6761e, 0x68fe4, 0x698e1, 0x748e6, 0x748ea, 0x75606, 0x75612 (the high word or a later element of the object
-  ahead), and from the first round 0x77106, 0x77150/2.
-- CODE.1: 0x3681e, 0x36903, 0x36907, 0x373ef, and from the first round 0x38919, 0x37ff3/5/7.
+  the members of record 0 of the tables 0x65a18 (256 x 28 bytes) and 0x67618 (300 x 22), 0x6994c (row 0 of the map
+  0x698e0), 0x74900 (in the 150 x 22 table 0x748ec), the high words 0x755d2 / 0x755d6 of the party position and
+  0x755ea ... 0x755f6 (assembler only), the level header's members (assembler only), element -1 of the tables 0x63020 and
+  0x64024 (0x6301e, 0x64018: the code indexes from 1), and from the first round 0x77106, 0x77150/2.
+- CODE.1: 0x3681e, 0x36903, 0x36907, 0x373ef, 0x38919, the node members 0x37ff3/5/7 and 0x388fc/fe/900 (node 257).
 - `selfview`: where the owning module itself declares only the first member (`extern unsigned char x;` for a table of
   248 bytes), the object is declared as bytes and those declarations become views of offset 0 (CODE.1 m10010: 0x35a00,
-  0x363f8, 0x36808).
+  0x363f8, 0x36808; CODE.2: the party flag word 0x718f0 in m2c0c0, the party position in m307e8).
 
 What a view changes in the compiler (all found by the SHA-1 test, each a function that no longer matched):
 
@@ -93,9 +105,16 @@ What a view changes in the compiler (all found by the SHA-1 test, each a functio
 - **m26810.c.** FUN_00026d04 depends on the compiler's state (README, Caveats); after the views its two copy chains had
   to be refitted (3 and 14 temporaries).
 
-The answer in every case but the last was not to make that label a view: **a label stays an object of its own wherever
-the class rule lets adjacent definitions reproduce the layout**, and it turned out that this is nearly always so - which
-says that these labels are the original objects.  The party records are the exception: they are defined as seven
+The second round answered this by keeping such a label an object of its own wherever adjacent definitions could
+reproduce the layout.  That cut tables into pieces and produced object-file boundaries that do not exist (below).  The
+third round gives the objects the extents the code shows and repairs the function instead: the pass-1 conflict list of
+the view form is the original list minus the label's memory node (compared entry by entry in the allocator trace of the
+real compiler), and **a dead read of a scalar the function does not otherwise use** - `{ int d; d = G; }`, marked
+`STANDIN` - adds a zero-savings node at the same place of the list.  One read per lost node restored FUN_0002bbd8
+(0x75619), FUN_00016444 (0x62b44), FUN_00029464 (two ints it reads as bytes) and the seven users of 0x755d2 / 0x755d6
+(FUN_0001083c, FUN_00010cb0, FUN_00012db0, FUN_00019368, FUN_0001aed8, FUN_0002b27c, FUN_00030a24).  Reading the lost
+variable itself does not help: a read at another size than the object's removes the node.  The party records still are
+pieces: they are defined as seven
 adjacent pieces (16 / 568 / 16 / 568 / 16 / 584 / 568 bytes, all class 6) cut at the names of the 2nd and 3rd record and at
 the four flag words, so that these six labels keep an object (STANDIN, noted in `m1ea90.c`).
 
@@ -109,6 +128,7 @@ the four flag words, so that these six labels keep an object (STANDIN, noted in 
     tools/bssfit.py own     PROG MODULE START END                   move a range of labels to b<MODULE>.asm (link order too)
     tools/bssfit.py convert PROG MODULE [--first NAME] [--last NAME] [--at TEXT] [--trim] [--size NAME=N] [--dry]
     tools/bssfit.py check   PROG                every built module object: its _BSS publics are in address-name order
+    tools/bssxref.py PROG START END             who references the addresses of a range (module:function), from the built objects
 
 `convert` takes the labels of `b<module>.asm` (address order, sizes = distance to the next label), finds each name's
 declaration (the module's own `extern`, else the first other module's), measures `sizeof` with a probe compile, cuts
@@ -117,59 +137,76 @@ fewest fillers), writes the block, completes later empty bounds (CODE.2), compil
 publics of the object with the wanted offsets.  Only then does it write the C file, shrink or delete `b<module>.asm`
 and update `link/<PROG>/order.txt`.  The build's SHA-1 comparison is the acceptance test of every step.
 
-## Object files and extents (second round)
+## Object files and extents
 
 Rule 1 is a test for object-file boundaries: inside one object file the classes never rise with the address, so a rise
-is either a label inside an object or the start of another object file, and then the address is dword-aligned (the
-linker's alignment; 1-3 unnamed bytes may lie ahead of it).  Applied to the remaining ranges (a search over the labels
-for the cut with the fewest views, then corrected by what is known about the records):
+is either a label inside an object or the start of another object file, and then the address is dword-aligned.  The
+second round applied it to the labels as they were and found more object files than modules; it defined the surplus in
+data-only files `d<address>.c`.  Two more sources of evidence settle most of it:
 
-- The ranges hold **more object files than the code has modules**: CODE.2 0x62760-0x718e0 has eight descending runs
-  (starts 0x62760, 0x62b58, 0x62bb0, 0x63020, 0x640a0, 0x64580, 0x65a30, 0x68fe0) for four modules, 0x748e4-0x75900 has
-  four (0x748e4, 0x74900, 0x755d8, 0x755f8); CODE.1 0x355f8-0x37bf0 has seven (0x355f8, 0x36814, 0x3682c, 0x36838,
-  0x36a54, 0x37140, 0x371dc) for two.  The references do not follow the link order either (0x68fe0 is used only by
-  m13810, the first module; 0x63020 by m23f70; 0x640a0 by m2af90 / m2c0c0): much of this data was defined in other
-  files than the ones that use it.  One run each is defined in the module whose range it was (m13a78, m186c4, m1c704,
-  m2c0c0, m307e8; CODE.1 m10010, m150c0), the others in data-only files `d<address>.c` linked at their place (STANDIN:
-  the boundary is what the rule proves; that the file had no code is an assumption, the code boundaries are unknown).
-- **0x718e0-0x72238** (party records, 0x72200 and five words) is one run between m1c704 and m270ac; it is defined in
-  `m1ea90.c`, the first module of that window, which names none of it.  m1eee0, m231dc, m23f70 or m26810 could own it as
-  well.
-- **0x755d0-0x755d6 and 0x755e8-0x755f6 are 2-byte objects**, not halves of ints: as such they close the runs that
-  start at 0x74900 and 0x755d8, the ints behind them start new files, and every function matches unchanged; with
-  0x755d2 / 0x755d6 as views of ints five functions changed.  Users that declare one of them `int` read two objects.
-- **0x64018** is the address of element -1 of the 12-byte table at 0x64024 (the code indexes from 1); 8 bytes are
-  defined there, 0x64020 is an int of its own.
-- **CODE.1 0x388fc** (three words): m15880's node array is 257 x 9 = 2313 bytes (class 2), then 3 alignment bytes, then
-  class 3: another object file.  FUN_00015880 uses both the array and the words, so m15880 is not two files split
-  between its functions; the words are defined in `m15d90.c`, the next object file (STANDIN, ownership).
-- Extents: monster table 0x64d80 = 100 x 22 and level header 0x75618 = 0x2a4 from the code; 0x68fe0 and 0x65618 are 1024
-  bytes up to the next object (declared `int` by their users).  Objects written `unsigned char x[n]` in a `d*.c` file or by `--size` have the extent up to the next
-  object; their element types are in the declarations of the users.
+**Who uses what.**  The fixups of the built objects give, for every address, the functions that reference it
+(`tools/bssxref.py PROG START END`).  In CODE.2 the result is a plain picture: 0x62740-0x64580 is the *private* data of the modules in
+link order - m106c0, m13a78, m186c4, m1ea90, m1eee0, m231dc, m23f70, m28d90, m29c80, m2af90, each piece used by that
+module only - and 0x64580-0x75900 is the data everyone shares, lying where m2c0c0 (the module with `main`) and m307e8
+are in the link order.  Then m32e40 and the modules behind follow with their own data again.
+
+**Extents from the code.**  Every rise inside that picture disappeared once the object ahead of it had its real size:
+
+| address | object | evidence |
+|---|---|---|
+| 0x62b30 | `void *[10]`, 40 bytes; 0x62b44 is element 5 | loops `for (k = 0; k < 10; k++)` over it |
+| 0x62c20 | 4 x 256 bytes; 0x6301e is element -1 of the table behind | `buf + k * 0x100`, index from 1 |
+| 0x63020 | 4096 bytes; 0x64018 is element -1 of the 5 x 12 table 0x64024 | index from 1 |
+| 0x64090 | two ints | written as ints by FUN_00029888 |
+| 0x65a18 | 256 records of 28 bytes (7168) | `struct W` of m307e8, 0x65a18 + 7168 = 0x67618 |
+| 0x67618 | 300 records of 22 bytes (6600) | `memmove(..., n * 0x16)`, ends at 0x68fe0 |
+| 0x698e0 | the map, 128 x 128 cells of 2 bytes (32768) | ends at the party records |
+| 0x748ec | 150 records of 22 bytes (3300); 0x74900 is inside | `memmove(..., n * 0x16)`, ends at 0x755d0 |
+| 0x755d0 / d4 | two ints (party position 16.16) | m307e8 passes `*(int *)&`; m2c0c0 declares 0x755e8-0x755f4 `int` |
+| CODE.1 0x37ff0 | 258 nodes of 9 bytes (2322); 0x388fc-0x38900 are the links of node 257 | 0x388fc = node 257 + 3, the link offsets |
+
+With them **CODE.2 has no object file without code**: every module defines one run, in link order, and the two runs of
+the shared data are m2c0c0's (0x64580-0x7224c: twelve class-6 objects, six ints, shorts) and m307e8's (0x7224c-0x75900:
+the 9880-byte table, then 40 objects of class 5 with the level header among them, two shorts).  m1c704, m270ac and
+m26810 define nothing.  Which of the two modules owns which shared run follows from the link order alone.
+
+**Paragraph alignment.**  The pieces of m13a78, m1ea90, m1eee0, m231dc, m23f70, m29c80, m3ac80 and m43aa0 start on a
+16-byte boundary with 8 or 12 unnamed bytes ahead (m186c4 uses 8 of 16 bytes, m1eee0 and m231dc 4 of 16).  That is the
+alignment of their `_BSS` segment, not data of the module ahead: m29c80 has it by itself (the far pointer above); the
+other seven get it from `typedef void (__far *PARA_BSS)();` at the top of the file (STANDIN: what in the original file
+raised the alignment - a far pointer, a `double` - is not known).  No filler object is left ahead of these modules.
+
+**CODE.1** keeps five data-only files (STANDIN: the boundary is what the rule proves; the code that was compiled in
+the same file is not known).  0x355f8-0x37140 lies in the range of the first module m10010 (20 KB of code) and has
+five runs: the 8-byte multiples and twelve 1-byte flags (m10010.c), then runs starting at 0x36814 (shorts), 0x3682c,
+0x36838 and 0x36a54.  The flags are used one by one by different functions, so they are objects of their own and the
+shorts behind them start another file; the users of each run are spread over the whole module and FUN_00015f4c of
+m15d90 (the only user of 0x36838-0x36858, 0x36a54 and 0x36a80), so the runs cannot be given to parts of the module by
+function address.  m10010 is at least five object files whose code boundaries are unknown.  The fifth file, 0x371dc
+(a 522-byte buffer, four shorts, 2049 bytes), follows m150c0's cursor record (6 bytes) and its mouse flag (a short):
+one file would have put the buffer ahead of the flag.  Merging needs the three as one 530-byte record, which no access
+supports; the functions that use both sides are the same ones (m150c0), so m150c0 is probably two object files.
 
 ## State
 
-| program | defined in C | still in `b*.asm` |
-|---|---|---|
-| CODE.1 | every object: m10010 4636, d36814 24, d3682c 11, d36838 540, d36a54 1772, m150c0 156, d371dc 2579, m15880 3337, m15d90 6, m161c0 132, m172d0 72, m17f50 24, m184d0 48, m1b060 16, m1cef0 64 | - |
-| CODE.2 | m106c0 32, m13a78 1016, d62b58 88, d62bb0 1136, d63020 4224, d640a0 1246, m186c4 5296, m1c704 13743, d68fe0 35072, m1ea90 2392, m270ac 8, m29c80 12, m2af90 9880, d748e4 28, m2c0c0 3288, d755d8 32, m307e8 32, d758bc 68, m32e40 6128, and the 12 modules behind | b307e8 676 |
+| program | defined in C |
+|---|---|
+| CODE.1 | m10010 4636, d36814 24, d3682c 11, d36838 540, d36a54 1772, m150c0 156, d371dc 2579, m15880 3346, m161c0 132, m172d0 72, m17f50 24, m184d0 48, m1b060 16, m1cef0 64 |
+| CODE.2 | m106c0 24, m13a78 1088, m186c4 8, m1ea90 68, m1eee0 4, m231dc 4, m23f70 5232, m28d90 8, m29c80 16, m2af90 1230, m2c0c0 56524, m307e8 14004, m32e40 6128, m38210 4, m3ac80 17712, m3c800 16, m3e340 57, m3f960 72, m40700 12, m40d80 124, m414b0 24, m43aa0 64, m44bb0 320 |
 
-**Left: the level header 0x75618** (`struct LEV`, `include/world.h`; `src/CODE2/b307e8.asm`, 8 labels).  Its members
-0x7561b ... 0x757a2 compile as views; the map width 0x75619 does not in FUN_0002bbd8 (m2af90.c): `xs = m[1] * width;
-m[3]++; m[6] = xs + m[3];` puts `xs` in dx and the reloaded counter in ax in the original, and the other way round when
-the width is a view or a `struct LEV` member.  0x75619 is at an odd address behind a 1-byte member, so it cannot be an
-object of its own.  Tried without success: member / pointer / cast forms of the view, operand order, `+=`, copy chains
-on either operand (one fixes this place and moves two frame slots).  Next step: a tie search for that function with the
-width as `B00075618_b1.w`, then `contain CODE2 B00075618_b1 676` and `convert CODE2 m307e8` (the eight labels already
-compile as views in every other user: the build with all of them was one place short of the image).
+No `b*.asm` is left.  `tools/bssfit.py check` reports every `_BSS` of both programs in address order.
 
-Special cases settled by this round:
+Open points:
 
-- **0x72240 (m29c80).** The object of `m29c80.c` has a paragraph-aligned `_BSS` whether it is empty or not.  With 12
-  bytes defined there (4 unnamed, the shorts 0x72244 / 0x72246, 4 unnamed) and the 9880-byte block at 0x7224c defined
-  in `m2af90.c` (9880 is a multiple of 8: one class 6 object that the next module in link order can start with), the
-  link reproduces the image.  The 12 bytes cannot be told apart from an empty contribution of m29c80 with m28d90 / m2af90
-  owning them; no code of m28d90, m29c80 or m2af90 names any of these addresses.
+- **Fillers** (unnamed bytes inside a module's run, `F...` / `G...`): CODE.2 m2c0c0 5 (an int at 0x72228, shorts at
+  0x72240 / 42 / 48 / 4a), m3f960 6, m43aa0 1, m3c800 1 (4 bytes ahead of m3e340: alignment or an int); CODE.1 m172d0 6,
+  m1b060 1 (12 bytes), m1cef0 1, m10010 1 (the flag 0x36811), one byte each behind the odd-sized buffers 0x3681c, 0x3682e,
+  0x36a40 and 4 bytes behind 0x36a80.
+- **Party records** (CODE.2 0x718e0): seven adjacent pieces instead of one object of 4 x 0x248 bytes, see above.
+  `include/chars.h` declares the first piece as one byte; m2c0c0.c, which defines it, declares it with its size
+  (`PARTY_HEAD_SIZED`).
+- **Element types**: objects written `unsigned char x[n]` in the definitions block of m2c0c0 / m307e8 (tables whose
+  record type is declared only by other modules) and in the CODE.1 `d*.c` files have the extent, not the type.
 - **0x7b6d0 (m40d80).** The find record (43 bytes) and the path buffer (81) must precede the library's `iob`; they are
   defined in `m40d80.c` as byte arrays although only m411e0 (linked after `iob`) uses them.  m40700 (12 bytes, class 5,
   directly ahead) could own them as well; the rule does not decide.
