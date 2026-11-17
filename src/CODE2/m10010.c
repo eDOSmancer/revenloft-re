@@ -29,7 +29,9 @@ void FUN_00010010(int x, int y)
 /* FUN_00010074 @ 00010074 */
 #include "world.h"
 struct R22 { unsigned char flags; char pad[2]; unsigned short type; char pad2[17]; };
-extern struct R22 B00064d8b_a7[]; 
+extern unsigned char B00064d80_ay[];
+#define B00064d8b_a7 ((struct R22 *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
+ 
 extern void FUN_00026524(int); extern void FUN_0002c124(int); extern void FUN_0002f1c8(void);
 void FUN_00010074(void)
 {

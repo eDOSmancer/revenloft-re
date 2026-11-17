@@ -183,7 +183,7 @@ void FUN_00027838(void)
 extern void FUN_00027838(void); /* module prototype */
 /* FUN_00027a68 @ 00027a68: daily update, then decide for every monster whether it is hidden today (time of day, area, quest flags) */
 #include "world.h"
-#define B00064d80_ay ((struct O *)B00064d80_ay)
+#define M00064d80_ay ((struct O *)B00064d80_ay)
 struct O { int a; int d4; int d8; unsigned short s, type; short timer, w12; unsigned short st; };
   extern unsigned DAT_0005cf4c; extern int DAT_0005c6c8; extern unsigned char *B00072230_c4;
  extern int FUN_0003acdc(int), FUN_0002c1dc(int), FUN_0002c328(int, int, int, int);
@@ -194,10 +194,10 @@ void FUN_00027a68(void)
     FUN_00027838();
     for (i = 0; i < B00075618_b1.nent; i++) {
         hide = 0;
-        ((unsigned char *)&B00064d80_ay[i])[0xb] &= ~2;
-        if (FUN_0003acdc(B00064d80_ay[i].type) && B00064d80_ay[i].w12 <= 0) hide = 1;
+        ((unsigned char *)&M00064d80_ay[i])[0xb] &= ~2;
+        if (FUN_0003acdc(M00064d80_ay[i].type) && M00064d80_ay[i].w12 <= 0) hide = 1;
         h = DAT_0005cf4c >> 16;
-        switch (B00064d80_ay[i].type) {
+        switch (M00064d80_ay[i].type) {
         case 0: if ((DAT_0005c6c8 == 0x12 || DAT_0005c6c8 == 0x1f) && h > 4 && h < 0x15) hide = 1; break;
         case 6: if ((DAT_0005c6c8 == 0x19 || DAT_0005c6c8 == 0x1a) && h > 4 && h < 0x15) hide = 1; break;
         case 0x11: if (DAT_0005c6c8 == 0x12 && h > 4 && h < 0x15) hide = 1; break;
@@ -206,7 +206,7 @@ void FUN_00027a68(void)
         case 8: if (!FUN_0002c1dc(0x3a)) hide = 1; break;
         case 0xf: if (FUN_0002c1dc(0x28) && FUN_0002c1dc(0x29)) hide = 1; break;
         default:
-            switch ((int)B00064d80_ay[i].type) {
+            switch ((int)M00064d80_ay[i].type) {
             case 0x22: if (FUN_0002c1dc(0x1d) == 1) hide = 1; break;
             case 0x24: if (FUN_0002c1dc(0x1e) == 1) hide = 1; break;
             case 0x26: if (FUN_0002c1dc(0x8) == 1 || FUN_0002c1dc(0x13) == 1) hide = 1; break;
@@ -237,20 +237,20 @@ void FUN_00027a68(void)
             case 0x47: if (FUN_0002c1dc(0x2f) == 1 || !FUN_0002c1dc(0x39)) hide = 1; break;
             case 0x4e:
                 if (FUN_0002c1dc(0x25)) {
-                    B00064d80_ay[i].type = 1;
-                    B00064d80_ay[i].d8 = 0x10000000;
-                    B00064d80_ay[i].w12 = FUN_0002c328(B00072230_c4[B00064d80_ay[i].type * 0x45 + 0x1d], 8, 0, 0);
+                    M00064d80_ay[i].type = 1;
+                    M00064d80_ay[i].d8 = 0x10000000;
+                    M00064d80_ay[i].w12 = FUN_0002c328(B00072230_c4[M00064d80_ay[i].type * 0x45 + 0x1d], 8, 0, 0);
                 }
                 break;
             case 0x52: if (FUN_0002c1dc(0x14) == 1 || FUN_0002c1dc(0x9) == 1) hide = 1; break;
             }
             break;
         }
-        if (hide) ((unsigned char *)&B00064d80_ay[i])[0xb] |= 2;
+        if (hide) ((unsigned char *)&M00064d80_ay[i])[0xb] |= 2;
     }
 }
 
-#undef B00064d80_ay
+#undef M00064d80_ay
 /* ---- from build/var/mod/parts/p281b4.c */
 extern void FUN_000270ac(void); /* module prototype */
 extern void FUN_000271fc(int lvl); /* module prototype */
@@ -261,9 +261,9 @@ extern void FUN_00027a68(void); /* module prototype */
 #include <string.h>
 #include "world.h"
 #define DAT_0005cf44 (*(unsigned char **)&DAT_0005cf44)
-#define B00064d80_ay ((struct ENT *)B00064d80_ay)
+#define M00064d80_ay ((struct ENT *)B00064d80_ay)
 #define B00067618_e7 ((struct ENT *)B00067618_e7)
-#define B000698e0_b7 ((short *)B000698e0_b7)
+#define M000698e0_b7 ((short *)B000698e0_b7)
 #define B00072230_c4 (*(char **)&B00072230_c4)
 #define B00072238_dL ((struct ENT *)B00072238_dL)
 #pragma pack(1)
@@ -310,8 +310,8 @@ void FUN_000281b4(int lvl)
     j = B00075618_b1.b4;
     if (FUN_00039050() != j || FUN_00039048() != 1) FUN_00038dcc(0x9c4);
     FUN_000270ac();
-    memset(B000698e0_b7, 0, 0x8000);
-    for (k = 0; k < B00075618_b1.h; k++) FUN_000412ec(B000698e0_b7 + B00075618_b1.w * k, B00075618_b1.w * sizeof(short), fh);
+    memset(M000698e0_b7, 0, 0x8000);
+    for (k = 0; k < B00075618_b1.h; k++) FUN_000412ec(M000698e0_b7 + B00075618_b1.w * k, B00075618_b1.w * sizeof(short), fh);
     for (k = 0; k < 0x80; k++) {
         if (DAT_0005cb3c[k]) {
             FUN_000410b0(DAT_0005cb3c[k]);
@@ -370,21 +370,21 @@ void FUN_000281b4(int lvl)
         FUN_000410b0(tmp);
         for (k = 0; B00075618_b1.nent > k; k++) {
             FUN_000412ec(&rec, 0xb, fh);
-            B00064d80_ay[k].a = rec.a;
-            B00064d80_ay[k].b = rec.b;
-            B00064d80_ay[k].c = rec.c;
-            B00064d80_ay[k].d = rec.d;
-            B00064d80_ay[k].kind = rec.kind;
-            B00064d80_ay[k].f8 = *(int *)(B00072230_c4 + rec.kind * 0x45 + 0x35);
-            B00064d80_ay[k].dir = rec.dir;
-            B00064d80_ay[k].w10 = 0;
-            B00064d80_ay[k].b2 = 0;
-            B00064d80_ay[k].c3 = 0;
-            B00064d80_ay[k].mode = 0;
-            B00064d80_ay[k].cell = B00064d80_ay[k].c * B00075618_b1.w + B00064d80_ay[k].a;
-            if (B00064d80_ay[k].f8 & 0x30000000) B00064d80_ay[k].hp = FUN_0002c328((unsigned char)B00072230_c4[(unsigned short)B00064d80_ay[k].kind * 0x45 + 0x1d], 8, 0, 0);
-            else B00064d80_ay[k].hp = 0;
-            if ((unsigned short)B00064d80_ay[k].kind == 8) B00064d80_ay[k].hp = 0x37;
+            M00064d80_ay[k].a = rec.a;
+            M00064d80_ay[k].b = rec.b;
+            M00064d80_ay[k].c = rec.c;
+            M00064d80_ay[k].d = rec.d;
+            M00064d80_ay[k].kind = rec.kind;
+            M00064d80_ay[k].f8 = *(int *)(B00072230_c4 + rec.kind * 0x45 + 0x35);
+            M00064d80_ay[k].dir = rec.dir;
+            M00064d80_ay[k].w10 = 0;
+            M00064d80_ay[k].b2 = 0;
+            M00064d80_ay[k].c3 = 0;
+            M00064d80_ay[k].mode = 0;
+            M00064d80_ay[k].cell = M00064d80_ay[k].c * B00075618_b1.w + M00064d80_ay[k].a;
+            if (M00064d80_ay[k].f8 & 0x30000000) M00064d80_ay[k].hp = FUN_0002c328((unsigned char)B00072230_c4[(unsigned short)M00064d80_ay[k].kind * 0x45 + 0x1d], 8, 0, 0);
+            else M00064d80_ay[k].hp = 0;
+            if ((unsigned short)M00064d80_ay[k].kind == 8) M00064d80_ay[k].hp = 0x37;
         }
         for (k = 0; k < B00075618_b1.ndoor; k++) {
             FUN_000412ec(&rec, 0xb, fh);
@@ -431,7 +431,7 @@ void FUN_000281b4(int lvl)
                 FUN_000412ec(DAT_0005cd3c[k], n * 10, fh);
             }
         }
-        FUN_000412ec(B00064d80_ay, B00075618_b1.nent * 0x16, fh);
+        FUN_000412ec(M00064d80_ay, B00075618_b1.nent * 0x16, fh);
         FUN_000412ec(&k, 2, fh);
         FUN_000412ec(B00072238_dL, B00075618_b1.ndoor * 0x16, fh);
         FUN_000412ec(B00067618_e7, B00075618_b1.n4 * 0x16, fh);
@@ -490,9 +490,9 @@ void FUN_000281b4(int lvl)
 }
 
 #undef DAT_0005cf44
-#undef B00064d80_ay
+#undef M00064d80_ay
 #undef B00067618_e7
-#undef B000698e0_b7
+#undef M000698e0_b7
 #undef B00072230_c4
 #undef B00072238_dL
 #pragma pack()

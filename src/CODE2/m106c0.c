@@ -112,7 +112,13 @@ int FUN_000107e4(int x, int y, int i)
 int abs(int);
 #pragma intrinsic(abs)
 extern int FUN_0003acdc(int);
-extern short B00064d82_aG, B00064d86_aC, DAT_0005f03e, DAT_0005f03c, B000755d2_ai; extern unsigned short B000755d4_ak; extern int B00064d8b_a7; extern unsigned short B00064d8e_a6, B00064d8c_bX, B000698e0_b7; extern char *B00072230_c4;
+#define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
+#define B00064d8c_bX (*(unsigned short *)((char *)&B00064d80_ay + 12)) /* STANDIN: view, B00064d80_ay + 0xc */
+#define B00064d8b_a7 (*(int *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
+extern unsigned short B00064d80_ay;
+#define B00064d82_aG (*(short *)((char *)&B00064d80_ay + 2)) /* STANDIN: view, B00064d80_ay + 0x2 */
+#define B00064d86_aC (*(short *)((char *)&B00064d80_ay + 6)) /* STANDIN: view, B00064d80_ay + 0x6 */
+extern short DAT_0005f03e, DAT_0005f03c, B000755d2_ai; extern unsigned short B000755d4_ak;  extern unsigned short B000698e0_b7; extern char *B00072230_c4;
 #define ENT_Y(i)  (*(short *)((char *)&B00064d82_aG + (i) * 0x16))
 #define ENT_X(i)  (*(short *)((char *)&B00064d86_aC + (i) * 0x16))
 #define ENT_FL(i) (*(int *)((char *)&B00064d8b_a7 + (i) * 0x16))
@@ -150,7 +156,7 @@ int FUN_0001083c(int x, int y, int i)
  
 #include "world.h"
 extern int FUN_0003ad18(int), FUN_0003ade0(int);
-extern short B00064d82_aG, B00064d86_aC; extern int B00064d8b_a7; extern unsigned short B00064d8e_a6;
+  
 #define ENT_Y(k)  (*(short *)((char *)&B00064d82_aG + (k) * 0x16))
 #define ENT_X(k)  (*(short *)((char *)&B00064d86_aC + (k) * 0x16))
 #define ENT_FL(k) (*(int *)((char *)&B00064d8b_a7 + (k) * 0x16))
@@ -229,7 +235,7 @@ extern unsigned FUN_000109b0(int p, int x, int y); /* module prototype */
 /* Round 54: MATCH in module 0x106c0 (-oa): the product W * y is first kept in t (`t = B00062756_ff * y; i = x + t;`), so x is loaded into the sum's own register (mov ebx,[x] / add ebx,eax); with `i = W * y; i += x;` the rest of the function was right already (4 lines), with the expression form the product took the sum's register and w / the two height bytes moved to other registers. Earlier notes (rounds 22 and before) described that cascade. */
 /* FUN_00010b6c @ 00010b6c: draw automap cell (x, y) at screen (sx, sy) with the colours of its wall type */
 #include "world.h"
-#define B000698e0_b7 ((unsigned short *)&B000698e0_b7)
+#define M000698e0_b7 ((unsigned short *)&B000698e0_b7)
  extern void FUN_0003975c(int, int, int, int, int);
 extern unsigned char DAT_00051760[], DAT_0005764d, DAT_00057651;
   extern int B000758dc_cl;
@@ -241,7 +247,7 @@ void FUN_00010b6c(int x, int y, int sx, int sy)
     t = DAT_00051760[i];
     if (t == 0xff) return;
     if (t < 0x20) t = FUN_000109b0(i, x, y);
-    w = B000698e0_b7[i] & 0x3f;
+    w = M000698e0_b7[i] & 0x3f;
     DAT_0005764d = B00075618_b1.u[w * 2];
     DAT_00057651 = (B00075618_b1.u + 1)[w * 2];
     FUN_0003975c(t, sx, sy, B000758dc_cl + 0x34, 0);
@@ -249,7 +255,7 @@ void FUN_00010b6c(int x, int y, int sx, int sy)
     DAT_00057651 = 0xb5;
 }
 
-#undef B000698e0_b7
+#undef M000698e0_b7
 /* ---- from build/var/mod/parts/p10bfc.c */
 /* FUN_00010bfc @ 00010bfc: draw the facing-direction marker on the automap (16.16 fixed point kept in a
    union; the zero stores precede the high-word stores in the original order) */
@@ -284,7 +290,8 @@ extern unsigned char DAT_00051760[];
 extern short B000755d2_ai, B000755d6_ae;
 
 extern char *DAT_00056048;
-extern unsigned short B00072238_dL, B0007223c_dz, B00072246_dJ, B00064d80_ay, B00064d84_aE;
+#define B00064d84_aE (*(unsigned short *)((char *)&B00064d80_ay + 4)) /* STANDIN: view, B00064d80_ay + 0x4 */
+extern unsigned short B00072238_dL, B0007223c_dz, B00072246_dJ, B00064d80_ay;
 #define IT(o, i) (*(unsigned short *)((char *)&o + (i) * 0x16))
 #define PT(o, i) (*(unsigned short *)(DAT_00056048 + (i) * 0x16 + (o)))
 void FUN_00010cb0(int x, int y, int px, int py)
@@ -441,7 +448,7 @@ void FUN_0001139c(int x0, int y0, int w, int h, int t)
 /* module FUN_00011558 .. FUN_00011c50 (one -oa file: FUN_00011c50's exits jump to FUN_00011558's epilogue) */
 /* FUN_00011558 @ 00011558: build the automap: classify every cell (party marker, unexplored, wall kinds, doors, open floor next to explored floor) into DAT_00051760 */
 #include "world.h"
-#define B000698e0_b7 ((struct T *)&B000698e0_b7)
+#define M000698e0_b7 ((struct T *)&B000698e0_b7)
 #define FUN_0002c368 ((void (*)(char *, int))FUN_0002c368)
 struct T { unsigned short wall : 6, b6 : 1, door : 1, b8 : 2, seen : 1, mark : 1, rest : 4; };
 
@@ -451,7 +458,7 @@ extern int FUN_0002e8c8(int, int);
 extern unsigned short FUN_0002e930(int);
 #define W B00062756_ff
 #define H B00062754_gp
-#define OPEN(c) (B000698e0_b7[c].seen && !B000698e0_b7[c].wall)
+#define OPEN(c) (M000698e0_b7[c].seen && !M000698e0_b7[c].wall)
 void FUN_00011558(void)
 {
     int x, y, i, v;
@@ -462,7 +469,7 @@ void FUN_00011558(void)
         for (y = 0; y < H; y++) {
             i = W * y + x;
             v = 0xff;
-            t = &B000698e0_b7[i];
+            t = &M000698e0_b7[i];
             if (y == B000755d6_ae && x == B000755d2_ai) {
                 if (B00075618_b1.solo == 0xff) v = 0x2f; else v = 0x2e;
             } else if (t->seen) {
@@ -614,7 +621,7 @@ void FUN_00011c50(char *s, int c, int n)
     }
 }
 
-#undef B000698e0_b7
+#undef M000698e0_b7
 #undef FUN_0002c368
 #undef W
 #undef H

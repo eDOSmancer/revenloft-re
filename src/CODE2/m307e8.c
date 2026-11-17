@@ -13,7 +13,9 @@
 /* FUN_000307e8 @ 000307e8: facing angle of a map entity (3-bit direction field) */
 extern void FUN_0003df2c(int, int, int, int);
 struct ENT { unsigned short f0 : 3, dir : 3, rest : 10; };
-extern struct ENT B00064d94_aU;
+extern char B00064d80_ay[];
+#define B00064d94_aU (*(struct ENT *)((char *)&B00064d80_ay + 20)) /* STANDIN: view, B00064d80_ay + 0x14 */
+
 #define ENT(i) ((struct ENT *)((char *)&B00064d94_aU + (i) * 0x16))
 void FUN_000307e8(int i, int turn, int c, int d)
 {
@@ -543,7 +545,7 @@ void FUN_00031704(int i)
 /* ---- from build/var/mod/parts/p31880.c */
 #define OBJ T13_OBJ
 extern void FUN_0003df2c(int, int, int, int);
-extern struct ENT B00064d94_aU;
+
 
 /* FUN_00031880: in area 16, once all four marker objects (type 0x89) stand on their four cells, solve the puzzle */
 #include "world.h"
@@ -653,7 +655,8 @@ void FUN_0003195c(int sx, int t, int flag, int px, int py, int thrown, int redra
 /* ---- from build/var/mod/parts/p31adc.c */
 /* FUN_00031adc @ 00031adc */
 struct R22 { unsigned char flags; char pad[2]; unsigned short type; char pad2[17]; };
-extern struct R22 B00064d8b_a7[];
+#define B00064d8b_a7 (*(struct R22 (*)[])((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
+
 extern int FUN_0003ad18(int); extern void FUN_00026524(int);
 int FUN_00031adc(int i, int c)
 {
@@ -668,7 +671,8 @@ int FUN_00031adc(int i, int c)
 /* ---- from build/var/mod/parts/p31b44.c */
 /* FUN_00031b44 @ 00031b44: on first sight (t == 0) of a talking monster e, say its greeting line; 1 when one was said */
 extern int FUN_0003ade0(int); extern void FUN_0002cd48(int, int, int, int, int, int, int, int, int);
-extern unsigned short B00064d8e_a6;
+#define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
+
 int FUN_00031b44(int e, int t)
 {
     int r = 0;
@@ -954,7 +958,7 @@ extern void FUN_00031f70(void); /* module prototype */
 #define DAT_0005759c ((char *)DAT_0005759c)
 extern unsigned short B00077148_eJ;
 #define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
-extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], B00077148_eJ, B00064d8e_a6, B00067626_hm, B00072246_dJ;
+extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], B00077148_eJ, B00067626_hm, B00072246_dJ;
 extern unsigned char DAT_00058602, DAT_0005cf68; 
 extern int FUN_0003ac80(int), FUN_0001f4b0(short), FUN_0002c1dc(int), FUN_0003ad18(int), FUN_0003ade0(int), FUN_0003acdc(int);
 extern int FUN_00034478(int, int), FUN_000343e0(int, int);

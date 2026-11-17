@@ -1237,7 +1237,7 @@ void FUN_0001ae30(void)
 #undef FUN_00038110
 /* ---- from src/CODE2/f1aed8.c (round 62 second blind rewrite) */
 #include "world.h"
-#define B00064d80_ay ((struct ENT *)B00064d80_ay)
+#define M00064d80_ay ((struct ENT *)B00064d80_ay)
 struct ENT { int y, x; unsigned lo : 24, fb0 : 1, dead : 1, fb2 : 2, st : 2, fb6 : 2;
     unsigned short cell, type; short timer, hp; unsigned short w14; };
 struct MT { char name[0x16]; unsigned short rad; char p18[0x16]; unsigned f2e : 31, nokill : 1; int imm; char p36[0xf]; };
@@ -1258,11 +1258,11 @@ void FUN_0001aed8(int who)
                 if (x >= 0 && x < B00075618_b1.w) {
                     cell = B00075618_b1.w * y + x;
                     for (i = 0; i < B00075618_b1.nent; i++) {
-                        if (!B00064d80_ay[i].dead && FUN_0003acdc(B00064d80_ay[i].type) && B00064d80_ay[i].type != 8 && B00064d80_ay[i].cell == cell) {
+                        if (!M00064d80_ay[i].dead && FUN_0003acdc(M00064d80_ay[i].type) && M00064d80_ay[i].type != 8 && M00064d80_ay[i].cell == cell) {
                             if (n <= 0) return;
-                            if (!((struct MT *)(B00072230_c4 + B00064d80_ay[i].type * 0x45))->nokill) {
+                            if (!((struct MT *)(B00072230_c4 + M00064d80_ay[i].type * 0x45))->nokill) {
                                 n--;
-                                FUN_0001e284(&B00064d80_ay[i], B00072230_c4 + B00064d80_ay[i].type * 0x45, i, B00064d80_ay[i].hp + 1, 0);
+                                FUN_0001e284(&M00064d80_ay[i], B00072230_c4 + M00064d80_ay[i].type * 0x45, i, M00064d80_ay[i].hp + 1, 0);
                             }
                         }
                     }
@@ -1272,7 +1272,7 @@ void FUN_0001aed8(int who)
     }
 }
 
-#undef B00064d80_ay
+#undef M00064d80_ay
 /* ---- from src/CODE2/wip/f1b02c.c (round 66 lane BG) */
 /* MATCH round 66 lane BG (module m186c4.c context, -3s -ox -oe -oa -ot -w0): 996/994 (the +2 is the alignment pad).
    (a) do-loop zero EBP -> EDI: the a-loop as `for (a = a0; ; a++) { if (a > a1) break; ... }` (no guard twist from
@@ -1290,8 +1290,8 @@ struct SPX { union FX a, b; int dir; unsigned short cell, type; short timer, w12
 struct EFL { int a, b; int fl; unsigned short s, type; short timer, hp; unsigned short w14; };
 struct MCELL { unsigned short lo : 6, seen : 1, door : 1, rest : 8; };
 #define B000748ec_bk ((struct SPX *)B000748ec_bk)
-#define B00064d80_ay ((struct EFL *)B00064d80_ay)
-#define B000698e0_b7 ((struct MCELL *)B000698e0_b7)
+#define M00064d80_ay ((struct EFL *)B00064d80_ay)
+#define M000698e0_b7 ((struct MCELL *)B000698e0_b7)
 extern int B000758bc_al;
 extern short FUN_0002e930(int);
 void FUN_0001b02c(int a0, int a1, int range, int dmg, int mask, int mark, int kind, int snd, int px, int py)
@@ -1328,9 +1328,9 @@ void FUN_0001b02c(int a0, int a1, int range, int dmg, int mask, int mark, int ki
             x.v += dx;
             if (y.s.i >= B00075618_b1.h || x.s.i >= B00075618_b1.w) continue;
             cell = y.s.i * B00075618_b1.w + x.s.i;
-            if (B000698e0_b7[cell].door) {
+            if (M000698e0_b7[cell].door) {
                 if (FUN_0002e930(cell)) hit = 1;
-            } else if (B000698e0_b7[cell].lo) hit = 1;
+            } else if (M000698e0_b7[cell].lo) hit = 1;
             if (hit) break;
             if (mark) {
                 for (i = 0; i < DAT_0005c038; i++)
@@ -1349,15 +1349,15 @@ void FUN_0001b02c(int a0, int a1, int range, int dmg, int mask, int mark, int ki
                 if (kind == 8) B000748ec_bk[i].fr = (unsigned)rand() * 3 >> 15;
                 DAT_0005c038++;
                 for (k = 0; k <= B00075618_b1.nent; k++) {
-                    if (!(B00064d80_ay[k].fl & 0x2000000) && B00064d80_ay[k].s == cell && (B00064d80_ay[k].fl & 0x10000000) && B00064d80_ay[k].hp != 0) {
+                    if (!(M00064d80_ay[k].fl & 0x2000000) && M00064d80_ay[k].s == cell && (M00064d80_ay[k].fl & 0x10000000) && M00064d80_ay[k].hp != 0) {
                         if (kind == 0xb) {
-                            if (B00064d80_ay[k].type == 8 && B00064d80_ay[k].hp <= 10) {
-                                B00064d80_ay[k].hp -= 2;
-                                FUN_0001e284(&B00064d80_ay[k], B00072230_c4 + B00064d80_ay[k].type * 0x45, k, 0, 0);
+                            if (M00064d80_ay[k].type == 8 && M00064d80_ay[k].hp <= 10) {
+                                M00064d80_ay[k].hp -= 2;
+                                FUN_0001e284(&M00064d80_ay[k], B00072230_c4 + M00064d80_ay[k].type * 0x45, k, 0, 0);
                             }
                         } else {
-                            t = B00072230_c4 + B00064d80_ay[k].type * 0x45;
-                            if (!(*(int *)(t + 0x31) & mask)) FUN_0001e284(&B00064d80_ay[k], t, k, dmg, 0);
+                            t = B00072230_c4 + M00064d80_ay[k].type * 0x45;
+                            if (!(*(int *)(t + 0x31) & mask)) FUN_0001e284(&M00064d80_ay[k], t, k, dmg, 0);
                         }
                     }
                 }
@@ -1389,8 +1389,8 @@ void FUN_0001b02c(int a0, int a1, int range, int dmg, int mask, int mark, int ki
 }
 
 #undef B000748ec_bk
-#undef B00064d80_ay
-#undef B000698e0_b7
+#undef M00064d80_ay
+#undef M000698e0_b7
 
 /* ---- from src/CODE2/f1b410.c */
 extern void FUN_00018c88(int i); /* module prototype */
@@ -1400,7 +1400,10 @@ extern void FUN_00018c88(int i); /* module prototype */
 #define FUN_0001e284 ((void (*)(void *, int, int, int, int))FUN_0001e284)
 #define FUN_00038110 ((void (*)(void *, int, int, int))FUN_00038110)
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void);
-extern int DAT_0005c038, B00064d84_aE; extern unsigned short B00064d8c_bX, B00064d8e_a6;
+#define B00064d8c_bX (*(unsigned short *)((char *)&B00064d80_ay + 12)) /* STANDIN: view, B00064d80_ay + 0xc */
+#define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
+#define B00064d84_aE (*(int *)((char *)&B00064d80_ay + 4)) /* STANDIN: view, B00064d80_ay + 0x4 */
+extern int DAT_0005c038; 
 #define CORPSE(o) ((char *)&B000748ec_bk + DAT_0005c038 * 0x16 + (o))
 void FUN_0001b410(int i)
 {
@@ -1442,17 +1445,17 @@ void FUN_0001b410(int i)
 #include <stdlib.h>
 #include "dice.h"
 #include "world.h"
-#define B00064d80_ay ((char *)B00064d80_ay)
+#define M00064d80_ay ((char *)B00064d80_ay)
 #define M000718e0_iO ((char *)&B000718e0_iO)
 #define B00072230_c4 ((char *)B00072230_c4)
 #define FUN_0001e284 ((void (*)(char *, char *, int, int, int))FUN_0001e284)
 void *memset(void *, int, unsigned);
 extern int FUN_00032e40(int, int); 
   extern int B000755d4_ak, B000755d0_ao; extern signed char DAT_000567b2[];
-#define EI(k, o) (*(int *)(B00064d80_ay + (k) + (o)))
-#define EU(k, o) (*(unsigned short *)(B00064d80_ay + (k) + (o)))
+#define EI(k, o) (*(int *)(M00064d80_ay + (k) + (o)))
+#define EU(k, o) (*(unsigned short *)(M00064d80_ay + (k) + (o)))
 /* Round 54 (8 compiles + trace): slots k / roll / lv rotated (here k, roll, lv top-down; original roll, lv, k) and dy in EBX (original EBP); sw.py: only an inserted size-1/2 temp at input 12 .. 59 (or t85 moved). Byte views of the int flag tests change the code (test dword stays in 10.0a: 17-23), byte |= 0x10 (13), k += 1 / k = 0 before the for / nent > k (13). */
-#undef B00064d80_ay
+#undef M00064d80_ay
 #undef M000718e0_iO
 #undef B00072230_c4
 #undef FUN_0001e284
@@ -1461,7 +1464,7 @@ struct E61 { int a, b; int fl; unsigned short s, type; short timer, hp; unsigned
 struct MT61 { char name[0x16]; unsigned short rad; char p18[5]; unsigned char hd; char p1e[0x13]; int f31; char p35[5]; int f3a; char p3e[7]; };
 struct PC61 { char p0[0x132]; int st; char rest[0x248 - 0x136]; };
 #pragma pack()
-#define B00064d80_ay ((struct E61 *)B00064d80_ay)
+#define M00064d80_ay ((struct E61 *)B00064d80_ay)
 #define B00072230_c4 ((struct MT61 *)B00072230_c4)
 #define M000718e0_iO ((struct PC61 *)&B000718e0_iO)
 #define FUN_0001e284 ((void (*)(struct E61 *, struct MT61 *, int, int, int))FUN_0001e284)
@@ -1476,23 +1479,23 @@ void FUN_0001b518(int i, int evil)
     else lvl = FUN_00032e40(i, 3);
     n = FUN_0002c328(2, 6, 0, 0);
     for (k = 0; k < B00075618_b1.nent; k++) {
-        if (!B000698e0_b7[B00064d80_ay[k].s].seen) continue;
-        if (!(B00072230_c4[B00064d80_ay[k].type].f3a & 0x20)) continue;
-        dx = B000755d0_ao - B00064d80_ay[k].b;
-        dy = B000755d4_ak - B00064d80_ay[k].a;
+        if (!B000698e0_b7[M00064d80_ay[k].s].seen) continue;
+        if (!(B00072230_c4[M00064d80_ay[k].type].f3a & 0x20)) continue;
+        dx = B000755d0_ao - M00064d80_ay[k].b;
+        dy = B000755d4_ak - M00064d80_ay[k].a;
         if (abs(dy) >= 0xa0000 || abs(dx) >= 0xa0000) continue;
-        t = B00072230_c4[B00064d80_ay[k].type].hd;
+        t = B00072230_c4[M00064d80_ay[k].type].hd;
         r = 12 - t + lvl;
         if (n || (t < 6 && left[t - 1])) {
             if (DAT_000567b2[r] < 0) {
                 n--;
-                FUN_0001e284(&B00064d80_ay[k], &B00072230_c4[B00064d80_ay[k].type], k, B00064d80_ay[k].hp, 0);
+                FUN_0001e284(&M00064d80_ay[k], &B00072230_c4[M00064d80_ay[k].type], k, M00064d80_ay[k].hp, 0);
                 if (DAT_000567b2[r] == -2) left[t - 1] = FUN_0002c328(2, 4, 0, 0);
             } else {
-                if (B00072230_c4[B00064d80_ay[k].type].f31 & 4) roll -= 4;
+                if (B00072230_c4[M00064d80_ay[k].type].f31 & 4) roll -= 4;
                 if (DAT_000567b2[r] <= roll) {
                     n--;
-                    B00064d80_ay[k].fl |= 0x10;
+                    M00064d80_ay[k].fl |= 0x10;
                 }
             }
         }
@@ -1500,8 +1503,8 @@ void FUN_0001b518(int i, int evil)
 }
 
 
-#undef B00064d80_ay
-#undef B000698e0_b7
+#undef M00064d80_ay
+#undef M000698e0_b7
 #undef M000718e0_iO
 #undef B00072230_c4
 #undef FUN_0001e284
@@ -1512,15 +1515,15 @@ void FUN_0001b518(int i, int evil)
    Round 61 (blind rewrite): the entity record's +8..+0xb is one int flag word (the original writes +8 as a dword in FUN_0001e0f8 and
    FUN_000281b4 too); the word-sized OR constant is the conflict node the byte form (f9 |= 2) lacked. */
 struct MF { int a, b; int fl; unsigned short s, type; short timer, hp; unsigned short w14; };
-#define B00064d80_ay ((struct MF *)B00064d80_ay)
+#define M00064d80_ay ((struct MF *)B00064d80_ay)
 void FUN_0001b6f4(void)
 {
     int i;
     for (i = 0; i < B00075618_b1.nent; i++)
-        if (!(B00064d80_ay[i].fl & 0x2000000) && (((struct MTYPE *)B00072230_c4)[B00064d80_ay[i].type].f3a & 0x20))
-            B00064d80_ay[i].fl |= 0x200;
+        if (!(M00064d80_ay[i].fl & 0x2000000) && (((struct MTYPE *)B00072230_c4)[M00064d80_ay[i].type].f3a & 0x20))
+            M00064d80_ay[i].fl |= 0x200;
 }
-#undef B00064d80_ay
+#undef M00064d80_ay
 
 /* ---- from src/CODE2/wip/f1b950.c */
 /* Round 64 lane AM: MATCH in module context (realcc). */
@@ -1555,13 +1558,13 @@ extern void FUN_0002c77c(int, int);
 #define FUN_00018a80 ((void (*)(int, int, int, int, int))FUN_00018a80)
 #define FUN_00038110 ((void (*)(int, int, int, int))FUN_00038110)
 extern int FUN_00032e40(int, int), FUN_00029cc4(void);
-#undef B00064d80_ay
+#undef M00064d80_ay
 #undef M000718e0_iO
 #undef B00072230_c4
 #undef MASK
 #define M000718e0_iO ((struct PC *)&B000718e0_iO)
-#define B00064d80_ay ((struct MF *)B00064d80_ay)
-#define MTF(t, o) (*(int *)(B00072230_c4 + B00064d80_ay[t].type * 0x45 + (o)))
+#define M00064d80_ay ((struct MF *)B00064d80_ay)
+#define MTF(t, o) (*(int *)(B00072230_c4 + M00064d80_ay[t].type * 0x45 + (o)))
 #define PF ((unsigned char *)DAT_0005d684 - 0x72a) /* STANDIN: the portrait flags DAT_0005cf5a[] addressed through the neighbouring array DAT_0005d684, so that this function takes no address of DAT_0005cf5a: the scalar store of the inlined FUN_0001a60c keeps its -oa memory node (pass-1 list as with the old alias) */
 /* FUN_0001b950 @ 0001b950: cast spell sp for character who */
 int FUN_0001b950(unsigned sp, int who)
@@ -1594,7 +1597,7 @@ int FUN_0001b950(unsigned sp, int who)
         t = FUN_000195c0();
         if (t != -1) {
             FUN_0001e578(who);
-            FUN_0001b02c(-0xb4, 0xb4, 7, FUN_0002c328(3, 0xa, 0, 0), 0x900, 1, 9, 0x2c, B00064d80_ay[t].b, B00064d80_ay[t].a);
+            FUN_0001b02c(-0xb4, 0xb4, 7, FUN_0002c328(3, 0xa, 0, 0), 0x900, 1, 9, 0x2c, M00064d80_ay[t].b, M00064d80_ay[t].a);
         } else r = 0;
         break;
     case 0:
@@ -1729,7 +1732,7 @@ int FUN_0001b950(unsigned sp, int who)
         t = FUN_000195c0();
         if (t != -1) {
             FUN_00038110(B000758d4_jG + 0x43, 0xff, 0, 1);
-            if (!(MTF(t, 0x32) & 1)) B00064d80_ay[t].fl |= 0x80;
+            if (!(MTF(t, 0x32) & 1)) M00064d80_ay[t].fl |= 0x80;
         } else {
             if (t == -1) r = -1; else r = 0; /* STANDIN: a second test of t on the shared t == -1 path - the dead cmp eax,eax / jne the original keeps there */
         }
@@ -1739,8 +1742,8 @@ int FUN_0001b950(unsigned sp, int who)
         if (t != -1) {
             FUN_00038110(B000758d4_jG + 0x2a, 0xff, 0, 1);
             if (!(MTF(t, 0x31) & 0x102)) {
-                B00064d80_ay[t].fl |= 8;
-                B00064d80_ay[t].timer = (FUN_00032e40(4, who) + FUN_0002c328(1, 4, 0, 0)) * 0x438;
+                M00064d80_ay[t].fl |= 8;
+                M00064d80_ay[t].timer = (FUN_00032e40(4, who) + FUN_0002c328(1, 4, 0, 0)) * 0x438;
             }
         } else {
             if (t == -1) r = -1; else r = 0; /* STANDIN: a second test of t on the shared t == -1 path - the dead cmp eax,eax / jne the original keeps there */
@@ -1751,8 +1754,8 @@ int FUN_0001b950(unsigned sp, int who)
         if (t != -1) {
             FUN_00038110(B000758d4_jG + 0x27, 0xff, 0, 1);
             if (!(MTF(t, 0x31) & 0x108)) {
-                B00064d80_ay[t].fl |= 8;
-                B00064d80_ay[t].timer = FUN_00032e40(4, who) * 0x870;
+                M00064d80_ay[t].fl |= 8;
+                M00064d80_ay[t].timer = FUN_00032e40(4, who) * 0x870;
             }
         } else {
             if (t == -1) r = -1; else r = 0; /* STANDIN: a second test of t on the shared t == -1 path - the dead cmp eax,eax / jne the original keeps there */
@@ -1763,8 +1766,8 @@ int FUN_0001b950(unsigned sp, int who)
         if (t != -1) {
             FUN_00038110(B000758d4_jG + 0x28, 0xff, 0, 1);
             if (!(MTF(t, 0x31) & 0x108)) {
-                B00064d80_ay[t].fl |= 8;
-                B00064d80_ay[t].timer = FUN_00032e40(3, who) * 0x870;
+                M00064d80_ay[t].fl |= 8;
+                M00064d80_ay[t].timer = FUN_00032e40(3, who) * 0x870;
             }
         } else {
             if (t == -1) r = -1; else r = 0; /* STANDIN: a second test of t on the shared t == -1 path - the dead cmp eax,eax / jne the original keeps there */
@@ -1775,8 +1778,8 @@ int FUN_0001b950(unsigned sp, int who)
         if (t != -1) {
             FUN_00038110(B000758d4_jG + 0x29, 0xff, 0, 1);
             if (!(MTF(t, 0x31) & 0x110)) {
-                B00064d80_ay[t].fl |= 8;
-                B00064d80_ay[t].timer = FUN_00032e40(4, who) * 0x438;
+                M00064d80_ay[t].fl |= 8;
+                M00064d80_ay[t].timer = FUN_00032e40(4, who) * 0x438;
             }
         } else {
             if (t == -1) r = -1; else r = 0; /* STANDIN: a second test of t on the shared t == -1 path - the dead cmp eax,eax / jne the original keeps there */
@@ -1887,8 +1890,8 @@ int FUN_0001b950(unsigned sp, int who)
 
 #undef PF
 #undef MTF
-#undef B00064d80_ay
-#undef B00064d80_ay
+#undef M00064d80_ay
+#undef M00064d80_ay
 #undef M000718e0_iO
 #undef B00072230_c4
 #undef FUN_00018a80

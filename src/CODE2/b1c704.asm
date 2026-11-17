@@ -29,10 +29,7 @@ B0006762e_es label byte
     db 6578 dup(?)
 public B00068fe0_eN
 B00068fe0_eN label byte
-    db 4 dup(?)
-public B00068fe4_eJ
-B00068fe4_eJ label byte
-    db 1020 dup(?)
+    db 1024 dup(?)
 public B000693e0_hM
 B000693e0_hM label byte
     db 640 dup(?)
@@ -41,10 +38,7 @@ B00069660_dl label byte
     db 640 dup(?)
 public B000698e0_b7
 B000698e0_b7 label byte
-    db 1 dup(?)
-public B000698e1_b6
-B000698e1_b6 label byte
-    db 107 dup(?)
+    db 108 dup(?)
 public B0006994c_hI
 B0006994c_hI label byte
     db 32660 dup(?)

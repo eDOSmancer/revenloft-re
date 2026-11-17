@@ -217,7 +217,14 @@ extern int FUN_00014040(void); /* module prototype */
 int abs(int);
 #pragma intrinsic(abs)
 extern int FUN_0003acdc(int);
-extern int DAT_00056688, DAT_0005c6c8; extern int B000755d0_ao, B000755d4_ak; extern short B00064d82_aG, B00064d86_aC; extern unsigned short B00064d8e_a6, B00064d8c_bX, B000698e0_b7, B000698e1_b6; extern int B00064d8b_a7;
+#define B000698e1_b6 (*(unsigned short *)((char *)&B000698e0_b7 + 1)) /* STANDIN: view, B000698e0_b7 + 0x1 */
+#define B00064d8b_a7 (*(int *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
+#define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
+#define B00064d8c_bX (*(unsigned short *)((char *)&B00064d80_ay + 12)) /* STANDIN: view, B00064d80_ay + 0xc */
+extern struct ENT B00064d80_ay[];
+#define B00064d82_aG (*(short *)((char *)&B00064d80_ay + 2)) /* STANDIN: view, B00064d80_ay + 0x2 */
+#define B00064d86_aC (*(short *)((char *)&B00064d80_ay + 6)) /* STANDIN: view, B00064d80_ay + 0x6 */
+extern int DAT_00056688, DAT_0005c6c8; extern int B000755d0_ao, B000755d4_ak;  extern unsigned short B000698e0_b7; 
 #define ENT(sym, i) (*(&sym + 0) , 0)
 #define ENT_FL(i) (*(int *)((char *)&B00064d8b_a7 + (i) * 0x16))
 #define ENT_ID(i) (*(unsigned short *)((char *)&B00064d8e_a6 + (i) * 0x16))

@@ -1,25 +1,9 @@
 ; b186c4.asm - uninitialised data (_BSS) of module m186c4.c, 10384 bytes
-; STANDIN: these variables were defined in the C file.  They are defined here, in address order, because wcc386
-; writes the _BSS of a module in symbol-hash order and the hash depends on the (unknown) original names.
+; STANDIN: part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md).
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
-    db 3 dup(?)
-public B00064d8b_a7
-B00064d8b_a7 label byte
-    db 1 dup(?)
-public B00064d8c_bX
-B00064d8c_bX label byte
-    db 2 dup(?)
-public B00064d8e_a6
-B00064d8e_a6 label byte
-    db 4 dup(?)
-public B00064d92_aW
-B00064d92_aW label byte
-    db 2 dup(?)
-public B00064d94_aU
-B00064d94_aU label byte
-    db 2180 dup(?)
+    db 2192 dup(?)
 public B00065618_e1
 B00065618_e1 label byte
     db 1024 dup(?)

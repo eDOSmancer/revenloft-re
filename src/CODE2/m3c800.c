@@ -43,7 +43,7 @@ int FUN_0003c800(unsigned y, unsigned x, int skip)
 #define O T1_O
 /* FUN_0003c8e4 @ 0003c8e4: is (y, x) inside a living person monster other than skip; unoptimised module */
 struct O { int a, b; unsigned char f8, f9, fa; unsigned char fb0 : 1, dead : 1, fb2 : 6; unsigned short s, type; short timer, w12; unsigned short w14; };
-#define B00064d80_ay ((struct O *)B00064d80_ay)
+#define M00064d80_ay ((struct O *)B00064d80_ay)
 extern int FUN_0003acdc(int);
 int FUN_0003c8e4(unsigned y, unsigned x, int skip)
 {
@@ -51,13 +51,13 @@ int FUN_0003c8e4(unsigned y, unsigned x, int skip)
         int i; int r; unsigned y0; unsigned y1; unsigned x0; unsigned x1;
         for (i = 0; i < B00075618_b1.nent; i++) {
             if (i == skip) continue;
-            if (!FUN_0003acdc(B00064d80_ay[i].type)) continue;
-            if (B00064d80_ay[i].dead) continue;
-            y1 = B00064d80_ay[i].b;
+            if (!FUN_0003acdc(M00064d80_ay[i].type)) continue;
+            if (M00064d80_ay[i].dead) continue;
+            y1 = M00064d80_ay[i].b;
             y0 = y1;
-            x1 = B00064d80_ay[i].a;
+            x1 = M00064d80_ay[i].a;
             x0 = x1;
-            r = *(unsigned short *)(B00072230_c4 + B00064d80_ay[i].type * 0x45 + 0x16);
+            r = *(unsigned short *)(B00072230_c4 + M00064d80_ay[i].type * 0x45 + 0x16);
             y0 -= r;
             y1 += r;
             x0 -= r;
@@ -68,7 +68,7 @@ int FUN_0003c8e4(unsigned y, unsigned x, int skip)
     }
 }
 
-#undef B00064d80_ay
+#undef M00064d80_ay
 #undef O
 /* ---- from build/var/mod/parts/p3c9dc.c */
 /* FUN_0003c9dc @ 0003c9dc: is the point (y, x) within 0x8fa0 of the party on both axes; debug-info module (-3s -d2 -oe -s: -d2 keeps "add [mem],-c" that -od turns into sub; locals in an inner block; first-declared gets the lowest slot) */
@@ -175,7 +175,7 @@ struct O { int a, b; unsigned char f8, f9, fa, fb; unsigned short s, type; short
 
 extern unsigned char *B000755dc_aX; extern int DAT_0005c6c8;
 #define B00072238_dL ((struct SO *)B00072238_dL)
-#define B00064d80_ay ((struct O *)B00064d80_ay)
+#define M00064d80_ay ((struct O *)B00064d80_ay)
 #define B00072230_c4 (*(struct MT **)&B00072230_c4)
 #define B000755d0_ao (*(int *)&B000755d0_ao)
 #define B000755d4_ak (*(int *)&B000755d4_ak)
@@ -222,7 +222,7 @@ int FUN_0003cc88(unsigned y, unsigned x, int who)
                 } else return 1;
             } else {
                 if (who >= 0 && who < 400) {
-                    if (B00072230_c4[B00064d80_ay[who].type].ghost) return 0;
+                    if (B00072230_c4[M00064d80_ay[who].type].ghost) return 0;
                 }
                 return 1;
             }
@@ -231,7 +231,7 @@ int FUN_0003cc88(unsigned y, unsigned x, int who)
     return 0;
 }
 
-#undef B00064d80_ay
+#undef M00064d80_ay
 #undef B00072230_c4
 #undef B00072238_dL
 #undef B000755d0_ao
@@ -408,7 +408,7 @@ extern void FUN_0003d2f4(void); /* module prototype */
 #define O T11_O
 /* FUN_0003d3d8 @ 0003d3d8: teleport the party to map cell (cy, cx) of level lev, turning by dirs * 45 degrees; monsters standing there are pushed away; debug-info module */
 struct O { int a, b; unsigned char f8, f9, fa; unsigned char fb0 : 1, dead : 1, fb2 : 6; unsigned short s, type; short timer, w12; unsigned short w14; };
-#define B00064d80_ay ((struct O *)B00064d80_ay)
+#define M00064d80_ay ((struct O *)B00064d80_ay)
 
 extern unsigned B000755d0_ao, B000755d4_ak; extern int DAT_0005c658, DAT_0005c6c8;
 extern int FUN_0001e0f8(int);
@@ -427,19 +427,19 @@ void FUN_0003d3d8(int y, int x, int cy, int cx, int dirs, int lev)
     old = DAT_0005c6c8;
     FUN_000281b4(lev);
     for (i = 0; i < B00075618_b1.nent; i++) {
-        if (B00064d80_ay[i].dead) continue;
-        b = B00064d80_ay[i].b;
+        if (M00064d80_ay[i].dead) continue;
+        b = M00064d80_ay[i].b;
         a = b;
-        d = B00064d80_ay[i].a;
+        d = M00064d80_ay[i].a;
         c = d;
-        r = *(unsigned short *)(B00072230_c4 + B00064d80_ay[i].type * 0x45 + 0x16);
+        r = *(unsigned short *)(B00072230_c4 + M00064d80_ay[i].type * 0x45 + 0x16);
         a -= r * 2;
         b += r * 2;
         c -= r * 2;
         d += r * 2;
         if ((B000755d0_ao >= a && B000755d0_ao <= b) && (B000755d4_ak >= c && B000755d4_ak <= d)) {
             for (y = 0; y < 3; y++) {
-                if (B00064d80_ay[i].type == B00075618_b1.aa[y]) {
+                if (M00064d80_ay[i].type == B00075618_b1.aa[y]) {
                     if (FUN_0001e0f8(i)) break;
                 }
             }
@@ -452,7 +452,7 @@ void FUN_0003d3d8(int y, int x, int cy, int cx, int dirs, int lev)
     if (found) FUN_00038110(7, 0xff, 1, 1);
 }
 
-#undef B00064d80_ay
+#undef M00064d80_ay
 #undef O
 /* ---- from build/var/mod/parts/p3d5d0.c */
 extern int FUN_0003c800(unsigned y, unsigned x, int skip); /* module prototype */
@@ -467,7 +467,7 @@ struct MK { unsigned char kind; unsigned char b0 : 2, on : 1, b3 : 3, lock : 1, 
 struct O { int a, b; unsigned char f8, f9, fa, fb; unsigned short s, type; short timer, w12; unsigned short w14; };
 struct TY { unsigned char pad[0x39]; unsigned char b0 : 6, open : 1, ghost : 1; unsigned char rest[0xb]; };
 extern struct CELL B000698e0_b7[];
-#define B00064d80_ay ((struct O *)B00064d80_ay)
+#define M00064d80_ay ((struct O *)B00064d80_ay)
 #define B00072230_c4 (*(struct TY **)&B00072230_c4)
  extern int DAT_0005f048;
 extern struct MK *FUN_0002e8c8(int, int);
@@ -499,7 +499,7 @@ short FUN_0003d5d0(int x, int y, int who)
                 if (door) {
                     if (p && p->kind != 8) {
                         if (door == 0x8000) {
-                            if (p->on && !p->lock && (who >= 0 && who < 0x190) && B00072230_c4[B00064d80_ay[who].type].open) {
+                            if (p->on && !p->lock && (who >= 0 && who < 0x190) && B00072230_c4[M00064d80_ay[who].type].open) {
                                 if (!p->a7) {
                                     sv = p->on;
                                     p->on = 1;
@@ -511,7 +511,7 @@ short FUN_0003d5d0(int x, int y, int who)
                             }
                         } else {
                             if (who >= 0 && who < 0x190) {
-                                if (!B00072230_c4[B00064d80_ay[who].type].ghost) blocked = 1;
+                                if (!B00072230_c4[M00064d80_ay[who].type].ghost) blocked = 1;
                             } else blocked = 1;
                         }
                     }
@@ -559,7 +559,7 @@ short FUN_0003d5d0(int x, int y, int who)
     return !blocked;
 }
 
-#undef B00064d80_ay
+#undef M00064d80_ay
 #undef B00072230_c4
 #undef O
 /* ---- from build/var/mod/parts/p3d9fc.c */
@@ -587,7 +587,7 @@ void FUN_0003d9fc(void)
 #define CELL T14_CELL
 /* FUN_0003da7c @ 0003da7c: next to map cell c a hidden door may be spotted by the first able elf (1 in 6) or dwarf (4 in 6); unoptimised module */
 struct CELL { unsigned short lo : 10, b10 : 1, b11 : 1, rest : 4; };
-#define B000698e0_b7 ((struct CELL *)B000698e0_b7)
+#define M000698e0_b7 ((struct CELL *)B000698e0_b7)
 extern short B00077108_dk[];
 extern unsigned short B000718f0_hO[]; 
 extern int FUN_0002c328(int, int, int, int); extern void FUN_0002c77c(int, int);
@@ -595,8 +595,8 @@ void FUN_0003da7c(int c)
 {
     int i; int j;
     for (i = 0; i < 8; i++) {
-        if (B000698e0_b7[B00077108_dk[i] + c].b11) {
-            if (!B000698e0_b7[B00077108_dk[i] + (c + B00077108_dk[i])].b10) {
+        if (M000698e0_b7[B00077108_dk[i] + c].b11) {
+            if (!M000698e0_b7[B00077108_dk[i] + (c + B00077108_dk[i])].b10) {
                 for (j = 0; j < 4; j++) {
                     if (*(unsigned short *)((char *)B000718f0_hO + j * 0x248) & 0xf240) continue;
                     if (B000718f4_h3[j * 0x248] == 5) {
@@ -618,7 +618,7 @@ void FUN_0003da7c(int c)
 }
 
 #undef CELL
-#undef B000698e0_b7
+#undef M000698e0_b7
 /* ---- from build/var/mod/parts/p3dbac.c */
 extern void FUN_0003d3d8(int y, int x, int cy, int cx, int dirs, int lev); /* module prototype */
 extern short FUN_0003d5d0(int x, int y, int who); /* module prototype */
@@ -627,7 +627,7 @@ extern void FUN_0003da7c(int c); /* module prototype */
 #define MK T15_MK
 /* FUN_0003dbac @ 0003dbac: move the party by (dx, dy), sliding along walls; on entering a new square handle its markers (wall plate light, teleport/trap/turn objects); debug-info module */
 struct CELL { unsigned short lo : 6, mid : 5, mark : 1, rest : 4; };
-#define B000698e0_b7 ((struct CELL *)B000698e0_b7)
+#define M000698e0_b7 ((struct CELL *)B000698e0_b7)
 #define FUN_00038110 ((void (*)(void *, int, int, int))FUN_00038110)
 extern void FUN_000102a8(int);
 struct MK { unsigned char kind; unsigned char b0 : 2, on : 1, b3 : 5; signed char a2, a3; unsigned char a4, a5, a6, a7, a8, a9; };
@@ -661,8 +661,8 @@ void FUN_0003dbac(int dx, int dy)
     if (((short *)&B000755d4_ak)[1] != DAT_0005f044 || ((short *)&B000755d0_ao)[1] != DAT_0005f040) {
         cell = B00075618_b1.w * DAT_0005f044 + DAT_0005f040;
         FUN_0003da7c(cell);
-        if (B000698e0_b7[cell].mark) {
-            B000698e0_b7[cell].lo = B0007b638_d2;
+        if (M000698e0_b7[cell].mark) {
+            M000698e0_b7[cell].lo = B0007b638_d2;
             FUN_00038110(B000758bc_al + 10, 0xff, 1, 4);
         }
         if (DAT_0005f044 != -1 && !DAT_0005f048) {
@@ -683,10 +683,10 @@ void FUN_0003dbac(int dx, int dy)
         DAT_0005f040 = ((short *)&B000755d0_ao)[1];
         DAT_0005f044 = ((short *)&B000755d4_ak)[1];
         cell = B00075618_b1.w * DAT_0005f044 + DAT_0005f040;
-        if (B000698e0_b7[cell].mark) {
+        if (M000698e0_b7[cell].mark) {
             FUN_00038110(B000758bc_al + 10, 0xff, 1, 4);
-            B0007b638_d2 = B000698e0_b7[cell].lo;
-            B000698e0_b7[cell].lo = 0;
+            B0007b638_d2 = M000698e0_b7[cell].lo;
+            M000698e0_b7[cell].lo = 0;
         }
         p = FUN_0002e8c8(((short *)&B000755d0_ao)[1], ((short *)&B000755d4_ak)[1]);
         if (p) {
@@ -710,7 +710,7 @@ void FUN_0003dbac(int dx, int dy)
 }
 
 #undef CELL
-#undef B000698e0_b7
+#undef M000698e0_b7
 #undef B000755d0_ao
 #undef B000755d4_ak
 #undef FUN_0002e8c8

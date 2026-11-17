@@ -24,7 +24,9 @@ extern int FUN_00013820(int n); /* module prototype */
    counter is a block-scope static (`static int used` at 0x56094, referenced nowhere else): the 10.0a front end drops
    FUNC_OK_TO_INLINE for a function that declares a static variable (OW1 cc/c/csym.c, block exit; round 15). */
 extern int FUN_000412a0(char *); extern void *FUN_0004104c(int); extern void FUN_000412ec(void *, unsigned, int), FUN_000412dc(int);
-extern char *DAT_0005c65c, *DAT_0005c664, *DAT_0005c660, *B000758c4_j7; extern char B00069660_dl[], B000693e0_hM[], DAT_0005c73c[]; extern int DAT_0005c6d8, DAT_0005c6d4, DAT_0005c6d0, DAT_0005c6dc, DAT_0005c6e0, B0007560c_hn, DAT_0005c6cc, B000755e0_bo, DAT_0005c738, DAT_0005c730, DAT_0005c734, DAT_00056090, B00065618_e1, B00068fe0_eN, B00068fe4_eJ;
+extern int B00068fe0_eN;
+#define B00068fe4_eJ (*(int *)((char *)&B00068fe0_eN + 4)) /* STANDIN: view, B00068fe0_eN + 0x4 */
+extern char *DAT_0005c65c, *DAT_0005c664, *DAT_0005c660, *B000758c4_j7; extern char B00069660_dl[], B000693e0_hM[], DAT_0005c73c[]; extern int DAT_0005c6d8, DAT_0005c6d4, DAT_0005c6d0, DAT_0005c6dc, DAT_0005c6e0, B0007560c_hn, DAT_0005c6cc, B000755e0_bo, DAT_0005c738, DAT_0005c730, DAT_0005c734, DAT_00056090, B00065618_e1, B00068fe0_eN;
 void FUN_00013838(void)
 {
     int fd, k, off, n; char *p;

@@ -1,6 +1,5 @@
 ; b13a78.asm - uninitialised data (_BSS) of module m13a78.c, 9768 bytes
-; STANDIN: these variables were defined in the C file.  They are defined here, in address order, because wcc386
-; writes the _BSS of a module in symbol-hash order and the hash depends on the (unknown) original names.
+; STANDIN: part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md).
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
@@ -111,15 +110,6 @@ B00064580_eK label byte
     db 2048 dup(?)
 public B00064d80_ay
 B00064d80_ay label byte
-    db 2 dup(?)
-public B00064d82_aG
-B00064d82_aG label byte
-    db 2 dup(?)
-public B00064d84_aE
-B00064d84_aE label byte
-    db 2 dup(?)
-public B00064d86_aC
-B00064d86_aC label byte
-    db 2 dup(?)
+    db 8 dup(?)
 _BSS ends
 end

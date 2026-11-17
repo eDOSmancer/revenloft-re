@@ -646,7 +646,11 @@ void FUN_0002520c(void)
 /* FUN_00025280 @ 00025280: script op: hide the entity named by the next word (or all 0x18s), show the 0x2a ones; the entity count is
    B00075618_b1.nent of struct LCNT (recipe 27: not cached under the module's -oa, reloaded per test as in the original) */
 #include "world.h"
-extern int DAT_00057fec; extern unsigned short B0006301e_ak[];   extern int B00064d8b_a7; extern unsigned short B00064d8e_a6, B00064d92_aW;
+#define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
+#define B00064d92_aW (*(unsigned short *)((char *)&B00064d80_ay + 18)) /* STANDIN: view, B00064d80_ay + 0x12 */
+extern unsigned char B00064d80_ay[];
+#define B00064d8b_a7 (*(int *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
+extern int DAT_00057fec; extern unsigned short B0006301e_ak[];    
 #define ENT_FL(i) (*(int *)((char *)&B00064d8b_a7 + (i) * 0x16))
 #define ENT_ID(i) (*(unsigned short *)((char *)&B00064d8e_a6 + (i) * 0x16))
 #define ENT_W12(i) (*(unsigned short *)((char *)&B00064d92_aW + (i) * 0x16))

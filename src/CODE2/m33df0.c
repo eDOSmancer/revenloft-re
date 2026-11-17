@@ -727,7 +727,9 @@ void FUN_000354d4(int i, int b, int slot)
 #include "world.h"
 void *memmove(void *, const void *, unsigned);
 extern void FUN_0002c124(int);
- extern unsigned short B00072246_dJ, B00072244_c8, B00064d8e_a6, B000698e0_b7; extern unsigned char B00072238_dL[]; extern int B00064d8b_a7;
+#define B00064d8b_a7 (*(int *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
+#define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
+ extern unsigned short B00072246_dJ, B00072244_c8, B000698e0_b7; extern unsigned char B00072238_dL[]; 
 #define DR_KIND(i) (*(unsigned short *)((char *)&B00072246_dJ + (i) * 0x16))
 #define DR_CELL(i) (*(unsigned short *)((char *)&B00072244_c8 + (i) * 0x16))
 #define CELLF(c) (*(int *)((char *)&B000698e0_b7 + (c) * 2))
@@ -762,7 +764,8 @@ extern void FUN_000351a0(int p, int s, int dx, int dy, int m); /* module prototy
  
 #include "world.h"
 extern int FUN_0002c1dc(int); extern void FUN_0002c124(int), FUN_00026524(int);
- extern unsigned short B00064d8e_a6, B00064d8c_bX, B000698e0_b7; extern int B00064d8b_a7, DAT_0005bf44;
+#define B00064d8c_bX (*(unsigned short *)((char *)&B00064d80_ay + 12)) /* STANDIN: view, B00064d80_ay + 0xc */
+ extern unsigned short B000698e0_b7; extern int DAT_0005bf44;
 #define ENT_ID(o) (*(unsigned short *)((char *)&B00064d8e_a6 + (o)))
 #define ENT_CELL(o) (*(unsigned short *)((char *)&B00064d8c_bX + (o)))
 #define ENT_FL(o) (*(int *)((char *)&B00064d8b_a7 + (o)))
@@ -803,7 +806,7 @@ extern void FUN_00034a9c(int who, int s); /* module prototype */
    savings to 236, so b sorts first and keeps EBP as in the original. */
 #include "world.h"
 extern int FUN_0002c1dc(int); extern void FUN_0002c124(int), FUN_00026524(int);
- extern unsigned short B00064d8e_a6, B00064d8c_bX, B000698e0_b7; extern int B00064d8b_a7, DAT_0005bf44;
+ extern unsigned short B000698e0_b7; extern int DAT_0005bf44;
 #define ENT_ID(i) (*(unsigned short *)((char *)&B00064d8e_a6 + (i) * 0x16))
 #define ENT_CELL(i) (*(unsigned short *)((char *)&B00064d8c_bX + (i) * 0x16))
 #define ENT_FL(i) (*(int *)((char *)&B00064d8b_a7 + (i) * 0x16))
@@ -842,7 +845,7 @@ extern void FUN_00034a9c(int who, int s); /* module prototype */
  
 #include "world.h"
 extern int FUN_0002c1dc(int); extern void FUN_00026524(int), FUN_0002c124(int);
- extern unsigned short B00064d8c_bX, B00064d8e_a6, B000698e0_b7;
+ extern unsigned short B000698e0_b7;
 #define ENT_ID(i) (*(unsigned short *)((char *)&B00064d8e_a6 + (i) * 0x16))
 #define ENT_CELL(i) (*(unsigned short *)((char *)&B00064d8c_bX + (i) * 0x16))
 #define CELLF(c) (*(int *)((char *)&B000698e0_b7 + (c) * 2))

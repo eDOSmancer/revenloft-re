@@ -619,7 +619,10 @@ void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
 struct SP { unsigned short x, z, a, id, hidden, key; char pad[10]; };
 extern char B00077148_eJ[];
 #define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
-extern int DAT_0005c050; extern unsigned short DAT_0005f038[]; extern char B00077148_eJ[];  extern int B00064d8b_a7; extern unsigned short B00064d8e_a6;
+#define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
+extern struct MON B00064d80_ay[];
+#define B00064d8b_a7 (*(int *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
+extern int DAT_0005c050; extern unsigned short DAT_0005f038[]; extern char B00077148_eJ[];   
 #define ENT_FL(i) (*(int *)((char *)&B00064d8b_a7 + (i) * 0x16))
 int FUN_0001dacc(int side)
 {
@@ -986,7 +989,7 @@ extern void FUN_0001e578(int i); /* module prototype */
 /* FUN_0001e5f0 @ 0001e5f0: party member who attacks with the weapon in hand (item wpn, -1 bare-handed) the target tgt (-1: pick one): roll to hit, roll damage by weapon, apply it, set the hand's recovery time; returns the hit result */
 #include <stdio.h>
 #include "world.h"
-#define B00064d80_ay ((struct ENT *)B00064d80_ay)
+#define M00064d80_ay ((struct ENT *)B00064d80_ay)
 #define M000718e0_iO ((char *)&B000718e0_iO)
 #define M00071913_a2 ((unsigned char *)&B00071913_a2)
 #define M0007191f_dW ((unsigned char *)&B0007191f_dW)
@@ -1013,7 +1016,7 @@ int FUN_0001e5f0(int who, int hand, unsigned wpn, int tgt)
     if (B00075618_b1.solo == 0xff && t != -1 && (who & 2) && (wpn == -1 || ((struct IT *)B000755d8_aw)[wpn].kind != 2)) t = -1;
     r = 0;
     if (t != -1) {
-        e = &B00064d80_ay[t];
+        e = &M00064d80_ay[t];
         snd = -1;
         m = B00072230_c4 + e->kind * 0x45;
         r = FUN_0001c80c(who, e, m, wpn, 1);
@@ -1086,7 +1089,7 @@ timing:
     return r;
 }
 
-#undef B00064d80_ay
+#undef M00064d80_ay
 #undef M000718e0_iO
 #undef M00071913_a2
 #undef M0007191f_dW
