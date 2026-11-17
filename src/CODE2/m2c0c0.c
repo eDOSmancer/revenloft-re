@@ -9,8 +9,7 @@ int B00072224_hh;
 int B00072220_gw;
 int B00072200_ew[8];
 /* the party records, 4 x 0x248 bytes at 0x718e0, are one object (include/chars.h, docs/BSS.md) */
-#define PCH_DEFINED
-struct PCH { char name[0x10]; unsigned short fl; char rest[0x236]; } B000718e0_iO[4];   /* the four character records (include/chars.h) */
+struct PC B000718e0_iO[4];   /* the four character records (include/records.h, include/chars.h) */
 unsigned short B000698e0_b7[128 * 128];   /* the map: one cell word per square */
 char B00069660_dl[640];
 char B000693e0_hM[640];

@@ -151,7 +151,7 @@ extern int B00067618_e7;
  extern int B000755d4_ak, B000755d0_ao, B00067618_e7;
 #define B0006762e_es ((char *)((char *)&B00067618_e7 + 22)) /* STANDIN: view, B00067618_e7 + 0x16 */
 #define B0006762c_ey (*(struct FB *)((char *)&B00067618_e7 + 20)) /* STANDIN: view, B00067618_e7 + 0x14 */
-  struct PC { char pad[0x40]; short inv[21]; char rest[0x248 - 0x40 - 42]; }; 
+  /* struct PC: include/records.h */
 void FUN_0001ca38(int who)
 {
     int k; short c;
@@ -505,10 +505,8 @@ int FUN_0001d4e8(int i, unsigned char *m)
 /* ---- from src/CODE2/wip/f1d550.c */
 extern void FUN_0001e284(struct M *m, unsigned char *def, int ctx, int dmg, int mode);
 #include <stdlib.h>
-#define PC T17_PC
 #include "records.h"
-#undef PC
-#define M000718e0_iO ((struct T17_PC *)&B000718e0_iO)
+#define M000718e0_iO ((struct PC *)&B000718e0_iO)
 #define DAT_0005d681 ((unsigned char *)&DAT_0005d681)
 #define M T63_M
 struct M { int a, b; short w8; unsigned short lo : 9, done : 1, m10 : 2, ai : 2, hi : 2; short wc; unsigned short type; short w10; short hp; unsigned short b0 : 1, fl : 2, dir : 3, mid : 8, st : 2; };
