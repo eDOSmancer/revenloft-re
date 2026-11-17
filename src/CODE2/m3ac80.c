@@ -8,7 +8,9 @@ extern struct DE B00077148_eJ[]; extern void *B00072230_c4; extern struct MO B00
  extern int DAT_0005c050; extern unsigned char DAT_0005c02d;
 extern void FUN_00045798(int, int, void *, unsigned short *), FUN_0003b2f4(void *, void *, int, int, int), FUN_0003b088(int, int), FUN_00031bf0(void *, int);
 int rand(void);
-extern short B00077106_dq;
+extern short B00077100_ds[];
+#define B00077106_dq (*(short *)((char *)&B00077100_ds + 6)) /* STANDIN: a name of its own in the original image, 6 bytes into B00077100_ds */
+
 
 extern int FUN_000469a7(int); /* abs */
 struct O { int a, b; unsigned char f8, f9, fa; unsigned char fb0 : 1, dead : 1, fb2 : 6; unsigned short s, type; short timer, w12; unsigned short w14; };

@@ -446,7 +446,9 @@ int FUN_00019418(int mode)
 /* FUN_000194e0 near miss (221/221): only the registers of the two parameters are swapped (original x=EDI, y=EBP); declaration orders of the locals do not change it; 2026-11-09: all 32 comparison spellings in both x/y orders (y-first gives 6 lines), continue-style tests, param copies tried */
 /* FUN_000194e0 @ 000194e0: find the topmost visible button of the current page under (x, y) */
 extern int FUN_0003acdc(int), FUN_00031bf0(void *, int);
-extern int DAT_0005c050; extern unsigned short DAT_0005f038[], B00077148_eJ, B00077152_el;
+extern unsigned short B00077148_eJ;
+#define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
+extern int DAT_0005c050; extern unsigned short DAT_0005f038[], B00077148_eJ;
 /* struct O: defined above */
 extern struct O B00064d80_ay[];
 #define BTN(page, off) ((char *)&B00077148_eJ + (page) * 0x2260 + (off))
@@ -473,7 +475,8 @@ extern int FUN_000194e0(int x, int y); /* module prototype */
 /* FUN_000195c0 @ 000195c0: let the player pick a visible creature with the mouse; -1 when none or cancelled (the mouse is struct MS at DAT_00059e31, recipe 27: under the module's -oa separate shorts joined the conflict list and swapped x/y) */
 extern void FUN_0002c21c(char *), FUN_0002c258(void), FUN_0002a9f8(void), FUN_0002c2cc(void), FUN_00032d70(void);
 extern int FUN_0002a1f4(void), FUN_00040b40(void);
-extern int DAT_0005c050; extern unsigned short DAT_0005f038[]; extern short B00077150_dR; struct MS { short x, y, b; };
+#define B00077150_dR (*(short *)((char *)&B00077148_eJ + 8)) /* STANDIN: a name of its own in the original image, 8 bytes into B00077148_eJ */
+extern int DAT_0005c050; extern unsigned short DAT_0005f038[];  struct MS { short x, y, b; };
 extern char *PTR_s_no_visible_creatures_upo_000566ac, *PTR_s_upon_which_creature_is_t_000566b0;
 int FUN_000195c0(void)
 {

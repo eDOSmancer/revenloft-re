@@ -384,7 +384,8 @@ def cmd_view(prog, name, cont, off):
             cuts.append((m.start(), e + 1, new))
         for s, e, new in sorted(cuts, reverse=True): text = text[:s] + new + text[e:]
         ls = text.rfind('\n', 0, first) + 1
-        pre = '' if re.search(r'\b%s\b' % cont, blank_comments(text[:ls])) else 'extern unsigned char %s[]; ' % cont
+        pre = '' if re.search(r'\b%s\b' % cont, blank_comments(text[:ls])) else \
+              'extern %s;\n' % (' '.join(D[cont]).replace('@', cont) if cont in D else 'unsigned char %s[]' % cont)
         text = text[:ls] + '%s#define %s %s /* STANDIN: a name of its own in the original image, %d bytes into %s */\n' % (pre, name, view, off, cont) + text[ls:]
         open(f, 'w', encoding='latin1').write(text); print('view in', os.path.basename(f))
     for f in glob.glob(src(prog, 'b*.asm')):

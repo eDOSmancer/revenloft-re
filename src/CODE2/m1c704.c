@@ -606,7 +606,9 @@ void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
 /* ---- from src/CODE2/f1dacc.c */
 /* FUN_0001dacc @ 0001dacc: entity id of the farthest visible monster on the given side (0 left, 1 right) of the view, or -1 */
 struct SP { unsigned short x, z, a, id, hidden, key; char pad[10]; };
-extern int DAT_0005c050; extern unsigned short DAT_0005f038[]; extern char B00077148_eJ[]; extern unsigned short B00077152_el; extern int B00064d8b_a7; extern unsigned short B00064d8e_a6;
+extern char B00077148_eJ[];
+#define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
+extern int DAT_0005c050; extern unsigned short DAT_0005f038[]; extern char B00077148_eJ[];  extern int B00064d8b_a7; extern unsigned short B00064d8e_a6;
 #define ENT_FL(i) (*(int *)((char *)&B00064d8b_a7 + (i) * 0x16))
 int FUN_0001dacc(int side)
 {
