@@ -16,7 +16,7 @@ unsigned char F00072224_a6[4];
 int B00072224_hh;
 int B00072220_gw;
 int B00072200_ew[8];
-/* STANDIN: the party records, 4 x 0x248 bytes at 0x718e0 (include/chars.h), defined as seven adjacent pieces cut at the names of the 2nd and 3rd record and at the four flag words (+0x10): these stay objects of their own (as views FUN_0001ccf4 / FUN_00033e1c are no longer expanded inline, docs/BSS.md) */
+/* the party records, 4 x 0x248 bytes at 0x718e0, are one object (include/chars.h, docs/BSS.md) */
 #define PCH_DEFINED
 struct PCH { char name[0x10]; unsigned short fl; char rest[0x236]; } B000718e0_iO[4];   /* the four character records (include/chars.h) */
 unsigned char B000698e0_b7[32768];

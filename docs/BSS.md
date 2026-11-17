@@ -83,12 +83,12 @@ whose address is taken becomes `(*(T (*)[n])...)`, and local macros that reused 
 (`#define B.. ((struct PC *)&B..)` ... `#undef`) were renamed `M...` so that the object's name always means the object
 (same preprocessed text).  Views in the sources:
 
-- CODE.2: 51 members of the party records (container 0x718e0), 8 members of the monster table 0x64d80 (100 x 22 bytes),
+- CODE.2: the members of the party records (container 0x718e0; the flag words and names as struct members), 8 members of the monster table 0x64d80 (100 x 22 bytes),
   the members of record 0 of the tables 0x65a18 (256 x 28 bytes) and 0x67618 (300 x 22), 0x6994c (row 0 of the map
   0x698e0), 0x74900 (in the 150 x 22 table 0x748ec), the high words 0x755d2 / 0x755d6 of the party position and
   0x755ea ... 0x755f6 (assembler only), the level header's members (assembler only), element -1 of the tables 0x63020 and
   0x64024 (0x6301e, 0x64018: the code indexes from 1), and from the first round 0x77106, 0x77150/2.
-- CODE.1: 0x3681e, 0x36903, 0x36907, 0x373ef, 0x38919, the node members 0x37ff3/5/7 and 0x388fc/fe/900 (node 257).
+- CODE.1: the members of character record 0 (container 0x367f8: 0x36808 ... 0x36a80), 0x373ef (a member), 0x38919, the node members 0x37ff3/5/7 and 0x388fc/fe/900 (node 257).
 - `selfview`: where the owning module itself declares only the first member (`extern unsigned char x;` for a table of
   248 bytes), the object is declared as bytes and those declarations become views of offset 0 (CODE.1 m10010: 0x35a00,
   0x363f8, 0x36808; CODE.2: the party flag word 0x718f0 in m2c0c0, the party position in m307e8).
@@ -113,10 +113,16 @@ real compiler), and **a dead read of a scalar the function does not otherwise us
 `STANDIN` - adds a zero-savings node at the same place of the list.  One read per lost node restored FUN_0002bbd8
 (0x75619), FUN_00016444 (0x62b44), FUN_00029464 (two ints it reads as bytes) and the seven users of 0x755d2 / 0x755d6
 (FUN_0001083c, FUN_00010cb0, FUN_00012db0, FUN_00019368, FUN_0001aed8, FUN_0002b27c, FUN_00030a24).  Reading the lost
-variable itself does not help: a read at another size than the object's removes the node.  The party records still are
-pieces: they are defined as seven
-adjacent pieces (16 / 568 / 16 / 568 / 16 / 584 / 568 bytes, all class 6) cut at the names of the 2nd and 3rd record and at
-the four flag words, so that these six labels keep an object (STANDIN, noted in `m1ea90.c`).
+variable itself does not help: a read at another size than the object's removes the node.
+
+**The character records** (CODE.2 0x718e0, CODE.1 0x367f8) are one object of 4 x 0x248 bytes in both programs.  In
+CODE.2 `include/chars.h` declares it `struct PCH B000718e0_iO[4]` (name, flag word, rest); the flag words and names of
+the records are written as members (`B000718e0_iO[1].fl`).  A member with a constant index costs the front end no more
+than a plain global, so FUN_0001ccf4 (four flag words) is expanded inline as in the original; a cast view was not
+(the earlier rounds therefore kept seven adjacent pieces).  A member is still no `-oa` memory node: FUN_0001d550,
+which expands FUN_0001ccf4, takes four dead reads (the original's pass-1 list has four zero-savings nodes at that
+place; a struct of four records instead of an array gives none either).  FUN_00026d04's first copy chain went from 3
+to 2 temporaries.
 
 ## tools/bssfit.py
 
@@ -173,38 +179,40 @@ m26810 define nothing.  Which of the two modules owns which shared run follows f
 **Paragraph alignment.**  The pieces of m13a78, m1ea90, m1eee0, m231dc, m23f70, m29c80, m3ac80 and m43aa0 start on a
 16-byte boundary with 8 or 12 unnamed bytes ahead (m186c4 uses 8 of 16 bytes, m1eee0 and m231dc 4 of 16).  That is the
 alignment of their `_BSS` segment, not data of the module ahead: m29c80 has it by itself (the far pointer above); the
-other seven get it from `typedef void (__far *PARA_BSS)();` at the top of the file (STANDIN: what in the original file
-raised the alignment - a far pointer, a `double` - is not known).  No filler object is left ahead of these modules.
+m43aa0 as well (its real-mode call takes segment and offset of a local far pointer); the
+other six get it from `typedef void (__far *PARA_BSS)();` at the top of the file (STANDIN: their code shows no far
+pointer and no `double`, no header of the repository is shared by exactly these files; a far-pointer *parameter* does
+not align - m3e340 has one).  No filler object is left ahead of these modules.
 
-**CODE.1** keeps five data-only files (STANDIN: the boundary is what the rule proves; the code that was compiled in
-the same file is not known).  0x355f8-0x37140 lies in the range of the first module m10010 (20 KB of code) and has
-five runs: the 8-byte multiples and twelve 1-byte flags (m10010.c), then runs starting at 0x36814 (shorts), 0x3682c,
-0x36838 and 0x36a54.  The flags are used one by one by different functions, so they are objects of their own and the
-shorts behind them start another file; the users of each run are spread over the whole module and FUN_00015f4c of
-m15d90 (the only user of 0x36838-0x36858, 0x36a54 and 0x36a80), so the runs cannot be given to parts of the module by
-function address.  m10010 is at least five object files whose code boundaries are unknown.  The fifth file, 0x371dc
-(a 522-byte buffer, four shorts, 2049 bytes), follows m150c0's cursor record (6 bytes) and its mouse flag (a short):
-one file would have put the buffer ahead of the flag.  Merging needs the three as one 530-byte record, which no access
-supports; the functions that use both sides are the same ones (m150c0), so m150c0 is probably two object files.
+**CODE.1** has no object file without code either (`docs/FILES.md`).  The "runs" that seemed to start at 0x36814,
+0x3682c, 0x36838 and 0x36a54 are members of the first character record: 0x367f8 is the table of four records of 0x248
+bytes (the code indexes `x[p * 0x248]`, FUN_00014ef0 writes it to the file CHARS, 0x920 bytes) and ends at 0x37118,
+where ten ints follow - one run of m10010.  In m150c0 the cursor record 0x371d4 is 530 bytes (shape, y, x, the mouse
+flag, the 522-byte cursor image: even class), followed by four shorts and the page byte with its two 1024-byte save
+buffers (2049 bytes): one run as well.
 
 ## State
 
 | program | defined in C |
 |---|---|
-| CODE.1 | m10010 4636, d36814 24, d3682c 11, d36838 540, d36a54 1772, m150c0 156, d371dc 2579, m15880 3346, m161c0 132, m172d0 72, m17f50 24, m184d0 48, m1b060 16, m1cef0 64 |
+| CODE.1 | m10010 6984, m150c0 2735, m15880 3346, m161c0 132, m172d0 72, m17f50 24, m184d0 48, m1b060 16, m1cef0 64 |
 | CODE.2 | m106c0 24, m13a78 1088, m186c4 8, m1ea90 68, m1eee0 4, m231dc 4, m23f70 5232, m28d90 8, m29c80 16, m2af90 1230, m2c0c0 56524, m307e8 14004, m32e40 6128, m38210 4, m3ac80 17712, m3c800 16, m3e340 57, m3f960 72, m40700 12, m40d80 124, m414b0 24, m43aa0 64, m44bb0 320 |
 
 No `b*.asm` is left.  `tools/bssfit.py check` reports every `_BSS` of both programs in address order.
 
 Open points:
 
-- **Fillers** (unnamed bytes inside a module's run, `F...` / `G...`): CODE.2 m2c0c0 5 (an int at 0x72228, shorts at
-  0x72240 / 42 / 48 / 4a), m3f960 6, m43aa0 1, m3c800 1 (4 bytes ahead of m3e340: alignment or an int); CODE.1 m172d0 6,
-  m1b060 1 (12 bytes), m1cef0 1, m10010 1 (the flag 0x36811), one byte each behind the odd-sized buffers 0x3681c, 0x3682e,
-  0x36a40 and 4 bytes behind 0x36a80.
-- **Party records** (CODE.2 0x718e0): seven adjacent pieces instead of one object of 4 x 0x248 bytes, see above.
-  `include/chars.h` declares the first piece as one byte; m2c0c0.c, which defines it, declares it with its size
-  (`PARTY_HEAD_SIZED`).
+- **Fillers** (unnamed bytes inside a module's run, `F...` / `G...`).  None of them can be alignment, with one
+  exception: they lie between objects of one run, so each is a variable no code references (or the unknown rest of
+  the object ahead).  CODE.2 m2c0c0 5 (an int at 0x72228, shorts at 0x72240 / 42 / 48 / 4a), m3f960 6 (2 + 4 + 12 + 4 + 4 + 4 bytes
+  among its ints), m43aa0 1 (2 bytes); CODE.1 m172d0 6, m1cef0 1, m1b060 1 (12 bytes behind the configuration
+  pointer; the CODE.2 twin m38210 has the pointer alone, so three ints of an older version).  The exception is the int
+  0x7b63c at the end of m3c800: m3e340 behind it starts on a paragraph boundary, and removing the filler fails only
+  because m3e340's `_BSS` is not paragraph-aligned by its far-pointer parameter (FUN_0003f2e0) - undecided between an
+  unreferenced int and an alignment whose cause is not in the code.
+- **Dead reads**: twelve lines.  The object-file evidence gives no natural replacement: no file owns the high words
+  0x755d2 / 0x755d6 or a table element as a scalar of its own, and a struct member is no memory node (tested with the
+  party records, array and struct-of-records form).
 - **Element types**: objects written `unsigned char x[n]` in the definitions block of m2c0c0 / m307e8 (tables whose
   record type is declared only by other modules) and in the CODE.1 `d*.c` files have the extent, not the type.
 - **0x7b6d0 (m40d80).** The find record (43 bytes) and the path buffer (81) must precede the library's `iob`; they are

@@ -18,7 +18,6 @@ Every byte of the two LE images comes out of the Watcom linker, from ordinary ob
 
 - `src/CODE1/m*.c` (20 files), `src/CODE2/m*.c` (35 files): one C file per original module, compiled by `WCC386`.
 - `src/CODE1/a*.asm` (5), `src/CODE2/a*.asm` (6): the modules that were written in assembler, assembled by `WASM`.
-- `src/CODE1/d*.c` (5): C files that hold only uninitialised data, see "Stand-ins".
 - `src/<PROG>/xib.asm`: a stand-in, see "Stand-ins".
 - the modules of the Watcom C library named in `link/<PROG>/order.txt`, copied unchanged out of the installation's
   `.LIB` files (`tools/omflib.py`; the same bytes `wlib lib *module` extracts).
@@ -106,16 +105,14 @@ Constructs that exist only because they reproduce the original bytes, not becaus
   the module's objects from the highest address down, which then yields the original layout. The block also holds
   filler arrays (`F<address>_xx`) for bytes no code names. Names that lie inside a larger object (members of the party records, of the monster table, ...) are macros
   (views, `container + offset`) in the files that use them. Rule, scheme and tool (`tools/bssfit.py`): `docs/BSS.md`.
-- **Data-only C files `d<address>.c`** (CODE.1: 5, CODE.2: none). Inside one object file the size classes of `_BSS` only
-  descend; where they rise at a dword boundary another object file of the original begins. In CODE.2 every such
-  boundary is a boundary between the code modules (each module defines its own data, the module with `main` and the
-  one behind it define the shared data). In CODE.1 the range of the first module holds five object files whose code
-  boundaries are not known; four of them and one in the next module stand in a C file of their own, linked at its place.
-- **Dead reads** (11 places, 10 of them from the naming of the uninitialised data; marked): `{ int d; d = G; }` of a scalar the function does not use. Under `-oa` a scalar
+- **No data-only files.** Inside one object file the size classes of `_BSS` only descend, so a rise at a dword
+  boundary is either another object file or a label inside an object. Every rise turned out to be the second: in both
+  programs each C module defines exactly one run (`docs/FILES.md` has the evidence per module boundary).
+- **Dead reads** (12 places, 11 of them from the naming of the uninitialised data; marked): `{ int d; d = G; }` of a scalar the function does not use. Under `-oa` a scalar
   global is an entry in the register allocator's list; where a name of the original image turned out to lie inside
   another object (an element of a table, the high word of an int) the function lost that entry and came out with other
   registers, and the dead read puts an entry back (`docs/BSS.md`).
-- **`typedef void (__far *PARA_BSS)();`** at the top of seven CODE.2 files: the `_BSS` contribution of these object
+- **`typedef void (__far *PARA_BSS)();`** at the top of six CODE.2 files: the `_BSS` contribution of these object
   files starts on a paragraph boundary in the original (8 or 12 unnamed bytes ahead of it); WCC386 aligns `_BSS` so
   when the file has a far pointer or `double` object, and a typedef of such a type has the same effect.
 - **`xib.asm`**: an empty paragraph-aligned `XIB` segment. In both originals the C library's initialiser table starts
@@ -151,7 +148,7 @@ Constructs that exist only because they reproduce the original bytes, not becaus
 
 ## Layout
 
-    src/CODE1, src/CODE2     C modules (m*.c), assembler modules (a*.asm), data-only C files (d*.c, CODE.1), stand-in definition (xib.asm)
+    src/CODE1, src/CODE2     C modules (m*.c), assembler modules (a*.asm), stand-in definition (xib.asm)
     include/                 shared headers of the C modules
     link/CODE1, link/CODE2   order.txt, options.lnk, alignfix.csv
     tools/build.py           the build driver          tools/dos.py        DOSBox-X runner

@@ -524,7 +524,7 @@ extern unsigned char DAT_0005687e[];
 void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
 {
     int ang, dmg, k, first, who, h, dy, dx, fl, vlad;
-    { extern int B000755e0_bo, B000755e4_bk, B000755e8_ag, B000755ec_aH; int d; d = B000755e0_bo; d = B000755e4_bk; d = B000755e8_ag; d = B000755ec_aH; }
+    { extern int B000755e0_bo, B000755e4_bk, B000755e8_ag, B000755ec_aH; int d; d = B000755e0_bo; d = B000755e4_bk; d = B000755e8_ag; d = B000755ec_aH; } /* STANDIN: dead reads of scalars this function does not use - four zero-savings -oa memory nodes in the pass-1 conflict list, where the original has the four flag words of the expanded FUN_0001ccf4 (members of the record table are no nodes; docs/BSS.md) */
     if (m->type == 0xf) {
         for (k = 0; k < 4; k++)
             if (M000718e0_iO[k].fl < 0x4000 && !FUN_0001cee4(k))
