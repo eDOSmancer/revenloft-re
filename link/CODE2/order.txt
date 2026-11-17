@@ -26,9 +26,7 @@ c    m29c80   -3s -ox -oe -oa -ot -w0
 c    m2af90   -3s -ox -oe -oa -ot -w0
 c    d748e4   -3s -ox -oe -oa -ot -w0
 c    m2c0c0   -3s -ox -oe -oa -ot -w0
-c    d755d8   -3s -ox -oe -oa -ot -w0
 c    m307e8   -3s -ox -oe -oa -ot -w0
-c    d758bc   -3s -ox -oe -oa -ot -w0
 c    m32e40   -3s -ox -oe -oa -ot -w0
 c    m33df0   -3s -ox -oe -ot -w0
 asm  a373e7   -3p -mf -c

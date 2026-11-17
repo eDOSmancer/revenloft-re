@@ -1,6 +1,23 @@
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
-#include "world.h"
-struct LEV B00075618_b1; /* the level header, 0x2a4 bytes (class 5 like the ints: first declared, last emitted) */
+short B000758fe_j6;
+short B000758fc_kL;
+int B000758f8_h3;
+int B000758f4_hG;
+int B000758f0_hK;
+int B000758ec_bl;
+int B000758e8_jC;
+int B000758e4_h7;
+int B000758e0_iK;
+char *B000758dc_cl;
+int B000758d8_j3[1];
+int B000758d4_jG;
+char *B000758d0_jK;
+int B000758cc_fL;
+int B000758c8_as;
+char *B000758c4_j7;
+int B000758c0_kK;
+int B000758bc_al;
+struct LEV B00075618_b1; /* the level header (include/world.h), 0x2a4 bytes: class 5 like the ints around it */
 int B00075614_lm;
 int B00075610_a9;
 int B0007560c_hn;
@@ -9,6 +26,14 @@ int B00075604_mM;
 int B00075600_b9;
 int B000755fc_ax;
 int B000755f8_bg;
+int B000755f4_ck;
+int B000755f0_co;
+int B000755ec_aH;
+int B000755e8_ag;
+int B000755e4_bk;
+int B000755e0_bo;
+unsigned char *B000755dc_aX;
+struct IT *B000755d8_aw;
 /* BSS end */
 /* Module: FUN_000307e8, FUN_00030850, FUN_00030994, FUN_00030a24, FUN_00030b40, FUN_00030c0c, FUN_00030cf4,
    FUN_00030d7c, FUN_00030e08, FUN_000310b0, FUN_000311d8, FUN_000314b8, FUN_00031704, FUN_00031880,
