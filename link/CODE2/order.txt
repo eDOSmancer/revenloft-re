@@ -49,7 +49,6 @@ lib  memmove  CLIB3S.LIB
 lib  set386   CLIB3S.LIB
 lib  int386   CLIB3S.LIB
 c    m40d80   -3s -ox -oe -ot -w0
-asm  b40d80   -3p -c
 lib  iob      CLIB3S.LIB
 lib  fputc    CLIB3S.LIB
 c    m411e0   -3s -ox -oe -ot -w0
