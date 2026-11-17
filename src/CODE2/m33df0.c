@@ -70,13 +70,10 @@ extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_0002
 /* ---- from build/var/mod/parts/p33eac.c */
 /* FUN_00033eac @ 00033eac */
 
-#define B000718f5_h2 (*(signed char *)((char *)&B000718e0_iO + 21)) /* STANDIN: view, B000718e0_iO + 0x15 */
-#define B000718f6_h5 (*(signed char *)((char *)&B000718e0_iO + 22)) /* STANDIN: view, B000718e0_iO + 0x16 */
-#define B000718f7_h4 (*(signed char *)((char *)&B000718e0_iO + 23)) /* STANDIN: view, B000718e0_iO + 0x17 */
 
 int FUN_00033eac(int i, int v)
 {
-    if (*((signed char *)&B000718f5_h2 + i * 0x248) == v || *((signed char *)&B000718f6_h5 + i * 0x248) == v || *((signed char *)&B000718f7_h4 + i * 0x248) == v) return 1;
+    if (B000718e0_iO[i].cls[0] == v || B000718e0_iO[i].cls[1] == v || B000718e0_iO[i].cls[2] == v) return 1;
     return 0;
 }
 

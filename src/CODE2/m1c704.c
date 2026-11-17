@@ -50,7 +50,6 @@ extern int FUN_0001c7c4(int i); /* module prototype */
 #include "dice.h"
 #include "world.h"
 extern int FUN_0001fe44(int);
-#define B00071948_au (*(short *)((char *)&B000718e0_iO + 104)) /* STANDIN: view, B000718e0_iO + 0x68 */
 #define B00071a12_dx (*(int *)((char *)&B000718e0_iO + 306)) /* STANDIN: view, B000718e0_iO + 0x132 */
 #define B000719ea_cm (*(unsigned char *)((char *)&B000718e0_iO + 266)) /* STANDIN: view, B000718e0_iO + 0x10a */
    
@@ -66,11 +65,11 @@ int FUN_0001c80c(int i, char *obj, char *tgt, int item, int flag)
     if (r == 2) bonus++;
     if (r == 3) bonus += 2;
     if (r == 4) bonus += 4;
-    need = *((unsigned char *)&B000719ea_cm + i * 0x248) - (signed char)tgt[0x21] + bonus;
+    need = B000718e0_iO[i].cost - (signed char)tgt[0x21] + bonus;
     if (*(int *)(obj + 8) & 0x80) need -= 4;
-    if (*(int *)((char *)&B00071a12_dx + i * 0x248) & 0x100) n++;
-    if (*(int *)((char *)&B00071a12_dx + i * 0x248) & 0x800) n++;
-    if (*(short *)((char *)&B00071948_au + i * 0x248) == 0x54) n += 3;
+    if (B000718e0_iO[i].f132 & 0x100) n++;
+    if (B000718e0_iO[i].f132 & 0x800) n++;
+    if (B000718e0_iO[i].inv[20] == 0x54) n += 3;
     r = FUN_0002c328(1, 20, n, 0);
     if (r >= 20) return 1;
     if (r == 1) return 0;
@@ -123,7 +122,7 @@ int FUN_0001c9a0(int i, unsigned char *obj, char *tgt)
     if (r == 20) return 1;
     if (r == 1) return 0;
     ac = FUN_0001efa0(i);
-    fl = *(int *)((char *)&B00071a12_dx + i * 0x248);
+    fl = B000718e0_iO[i].f132;
     if (fl & 0x40) { FUN_0001871c(i, 6); return 0; }
     if (fl & 0x20) need = r - 2;
     if (fl & 0x100) need--;
@@ -491,7 +490,7 @@ void FUN_0001d1e0(int p)
 /* ---- from src/CODE2/f1d4e8.c */
 /* FUN_0001d4e8 @ 0001d4e8 */
  
-#define CH_FLAGS(k) (*(int *)((char *)&B00071a12_dx + (k) * 0x248))
+#define CH_FLAGS(k) (B000718e0_iO[k].f132)
 int FUN_0001d4e8(int i, unsigned char *m)
 {
     int st = *(unsigned short *)((char *)&B000718f0_hO + i * 0x248);
@@ -967,9 +966,8 @@ alive:
 
 /* ---- from src/CODE2/f1e578.c */
 /* FUN_0001e578 @ 0001e578 (character flag words are ints tested with masks) */
-#define B00071a3a_di (*(int *)((char *)&B000718e0_iO + 346)) /* STANDIN: view, B000718e0_iO + 0x15a */
  extern unsigned char DAT_0005cf5a[];
-#define CH_FLAGS(k) (*(int *)((char *)&B00071a12_dx + (k) * 0x248))
+#define CH_FLAGS(k) (B000718e0_iO[k].f132)
 void FUN_0001e578(int i)
 {
     int k;
@@ -977,7 +975,7 @@ void FUN_0001e578(int i)
         if (CH_FLAGS(k) & 0x20) { DAT_0005cf5a[k] = 1; CH_FLAGS(k) &= ~0x20; }
     }
     if (CH_FLAGS(i) & 0x200) {
-        *(int *)((char *)&B00071a3a_di + i * 0x248) = 0;
+        B000718e0_iO[i].t[9] = 0;
         CH_FLAGS(i) &= ~0x200;
         DAT_0005cf5a[i] = 1;
     }

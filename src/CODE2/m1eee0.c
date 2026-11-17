@@ -32,26 +32,22 @@ extern unsigned short DAT_00057e8c[][5];
 /* FUN_0001eee0 @ 0001eee0 */
 #include "world.h"
 #include "chars.h"
-#define B00071940_lM (*(short *)((char *)&B000718e0_iO + 96)) /* STANDIN: view, B000718e0_iO + 0x60 */
  
 int FUN_0001eee0(int i)
 {
-    int t = *(short *)((char *)&B00071940_lM + i * 0x248);
+    int t = B000718e0_iO[i].inv[16];
     if (t != -1 && ((unsigned char *)B000755d8_aw)[t * 0x41 + 0x2f] == 4) return 1; /* STANDIN: if / return 1 / return 0 instead of the returned condition - orders the i * 0x248 / t tie as the original under -oa */
     return 0;
 }
 
 /* ---- from build/var/mod/parts/p1ef14.c */
 /* FUN_0001ef14 @ 0001ef14 */
-#define B00071aca_he (*(int *)((char *)&B000718e0_iO + 490)) /* STANDIN: view, B000718e0_iO + 0x1ea */
-#define B000719f3_iO (*(int *)((char *)&B000718e0_iO + 275)) /* STANDIN: view, B000718e0_iO + 0x113 */
-#define B000718fc_i0 (*(short *)((char *)&B000718e0_iO + 28)) /* STANDIN: view, B000718e0_iO + 0x1c */
  
 int FUN_0001ef14(int i)
 {
-    int r = *(short *)((char *)&B000718fc_i0 + i * 0x248);
-    r += *(int *)((char *)&B00071aca_he + i * 0x248);
-    r += *(int *)((char *)&B000719f3_iO + i * 0x248);
+    int r = B000718e0_iO[i].hp;
+    r += B000718e0_iO[i].f1ea;
+    r += B000718e0_iO[i].r10b[2];
     return r;
 }
 
@@ -152,9 +148,8 @@ int FUN_0001f168(int k)
 /* (FUN_0001f218, FUN_000200c8: defined in this module) */
 /* round 62 second blind rewrite; the copies of FUN_0001f218 / FUN_000200c8 are the module definitions, expanded in line here */
 /* LAYOUT-ONLY copies of the module's expanded callees (src/CODE2/f1f218.c, f200c8.c) */
-#define B00071a0b_ah (*(int *)((char *)&B000718e0_iO + 299)) /* STANDIN: view, B000718e0_iO + 0x12b */
 
-unsigned char FUN_0001f218(int i, int bit) { return (*(int *)((char *)&B00071a0b_ah + i * 0x248) & (1 << bit)) >> bit; }
+unsigned char FUN_0001f218(int i, int bit) { return (B000718e0_iO[i].r10b[8] & (1 << bit)) >> bit; }
 
 /* ---- from build/var/mod/parts/p1f238.c */
 /* FUN_0001f238 @ 0001f238 */
@@ -163,8 +158,8 @@ unsigned char FUN_0001f218(int i, int bit) { return (*(int *)((char *)&B00071a0b
 void FUN_0001f238(int i, int bit, int val)
 {
     if (((short *)((char *)&B00071920_bM + i * 0x248))[bit] != -1) {
-        *(int *)((char *)&B00071a0b_ah + i * 0x248) &= ~(1 << bit);
-        *(int *)((char *)&B00071a0b_ah + i * 0x248) |= val << bit;
+        B000718e0_iO[i].r10b[8] &= ~(1 << bit);
+        B000718e0_iO[i].r10b[8] |= val << bit;
     }
 }
 
@@ -196,13 +191,11 @@ int FUN_0001f2b4(int k)
 
 /* ---- from build/var/mod/parts/p1f2d4.c */
 /* FUN_0001f2d4 @ 0001f2d4 */
-#define B00071938_l5 (*(short *)((char *)&B000718e0_iO + 88)) /* STANDIN: view, B000718e0_iO + 0x58 */
-#define B0007193a_bl (*(short *)((char *)&B000718e0_iO + 90)) /* STANDIN: view, B000718e0_iO + 0x5a */
 
 int FUN_0001f2d4(int i, int v)
 {
-    if (*(short *)((char *)&B00071938_l5 + i * 0x248) == v) return 1;
-    if (*(short *)((char *)&B0007193a_bl + i * 0x248) == v) return 1;
+    if (B000718e0_iO[i].inv[12] == v) return 1;
+    if (B000718e0_iO[i].inv[13] == v) return 1;
     return 0;
 }
 
@@ -225,11 +218,10 @@ void FUN_0001f308(int a, int b, int c, int i)
    The table read is written out in each comparison (recipe 6): the code is the same as with one local, but the function then
    has more than 20 expression nodes, so -oe does not expand it, and the original calls it from FUN_00020bbc and FUN_00022e70
    (round 16; with `int t = ...` it has 16 nodes and is expanded into both callers). */
-#define B000718f4_h3 (*(unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
 
 int FUN_0001f368(int i)
 {
-    if (*((unsigned char *)&B000718f4_h3 + i * 0x248) == 4 || *((unsigned char *)&B000718f4_h3 + i * 0x248) == 3 || *((unsigned char *)&B000718f4_h3 + i * 0x248) == 2) return 0;
+    if (B000718e0_iO[i].race == 4 || B000718e0_iO[i].race == 3 || B000718e0_iO[i].race == 2) return 0;
     return 1;
 }
 
@@ -491,13 +483,11 @@ int FUN_0001fd84(int i)
 #undef MON
 /* ---- from build/var/mod/parts/p1fde4.c */
 /* FUN_0001fde4 @ 0001fde4: experience table lookup from class index and level */
-#define B00071912_a3 (*(unsigned char *)((char *)&B000718e0_iO + 50)) /* STANDIN: view, B000718e0_iO + 0x32 */
-#define B0007191e_dP (*(unsigned char *)((char *)&B000718e0_iO + 62)) /* STANDIN: view, B000718e0_iO + 0x3e */
  
 int FUN_0001fde4(int i)
 {
-    int n = *((unsigned char *)&B00071912_a3 + i * 0x248);
-    int lv = *((unsigned char *)&B0007191e_dP + i * 0x248);
+    int n = B000718e0_iO[i].f32;
+    int lv = B000718e0_iO[i].ab[11];
     if (lv >= 1 && lv <= 0x32) n += 1;
     if (lv >= 0x33 && lv <= 0x4b) n += 2;
     if (lv >= 0x4c && lv <= 0x5a) n += 3;
@@ -1360,12 +1350,10 @@ int FUN_00021fb0(int a, int b, int c, int d)
 /* ---- from build/var/mod/parts/p2202c.c */
 /* FUN_0002202c @ 0002202c: add n levels/charges, capped at 20 */
 #include "chars.h"
-#define B00071a96_av (*(int *)((char *)&B000718e0_iO + 438)) /* STANDIN: view, B000718e0_iO + 0x1b6 */
-#define B00071948_au (*(short *)((char *)&B000718e0_iO + 104)) /* STANDIN: view, B000718e0_iO + 0x68 */
   
-#define CH68(i)  (*(short *)((char *)&B00071948_au + (i) * 0x248))
+#define CH68(i)  (B000718e0_iO[i].inv[20])
 #define CH33(i)  (*((unsigned char *)&B00071913_a2 + (i) * 0x248))
-#define CH1B6(i) (*(int *)((char *)&B00071a96_av + (i) * 0x248))
+#define CH1B6(i) (B000718e0_iO[i].t1b6[0])
 int FUN_0002202c(int i, int n)
 {
     if (CH68(i) == 0x54) {
@@ -1386,19 +1374,18 @@ int FUN_0002202c(int i, int n)
   
 int FUN_00022098(int i)
 {
-    if (*(short *)((char *)&B00071948_au + i * 0x248) == 0x54)
-        return *(int *)((char *)&B00071a96_av + i * 0x248);
+    if (B000718e0_iO[i].inv[20] == 0x54)
+        return B000718e0_iO[i].t1b6[0];
     return *((unsigned char *)&B00071913_a2 + i * 0x248);
 }
 
 /* ---- from build/var/mod/parts/p220bc.c */
 /* FUN_000220bc @ 000220bc: class change bookkeeping */
 #include "chars.h"
-#define B00071915_a0 (*(unsigned char *)((char *)&B000718e0_iO + 53)) /* STANDIN: view, B000718e0_iO + 0x35 */
  
 #define CH33(i)  (*((unsigned char *)&B00071913_a2 + (i) * 0x248))
-#define CH35(i)  (*((unsigned char *)&B00071915_a0 + (i) * 0x248))
-#define CH1B6(i) (*(int *)((char *)&B00071a96_av + (i) * 0x248))
+#define CH35(i)  (B000718e0_iO[i].ab[2])
+#define CH1B6(i) (B000718e0_iO[i].t1b6[0])
 void FUN_000220bc(int i, int old, int new)
 {
     int t;

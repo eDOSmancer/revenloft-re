@@ -7,16 +7,12 @@ char B00075900_a9[33];
 /* ---- from build/var/mod/parts/p32e40.c */
 /* FUN_00032e40 @ 00032e40: level of a character in a given class (three class slots) */
 #include "chars.h"
-#define B00071902_aC (*(short *)((char *)&B000718e0_iO + 34)) /* STANDIN: view, B000718e0_iO + 0x22 */
-#define B00071904_aA (*(short *)((char *)&B000718e0_iO + 36)) /* STANDIN: view, B000718e0_iO + 0x24 */
-#define B000718f6_h5 (*(signed char *)((char *)&B000718e0_iO + 22)) /* STANDIN: view, B000718e0_iO + 0x16 */
-#define B000718f7_h4 (*(signed char *)((char *)&B000718e0_iO + 23)) /* STANDIN: view, B000718e0_iO + 0x17 */
  
 int FUN_00032e40(int cls, int i)
 {
     if (CH_CLASS_S(i) == cls) return CH_LVLIDX(i);
-    if (*((signed char *)&B000718f6_h5 + i * 0x248) == cls) return *(short *)((char *)&B00071902_aC + i * 0x248);
-    if (*((signed char *)&B000718f7_h4 + i * 0x248) == cls) return *(short *)((char *)&B00071904_aA + i * 0x248);
+    if (B000718e0_iO[i].cls[1] == cls) return B000718e0_iO[i].lvl[1];
+    if (B000718e0_iO[i].cls[2] == cls) return B000718e0_iO[i].lvl[2];
     return 1;
 }
 
@@ -46,10 +42,9 @@ void FUN_00032e90(struct PRJ *p, int flag)
 /* FUN_00032f40 @ 00032f40: draw the class icon of party member i on the status bar in palette row c (the x position goes through a local) */
 #include "chars.h"
 extern void FUN_000398f0(int, int, int, int, int, void *);
-#define B00071a11_dy (*(unsigned char *)((char *)&B000718e0_iO + 305)) /* STANDIN: view, B000718e0_iO + 0x131 */
 #define B000718f0_hO (B000718e0_iO[0].fl)
  extern unsigned char DAT_0005cf70[]; extern int B000758dc_cl, DAT_0005c034;
-#define CB(i) (*((unsigned char *)&B00071a11_dy + (i) * 0x248))
+#define CB(i) (B000718e0_iO[i].sp)
 void FUN_00032f40(int i, int c)
 {
     int r = -1, x;

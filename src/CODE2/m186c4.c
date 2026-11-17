@@ -18,8 +18,8 @@ extern short DAT_000567ca[];
 extern void FUN_00034a9c(int, int);
 void FUN_000186c4(int i, int k)
 {
-    if (*(short *)((char *)&B0007193c_aB + i * 0x248) == DAT_000567ca[k]) FUN_00034a9c(i, 0);
-    if (*(short *)((char *)&B0007193e_bP + i * 0x248) == DAT_000567ca[k]) FUN_00034a9c(i, 1);
+    if (B000718e0_iO[i].inv[14] == DAT_000567ca[k]) FUN_00034a9c(i, 0);
+    if (B000718e0_iO[i].inv[15] == DAT_000567ca[k]) FUN_00034a9c(i, 1);
 }
 
 /* ---- from src/CODE2/f1871c.c */
@@ -100,9 +100,7 @@ extern void FUN_0001871c(int who, unsigned e); /* module prototype */
 #include "dice.h"
 #define M000718e0_iO ((char *)&B000718e0_iO)
 extern int FUN_00029cc4(void), FUN_00022098(int); extern void FUN_0002202c(int, int);
-#define B00071912_a3 (*(unsigned char *)((char *)&B000718e0_iO + 50)) /* STANDIN: view, B000718e0_iO + 0x32 */
 #define B00071aa2_ht (*(int *)((char *)&B000718e0_iO + 450)) /* STANDIN: view, B000718e0_iO + 0x1c2 */
-#define B00071a12_dx (*(int *)((char *)&B000718e0_iO + 306)) /* STANDIN: view, B000718e0_iO + 0x132 */
  extern int DAT_00071aa6, DAT_00071ace, DAT_00071a16; 
 #define CH(sym, k) (*(int *)((char *)&sym + (k) * 0x248))
 #define CHJ(sym, k, j) (*(int *)((char *)&sym + (k) * 0x248 + (j) * 4))
@@ -1008,7 +1006,7 @@ void FUN_0001a794(int i)
     for (k = 0, off = 0; k < 4; k++, off += 0x248) {
         if (!(*(unsigned short *)((char *)&(*(unsigned short *)&B000718f0_hO) + off) & 0x8000)) {
             (&DAT_0005cf5a)[k] = 1;
-            *(int *)((char *)&B00071a12_dx + i * 0x248) |= 0x20;
+            B000718e0_iO[i].f132 |= 0x20;
         }
     }
 }
@@ -1020,9 +1018,6 @@ extern void FUN_00019b4c(int who, int fx, int all); /* module prototype */
 /* FUN_0001a8a0 @ 0001a8a0: party member i prays/meditates: fade, run the time, set the next prayer time and memorise spells; 0 when already done (n = q; n++ keeps n in the register of the quotient as in the original under the module's -oa; n = q + 1 put it in a new one) */
 extern void FUN_00038110(char *, int, int, int), FUN_0002f494(int); extern int FUN_00032e40(int, int), FUN_00029cc4(void);
 #define B00071a13_eo (*(int *)((char *)&B000718e0_iO + 307)) /* STANDIN: view, B000718e0_iO + 0x133 */
-#define B00071a46_dE (*(int *)((char *)&B000718e0_iO + 358)) /* STANDIN: view, B000718e0_iO + 0x166 */
-#define B00071a03_do (*(int *)((char *)&B000718e0_iO + 291)) /* STANDIN: view, B000718e0_iO + 0x123 */
-#define B000718f4_h3 (*(unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
 extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682; extern int B00062ba0_hT, B00062ba4_hh;
 #define CH(sym, i) (*(int *)((char *)&sym + (i) * 0x248))
 #define CH8(sym, i) (*((unsigned char *)&sym + (i) * 0x248))
@@ -1054,15 +1049,15 @@ int FUN_0001a8a0(int i)
         FUN_0002f494(1);
         CH(B00071a13_eo, i) |= 0x10;
         t = FUN_00032e40(3, i) * 0x438;
-        CH(B00071a46_dE, i) = FUN_00029cc4() + t;
+        CH(B000718e0_iO[0].t[12], i) = FUN_00029cc4() + t;
         n = FUN_00032e40(3, i) / 3;
         n++;
-        if (CH8(B000718f4_h3, i) == 2) {
-            if (CH8(B00071912_a3, i) + n > 0x11) n = 0x11 - CH8(B00071912_a3, i);
+        if (CH8(B000718e0_iO[0].race, i) == 2) {
+            if (CH8(B000718e0_iO[0].f32, i) + n > 0x11) n = 0x11 - CH8(B000718e0_iO[0].f32, i);
         } else {
-            if (CH8(B00071912_a3, i) + n > 0x12) n = 0x12 - CH8(B00071912_a3, i);
+            if (CH8(B000718e0_iO[0].f32, i) + n > 0x12) n = 0x12 - CH8(B000718e0_iO[0].f32, i);
         }
-        CH(B00071a03_do, i) = FUN_0002202c(i, n);
+        CH(B000718e0_iO[0].r10b[6], i) = FUN_0002202c(i, n);
         r = 1;
     }
     return r;
@@ -1075,9 +1070,6 @@ int FUN_0001a8a0(int i)
 extern void FUN_00019b4c(int who, int fx, int all); /* module prototype */
 /* FUN_0001aa30 @ 0001aa30: party member i studies the spell book: fade, run the time, set the next study time and learn spells; 0 when already done */
 extern void FUN_00038110(char *, int, int, int), FUN_0002f494(int); extern int FUN_00032e40(int, int), FUN_00029cc4(void);
-#define B00071a4a_dy (*(int *)((char *)&B000718e0_iO + 362)) /* STANDIN: view, B000718e0_iO + 0x16a */
-#define B00071a07_dk (*(int *)((char *)&B000718e0_iO + 295)) /* STANDIN: view, B000718e0_iO + 0x127 */
-#define B00071915_a0 (*(unsigned char *)((char *)&B000718e0_iO + 53)) /* STANDIN: view, B000718e0_iO + 0x35 */
 extern unsigned char DAT_0005cf5b, DAT_0005cf5c, DAT_0005cf5d, DAT_0005d681, DAT_0005d682; extern int B00062ba0_hT, B00062ba4_hh;
 #define CH(sym, i) (*(int *)((char *)&sym + (i) * 0x248))
 #define CH8(sym, i) (*((unsigned char *)&sym + (i) * 0x248))
@@ -1109,15 +1101,15 @@ int FUN_0001aa30(int i)
         FUN_0002f494(1);
         CH(B00071a13_eo, i) |= 0x20;
         t = FUN_00032e40(3, i) * 0x438;
-        CH(B00071a4a_dy, i) = FUN_00029cc4() + t;
+        CH(B000718e0_iO[0].t[13], i) = FUN_00029cc4() + t;
         n = FUN_00032e40(3, i) / 3 + 1;
-        if (CH8(B000718f4_h3, i) == 2 || CH8(B000718f4_h3, i) == 5) {
-            if (CH8(B00071915_a0, i) + n > 0x13) n = 0x13 - CH8(B00071915_a0, i);
+        if (CH8(B000718e0_iO[0].race, i) == 2 || CH8(B000718e0_iO[0].race, i) == 5) {
+            if (CH8(B000718e0_iO[0].ab[2], i) + n > 0x13) n = 0x13 - CH8(B000718e0_iO[0].ab[2], i);
         } else {
-            if (CH8(B00071915_a0, i) + n > 0x12) n = 0x12 - CH8(B00071915_a0, i);
+            if (CH8(B000718e0_iO[0].ab[2], i) + n > 0x12) n = 0x12 - CH8(B000718e0_iO[0].ab[2], i);
         }
-        CH(B00071a07_dk, i) = n;
-        CH8(B00071915_a0, i) += n;
+        CH(B000718e0_iO[0].r10b[7], i) = n;
+        CH8(B000718e0_iO[0].ab[2], i) += n;
         r = 1;
     }
     return r;
@@ -1200,13 +1192,13 @@ void FUN_0001ad24(int who)
     else { lo = who; hi = who + 1; }
     for (k = lo; k < hi; k++) {
         if (!(*(unsigned short *)((char *)&(*(unsigned short *)&B000718f0_hO) + k * 0x248) & 0x8000))
-            for (j = 0; j < 0x1a; j++) if (CH(k, B00071a12_dx) & (1 << j)) FUN_0001871c(k, j);
+            for (j = 0; j < 0x1a; j++) if (CH(k, B000718e0_iO[0].f132) & (1 << j)) FUN_0001871c(k, j);
     }
     for (k = lo; k < hi; k++) {
         if (!(*(unsigned short *)((char *)&(*(unsigned short *)&B000718f0_hO) + k * 0x248) & 0x8000))
             for (j = 0; j < 9; j++) {
-                if (CH(k, B00071aa2_ht) & (1 << j)) {
-                    CH(k, B00071aa2_ht) ^= 1 << j;
+                if (CH(k, B000718e0_iO[0].f1c2) & (1 << j)) {
+                    CH(k, B000718e0_iO[0].f1c2) ^= 1 << j;
                     (&DAT_0005cf5a)[k] = 1;
                     *(int *)((char *)&B00071aa2_ht + k * 0x248 + 4 + j * 4) = 0;
                     FUN_000186c4(k, j);

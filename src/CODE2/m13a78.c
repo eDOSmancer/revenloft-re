@@ -353,8 +353,6 @@ void FUN_000143f4(int i, int *pm, int *pp)
 /* FUN_000144d0 @ 000144d0: memorise spells from a slot: each resting priest/mage learns while charges remain */
 struct SLOT { unsigned char lo : 4, hi : 4; };
 extern void FUN_00019d90(int, int, int), FUN_0002f494(int);
-#define B000718fc_i0 (*(short *)((char *)&B000718e0_iO + 28)) /* STANDIN: view, B000718e0_iO + 0x1c */
-#define B000718fe_ar (*(short *)((char *)&B000718e0_iO + 30)) /* STANDIN: view, B000718e0_iO + 0x1e */
 #define B000718f0_hO (B000718e0_iO[0].fl)
    extern unsigned char DAT_0005cf5a;
 int FUN_000144d0(int a, int b, int c, int d, int *e, int *f, int g)
@@ -367,8 +365,8 @@ int FUN_000144d0(int a, int b, int c, int d, int *e, int *f, int g)
         if (!M0007199a_mo[idx].hi) return 0;
         r = 0;
         for (k = 0; k < 4; k++) {
-            if (!(*(unsigned short *)((char *)&B000718f0_hO + k * 0x248) & 0xc000) && *(short *)((char *)&B000718fc_i0 + k * 0x248) != *(short *)((char *)&B000718fe_ar + k * 0x248)) {
-                while (M0007199a_mo[idx].hi && *(short *)((char *)&B000718fc_i0 + k * 0x248) < *(short *)((char *)&B000718fe_ar + k * 0x248)) {
+            if (!(*(unsigned short *)((char *)&B000718f0_hO + k * 0x248) & 0xc000) && B000718e0_iO[k].hp != B000718e0_iO[k].maxhp) {
+                while (M0007199a_mo[idx].hi && B000718e0_iO[k].hp < B000718e0_iO[k].maxhp) {
                     FUN_00019d90(d, k, a);
                     (&DAT_0005cf5a)[k] = 1;
                     FUN_0002f494(1);
@@ -378,7 +376,7 @@ int FUN_000144d0(int a, int b, int c, int d, int *e, int *f, int g)
                         *e = g + 0xf0;
                     }
                 }
-                if (*(short *)((char *)&B000718fc_i0 + k * 0x248) == *(short *)((char *)&B000718fe_ar + k * 0x248)) (*f)--;
+                if (B000718e0_iO[k].hp == B000718e0_iO[k].maxhp) (*f)--;
             }
         }
     }
@@ -979,8 +977,6 @@ int FUN_00015aa4(int m, int cur, int a, int b, int c, int d, int e)
 /* ---- from src/CODE2/f15bdc.c */
 /* FUN_00015bdc @ 00015bdc: build the spell-slot table for a character */
 void *memset(void *, int, unsigned); void *memmove(void *, const void *, unsigned);
-#define B0007191b_dS (*(unsigned char *)((char *)&B000718e0_iO + 59)) /* STANDIN: view, B000718e0_iO + 0x3b */
-#define B00071919_ad (*(unsigned char *)((char *)&B000718e0_iO + 57)) /* STANDIN: view, B000718e0_iO + 0x39 */
 extern unsigned char DAT_00056208[8], DAT_000562b0[], DAT_00056160[], DAT_0005613f[];
 void FUN_00015bdc(int mode, int i, int row, unsigned char *tbl)
 {
@@ -988,13 +984,13 @@ void FUN_00015bdc(int mode, int i, int row, unsigned char *tbl)
     memset(DAT_00056208, 0, 8);
     memmove(DAT_00056208, tbl + row * 8, 8);
     if (mode == 0) {
-        if (*((signed char *)&B000718f5_h2 + i * 0x248) != 1) {
+        if (B000718e0_iO[i].cls[0] != 1) {
             for (k = 0; k < 8; k++) {
-                if (DAT_000562b0[row * 8 + k]) DAT_00056208[k] += DAT_00056160[*((unsigned char *)&B0007191b_dS + i * 0x248) * 8 + k];
+                if (DAT_000562b0[row * 8 + k]) DAT_00056208[k] += DAT_00056160[B000718e0_iO[i].ab[8] * 8 + k];
             }
         }
-    } else if (DAT_0005613f[*((unsigned char *)&B00071919_ad + i * 0x248)] != 0) {
-        for (k = DAT_0005613f[*((unsigned char *)&B00071919_ad + i * 0x248)]; k < 8; k++) DAT_00056208[k] = 0;
+    } else if (DAT_0005613f[B000718e0_iO[i].ab[6]] != 0) {
+        for (k = DAT_0005613f[B000718e0_iO[i].ab[6]]; k < 8; k++) DAT_00056208[k] = 0;
     }
 }
 
