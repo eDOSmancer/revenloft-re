@@ -1,9 +1,3 @@
-/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
-/* STANDIN (ownership): the three words 0x388fc-0x38900 follow m15880's 2313-byte node array (257 x 9) and 3 alignment bytes, a class rise at a dword boundary: they are defined by the object file linked after m15880.c although only FUN_00015880 names them. That file is taken to be this one (docs/BSS.md). */
-short B00038900_eu;
-short B000388fe_eu;
-short B000388fc_eu;
-/* BSS end */
 /* Module: FUN_00015d90, FUN_00015f4c */
 /* ---- from build/var/mod/parts/p15d90.c */
 /* Round 24: matches only under -ol; module 0x15d90 needs FUN_00015f4c under the same set. Without -ol the first difference is the register of the hoisted C0 address (edx here, eax in the original; C0 and C1 addresses CSEd into the common dominator of both else branches): an allocation tie, no lever found (modmat: -oa, -oi, -or, -oc change nothing) */

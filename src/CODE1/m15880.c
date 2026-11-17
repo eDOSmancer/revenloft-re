@@ -1,5 +1,5 @@
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
-struct KD B00037ff0_eu[257];
+struct KD B00037ff0_eu[258]; /* 258 nodes of 9 bytes; the three words 0x388fc-0x38900 are the links of node 257 */
 short B00037bf0_eu[512];
 /* BSS end */
 /* Module: FUN_00015880, FUN_000159ac, FUN_00015a34, FUN_00015b64 */
@@ -26,7 +26,10 @@ struct PE { unsigned char g, r, b; short idx; short x, y; };
 #define B00037ff3_eu (*(short *)((char *)&B00037ff0_eu + 3)) /* STANDIN: a name of its own in the original image, 3 bytes into B00037ff0_eu */
 #define B00037ff5_eu (*(short *)((char *)&B00037ff0_eu + 5)) /* STANDIN: a name of its own in the original image, 5 bytes into B00037ff0_eu */
 #define B00037ff7_eu (*(short *)((char *)&B00037ff0_eu + 7)) /* STANDIN: a name of its own in the original image, 7 bytes into B00037ff0_eu */
-extern short B000388fc_eu, B000388fe_eu, B00038900_eu, DAT_00030982;
+#define B000388fc_eu (*(short *)((char *)&B00037ff0_eu + 2316)) /* STANDIN: view, B00037ff0_eu + 0x90c */
+#define B000388fe_eu (*(short *)((char *)&B00037ff0_eu + 2318)) /* STANDIN: view, B00037ff0_eu + 0x90e */
+#define B00038900_eu (*(short *)((char *)&B00037ff0_eu + 2320)) /* STANDIN: view, B00037ff0_eu + 0x910 */
+extern short DAT_00030982;
  
 /* FUN_00015a34 @ 00015a34: feed every palette entry to FUN_00015880, from the start index down to 0 and then up to 255 */
 void FUN_00015a34(unsigned char *pal)
