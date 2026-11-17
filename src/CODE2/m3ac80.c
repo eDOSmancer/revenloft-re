@@ -1,14 +1,22 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+short B0007b61c_dd[10];
+short B0007b608_e2[10];
+struct DE B00077148_eJ[800];
+short B00077128_fk[16];
+short B00077108_dk[16];
+short B00077100_ds[4];
+/* BSS end */
 /* Debug-info module 0003ac70.. (-3s -d2 -oe -s; the 16 zero bytes at 0003ac70 are the module's const for FUN_0003c294's int r[4] = {0}): FUN_0003ac80 .. FUN_0003c294 in address order (FUN_0003b2f4 and FUN_0003b6d0 matched 2026-11-10: the original adds to e->h with +=, which evaluates the term first and adds into the register of e->h; "e->h = e->h + x" in either operand order adds into the term register); built with -ot ahead of -d2 (lea for index scaling); -oe inlines FUN_0003acdc and FUN_0003ac80 into later functions (only in statement-level ifs) */
 
 #include "world.h"
 struct DE { short f0; unsigned short dist; unsigned short h; short idx, kind, fa, f0c, f0e, f10, f12, f14; };
 struct MO { int a, b; unsigned char f8, f9, fa, fb; unsigned short cell, type; short timer, w12; unsigned short lo : 6, frame : 3, rest : 7; };
 struct CELL { unsigned short lo : 6, seen : 1, rest : 9; };
-extern struct DE B00077148_eJ[]; extern void *B00072230_c4; extern struct MO B00072238_dL[]; extern struct CELL B000698e0_b7[];
+extern struct DE B00077148_eJ[800]; extern void *B00072230_c4; extern struct MO B00072238_dL[]; extern struct CELL B000698e0_b7[];
  extern int DAT_0005c050; extern unsigned char DAT_0005c02d;
 extern void FUN_00045798(int, int, void *, unsigned short *), FUN_0003b2f4(void *, void *, int, int, int), FUN_0003b088(int, int), FUN_00031bf0(void *, int);
 int rand(void);
-extern short B00077100_ds[];
+extern short B00077100_ds[4];
 #define B00077106_dq (*(short *)((char *)&B00077100_ds + 6)) /* STANDIN: a name of its own in the original image, 6 bytes into B00077100_ds */
 
 
@@ -86,7 +94,7 @@ int FUN_0003ae30(int x, int y)
 }
 
 struct W { int w[5]; int cell, val; };
-extern struct W B00065a18_cn[]; extern short B00077108_dk[], B00077128_fk[];
+extern struct W B00065a18_cn[]; extern short B00077108_dk[16], B00077128_fk[16];
 void FUN_0003b088(int n, int c)
 {
     int last, j, i, v;
@@ -140,7 +148,7 @@ int FUN_0003b1bc(void)
 
 struct OB { int a, b; unsigned char f8, f9, fa, fb; unsigned short cell, type; short timer, w12; unsigned short lo1 : 1, st : 2, face : 3, rest : 10; };
 struct DE3 { unsigned short f0, dist, h; short idx, kind, fa, f0c, f0e, f10, f12, f14; };
-extern short B0007b608_e2[], B0007b61c_dd[], B00077100_ds[]; extern int DAT_0005c6d0, DAT_0005c658;
+extern short B0007b608_e2[10], B0007b61c_dd[10], B00077100_ds[4]; extern int DAT_0005c6d0, DAT_0005c658;
 /* FUN_0003b2f4 @ 0003b2f4: choose the frame of sprite e for object o of draw kind k, type t, with nf direction frames (groups of three scenery pieces share one direction) */
 void FUN_0003b2f4(void *o_p, void *e_p, int k, int t, int nf)
 {
@@ -206,7 +214,7 @@ struct TY { unsigned char p0[0x14]; unsigned short w14; unsigned char p16[2]; un
 #pragma pack()
 /* the module declares B00072230_c4 as void * (cast view, recipe 29) */
 #define B00072230_c4 (*(struct TY **)&B00072230_c4)
-extern short B00077100_ds[];
+extern short B00077100_ds[4];
 int rand(void); void srand(unsigned); extern unsigned FUN_00040700(void);
 /* FUN_0003b6d0 @ 0003b6d0: put the visible creatures into draw list slot n onwards (frame from type, state and animation), return the next free slot */
 int FUN_0003b6d0(int n)
