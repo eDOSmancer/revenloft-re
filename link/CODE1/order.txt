@@ -31,7 +31,6 @@ asm  a19ca0   -3p -mf -c
 lib  sprintf  CLIB3S.LIB
 lib  strcat   CLIB3S.LIB
 c    m1b060   -3s -s -of+ -ot -d1+ -w0
-asm  b1b060   -3p -c
 c    m1be70   -3s -s -of+ -ot -d1+ -w0
 c    m1c2d0   -3s -s -of+ -ot -d1+ -w0
 asm  a1c7a0   -3p -mf -c
