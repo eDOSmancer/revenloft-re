@@ -14,7 +14,6 @@ c    m1ea90   -3s -ox -oe -ot -w0
 asm  b1ea90   -3p -c
 c    m1eee0   -3s -ox -oe -oa -ot -w0
 c    m231dc   -3s -ox -oe -oa -ot -w0
-asm  b231dc   -3p -c
 c    m23f70   -3s -ox -oe -oa -ot -j -w0
 asm  b23f70   -3p -c
 c    m26810   -3s -ox -oe -oa -ot -w0
