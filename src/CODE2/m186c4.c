@@ -1123,12 +1123,12 @@ int FUN_0001aa30(int i)
 #include "world.h"
 #define FUN_00038110 ((void (*)(void *, int, int, int))FUN_00038110)
  extern unsigned char *FUN_0002e8c8(int, int);
-extern unsigned char B00065a18_cn[];
-#define B00065a2c_ay (*(int *)((char *)&B00065a18_cn + 20)) /* STANDIN: view, B00065a18_cn + 0x14 */
+#include "records.h"
+extern struct COL B00065a18_cn[256];
 
 void FUN_0001abc4(int i)
 {
-    int pos = *(int *)((char *)&B00065a2c_ay + i * 0x1c);
+    int pos = B00065a18_cn[i].cell;
     int x, y;
     unsigned char *p;
     x = pos % B00075618_b1.w;
@@ -1150,7 +1150,7 @@ extern void FUN_000102a8(int), FUN_0002c77c(int, int);  extern int FUN_00030c0c(
 
 void FUN_0001ac2c(int i)
 {
-    int pos = *(int *)((char *)&B00065a2c_ay + i * 0x1c);
+    int pos = B00065a18_cn[i].cell;
     int x, y, saved; struct OBJ *p;
     x = pos % B00075618_b1.w;
     y = pos % B00075618_b1.h;

@@ -94,8 +94,8 @@ int FUN_0003ae30(int x, int y)
     return 0;
 }
 
-struct W { int w[5]; int cell, val; };
-extern struct W B00065a18_cn[]; extern short B00077108_dk[16], B00077128_fk[16];
+#include "records.h"
+extern struct COL B00065a18_cn[256]; extern short B00077108_dk[16], B00077128_fk[16];
 void FUN_0003b088(int n, int c)
 {
     int last, j, i, v;

@@ -1083,16 +1083,15 @@ int FUN_000323f4(int x, int y, int fl)
 /* ---- from build/var/mod/parts/p32894.c */
 /* FUN_00032894 @ 00032894: hit-test row y of a perspective strip of width r against window win; report the window geometry and the column index; round 21: the map width is the level header member (the old `const short` fit stood in for the module -oa) */
 #include "world.h"
-struct W { int a, w, h, c, d, e, f; };
-extern struct W B00065a18_cn[];
+extern struct COL B00065a18_cn[256];
 void FUN_00032894(int r, int y, int win, int *ph, int *pd, int *res, int *pcol, int *prow)
 {
-    struct W *w; int k, s, base;
-    w = (struct W *)(win * 0x1c + (int)B00065a18_cn);
+    struct COL *w; int k, s, base;
+    w = (struct COL *)(win * 0x1c + (int)B00065a18_cn);
     *ph = w->h;
     *pd = w->d >> 6;
-    *pcol = w->e % B00075618_b1.w;
-    *prow = w->e / B00075618_b1.w;
+    *pcol = w->cell % B00075618_b1.w;
+    *prow = w->cell / B00075618_b1.w;
     s = r * 4;
     base = 0x84 - s / 2;
     base += s / 8;
@@ -1120,9 +1119,8 @@ extern void FUN_00032894(int r, int y, int win, int *ph, int *pd, int *res, int 
    Its 820/788 failure in the merged module was not this function: FUN_00032ce0's file defined `static int next()`, which a
    one-file module emits out of line (32 bytes) right after FUN_000329cc - fixed in final/f32ce0.c (macro). */
 struct BOX { short x0, y0, x1, y1; };
-/* struct W: defined above */
 extern struct BOX DAT_0005d684[];
-extern struct W B00065a18_cn[];
+extern struct COL B00065a18_cn[256];
 extern short DAT_00058600; extern unsigned char DAT_00058602, DAT_0005d681[], DAT_0005d682;
  extern int DAT_0005c738;
 extern void FUN_0001c704(void);
