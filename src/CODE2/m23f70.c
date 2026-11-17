@@ -164,7 +164,7 @@ void FUN_00024218(int sel, int all)
 
 /* ---- from src/CODE2/f2430c.c */
 /* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
-#define B00063020_bP ((unsigned short *)B00063020_bP)
+#define M00063020_bP ((unsigned short *)B00063020_bP)
 #define M000718e0_iO ((unsigned char *)&B000718e0_iO)
 /* Round 53 (module 0x23f70 -oa, 2 compiles): the walk as `for (;; DAT_00057fec += 2) { p = &B00063020_bP[DAT_00057fec]; ...}` (one more 2/4 constant in the loop): 173 lines; without p (table at each use): compiler error exit. The constant tie (1 / 4 / 2 at eight uses) stands; one more use of 2 or 4 or one fewer of 1 in the loop decides it (found = 1 is the extra use of 1 here). */
 /* FUN_0002430c @ 0002430c: evaluate the current script condition list against the active character; -oa without loop optimisation (-ol would cache the constant 1 in ebp) */
@@ -194,7 +194,7 @@ int FUN_0002430c(void)
     one = 1; /* STANDIN: copy-propagated back to an immediate; the loop CONST_TEMP for 1 is then created after those for 2 and 4 (pass-2 pre-sort position 3 instead of 1), so 2 wins the 322-savings tie for EBP; 2 has no MOV use, EBP stays untouched and found = 1 stays mov ecx,1 as in the original */
     c = M000718e0_iO + DAT_00057ffc * 0x248;
     found = 0;
-    for (p = &B00063020_bP[DAT_00057fec];; p += 2, DAT_00057fec += 2) {
+    for (p = &M00063020_bP[DAT_00057fec];; p += 2, DAT_00057fec += 2) {
         if (*p == 0x21) break;
         if (*p == 0 && c[0x1a] == 0) goto hit;
         if (*p == 1 && c[0x1a] == 2) goto hit;
@@ -242,7 +242,7 @@ int FUN_0002430c(void)
     return tgt;
 }
 
-#undef B00063020_bP
+#undef M00063020_bP
 #undef M000718e0_iO
 /* ---- from src/CODE2/f246b8.c */
 /* FUN_000246b8 @ 000246b8 */
@@ -257,7 +257,8 @@ extern void FUN_00026034(void); /* module prototype */
 #include "snd.h"
 #define FUN_0002c368 ((void (*)(unsigned char *, int))FUN_0002c368)
 extern int FUN_0002a1f4(void); extern void FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_0002a8c8(int, int, int, int, int);
-extern int DAT_00057fec, B000758cc_fL, DAT_00057ff4, DAT_0005c050, B00075614_lm, DAT_00057ff8, DAT_00057fd4; extern unsigned short B0006301e_ak[]; extern unsigned char DAT_0005759c[], DAT_0005c02b;
+#define B0006301e_ak ((unsigned short *)((char *)&B00063020_bP - 2)) /* STANDIN: view, B00063020_bP - 2 (element -1 of the table: the code indexes from 1) */
+extern int DAT_00057fec, B000758cc_fL, DAT_00057ff4, DAT_0005c050, B00075614_lm, DAT_00057ff8, DAT_00057fd4;  extern unsigned char DAT_0005759c[], DAT_0005c02b;
 void FUN_000246dc(void)
 {
     int n, r, snd; unsigned short v, v2;
@@ -310,12 +311,12 @@ void *memmove(void *, const void *, unsigned); void *memset(void *, int, unsigne
 extern int FUN_0001dbd4(int); extern void FUN_00013ea4(int, int), FUN_00013de4(int, int);
 extern int DAT_00057fec; 
 #include "records.h"
-#define B00063020_bP ((unsigned short *)B00063020_bP)
+#define M00063020_bP ((unsigned short *)B00063020_bP)
 #define M000718e0_iO ((struct PC *)&B000718e0_iO)
 extern struct PC DAT_0005a808[];
 void FUN_000248f0(int who)
 {
-    int t = B00063020_bP[DAT_00057fec++];
+    int t = M00063020_bP[DAT_00057fec++];
     memmove(&M000718e0_iO[who], (void *)(t * 0x248 + (int)DAT_0005a808), sizeof(struct PC));
     memset((char *)M000718e0_iO[who].r10b, 0, (char *)&M000718e0_iO[who + 1] - (char *)M000718e0_iO[who].r10b);
     M000718e0_iO[who].cost = FUN_0001dbd4(who);
@@ -343,7 +344,7 @@ void FUN_000248f0(int who)
     M000718e0_iO[who].fl |= 0x80;
 }
 
-#undef B00063020_bP
+#undef M00063020_bP
 #undef M000718e0_iO
 /* ---- from src/CODE2/f24a60.c */
 /* FUN_00024a60: index of the party record named name whose flag word (+0x10) has bit 7 set, -1 if none */
@@ -592,39 +593,39 @@ void FUN_00025144(int t) { FUN_0003195c(0x80, t, 0, B000755d0_ao, B000755d4_ak, 
 
 /* ---- from src/CODE2/f25168.c */
 extern void FUN_000241b8(void); /* module prototype */
-#define B00063020_bP ((unsigned short *)B00063020_bP)
+#define M00063020_bP ((unsigned short *)B00063020_bP)
 /* FUN_00025168 @ 00025168: script op: add a picture to the four slots (-oa: the script index global is cached in a register) */
 /* struct PX: defined above */
 void *memmove(void *, const void *, unsigned);
 
-extern int DAT_00057fec; extern struct PX DAT_00057fd8[4]; extern unsigned short B0006301e_ak[];
+extern int DAT_00057fec; extern struct PX DAT_00057fd8[4]; 
 void FUN_00025168(int mode)
 {
     int k;
     if (mode == 0) {
         for (k = 0; k < 4; k++) {
             if (DAT_00057fd8[k].id == 0xffff) {
-                DAT_00057fd8[k].id = B00063020_bP[DAT_00057fec++];
-                DAT_00057fd8[k].pad = B00063020_bP[DAT_00057fec++];
+                DAT_00057fd8[k].id = M00063020_bP[DAT_00057fec++];
+                DAT_00057fd8[k].pad = M00063020_bP[DAT_00057fec++];
                 break;
             }
         }
     } else {
         memmove(&DAT_00057fd8[1], &DAT_00057fd8[0], 12);
-        DAT_00057fd8[0].id = B00063020_bP[DAT_00057fec++];
-        DAT_00057fd8[0].pad = B00063020_bP[DAT_00057fec++];
+        DAT_00057fd8[0].id = M00063020_bP[DAT_00057fec++];
+        DAT_00057fd8[0].pad = M00063020_bP[DAT_00057fec++];
     }
     FUN_000241b8();
 }
 
-#undef B00063020_bP
+#undef M00063020_bP
 /* ---- from src/CODE2/f2520c.c */
 extern void FUN_000241b8(void); /* module prototype */
 /* FUN_0002520c @ 0002520c: drop the current script picture from the four slots */
 /* struct PX: defined above */
 void *memmove(void *, const void *, unsigned);
 
-extern int DAT_00057fec, DAT_00057fe8; extern struct PX DAT_00057fd8[4]; extern unsigned short B0006301e_ak[];
+extern int DAT_00057fec, DAT_00057fe8; extern struct PX DAT_00057fd8[4]; 
 void FUN_0002520c(void)
 {
     int k, n; unsigned id;
@@ -650,7 +651,7 @@ void FUN_0002520c(void)
 #define B00064d92_aW (*(unsigned short *)((char *)&B00064d80_ay + 18)) /* STANDIN: view, B00064d80_ay + 0x12 */
 extern unsigned char B00064d80_ay[];
 #define B00064d8b_a7 (*(int *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
-extern int DAT_00057fec; extern unsigned short B0006301e_ak[];    
+extern int DAT_00057fec;     
 #define ENT_FL(i) (*(int *)((char *)&B00064d8b_a7 + (i) * 0x16))
 #define ENT_ID(i) (*(unsigned short *)((char *)&B00064d8e_a6 + (i) * 0x16))
 #define ENT_W12(i) (*(unsigned short *)((char *)&B00064d92_aW + (i) * 0x16))
@@ -755,7 +756,7 @@ extern int FUN_000253fc(void); /* module prototype */
 /* FUN_00025534 @ 00025534: execute one instruction of the event script at B00063020_bP[DAT_00057fec]; 0 = continue, 1/2/3 = stop codes */
 #include <stdlib.h>
 #define DAT_00057fd8 ((struct XY *)DAT_00057fd8)
-#define B00063020_bP ((unsigned short *)B00063020_bP)
+#define M00063020_bP ((unsigned short *)B00063020_bP)
 #define FUN_0003f29c ((int (*)(int, int))FUN_0003f29c)
 struct XY { short x, y; };
 struct TM { int a, b, c; };
@@ -768,7 +769,7 @@ extern void FUN_0003e510(int, int, int, int), FUN_000396c0(int, int, int, int), 
 extern void FUN_0002a9f8(void), FUN_0002a8c8(int, int, int, int, int), FUN_0003e608(void), FUN_00037f24(int), FUN_00038ef0(void), FUN_00039008(int); extern int FUN_0003e614(unsigned, int);
 extern void FUN_00038f58(int), FUN_00038e58(int, int, int), FUN_00023ef8(int);
 extern int FUN_0001f4b0(int), FUN_0002c1dc(int); extern unsigned FUN_00040700(void);
-#define S B00063020_bP
+#define S M00063020_bP
 #define PC DAT_00057fec
 #define RND(n) ((unsigned)((n) * rand()) >> 15)
 int FUN_00025534(void)
@@ -922,7 +923,7 @@ int FUN_00025534(void)
 }
 
 #undef DAT_00057fd8
-#undef B00063020_bP
+#undef M00063020_bP
 #undef FUN_0003f29c
 #undef S
 #undef PC
