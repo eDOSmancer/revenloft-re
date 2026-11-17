@@ -562,7 +562,9 @@ def cmd_view(prog, name, cont, off): cmd_views(prog, {name: (cont, off)})
 
 def cmd_check(prog):
     work = os.path.join(ROOT, 'build', prog, 'cc'); bad = 0
+    linked = set(l.split()[1].upper() for l in open(os.path.join(ROOT, 'link', prog, 'order.txt')) if l.split()[:1] == ['c'])
     for f in sorted(glob.glob(os.path.join(work, 'M*.OBJ')) + glob.glob(os.path.join(work, 'D*.OBJ'))):
+        if os.path.basename(f)[:-4] not in linked: continue   # an object left over from an earlier build
         length, pubs = bss_of(f); names = [n for o, n in pubs]
         key = [n[1:9] if re.fullmatch(r'[B-Z][0-9a-f]{8}_\w\w', n) else n[-8:] for n in names]
         ok = key == sorted(key)

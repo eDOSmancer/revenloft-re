@@ -1,7 +1,11 @@
 /* Module: FUN_00015d90, FUN_00015f4c */
 /* ---- from build/var/mod/parts/p15d90.c */
 /* Round 24: matches only under -ol; module 0x15d90 needs FUN_00015f4c under the same set. Without -ol the first difference is the register of the hoisted C0 address (edx here, eax in the original; C0 and C1 addresses CSEd into the common dominator of both else branches): an allocation tie, no lever found (modmat: -oa, -oi, -or, -oc change nothing) */
-extern signed char B0003680d_eu[], B0003680e_eu[], B0003680f_eu[];
+extern unsigned char B000367f8_eu[];
+#define B0003680d_eu ((signed char *)((char *)&B000367f8_eu + 21)) /* STANDIN: view, B000367f8_eu + 0x15 */
+#define B0003680e_eu ((signed char *)((char *)&B000367f8_eu + 22)) /* STANDIN: view, B000367f8_eu + 0x16 */
+#define B0003680f_eu ((signed char *)((char *)&B000367f8_eu + 23)) /* STANDIN: view, B000367f8_eu + 0x17 */
+
 #define C0 B0003680d_eu[p * 0x248]
 #define C1 B0003680e_eu[p * 0x248]
 #define C2 B0003680f_eu[p * 0x248]
@@ -44,7 +48,15 @@ int FUN_00015d90(int p)
 extern int FUN_00015d90(int p); /* module prototype */
 /* Round 33: matches in module 0x15d90 under the module set -ol with cls initialised at the declaration (first-definition tie, recipe 96) and the record offset written p * 0x248 + k * 2 like the other stores (the k-loop address node moves the 320-savings tie of the x*0x41 tail sum); found with the 9.5b trace (tietrace class B -> A). Round 24: matched only without -ol. Under -ol (FUN_00015d90 needs it) the first difference is cls in ecx and r*0xa8 in esi (original: cls esi), then the *0x41 sum register: identical instructions, an allocation tie; block-scoped k/r/cls (1 real) and modmat -oa/-oi/-or/-oc change nothing */
 struct T { short a, b, c, d, w[10]; };
- extern unsigned char B0003680c_eu[], B00036a54_eu, *B00037128_eu; extern struct T DAT_00030988[][6]; extern char B00036854_eu[], B00036856_eu[], B00036858_eu[], B0003685a_eu[], B00036838_eu[]; extern short B00036a80_eu[];
+#define B00036a80_eu ((short *)((char *)&B000367f8_eu + 648)) /* STANDIN: view, B000367f8_eu + 0x288 */
+#define B00036854_eu ((char *)((char *)&B000367f8_eu + 92)) /* STANDIN: view, B000367f8_eu + 0x5c */
+#define B00036856_eu ((char *)((char *)&B000367f8_eu + 94)) /* STANDIN: view, B000367f8_eu + 0x5e */
+#define B00036858_eu ((char *)((char *)&B000367f8_eu + 96)) /* STANDIN: view, B000367f8_eu + 0x60 */
+#define B0003685a_eu ((char *)((char *)&B000367f8_eu + 98)) /* STANDIN: view, B000367f8_eu + 0x62 */
+#define B00036838_eu ((char *)((char *)&B000367f8_eu + 64)) /* STANDIN: view, B000367f8_eu + 0x40 */
+#define B0003680c_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 20)) /* STANDIN: view, B000367f8_eu + 0x14 */
+#define B00036a54_eu (*(unsigned char *)((char *)&B000367f8_eu + 604)) /* STANDIN: view, B000367f8_eu + 0x25c */
+ extern unsigned char *B00037128_eu; extern struct T DAT_00030988[][6];  
 #define W(a, o) (*(short *)((a) + (o)))
 void FUN_00015f4c(void) { int k, r, cls = 0, p, m; for (p = 0; p < 2; p++) { r = FUN_00015d90(p); cls = B0003680c_eu[p * 0x248]; W(B00036854_eu, p * 0x248) = DAT_00030988[r][cls].c; W(B00036856_eu, p * 0x248) = DAT_00030988[r][cls].d; W(B00036858_eu, p * 0x248) = DAT_00030988[r][cls].b; W(B0003685a_eu, p * 0x248) = DAT_00030988[r][cls].a; for (k = 0; k < 10; k++) W(B00036838_eu, p * 0x248 + k * 2) = DAT_00030988[r][cls].w[k]; } if (FUN_00015d90(0) == FUN_00015d90(1) && B0003680c_eu[0] == B00036a54_eu) for (m = 0; m < 10; m++) if (B00037128_eu[B00036a80_eu[m] * 0x41 + 0x2f] == 1) B00036a80_eu[m] = -1; }
 

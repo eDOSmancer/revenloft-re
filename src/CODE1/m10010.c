@@ -1,17 +1,15 @@
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
-unsigned char B00036813_eu[1];
-unsigned char B00036812_eu[1];
-unsigned char F00036810_eu[1];
-char B00036810_eu[1];
-unsigned char B0003680f_eu[1];
-signed char B0003680e_eu[1];
-signed char B0003680d_eu[1];
-unsigned char B0003680c_eu[1];
-unsigned char B0003680b_eu[1];
-signed char B0003680a_eu[1];
-unsigned char B00036809_eu[1];
-unsigned char B00036808_eu[1];
-unsigned char B000367f8_eu[16];
+int B0003713c_eu;
+unsigned char B00037138_eu[4];
+int B00037134_eu;
+void *B00037130_eu;
+int B0003712c_eu;
+void *B00037128_eu;
+int B00037124_eu;
+int B00037120_eu;
+int B0003711c_eu;
+int B00037118_eu;
+unsigned char B000367f8_eu[2336];
 unsigned char B000364f8_eu[768];
 unsigned char B000363f8_eu[256];
 unsigned char B00035ff8_eu[1024];
@@ -20,7 +18,8 @@ unsigned char B00035a00_eu[248];
 char B000359f8_eu[8];
 char B000355f8_eu[1024];
 /* BSS end */
-extern unsigned char B00036808_eu[1];
+#define B00036808_eu (*(unsigned char (*)[1])((char *)&B000367f8_eu + 16)) /* STANDIN: view, B000367f8_eu + 0x10 */
+
 extern unsigned char B000363f8_eu[256];
 extern unsigned char B00035a00_eu[248];
 /* Module: FUN_00010010, FUN_0001004c, FUN_000100ec, FUN_0001035c, FUN_0001043c, FUN_000104b0, FUN_0001064c,
@@ -133,8 +132,13 @@ extern void FUN_000138a4(int y, int x); /* module prototype */
 /* FUN_000104b0: draws a panel of the current record (DAT_000304cc) up to step; k doubles as the record offset in steps 1 and 4 (that is what puts it in ebx). Round 25: the round-24 "state carried between functions" reading is withdrawn: the record offset goes to eax only under -ol (alone, after a 60-statement synthetic function, and in module 0x10010 alike: 4 lines); without -ol it matches alone, after a predecessor and in the module. So module 0x10010 has a flag conflict here (-ol for FUN_000100ec, FUN_000110a4, FUN_000115b0, FUN_00012198 ...), not a context effect; tried under -ol: a separate offset variable, c in the loop block, k = R as its own statement, int c, k (8 real compiles). Round 27 (re-derived, 0 compiles): the original recomputes R inside the step-3 loop (imul eax per iteration, k in ebx), so the loop has no invariant hoisted even under -ol; the only -ol effect here is on the dead step-1/step-4 instances of k (k = R, never read before k = 2 / the end): without -ol 9.5b keeps them in k's home ebx, with -ol they become their own temporaries and take eax. A source for -ol needs those instances live: the most likely untested form is k read after the step-1/step-4 calls (e.g. the step-2 and step-5 record reads written through k, B0003680c_eu[k], which the original's fresh imul in step 2 argues against) - not tested for lack of budget */
 #define R (DAT_000304cc * 0x248)
 extern int DAT_000304cc, B0003713c_eu;
-extern unsigned char B0003680b_eu[], B0003680c_eu[], B00036812_eu[], DAT_000304c4[], B00035ff8_eu[], B000367f8_eu[];
-extern signed char B0003680d_eu[], B0003680a_eu[];
+#define B0003680b_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 19)) /* STANDIN: view, B000367f8_eu + 0x13 */
+#define B0003680c_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 20)) /* STANDIN: view, B000367f8_eu + 0x14 */
+#define B00036812_eu ((unsigned char *)((char *)&B000367f8_eu + 26)) /* STANDIN: view, B000367f8_eu + 0x1a */
+extern unsigned char DAT_000304c4[], B00035ff8_eu[], B000367f8_eu[];
+#define B0003680d_eu ((signed char *)((char *)&B000367f8_eu + 21)) /* STANDIN: view, B000367f8_eu + 0x15 */
+#define B0003680a_eu (*(signed char (*)[])((char *)&B000367f8_eu + 18)) /* STANDIN: view, B000367f8_eu + 0x12 */
+
 extern void FUN_00016eb0(int, int, int, int, int, unsigned char *), FUN_00016c60(int, int, int, int, int), FUN_00017d80(int, int, int, char *, int);
 void FUN_000104b0(int step)
 {
@@ -203,7 +207,8 @@ extern void FUN_00018e3c(int, int), FUN_00016588(int), FUN_000186c4(int, int, in
 extern void FUN_00019c44(int, int, int, int, int, void *, int, int), FUN_0001a05c(int, int, int, int, int), FUN_000155dc(int, int, int, int, int), FUN_000153e4(int);
 extern void *FUN_0001954c(int, int);
 #define B000363f8_eu (*(unsigned char *)((char *)&B000363f8_eu)) /* STANDIN: the first bytes of the object */
-extern unsigned char B00037138_eu, B00035af8_eu[], B00035ff8_eu[];
+#define B00037138_eu (*(unsigned char *)((char *)&B00037138_eu)) /* STANDIN: the first bytes of the object */
+extern unsigned char B00035af8_eu[], B00035ff8_eu[];
 extern int B0003713c_eu;
 
 extern char B000355f8_eu[];
@@ -331,7 +336,7 @@ extern void FUN_000104b0(int step); /* module prototype */
 extern void *FUN_000171c8(int), *FUN_0001954c(int, int);
 extern void FUN_00016588(int), FUN_000186c4(int, int, int, int), FUN_00016c60(int, int, int, int, int), FUN_00017d80(int, int, int, char *, int), FUN_000153e4(int);
 extern void FUN_00016744(void *, int, int, int, int), FUN_000166c0(void *, int, int, int, int), FUN_00016d54(int, int, int, void *), FUN_0001a5c8(int, void *), FUN_00017240(void *);
-extern unsigned char B00037138_eu, DAT_00030964[], DAT_00030970[];
+extern unsigned char DAT_00030964[], DAT_00030970[];
 
 extern char B00037140_eu[];
 /* struct EMB: defined above */
@@ -445,7 +450,7 @@ extern void FUN_000104b0(int step); /* module prototype */
 extern void *FUN_000171c8(int), *FUN_0001954c(int, int);
 extern void FUN_000156dc(void), FUN_00016588(int), FUN_00016824(int, int, int, void *, void *), FUN_00016eb0(int, int, int, int, int, unsigned char *), FUN_000153e4(int), FUN_00015454(int);
 extern void FUN_00016c60(int, int, int, int, int), FUN_000166c0(void *, int, int, int, int), FUN_00016744(void *, int, int, int, int), FUN_00017240(void *), FUN_000186c4(int, int, int, int);
-extern unsigned char B00037138_eu, B00035ff8_eu[], B00035af8_eu[];
+extern unsigned char B00035ff8_eu[], B00035af8_eu[];
 extern int B0003713c_eu;
 
 /* struct EMB: defined above */
@@ -525,17 +530,20 @@ void FUN_000115b0(int sel, int tx, int ty, int arg)
 extern void FUN_0001004c(char *buf, int k); /* module prototype */
 extern void FUN_000100ec(int x, int y, int w, int col, char *s, int mode, unsigned char *tbl); /* module prototype */
 #define DAT_000304c4 (*(unsigned char *)&DAT_000304c4)
-#define B000367f8_eu ((char *)B000367f8_eu)
-#define B0003680a_eu (*(signed char *)&B0003680a_eu)
-#define B0003680b_eu (*(unsigned char *)&B0003680b_eu)
+#define M000367f8_eu ((char *)B000367f8_eu)
+#define M0003680a_eu (*(signed char *)&B0003680a_eu)
+#define M0003680b_eu (*(unsigned char *)&B0003680b_eu)
 #define FUN_000167c8 ((void (*)(int, int, int, void *))FUN_000167c8)
 /* FUN_00011a04: rebuild the two portrait cards (empty slot text or the character's face and name) as grabbed sprites, saving and restoring the screen under them */
 extern void FUN_00017830(void *), FUN_00016588(int), FUN_00016c60(int, int, int, int, int), FUN_00017d80(int, int, int, char *, int);
 extern void *FUN_00017868(int, int, int, int, int);
 extern void *DAT_0003095c, *DAT_00030960;
-extern unsigned char B00037138_eu, DAT_000304c5, B00036a53_eu, B00035ff8_eu[];
-extern signed char B00036a52_eu;
-extern char B000355f8_eu[], B00036a40_eu[];
+#define B00036a53_eu (*(unsigned char *)((char *)&B000367f8_eu + 603)) /* STANDIN: view, B000367f8_eu + 0x25b */
+extern unsigned char DAT_000304c5, B00035ff8_eu[];
+#define B00036a52_eu (*(signed char *)((char *)&B000367f8_eu + 602)) /* STANDIN: view, B000367f8_eu + 0x25a */
+
+#define B00036a40_eu ((char *)((char *)&B000367f8_eu + 584)) /* STANDIN: view, B000367f8_eu + 0x248 */
+extern char B000355f8_eu[];
 extern int B0003713c_eu;
 void FUN_00011a04(void)
 {
@@ -555,8 +563,8 @@ void FUN_00011a04(void)
         FUN_000100ec(0, 0, 0x7a, 0x30, B000355f8_eu, 0, B00035ff8_eu);
     } else {
         FUN_00016c60(0, 0, 0, 0x14, 7);
-        FUN_00016c60(0, 0x15, 0, B0003680a_eu + B0003713c_eu + B0003680b_eu * 0x17, 1);
-        FUN_00017d80(2, 0, 0x30, B000367f8_eu, 0);
+        FUN_00016c60(0, 0x15, 0, M0003680a_eu + B0003713c_eu + M0003680b_eu * 0x17, 1);
+        FUN_00017d80(2, 0, 0x30, M000367f8_eu, 0);
     }
     DAT_0003095c = FUN_00017868(0, 0, 0x7a, 0x30, 0xff);
     if (!DAT_000304c5) {
@@ -573,9 +581,9 @@ void FUN_00011a04(void)
 }
 
 #undef DAT_000304c4
-#undef B000367f8_eu
-#undef B0003680a_eu
-#undef B0003680b_eu
+#undef M000367f8_eu
+#undef M0003680a_eu
+#undef M0003680b_eu
 #undef FUN_000167c8
 /* ---- from build/var/mod/parts/p11bd4.c */
 extern int FUN_0001043c(void); /* module prototype */
@@ -584,9 +592,9 @@ extern void FUN_000107e4(int lo, int hi); /* module prototype */
 extern void FUN_00011a04(void); /* module prototype */
 /* FUN_00011bd4: the "start the adventure?" screen: show the party sheet, wait for yes (4: finish creation) or no (3), then restore the cursor shapes */
 extern void FUN_00016588(int), FUN_0001550c(int, int, int, int, int); 
-#define B00036808_eu ((short *)((char *)&B00036808_eu)) /* STANDIN: the first bytes of the object */
-extern int DAT_000304cc; extern unsigned char B00037138_eu, DAT_000304c4[]; 
-void FUN_00011bd4(void) { int done, r; DAT_00030904 = DAT_00030908; DAT_0003090c = DAT_00030910; DAT_00030908 = 0x2f; DAT_00030910 = 0x30; FUN_000107e4(0, 6); FUN_00016588(B00037138_eu); FUN_000104b0(6); FUN_0001550c(*(int *)&B00037138_eu, 0xc8, 0, 0xc8, 0x140); B00037138_eu ^= 1; done = 0; do { r = FUN_0001043c(); switch (r) { case 4: *(short *)((char *)B00036808_eu + DAT_000304cc * 0x248) = 0x8000; DAT_000304c4[DAT_000304cc] = 0; DAT_00030940 = 2; case 3: done = 1; } } while (!done); DAT_00030904 = DAT_00030908; DAT_0003090c = DAT_00030910; DAT_00030908 = 1; DAT_00030910 = 1; FUN_00011a04(); FUN_000107e4(0, 6); }
+#define M00036808_eu ((short *)((char *)&B00036808_eu)) /* STANDIN: the first bytes of the object */
+extern int DAT_000304cc; extern unsigned char DAT_000304c4[]; 
+void FUN_00011bd4(void) { int done, r; DAT_00030904 = DAT_00030908; DAT_0003090c = DAT_00030910; DAT_00030908 = 0x2f; DAT_00030910 = 0x30; FUN_000107e4(0, 6); FUN_00016588(B00037138_eu); FUN_000104b0(6); FUN_0001550c(*(int *)&B00037138_eu, 0xc8, 0, 0xc8, 0x140); B00037138_eu ^= 1; done = 0; do { r = FUN_0001043c(); switch (r) { case 4: *(short *)((char *)M00036808_eu + DAT_000304cc * 0x248) = 0x8000; DAT_000304c4[DAT_000304cc] = 0; DAT_00030940 = 2; case 3: done = 1; } } while (!done); DAT_00030904 = DAT_00030908; DAT_0003090c = DAT_00030910; DAT_00030908 = 1; DAT_00030910 = 1; FUN_00011a04(); FUN_000107e4(0, 6); }
 
 /* ---- from build/var/mod/parts/p11cd0.c */
 extern int FUN_0001043c(void); /* module prototype */
@@ -596,7 +604,8 @@ extern void FUN_00011a04(void); /* module prototype */
 extern void FUN_00011bd4(void); /* module prototype */
 /* FUN_00011cd0: character creation menu: pick member slot 1 or 2 (start the adventure when it is already made, else start making it), or leave */
 extern void FUN_00017830(void *); 
-extern unsigned char B0003685a_eu[];
+#define B0003685a_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 98)) /* STANDIN: view, B000367f8_eu + 0x62 */
+
 #define B00036903_eu ((int *)((char *)&B0003685a_eu + 169)) /* STANDIN: view, B0003685a_eu + 0xa9 */
 #define B00036907_eu ((int *)((char *)&B0003685a_eu + 173)) /* STANDIN: view, B0003685a_eu + 0xad */
 extern int DAT_000304cc; extern unsigned char DAT_000304c4[], DAT_000304c5;  extern void *DAT_0003095c, *DAT_00030960;
@@ -608,7 +617,7 @@ extern void FUN_00011464(int scr, int b0, int b1, int b2, int b3, int b4, int b5
 extern void FUN_000115b0(int sel, int tx, int ty, int arg); /* module prototype */
 #define FUN_000166c0 ((void (*)(unsigned char *, int, int, int, int))FUN_000166c0)
 struct SR { short size, n, w; unsigned char hb, flag; unsigned char data[1]; };
-extern int DAT_000304cc; extern unsigned char B0003680b_eu[];
+extern int DAT_000304cc; 
 extern void FUN_000165c0(int, int, int, int), FUN_000165e8(int, int, int, int);
 
 /* FUN_00011dd8 @ 00011dd8: alignment choice screen (buttons 3 and 4) for the current character, or step back */
@@ -621,7 +630,7 @@ extern void FUN_00011464(int scr, int b0, int b1, int b2, int b3, int b4, int b5
 extern void FUN_000115b0(int sel, int tx, int ty, int arg); /* module prototype */
 #define FUN_00016824 ((void (*)(int, int, int, int, int))FUN_00016824)
 struct CHR { char b[0x248]; };
-extern unsigned char *B00038988_eu; extern int DAT_00032908, B0003898c_eu, B00038990_eu, DAT_000304cc; extern unsigned char B0003680c_eu[];
+extern unsigned char *B00038988_eu; extern int DAT_00032908, B0003898c_eu, B00038990_eu, DAT_000304cc; 
 extern unsigned char *FUN_0001954c(int, int); extern void FUN_000167c8(int, int, int, int);
  
 /* FUN_00011e64 @ 00011e64: class choice screen for the current character: store the pick (or step back) */
@@ -634,7 +643,7 @@ void FUN_00011ee4(char *a, char *b) { char t = *a; *a = *b; *b = t; }
 
 /* ---- from build/var/mod/parts/p11f24.c */
 extern void FUN_00011ee4(char *a, char *b); /* module prototype */
-#define B000367f8_eu ((struct CH *)B000367f8_eu)
+#define M000367f8_eu ((struct CH *)B000367f8_eu)
 /* FUN_00011f24 @ 00011f24: put the classes of the current character into the canonical multi-class order */
 extern int DAT_000304cc; struct CH { char pad[0x15]; signed char cls[3]; char rest[0x248 - 0x18]; };
 
@@ -642,59 +651,60 @@ extern int DAT_000304cc; struct CH { char pad[0x15]; signed char cls[3]; char re
 void FUN_00011f24(void)
 {
     signed char k;
-    if (B000367f8_eu[DAT_000304cc].cls[1] == -1) k = B000367f8_eu[DAT_000304cc].cls[0];
-    else if (B000367f8_eu[DAT_000304cc].cls[2] == -1) {
-        if (B000367f8_eu[DAT_000304cc].cls[0] == 0) {
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 5) k = 6;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 3) k = 7;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 4) k = 8;
+    if (M000367f8_eu[DAT_000304cc].cls[1] == -1) k = M000367f8_eu[DAT_000304cc].cls[0];
+    else if (M000367f8_eu[DAT_000304cc].cls[2] == -1) {
+        if (M000367f8_eu[DAT_000304cc].cls[0] == 0) {
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 5) k = 6;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 3) k = 7;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 4) k = 8;
         }
-        if (B000367f8_eu[DAT_000304cc].cls[0] == 5) {
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 0) k = 6;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 3) k = 9;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 4) k = 12;
+        if (M000367f8_eu[DAT_000304cc].cls[0] == 5) {
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 0) k = 6;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 3) k = 9;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 4) k = 12;
         }
-        if (B000367f8_eu[DAT_000304cc].cls[0] == 2) k = 10;
-        if (B000367f8_eu[DAT_000304cc].cls[0] == 3) {
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 0) k = 7;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 5) k = 9;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 4) k = 11;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 2) k = 10;
+        if (M000367f8_eu[DAT_000304cc].cls[0] == 2) k = 10;
+        if (M000367f8_eu[DAT_000304cc].cls[0] == 3) {
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 0) k = 7;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 5) k = 9;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 4) k = 11;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 2) k = 10;
         }
-        if (B000367f8_eu[DAT_000304cc].cls[0] == 4) {
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 0) k = 8;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 3) k = 11;
-            if (B000367f8_eu[DAT_000304cc].cls[1] == 5) k = 12;
+        if (M000367f8_eu[DAT_000304cc].cls[0] == 4) {
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 0) k = 8;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 3) k = 11;
+            if (M000367f8_eu[DAT_000304cc].cls[1] == 5) k = 12;
         }
     } else {
-        if (B000367f8_eu[DAT_000304cc].cls[0] == 5 || B000367f8_eu[DAT_000304cc].cls[1] == 5 || B000367f8_eu[DAT_000304cc].cls[2] == 5) k = 13;
+        if (M000367f8_eu[DAT_000304cc].cls[0] == 5 || M000367f8_eu[DAT_000304cc].cls[1] == 5 || M000367f8_eu[DAT_000304cc].cls[2] == 5) k = 13;
         else k = 14;
     }
     switch (k) {
     case 6: case 7: case 8:
-        if (B000367f8_eu[DAT_000304cc].cls[0] != 0) FUN_00011ee4(&B000367f8_eu[DAT_000304cc].cls[0], &B000367f8_eu[DAT_000304cc].cls[1]);
+        if (M000367f8_eu[DAT_000304cc].cls[0] != 0) FUN_00011ee4(&M000367f8_eu[DAT_000304cc].cls[0], &M000367f8_eu[DAT_000304cc].cls[1]);
         break;
     case 9: case 10: case 11:
-        if (B000367f8_eu[DAT_000304cc].cls[0] != 3) FUN_00011ee4(&B000367f8_eu[DAT_000304cc].cls[0], &B000367f8_eu[DAT_000304cc].cls[1]);
+        if (M000367f8_eu[DAT_000304cc].cls[0] != 3) FUN_00011ee4(&M000367f8_eu[DAT_000304cc].cls[0], &M000367f8_eu[DAT_000304cc].cls[1]);
         break;
     case 12:
-        if (B000367f8_eu[DAT_000304cc].cls[0] != 4) FUN_00011ee4(&B000367f8_eu[DAT_000304cc].cls[0], &B000367f8_eu[DAT_000304cc].cls[1]);
+        if (M000367f8_eu[DAT_000304cc].cls[0] != 4) FUN_00011ee4(&M000367f8_eu[DAT_000304cc].cls[0], &M000367f8_eu[DAT_000304cc].cls[1]);
         break;
     case 13:
-        B000367f8_eu[DAT_000304cc].cls[0] = 0; B000367f8_eu[DAT_000304cc].cls[1] = 4; B000367f8_eu[DAT_000304cc].cls[2] = 5;
+        M000367f8_eu[DAT_000304cc].cls[0] = 0; M000367f8_eu[DAT_000304cc].cls[1] = 4; M000367f8_eu[DAT_000304cc].cls[2] = 5;
         break;
     case 14:
-        B000367f8_eu[DAT_000304cc].cls[0] = 0; B000367f8_eu[DAT_000304cc].cls[1] = 4; B000367f8_eu[DAT_000304cc].cls[2] = 3;
+        M000367f8_eu[DAT_000304cc].cls[0] = 0; M000367f8_eu[DAT_000304cc].cls[1] = 4; M000367f8_eu[DAT_000304cc].cls[2] = 3;
         break;
     }
 }
 
-#undef B000367f8_eu
+#undef M000367f8_eu
 /* ---- from build/var/mod/parts/p12198.c */
 void *memset(void *, int, unsigned);
 extern int DAT_000304cc;
-extern unsigned char B0003680c_eu[];
-extern signed char B0003680d_eu[], B0003680e_eu[], DAT_000306d8[], DAT_000306fc[];
+
+#define B0003680e_eu ((signed char *)((char *)&B000367f8_eu + 22)) /* STANDIN: view, B000367f8_eu + 0x16 */
+extern signed char DAT_000306d8[], DAT_000306fc[];
 #define R B0003680c_eu[DAT_000304cc * 0x248]
 #define C0 B0003680d_eu[DAT_000304cc * 0x248]
 #define C1 B0003680e_eu[DAT_000304cc * 0x248]
@@ -773,7 +783,7 @@ int FUN_00012198(int *f, int mode)
 /* struct B: defined above */
 extern struct P DAT_0003087c[];
 extern struct B DAT_000308f4[];
-extern unsigned char B00037138_eu;
+
 #define PG (*(int *)&B00037138_eu)
 extern void FUN_000156dc(void), FUN_00016588(int), FUN_00016c60(int, int, int, int, int), FUN_000166c0(void *, int, int, int, int), FUN_00016744(void *, int, int, int, int), FUN_000153e4(int), FUN_00017240(void *);
 extern void *FUN_000171c8(int), *FUN_0001954c(int, int);
@@ -825,9 +835,9 @@ extern void FUN_00011f24(void); /* module prototype */
 extern int FUN_00012198(int *f, int mode); /* module prototype */
 extern void FUN_000124d4(int btn, int tx, int ty); /* module prototype */
 #define DAT_000308f4 ((struct BT *)DAT_000308f4)
-#define B0003680d_eu ((unsigned char *)B0003680d_eu)
+#define M0003680d_eu ((unsigned char *)B0003680d_eu)
 struct BT { int a, b; };
-extern int DAT_000304cc; extern unsigned char B00037138_eu; 
+extern int DAT_000304cc;  
 extern int FUN_000153b4(void);
 extern void FUN_00016588(int), FUN_000186c4(int, int, int, int);
 /* FUN_0001266c @ 0001266c: class choice screen for up to three classes (multi-class): each slot offers the classes still allowed; Esc steps back a slot or leaves, Done (0xff) accepts what has been picked */
@@ -837,7 +847,7 @@ void FUN_0001266c(void)
     k = 0;
     res = 0;
     shown = res;
-    for (i = 0; i < 3; i++) B0003680d_eu[DAT_000304cc * 0x248 + i] = 0xff;
+    for (i = 0; i < 3; i++) M0003680d_eu[DAT_000304cc * 0x248 + i] = 0xff;
     state = 0;
     for (slot = 0; slot < 3 && res != -1 && !state; slot++) {
         if (!FUN_00012198(b, slot)) break;
@@ -877,7 +887,7 @@ void FUN_0001266c(void)
             k = FUN_0001043c();
             if (k && k != 0xff) {
                 if (b[k - 1] != 0x15) {
-                    B0003680d_eu[DAT_000304cc * 0x248 + slot] = k - 1;
+                    M0003680d_eu[DAT_000304cc * 0x248 + slot] = k - 1;
                     res = 1;
                     state = res;
                 }
@@ -886,7 +896,7 @@ void FUN_0001266c(void)
                 state = 2;
             } else if (k == 0) {
                 if (slot) {
-                    for (i = 0; i < 3; i++) B0003680d_eu[DAT_000304cc * 0x248 + i] = 0xff;
+                    for (i = 0; i < 3; i++) M0003680d_eu[DAT_000304cc * 0x248 + i] = 0xff;
                     slot = -1;
                 } else res = -1;
                 state = 1;
@@ -901,22 +911,23 @@ void FUN_0001266c(void)
 }
 
 #undef DAT_000308f4
-#undef B0003680d_eu
+#undef M0003680d_eu
 /* ---- from build/var/mod/parts/p128e4.c */
-#define B0003680d_eu ((unsigned char *)B0003680d_eu)
-#define B0003680e_eu ((unsigned char *)B0003680e_eu)
+#define M0003680d_eu ((unsigned char *)B0003680d_eu)
+#define M0003680e_eu ((unsigned char *)B0003680e_eu)
 /* FUN_000128e4 */
-void *memset(void *, int, unsigned); extern int DAT_000304cc; extern unsigned char B0003680f_eu[];
-void FUN_000128e4(int *f) { int k; for (k = 0; k < 6; k++) f[k] = 1; if (B0003680d_eu[DAT_000304cc * 0x248] == 1) { memset(f, 0, 0x18); f[0] = 1; return; } if (B0003680d_eu[DAT_000304cc * 0x248] == 5 || B0003680e_eu[DAT_000304cc * 0x248] == 5 || B0003680f_eu[DAT_000304cc * 0x248] == 5) f[0] = 0; if (B0003680d_eu[DAT_000304cc * 0x248] == 2 || B0003680e_eu[DAT_000304cc * 0x248] == 2) { f[1] = 0; f[3] = 0; f[5] = 0; } }
+#define B0003680f_eu ((unsigned char *)((char *)&B000367f8_eu + 23)) /* STANDIN: view, B000367f8_eu + 0x17 */
+void *memset(void *, int, unsigned); extern int DAT_000304cc; 
+void FUN_000128e4(int *f) { int k; for (k = 0; k < 6; k++) f[k] = 1; if (M0003680d_eu[DAT_000304cc * 0x248] == 1) { memset(f, 0, 0x18); f[0] = 1; return; } if (M0003680d_eu[DAT_000304cc * 0x248] == 5 || M0003680e_eu[DAT_000304cc * 0x248] == 5 || B0003680f_eu[DAT_000304cc * 0x248] == 5) f[0] = 0; if (M0003680d_eu[DAT_000304cc * 0x248] == 2 || M0003680e_eu[DAT_000304cc * 0x248] == 2) { f[1] = 0; f[3] = 0; f[5] = 0; } }
 
-#undef B0003680d_eu
-#undef B0003680e_eu
+#undef M0003680d_eu
+#undef M0003680e_eu
 /* ---- from build/var/mod/parts/p12994.c */
 extern int FUN_0001043c(void); /* module prototype */
 extern void FUN_00011464(int scr, int b0, int b1, int b2, int b3, int b4, int b5, int b6, int b7, int b8, int b9, int b10, int msg); /* module prototype */
 extern void FUN_000115b0(int sel, int tx, int ty, int arg); /* module prototype */
 extern void FUN_000128e4(int *f); /* module prototype */
-extern int DAT_000304cc; extern unsigned char B00036812_eu[];
+extern int DAT_000304cc; 
  
 /* FUN_00012994 @ 00012994: race choice screen: the six race buttons (greyed, 0x15, where the class rules them out); store the pick or step back */
 void FUN_00012994(void)
@@ -952,12 +963,12 @@ extern void FUN_000107e4(int lo, int hi); /* module prototype */
 extern void FUN_00011464(int scr, int b0, int b1, int b2, int b3, int b4, int b5, int b6, int b7, int b8, int b9, int b10, int msg); /* module prototype */
 extern void FUN_000115b0(int sel, int tx, int ty, int arg); /* module prototype */
 #define DAT_000308f4 ((struct BT *)DAT_000308f4)
-#define B00037138_eu (*(int *)&B00037138_eu)
+#define M00037138_eu (*(int *)&B00037138_eu)
 #define FUN_00016588 ((void (*)(unsigned char))FUN_00016588)
 /* FUN_00012a64 @ 00012a64: portrait selection for the current character: six portraits per page (three pages), the other character's portrait and slot 17 are not offered; 0xff turns the page, Esc goes back */
 /* struct BT: defined above */ struct XY { int x, y; };
 extern int DAT_000304cc, B0003713c_eu; extern short B000373e6_eu, B000373e8_eu;
-extern unsigned char B0003680b_eu[], DAT_000304c4[], B00035af8_eu[]; extern signed char B0003680a_eu[];  
+extern unsigned char DAT_000304c4[], B00035af8_eu[];   
 extern void FUN_00016c60(int, int, int, int, int);
 extern void FUN_00016eb0(int, int, int, int, int, unsigned char *), FUN_000155dc(int, int, int, int, int);
 extern int FUN_000153b4(void);
@@ -969,7 +980,7 @@ void FUN_00012a64(void)
     state = 0;
     g = B0003680b_eu[DAT_000304cc * 0x248];
     while (!state) {
-        FUN_00016588(B00037138_eu);
+        FUN_00016588(M00037138_eu);
         if (!first) for (k = 0; k < 6; k++) DAT_000308f4[k].a = DAT_000308f4[k].b;
         for (k = 0; k < 6; k++) {
             if (B0003680b_eu[(DAT_000304cc ^ 1) * 0x248] == g && DAT_000304c4[DAT_000304cc ^ 1] && B0003680a_eu[(DAT_000304cc ^ 1) * 0x248] == page + k) {
@@ -994,16 +1005,16 @@ void FUN_00012a64(void)
             while (!FUN_000153b4()) {
                 x = B000373e6_eu; y = B000373e8_eu; hit = FUN_0001035c(x, y);
                 if (prev == hit) continue;
-                FUN_00016588(B00037138_eu);
+                FUN_00016588(M00037138_eu);
                 if (prev > 0 && prev != 0xff && ok[prev - 1]) {
                     FUN_00016c60(0, DAT_00030874[prev].x, DAT_00030874[prev].y, 0x14, 7);
                     FUN_00016eb0(0, DAT_00030874[prev].x + 0x15, DAT_00030874[prev].y, g * 0x17 + B0003713c_eu + prev - 1 + page, 1, B00035af8_eu);
-                    FUN_000155dc(B00037138_eu, DAT_00030874[prev].x + 0x15, DAT_00030874[prev].y, 0x50, 0x30);
+                    FUN_000155dc(M00037138_eu, DAT_00030874[prev].x + 0x15, DAT_00030874[prev].y, 0x50, 0x30);
                 }
                 if (hit > 0 && hit != 0xff && ok[hit - 1]) {
                     FUN_00016c60(0, DAT_00030874[hit].x, DAT_00030874[hit].y, 0x14, 7);
                     FUN_00016c60(0, DAT_00030874[hit].x + 0x15, DAT_00030874[hit].y, g * 0x17 + B0003713c_eu + hit - 1 + page, 1);
-                    FUN_000155dc(B00037138_eu, DAT_00030874[hit].x + 0x15, DAT_00030874[hit].y, 0x50, 0x30);
+                    FUN_000155dc(M00037138_eu, DAT_00030874[hit].x + 0x15, DAT_00030874[hit].y, 0x50, 0x30);
                 }
                 prev = hit;
             }
@@ -1031,16 +1042,16 @@ void FUN_00012a64(void)
 }
 
 #undef DAT_000308f4
-#undef B00037138_eu
+#undef M00037138_eu
 #undef FUN_00016588
 /* ---- from build/var/mod/parts/p12dfc.c */
-#define B000367f8_eu ((char *)B000367f8_eu)
+#define M000367f8_eu ((char *)B000367f8_eu)
 /* FUN_00012dfc: type the name of the current character at column x (max characters, 0x30 pixels), with a blinking underscore cursor */
 void *memset(void *, int, unsigned);
 extern unsigned FUN_00017f50(void); extern void FUN_00017d68(int, int), FUN_00016588(int), FUN_00019eb0(int, int, int, int, int), FUN_0001550c(int, int, int, int, int), FUN_000153e4(int), FUN_00017d80(int, int, int, char *, int);
 extern int FUN_00017de8(void), FUN_0001831c(void), FUN_000182c0(void), FUN_00017ab4(char *, int), FUN_00017b50(int, int);
-extern int DAT_000304cc; extern unsigned char B00037138_eu; 
-void FUN_00012dfc(int x, int max) { int blink; int key, n; unsigned t; int w; blink = 1; FUN_00017f50(); key = 0; n = 0; memset(B000367f8_eu + DAT_000304cc * 0x248, 0, 0x10); B000367f8_eu[DAT_000304cc * 0x248] = 0; FUN_00017d68(x, 0xa0);
+extern int DAT_000304cc;  
+void FUN_00012dfc(int x, int max) { int blink; int key, n; unsigned t; int w; blink = 1; FUN_00017f50(); key = 0; n = 0; memset(M000367f8_eu + DAT_000304cc * 0x248, 0, 0x10); M000367f8_eu[DAT_000304cc * 0x248] = 0; FUN_00017d68(x, 0xa0);
     while (key != 0xd) {
         FUN_00016588(B00037138_eu);
         key = FUN_00017de8();
@@ -1066,30 +1077,30 @@ void FUN_00012dfc(int x, int max) { int blink; int key, n; unsigned t; int w; bl
         if (key == 8) {
             if (n) {
                 FUN_00019eb0(x, 0x88, 10, 0x30, 0x5f);
-                B000367f8_eu[--n + DAT_000304cc * 0x248] = 0;
+                M000367f8_eu[--n + DAT_000304cc * 0x248] = 0;
             }
         } else if ((key >= 'A' && key <= 'Z' || key == ' ' || key >= '0' && key <= '9') && n < max) {
-            w = FUN_00017ab4(B000367f8_eu + DAT_000304cc * 0x248, 0);
-            if (FUN_00017b50((signed char)key, 0) + w < 0x30) { B000367f8_eu[n + DAT_000304cc * 0x248] = key; n++; }
+            w = FUN_00017ab4(M000367f8_eu + DAT_000304cc * 0x248, 0);
+            if (FUN_00017b50((signed char)key, 0) + w < 0x30) { M000367f8_eu[n + DAT_000304cc * 0x248] = key; n++; }
         }
         FUN_00019eb0(x, 0x88, 10, 0x30, 0x5f);
-        FUN_00017d80(x, 0x88, 0x30, B000367f8_eu + DAT_000304cc * 0x248, 0);
+        FUN_00017d80(x, 0x88, 0x30, M000367f8_eu + DAT_000304cc * 0x248, 0);
     }
 }
 
-#undef B000367f8_eu
+#undef M000367f8_eu
 /* ---- from build/var/mod/parts/p13020.c */
 extern void FUN_00011464(int scr, int b0, int b1, int b2, int b3, int b4, int b5, int b6, int b7, int b8, int b9, int b10, int msg); /* module prototype */
 extern void FUN_000115b0(int sel, int tx, int ty, int arg); /* module prototype */
 extern void FUN_00012dfc(int x, int max); /* module prototype */
 #define DAT_00030958 (*(void **)&DAT_00030958)
-#define B000367f8_eu ((char *)B000367f8_eu)
+#define M000367f8_eu ((char *)B000367f8_eu)
 /* FUN_00013020 */
-extern void FUN_00016588(int), FUN_00016c60(int, int, int, int, int), FUN_000153e4(int), FUN_00017830(void *), FUN_00017d80(int, int, int, char *, int); extern void *FUN_00017868(int, int, int, int, int); extern unsigned char B00037138_eu;  extern int DAT_000304cc; 
-void FUN_00013020(void) { FUN_00011464(6, -1, -1, -1, -1, -1, -1, -1, 0x14, -1, -1, -1, 0x2e); FUN_00016588(B00037138_eu); FUN_00016c60(0, 0x5b, 0x88, 0x14, 7); FUN_000153e4(*(int *)&B00037138_eu); B00037138_eu ^= 1; FUN_00012dfc(0x93, 0xf); if (DAT_00030958) FUN_00017830(DAT_00030958); FUN_00016588(B00037138_eu); FUN_00016c60(0, 0x5b, 0x88, 0x14, 7); FUN_00017d80(0x93, 0x88, 0x30, B000367f8_eu + DAT_000304cc * 0x248, 0); DAT_00030958 = FUN_00017868(0x5b, 0x88, 0x7a, 0x30, 0xff); DAT_0003092c = 0; DAT_00030930 = 1; FUN_000115b0(-1, -1, -1, -1); }
+extern void FUN_00016588(int), FUN_00016c60(int, int, int, int, int), FUN_000153e4(int), FUN_00017830(void *), FUN_00017d80(int, int, int, char *, int); extern void *FUN_00017868(int, int, int, int, int);   extern int DAT_000304cc; 
+void FUN_00013020(void) { FUN_00011464(6, -1, -1, -1, -1, -1, -1, -1, 0x14, -1, -1, -1, 0x2e); FUN_00016588(B00037138_eu); FUN_00016c60(0, 0x5b, 0x88, 0x14, 7); FUN_000153e4(*(int *)&B00037138_eu); B00037138_eu ^= 1; FUN_00012dfc(0x93, 0xf); if (DAT_00030958) FUN_00017830(DAT_00030958); FUN_00016588(B00037138_eu); FUN_00016c60(0, 0x5b, 0x88, 0x14, 7); FUN_00017d80(0x93, 0x88, 0x30, M000367f8_eu + DAT_000304cc * 0x248, 0); DAT_00030958 = FUN_00017868(0x5b, 0x88, 0x7a, 0x30, 0xff); DAT_0003092c = 0; DAT_00030930 = 1; FUN_000115b0(-1, -1, -1, -1); }
 
 #undef DAT_00030958
-#undef B000367f8_eu
+#undef M000367f8_eu
 /* ---- from build/var/mod/parts/p13138.c */
 extern int FUN_0001043c(void); /* module prototype */
 extern void FUN_00011464(int scr, int b0, int b1, int b2, int b3, int b4, int b5, int b6, int b7, int b8, int b9, int b10, int msg); /* module prototype */
@@ -1097,47 +1108,56 @@ extern void FUN_000115b0(int sel, int tx, int ty, int arg); /* module prototype 
 extern void FUN_00013020(void); /* module prototype */
 /* FUN_00013138: run the "keep this character" dialog until it is answered: 3 = keep (back to the roll screen), 4 = done */
  
-extern int DAT_000304cc; extern unsigned char DAT_000304c4[], B00036809_eu[]; 
-void FUN_00013138(void) { int done, s, r; ++DAT_000304d0; FUN_00011464(6, -1, -1, 0x2f, 0x30, -1, -1, -1, -1, -1, -1, -1, 0x2d); done = 0; (*(int *)((char *)&DAT_000304cc + 4))--; /* STANDIN: plain view of DAT_000304d0 through its neighbour: dec dword ptr */ do { s = DAT_000304d0; DAT_000304d0 = 0; r = FUN_0001043c(); DAT_000304d0 = s; switch (r) { case 3: FUN_000115b0(-1, -1, -1, -1); FUN_00013020(); DAT_000304c4[DAT_000304cc] = 1; *(short *)((char *)B00036808_eu + DAT_000304cc * 0x248) = 0; done = 1; break; case 4: FUN_000115b0(-1, -1, -1, -1); DAT_000304c4[DAT_000304cc] = 0; B00036809_eu[DAT_000304cc * 0x248] |= 0x80; done = 1; break; } } while (!done); }
+#define B00036809_eu ((unsigned char *)((char *)&B000367f8_eu + 17)) /* STANDIN: view, B000367f8_eu + 0x11 */
+extern int DAT_000304cc; extern unsigned char DAT_000304c4[]; 
+void FUN_00013138(void) { int done, s, r; ++DAT_000304d0; FUN_00011464(6, -1, -1, 0x2f, 0x30, -1, -1, -1, -1, -1, -1, -1, 0x2d); done = 0; (*(int *)((char *)&DAT_000304cc + 4))--; /* STANDIN: plain view of DAT_000304d0 through its neighbour: dec dword ptr */ do { s = DAT_000304d0; DAT_000304d0 = 0; r = FUN_0001043c(); DAT_000304d0 = s; switch (r) { case 3: FUN_000115b0(-1, -1, -1, -1); FUN_00013020(); DAT_000304c4[DAT_000304cc] = 1; *(short *)((char *)M00036808_eu + DAT_000304cc * 0x248) = 0; done = 1; break; case 4: FUN_000115b0(-1, -1, -1, -1); DAT_000304c4[DAT_000304cc] = 0; B00036809_eu[DAT_000304cc * 0x248] |= 0x80; done = 1; break; } } while (!done); }
 
 /* ---- from build/var/mod/parts/p13208.c */
-#define B0003680f_eu ((signed char *)B0003680f_eu)
+#define M0003680f_eu ((signed char *)B0003680f_eu)
 /* FUN_00013208: share the starting experience between the classes of the current character and set each class level from the level table */
-extern char B0003681c_eu[];
-#define B0003681e_eu ((unsigned *)((char *)&B0003681c_eu + 2)) /* STANDIN: view, B0003681c_eu + 0x2 */
-extern int DAT_000304cc; extern signed char B0003680d_eu[], B0003680e_eu[];  extern unsigned short DAT_0003057c[], B00036818_eu[];
-#define P (DAT_000304cc * 0x248)
-void FUN_00013208(void) { int n, k, lv; n = 1; if (B0003680e_eu[P] != -1) n = 2; if (B0003680f_eu[P] != -1) n++; for (k = 0; k < n; k++) { *(unsigned *)((char *)B0003681e_eu + P + k * 4) = 35004 / n; for (lv = 0; lv < 20; lv++) if (*(unsigned *)((char *)B0003681e_eu + P + k * 4) / 1000 < *(unsigned short *)((char *)DAT_0003057c + B0003680d_eu[P + k] * 40 + lv * 2)) break; *(unsigned short *)((char *)B00036818_eu + k * 2 + P) = lv; } }
+#define B0003681c_eu (*(char (*)[])((char *)&B000367f8_eu + 36)) /* STANDIN: view, B000367f8_eu + 0x24 */
 
-#undef B0003680f_eu
+#define B0003681e_eu ((unsigned *)((char *)&B0003681c_eu + 2)) /* STANDIN: view, B0003681c_eu + 0x2 */
+#define B00036818_eu ((unsigned short *)((char *)&B000367f8_eu + 32)) /* STANDIN: view, B000367f8_eu + 0x20 */
+extern int DAT_000304cc;   extern unsigned short DAT_0003057c[];
+#define P (DAT_000304cc * 0x248)
+void FUN_00013208(void) { int n, k, lv; n = 1; if (B0003680e_eu[P] != -1) n = 2; if (M0003680f_eu[P] != -1) n++; for (k = 0; k < n; k++) { *(unsigned *)((char *)B0003681e_eu + P + k * 4) = 35004 / n; for (lv = 0; lv < 20; lv++) if (*(unsigned *)((char *)B0003681e_eu + P + k * 4) / 1000 < *(unsigned short *)((char *)DAT_0003057c + B0003680d_eu[P + k] * 40 + lv * 2)) break; *(unsigned short *)((char *)B00036818_eu + k * 2 + P) = lv; } }
+
+#undef M0003680f_eu
 #undef P
 /* ---- from build/var/mod/parts/p132f4.c */
 extern int FUN_00010010(int n, int d, int b, int bonus); /* module prototype */
 /* FUN_000132f4 */
- extern int DAT_000304cc; extern unsigned char B0003680c_eu[], DAT_0003082e[], DAT_0003082f[], DAT_00030830[]; extern char B00036810_eu[];
+#define B00036810_eu ((char *)((char *)&B000367f8_eu + 24)) /* STANDIN: view, B000367f8_eu + 0x18 */
+ extern int DAT_000304cc; extern unsigned char DAT_0003082e[], DAT_0003082f[], DAT_00030830[]; 
 void FUN_000132f4(void) { int i = DAT_000304cc * 0x248, c = B0003680c_eu[i] * 3; *(unsigned short *)(B00036810_eu + i) = DAT_0003082e[c]; *(unsigned short *)(B00036810_eu + i) += FUN_00010010(DAT_0003082f[c], DAT_00030830[c], 0, 0); }
 
 /* ---- from build/var/mod/parts/p1334c.c */
 extern int FUN_00010010(int n, int d, int b, int bonus); /* module prototype */
-#define B0003680d_eu ((unsigned char *)B0003680d_eu)
-#define B0003680e_eu ((unsigned char *)B0003680e_eu)
+#define M0003680d_eu ((unsigned char *)B0003680d_eu)
+#define M0003680e_eu ((unsigned char *)B0003680e_eu)
 /* FUN_0001334c: roll the six ability scores (3d6) of the current character and the exceptional strength percentile */
-void *memset(void *, int, unsigned);  extern int DAT_000304cc; extern unsigned char B000367f8_eu[], B0003682a_eu[], B0003680c_eu[], B0003680f_eu[], B00036836_eu[];
-void FUN_0001334c(void) { int k; memset(B000367f8_eu + DAT_000304cc * 0x248 + 0x32, 0, 14); for (k = 0; k < 6; k++) B0003682a_eu[DAT_000304cc * 0x248 + k * 2] = FUN_00010010(3, 6, 0, 0) + 3; if (B0003682a_eu[DAT_000304cc * 0x248] >= 0x12 && B0003680c_eu[DAT_000304cc * 0x248] != 2 && (B0003680d_eu[DAT_000304cc * 0x248] == 1 || B0003680d_eu[DAT_000304cc * 0x248] == 2 || B0003680d_eu[DAT_000304cc * 0x248] == 0 || B0003680e_eu[DAT_000304cc * 0x248] == 0 || B0003680f_eu[DAT_000304cc * 0x248] == 0)) B00036836_eu[DAT_000304cc * 0x248] = FUN_00010010(1, 100, 0, 0); }
+#define B0003682a_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 50)) /* STANDIN: view, B000367f8_eu + 0x32 */
+#define B00036836_eu (*(unsigned char (*)[])((char *)&B000367f8_eu + 62)) /* STANDIN: view, B000367f8_eu + 0x3e */
+void *memset(void *, int, unsigned);  extern int DAT_000304cc; extern unsigned char B000367f8_eu[];
+void FUN_0001334c(void) { int k; memset(B000367f8_eu + DAT_000304cc * 0x248 + 0x32, 0, 14); for (k = 0; k < 6; k++) B0003682a_eu[DAT_000304cc * 0x248 + k * 2] = FUN_00010010(3, 6, 0, 0) + 3; if (B0003682a_eu[DAT_000304cc * 0x248] >= 0x12 && B0003680c_eu[DAT_000304cc * 0x248] != 2 && (M0003680d_eu[DAT_000304cc * 0x248] == 1 || M0003680d_eu[DAT_000304cc * 0x248] == 2 || M0003680d_eu[DAT_000304cc * 0x248] == 0 || M0003680e_eu[DAT_000304cc * 0x248] == 0 || B0003680f_eu[DAT_000304cc * 0x248] == 0)) B00036836_eu[DAT_000304cc * 0x248] = FUN_00010010(1, 100, 0, 0); }
 
-#undef B0003680d_eu
-#undef B0003680e_eu
+#undef M0003680d_eu
+#undef M0003680e_eu
 /* ---- from build/var/mod/parts/p13404.c */
 #define DAT_000304d4 ((int (*)[19])&DAT_000304d4)
-#define B0003680f_eu ((signed char *)B0003680f_eu)
-#define B00036818_eu ((short *)B00036818_eu)
+#define M0003680f_eu ((signed char *)B0003680f_eu)
+#define M00036818_eu ((short *)B00036818_eu)
 /* FUN_00013404: apply racial limits and class minimums to the abilities, then hit points */
 /* r63aj: byte-exact with three STANDIN named temps (s1, s2, l5a) and a searched declaration order; see STANDIN comments */
 extern int DAT_000304cc, B0003711c_eu, B00037118_eu;
-extern unsigned char B0003680c_eu[], B0003682a_eu[], B0003682e_eu[], B00036836_eu[], B00036813_eu[];
+#define B0003682e_eu ((unsigned char *)((char *)&B000367f8_eu + 54)) /* STANDIN: view, B000367f8_eu + 0x36 */
+#define B00036813_eu ((unsigned char *)((char *)&B000367f8_eu + 27)) /* STANDIN: view, B000367f8_eu + 0x1b */
+
 extern unsigned char DAT_0003066c[], DAT_0003066d[], DAT_000307d4[];
-extern signed char B0003680d_eu[], B0003680e_eu[], DAT_000306b4[], DAT_00030853[];
-extern short B00036816_eu[];
+extern signed char DAT_000306b4[], DAT_00030853[];
+#define B00036816_eu ((short *)((char *)&B000367f8_eu + 30)) /* STANDIN: view, B000367f8_eu + 0x1e */
+
 void FUN_00013404(void)
 {
     short ts1;            /* STANDIN: s1 temp; declared first so its rough-sort entry (k=0 conf=0) gets the highest function id */
@@ -1156,8 +1176,8 @@ void FUN_00013404(void)
     if (B0003682a_eu[DAT_000304cc * 0x248] == 18 && B00036836_eu[DAT_000304cc * 0x248] == 0)
         B00036836_eu[DAT_000304cc * 0x248]++;
     if (B0003682a_eu[DAT_000304cc * 0x248] < 18 || !(B0003680d_eu[DAT_000304cc * 0x248] == 1 || B0003680d_eu[DAT_000304cc * 0x248] == 2
-        || B0003680e_eu[DAT_000304cc * 0x248] == 2 || B0003680f_eu[DAT_000304cc * 0x248] == 2 || B0003680d_eu[DAT_000304cc * 0x248] == 0
-        || B0003680e_eu[DAT_000304cc * 0x248] == 0 || B0003680f_eu[DAT_000304cc * 0x248] == 0))
+        || B0003680e_eu[DAT_000304cc * 0x248] == 2 || M0003680f_eu[DAT_000304cc * 0x248] == 2 || B0003680d_eu[DAT_000304cc * 0x248] == 0
+        || B0003680e_eu[DAT_000304cc * 0x248] == 0 || M0003680f_eu[DAT_000304cc * 0x248] == 0))
         B00036836_eu[DAT_000304cc * 0x248] = 0;
     for (k = 0; k < 6; k++)
         for (j = 0; j < 3; j++)
@@ -1165,26 +1185,26 @@ void FUN_00013404(void)
                 { tl5a = DAT_000307d4[k * 15 + B0003680d_eu[DAT_000304cc * 0x248 + j]]; B0003682a_eu[DAT_000304cc * 0x248 + k * 2] = tl5a; } /* STANDIN: byte copy through a named temp: the late split temp of this store (pre-sort pos 5) becomes an in-block node at the head of the j-loop group (pos 24) */
     n = 1;
     if (B0003680e_eu[DAT_000304cc * 0x248] != -1) n = 2;
-    if (B0003680f_eu[DAT_000304cc * 0x248] != -1) n++;
+    if (M0003680f_eu[DAT_000304cc * 0x248] != -1) n++;
     B0003711c_eu = 0;
     B00037118_eu = 99;
     for (k = 0; k < n; k++) {
         int c, d, sum;
         c = B0003680d_eu[DAT_000304cc * 0x248 + k];
         sum = 0;
-        for (j = 0; j < *(short *)((char *)B00036818_eu + DAT_000304cc * 0x248 + k * 2); j++) {
+        for (j = 0; j < *(short *)((char *)M00036818_eu + DAT_000304cc * 0x248 + k * 2); j++) {
             d = DAT_00030853[c];
             if (d < 1) d = 1;
             sum += d;
         }
         B0003711c_eu += sum;
-        if (*(short *)((char *)B00036818_eu + DAT_000304cc * 0x248 + k * 2) < B00037118_eu)
-            B00037118_eu = *(short *)((char *)B00036818_eu + DAT_000304cc * 0x248 + k * 2);
+        if (*(short *)((char *)M00036818_eu + DAT_000304cc * 0x248 + k * 2) < B00037118_eu)
+            B00037118_eu = *(short *)((char *)M00036818_eu + DAT_000304cc * 0x248 + k * 2);
     }
     mx = 0;
     for (k = 0; k < n; k++)
-        if (*(short *)((char *)B00036818_eu + DAT_000304cc * 0x248 + k * 2) > mx)
-            mx = *(short *)((char *)B00036818_eu + DAT_000304cc * 0x248 + k * 2);
+        if (*(short *)((char *)M00036818_eu + DAT_000304cc * 0x248 + k * 2) > mx)
+            mx = *(short *)((char *)M00036818_eu + DAT_000304cc * 0x248 + k * 2);
     cls = B0003680d_eu[DAT_000304cc * 0x248];
     if (B0003680e_eu[DAT_000304cc * 0x248] == 2) cls = 2;
     B0003711c_eu /= n;
@@ -1206,29 +1226,29 @@ void FUN_00013404(void)
 }
 
 #undef DAT_000304d4
-#undef B0003680f_eu
-#undef B00036818_eu
+#undef M0003680f_eu
+#undef M00036818_eu
 /* ---- from build/var/mod/parts/p137c0.c */
 extern int FUN_00010010(int n, int d, int b, int bonus); /* module prototype */
 #define DAT_000304d4 ((int (*)[19])&DAT_000304d4)
-#define B0003680f_eu ((signed char *)B0003680f_eu)
-#define B00036818_eu ((short *)B00036818_eu)
+#define M0003680f_eu ((signed char *)B0003680f_eu)
+#define M00036818_eu ((short *)B00036818_eu)
 
 extern int DAT_000304cc;
-extern signed char B0003680d_eu[], B0003680e_eu[], DAT_00030853[];
-extern short B00036816_eu[];
-extern unsigned char B0003682e_eu[];
+extern signed char DAT_00030853[];
+
+
 void FUN_000137c0(void)
 {
     int n, sum, cls;
     int k;
     n = 1;
     if (B0003680e_eu[DAT_000304cc * 0x248] != -1) n = 2;
-    if (B0003680f_eu[DAT_000304cc * 0x248] != -1) n++;
+    if (M0003680f_eu[DAT_000304cc * 0x248] != -1) n++;
     sum = 0;
     for (k = 0; k < n; k++) {
         cls = B0003680d_eu[DAT_000304cc * 0x248 + k];
-        sum += FUN_00010010(*(short *)((char *)B00036818_eu + DAT_000304cc * 0x248 + k * 2), DAT_00030853[cls], 0, 0);
+        sum += FUN_00010010(*(short *)((char *)M00036818_eu + DAT_000304cc * 0x248 + k * 2), DAT_00030853[cls], 0, 0);
     }
     sum /= n;
     sum += DAT_000304d4[cls / 3][B0003682e_eu[DAT_000304cc * 0x248]];
@@ -1236,8 +1256,8 @@ void FUN_000137c0(void)
 }
 
 #undef DAT_000304d4
-#undef B0003680f_eu
-#undef B00036818_eu
+#undef M0003680f_eu
+#undef M00036818_eu
 /* ---- from build/var/mod/parts/p13884.c */
 extern void FUN_00013208(void); /* module prototype */
 extern void FUN_000132f4(void); /* module prototype */
@@ -1250,10 +1270,10 @@ void FUN_00013884(void) { FUN_00013208(); FUN_000132f4(); FUN_0001334c(); FUN_00
 
 /* ---- from build/var/mod/parts/p138a4.c */
 extern void FUN_0001004c(char *buf, int k); /* module prototype */
-#define B0003680f_eu ((signed char *)B0003680f_eu)
-#define B00036813_eu ((signed char *)B00036813_eu)
-#define B00036816_eu ((char *)B00036816_eu)
-#define B00036818_eu ((char *)B00036818_eu)
+#define M0003680f_eu ((signed char *)B0003680f_eu)
+#define M00036813_eu ((signed char *)B00036813_eu)
+#define M00036816_eu ((char *)B00036816_eu)
+#define M00036818_eu ((char *)B00036818_eu)
 extern void FUN_00016c60(int, int, int, int, int), FUN_00017df4(void *), FUN_00017e44(int, int, char *, int), FUN_00017e04(int, int, char *, int);
 extern char *FUN_000188d8(int);
 int sprintf(char *, const char *, ...);
@@ -1262,9 +1282,11 @@ extern int DAT_000304cc, B00037124_eu;
 extern char B000355f8_eu[], B000359f8_eu[];
 #define B00035a00_eu (*(unsigned char *)((char *)&B00035a00_eu)) /* STANDIN: the first bytes of the object */
 
-extern unsigned char B00036836_eu[], B0003682a_eu[], B0003682c_eu[];
-extern signed char B0003680e_eu[], DAT_0003083f[];
-extern char B00036810_eu[], B0003681a_eu[], B0003681c_eu[];
+#define B0003682c_eu ((unsigned char *)((char *)&B000367f8_eu + 52)) /* STANDIN: view, B000367f8_eu + 0x34 */
+
+extern signed char DAT_0003083f[];
+#define B0003681a_eu ((char *)((char *)&B000367f8_eu + 34)) /* STANDIN: view, B000367f8_eu + 0x22 */
+
 #define W(a) (*(short *)(a + P))
 
 #define P (DAT_000304cc * 0x248)
@@ -1300,18 +1322,18 @@ void FUN_000138a4(int y, int x)
     y += 10;
     FUN_0001004c(B000355f8_eu, ++k + 0x2f);
     FUN_00017e44(y, x + 1, B000355f8_eu, 0);
-    FUN_00017e04(y, x + 0x2f, FUN_000188d8(B00036813_eu[P] + DAT_0003083f[B0003682c_eu[P]]), 0);
+    FUN_00017e04(y, x + 0x2f, FUN_000188d8(M00036813_eu[P] + DAT_0003083f[B0003682c_eu[P]]), 0);
     y += 10;
     FUN_0001004c(B000355f8_eu, ++k + 0x2f);
     k++;
     if (B0003680e_eu[P] != -1) FUN_0001004c(B000355f8_eu, k + 0x2f);
     FUN_00017e44(y, x + 1, B000355f8_eu, 0);
-    strcpy(B000355f8_eu, FUN_000188d8(W(B00036818_eu)));
+    strcpy(B000355f8_eu, FUN_000188d8(W(M00036818_eu)));
     if (B0003680e_eu[P] != -1) {
         strcat(B000355f8_eu, "/");
         strcat(B000355f8_eu, FUN_000188d8(W(B0003681a_eu)));
     }
-    if (B0003680f_eu[P] != -1) {
+    if (M0003680f_eu[P] != -1) {
         strcat(B000355f8_eu, "/");
         strcat(B000355f8_eu, FUN_000188d8(W(B0003681c_eu)));
     }
@@ -1324,17 +1346,17 @@ void FUN_000138a4(int y, int x)
     }
     FUN_0001004c(B000355f8_eu, k + 0x2f);
     FUN_00017e44(y, x + 1, B000355f8_eu, 0);
-    FUN_00017e04(y, x + 0x2f, FUN_000188d8(W(B00036816_eu)), 0);
+    FUN_00017e04(y, x + 0x2f, FUN_000188d8(W(M00036816_eu)), 0);
     if (B00037124_eu == 10) {
         B00035a00_eu = 8;
         FUN_00017df4(0);
     }
 }
 
-#undef B0003680f_eu
-#undef B00036813_eu
-#undef B00036816_eu
-#undef B00036818_eu
+#undef M0003680f_eu
+#undef M00036813_eu
+#undef M00036816_eu
+#undef M00036818_eu
 #undef W
 #undef P
 /* ---- from build/var/mod/parts/p13c58.c */
@@ -1344,14 +1366,14 @@ extern void FUN_00013404(void); /* module prototype */
 extern void FUN_000138a4(int y, int x); /* module prototype */
 #define DAT_00030954 (*(void **)&DAT_00030954)
 #define DAT_00030958 (*(void **)&DAT_00030958)
-#define B0003680d_eu ((unsigned char *)B0003680d_eu)
-#define B00036816_eu ((char *)B00036816_eu)
+#define M0003680d_eu ((unsigned char *)B0003680d_eu)
+#define M00036816_eu ((char *)B00036816_eu)
 #define FUN_000167c8 ((void (*)(int, int, int, void *))FUN_000167c8)
 extern void FUN_000156dc(void), FUN_00016588(int), FUN_000155dc(int, int, int, int, int), FUN_00019eb0(int, int, int, int, int), FUN_00017830(void *);
 extern int FUN_000153b4(void);
 extern void *FUN_00017868(int, int, int, int, int);
 extern int B00037124_eu, DAT_000304cc, DAT_000304d4;
-extern unsigned char B00037138_eu, B0003682a_eu[], B00036836_eu[];
+
 extern short B000373e6_eu;
 
 
@@ -1359,8 +1381,8 @@ extern short B000373e6_eu;
 #define P (DAT_000304cc * 0x248)
 #define ST B0003682a_eu[P + B00037124_eu * 2]
 #define EX B00036836_eu[P]
-#define C0 B0003680d_eu[P]
-#define HP (*(short *)(B00036816_eu + P))
+#define C0 M0003680d_eu[P]
+#define HP (*(short *)(M00036816_eu + P))
 void FUN_00013c58(void)
 {
     int done, key, v;
@@ -1466,8 +1488,8 @@ void FUN_00013c58(void)
 
 #undef DAT_00030954
 #undef DAT_00030958
-#undef B0003680d_eu
-#undef B00036816_eu
+#undef M0003680d_eu
+#undef M00036816_eu
 #undef FUN_000167c8
 #undef PG
 #undef P
@@ -1487,7 +1509,7 @@ extern void FUN_000138a4(int y, int x); /* module prototype */
 extern void FUN_00013c58(void); /* module prototype */
 #define DAT_00030954 (*(void **)&DAT_00030954)
 #define DAT_00030958 (*(void **)&DAT_00030958)
-#define B00037138_eu (*(int *)&B00037138_eu)
+#define M00037138_eu (*(int *)&B00037138_eu)
 #define FUN_00016588 ((void (*)(unsigned char))FUN_00016588)
 #define FUN_000167c8 ((void (*)(int, int, int, void *))FUN_000167c8)
 /* FUN_000140fc @ 000140fc: character review screen: Esc leaves (back), 7 rerolls the portrait and stats, 8 accepts, 9 renames */
@@ -1504,7 +1526,7 @@ void FUN_000140fc(void)
     srand(FUN_00017f50());
     FUN_00013884();
     B00037124_eu = -1;
-    FUN_00016588(B00037138_eu);
+    FUN_00016588(M00037138_eu);
     spr = FUN_00017868(0, 0, 0x7a, 0x30, 0xff);
     FUN_00019eb0(0, 0, 0x7a, 0x30, 0xfe);
     FUN_000138a4(0, 0);
@@ -1513,16 +1535,16 @@ void FUN_000140fc(void)
     FUN_00017830(spr);
     FUN_00011464(5, -1, -1, -1, -1, -1, -1, 0x16, 2, 0x2e, 0xe, -1, 0x2b);
     do {
-        FUN_00016588(B00037138_eu);
+        FUN_00016588(M00037138_eu);
         FUN_000167c8(0, 0x5b, 0x88, DAT_00030958);
         FUN_00016c60(0, 0x5b, 0xbd, 0x2e, 7);
-        FUN_000153e4(B00037138_eu);
-        B00037138_eu ^= 1;
-        FUN_00016588(B00037138_eu);
+        FUN_000153e4(M00037138_eu);
+        M00037138_eu ^= 1;
+        FUN_00016588(M00037138_eu);
         FUN_000167c8(0, 0x5b, 0x88, DAT_00030958);
         FUN_00016c60(0, 0x5b, 0xbd, 0x2e, 7);
-        FUN_000153e4(B00037138_eu);
-        B00037138_eu ^= 1;
+        FUN_000153e4(M00037138_eu);
+        M00037138_eu ^= 1;
         r = 0;
         do {
             k = FUN_0001043c();
@@ -1534,7 +1556,7 @@ void FUN_000140fc(void)
                 if (DAT_00030954) FUN_00017830(DAT_00030954);
                 DAT_00030954 = DAT_00030958;
                 FUN_00013884();
-                FUN_00016588(B00037138_eu);
+                FUN_00016588(M00037138_eu);
                 spr = FUN_00017868(0, 0, 0x7a, 0x30, 0xff);
                 FUN_00019eb0(0, 0, 0x7a, 0x30, 0xfe);
                 FUN_000138a4(0, 0);
@@ -1554,19 +1576,19 @@ void FUN_000140fc(void)
                 ++DAT_000304d0;
             } else if (k == 9) {
                 FUN_0001004c(B00037140_eu, 0x2c);
-                FUN_00016588(B00037138_eu);
+                FUN_00016588(M00037138_eu);
                 FUN_00016c60(0, 5, 0, 0x2a, 7);
                 FUN_00017d80(5, 0, 0x140, B00037140_eu, 1);
                 FUN_00015780();
-                FUN_0001a3e8(B00037138_eu ^ 1, 5, 0, 5, 0, 0x14, 0x140);
+                FUN_0001a3e8(M00037138_eu ^ 1, 5, 0, 5, 0, 0x14, 0x140);
                 FUN_000157dc();
                 FUN_00013c58();
                 strcpy(B00037140_eu, DAT_000304b8);
-                FUN_00016588(B00037138_eu);
+                FUN_00016588(M00037138_eu);
                 FUN_00016c60(0, 5, 0, 0x2a, 7);
                 FUN_00017d80(5, 0, 0x140, B00037140_eu, 1);
                 FUN_00015780();
-                FUN_0001a3e8(B00037138_eu ^ 1, 5, 0, 5, 0, 0x14, 0x140);
+                FUN_0001a3e8(M00037138_eu ^ 1, 5, 0, 5, 0, 0x14, 0x140);
                 FUN_000157dc();
                 r = 1;
             }
@@ -1584,7 +1606,7 @@ void FUN_000140fc(void)
 
 #undef DAT_00030954
 #undef DAT_00030958
-#undef B00037138_eu
+#undef M00037138_eu
 #undef FUN_00016588
 #undef FUN_000167c8
 /* ---- from build/var/mod/parts/p144e4.c */
@@ -1593,7 +1615,7 @@ void FUN_000144e4(int *a, int *b) { int s, t; s = *a; t = *b; s += t; if (s == 0
 
 /* ---- from build/var/mod/parts/p14520.c */
 extern void FUN_000144e4(int *a, int *b); /* module prototype */
-#define B00037138_eu (*(int *)&B00037138_eu)
+#define M00037138_eu (*(int *)&B00037138_eu)
 #define FUN_00016588 ((void (*)(unsigned char))FUN_00016588)
 #define FUN_000167c8 ((void (*)(int, int, int, void *))FUN_000167c8)
 /* One module (-3s -ot -d1+): FUN_00014520 draws the hit-point bar, FUN_000145fc the title animation; the
@@ -1614,29 +1636,29 @@ void FUN_000145fc(void)
     int a, b; int k, j; void *spr;
     a = 0;
     b = 2;
-    FUN_00016588(B00037138_eu);
+    FUN_00016588(M00037138_eu);
     FUN_000186c4(0, 0, 0x1b, 7);
     FUN_000186c4(0xc8, 0, 0x1c, 7);
     B00037130_eu = FUN_00017868(0xe5, 0, 0xaa, 0x50, 0xff);
     FUN_00014520(0, 2);
     FUN_00016c60(0, 0x15f, 0x74, 0x31, 7);
-    FUN_0001a390(B00037138_eu ^ 1);
-    FUN_000165a4(B00037138_eu);
-    B00037138_eu ^= 1;
+    FUN_0001a390(M00037138_eu ^ 1);
+    FUN_000165a4(M00037138_eu);
+    M00037138_eu ^= 1;
     for (j = 0x31; j <= 0x3d; j++) FUN_0001954c(j, 7);
-    FUN_00016588(B00037138_eu);
+    FUN_00016588(M00037138_eu);
     FUN_000167c8(0, 0xe5, 0, B00037130_eu);
     spr = FUN_00017868(0x96, 0x8c, 0xe2, 0x68, 0xff);
     for (k = 0; k < 2; k++) {
         for (j = 0; j < 10; j++) {
             FUN_000187c4();
-            FUN_00016588(B00037138_eu);
+            FUN_00016588(M00037138_eu);
             FUN_000167c8(0, 0x96, 0x8c, spr);
             FUN_00016c60(0, 0x96, 0x8c, fr[k * 5 + j / 2], 7);
             FUN_000167c8(0, 0xe5, 0, B00037130_eu);
             FUN_00014520(a, b);
-            FUN_000165a4(B00037138_eu);
-            B00037138_eu ^= 1;
+            FUN_000165a4(M00037138_eu);
+            M00037138_eu ^= 1;
             FUN_000187d8(2, 0);
             if (k == 0 && j == 0) {
                 FUN_0001bc1c(0x18, 1, 0x9c4);
@@ -1647,14 +1669,14 @@ void FUN_000145fc(void)
         }
         for (j = 0; j < 0x19; j++) {
             FUN_000187c4();
-            FUN_00016588(B00037138_eu);
+            FUN_00016588(M00037138_eu);
             FUN_000167c8(0, 0x96, 0x8c, spr);
             if (k == 0) FUN_00016c60(0, 0x15f, 0x95, 0x32, 7);
             else FUN_00016c60(0, 0x15f, 0xb2, 0x33, 7);
             FUN_000167c8(0, 0xe5, 0, B00037130_eu);
             FUN_00014520(a, b);
-            FUN_000165a4(B00037138_eu);
-            B00037138_eu ^= 1;
+            FUN_000165a4(M00037138_eu);
+            M00037138_eu ^= 1;
             FUN_000187d8(2, 0);
             FUN_000144e4((int *)&a, (int *)&b);
             if (k == 0 && j == 0xf) FUN_0001c4e0(B0003712c_eu + 0xc);
@@ -1669,14 +1691,14 @@ void FUN_000145fc(void)
     FUN_00017830(B00037130_eu);
 }
 
-#undef B00037138_eu
+#undef M00037138_eu
 #undef FUN_00016588
 #undef FUN_000167c8
 /* ---- from build/var/mod/parts/p14978.c */
 extern void FUN_000145fc(void); /* module prototype */
 #define DAT_000304c4 (*(unsigned char *)&DAT_000304c4)
 /* FUN_00014978 */
-extern void FUN_0001c254(unsigned char *, int, int, char *, int), FUN_000157dc(void); extern int FUN_000153b4(void); extern void (*PTR_FUN_0003085c[])(void); extern int DAT_000304cc; extern unsigned char B000364f8_eu[], B00037138_eu, B000373ee_eu, DAT_000304c5; 
+extern void FUN_0001c254(unsigned char *, int, int, char *, int), FUN_000157dc(void); extern int FUN_000153b4(void); extern void (*PTR_FUN_0003085c[])(void); extern int DAT_000304cc; extern unsigned char B000364f8_eu[], B000373ee_eu, DAT_000304c5; 
 int FUN_00014978(void) { DAT_000304d0 = 0; FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); FUN_000145fc(); B000373ee_eu = B00037138_eu ^ 1; FUN_000157dc(); top: if (DAT_000304d0 == 7) goto reset; (*PTR_FUN_0003085c[DAT_000304d0])(); while (FUN_000153b4()); if (DAT_000304cc != -1) goto top; if (DAT_000304c4 && DAT_000304c5) return 10; return 0; reset: DAT_000304d0 = 0; goto top; }
 
 #undef DAT_000304c4
@@ -1724,19 +1746,22 @@ extern void FUN_00014cb0(void); /* module prototype */
 extern void FUN_00014d54(void); /* module prototype */
 #define M00036903_eu ((char *)B00036903_eu)
 #define FUN_000165a4 ((void (*)(int))FUN_000165a4)
-void *memset(void *, int, unsigned); extern void FUN_000195bc(void *, int), FUN_00019724(char *, int, int), FUN_000164dc(int), FUN_0001c254(unsigned char *, int, int, char *, int), FUN_00016618(unsigned char *), FUN_00019ac4(void), FUN_00016588(int), FUN_000152ac(void);  extern unsigned char B000364f8_eu[], B00037138_eu, B000367f8_eu[], B00036809_eu[]; 
+void *memset(void *, int, unsigned); extern void FUN_000195bc(void *, int), FUN_00019724(char *, int, int), FUN_000164dc(int), FUN_0001c254(unsigned char *, int, int, char *, int), FUN_00016618(unsigned char *), FUN_00019ac4(void), FUN_00016588(int), FUN_000152ac(void);  extern unsigned char B000364f8_eu[], B000367f8_eu[]; 
 void FUN_00014dc4(void) { int p, k; FUN_000195bc("RES", 0xb); FUN_00019724("Ravenloft", 1, 0x3c); FUN_00014d54(); FUN_00014cb0(); FUN_000164dc(3); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); FUN_00016618(B000364f8_eu); FUN_00019ac4(); FUN_00014b18(); FUN_00014b00(); FUN_00014a0c(); memset(B000364f8_eu, 0, 0x300); FUN_00016618(B000364f8_eu); FUN_0001c254(B000364f8_eu, 0, 8, "COLORS", 0x100); *(int *)&B00037138_eu = 1; FUN_00016588(B00037138_eu); FUN_000165a4(B00037138_eu ^ 1); FUN_000152ac(); memset(B000367f8_eu, -1, 0x920); for (p = 0; p < 4; p++) { B00036809_eu[p * 0x248] |= 0x80; for (k = 0; k < 4; k++) ((int *)(M00036903_eu + p * 0x248))[k] = 0; } }
 
 #undef M00036903_eu
 #undef FUN_000165a4
 /* ---- from build/var/mod/parts/p14ef0.c */
-#define B0003680d_eu ((unsigned char *)B0003680d_eu)
-#define B0003680e_eu ((unsigned char *)B0003680e_eu)
-void *memset(void *, int, unsigned); extern void FUN_000163a4(char *), FUN_000162f0(int), FUN_00016320(void *, int, int); extern int FUN_000162d8(char *), FUN_000162c0(char *); extern unsigned char B000367f8_eu[], B00036813_eu[], B0003682a_eu[], B0003682b_eu[], B00036929_eu[], B0003680f_eu[]; extern short B00036814_eu[], B00036816_eu[]; 
-void FUN_00014ef0(void) { int k, p, fd; for (p = 0; p < 2; p++) { memset(B000367f8_eu + p * 0x248 + 0x10b, 0, B000367f8_eu + (p + 1) * 0x248 - (B000367f8_eu + p * 0x248 + 0x10b)); B00036813_eu[p * 0x248] = 10; *(short *)((char *)B00036814_eu + p * 0x248) = *(short *)((char *)B00036816_eu + p * 0x248); for (k = 0; k < 7; k++) B0003682b_eu[p * 0x248 + k * 2] = B0003682a_eu[p * 0x248 + k * 2]; B00036929_eu[p * 0x248] = 0; if (B0003680d_eu[p * 0x248] == 3 || B0003680e_eu[p * 0x248] == 3 || B0003680f_eu[p * 0x248] == 3) B00036929_eu[p * 0x248] |= 1; if (B0003680d_eu[p * 0x248] == 4 || B0003680e_eu[p * 0x248] == 4 || B0003680f_eu[p * 0x248] == 4) B00036929_eu[p * 0x248] |= 2; } FUN_000163a4("CHARS"); FUN_000162f0(FUN_000162d8("CHARS")); fd = FUN_000162c0("CHARS"); FUN_00016320(B000367f8_eu, 0x920, fd); FUN_000162f0(fd); }
+#define M0003680d_eu ((unsigned char *)B0003680d_eu)
+#define M0003680e_eu ((unsigned char *)B0003680e_eu)
+#define B00036814_eu ((short *)((char *)&B000367f8_eu + 28)) /* STANDIN: view, B000367f8_eu + 0x1c */
+#define B0003682b_eu ((unsigned char *)((char *)&B000367f8_eu + 51)) /* STANDIN: view, B000367f8_eu + 0x33 */
+#define B00036929_eu ((unsigned char *)((char *)&B000367f8_eu + 305)) /* STANDIN: view, B000367f8_eu + 0x131 */
+void *memset(void *, int, unsigned); extern void FUN_000163a4(char *), FUN_000162f0(int), FUN_00016320(void *, int, int); extern int FUN_000162d8(char *), FUN_000162c0(char *); extern unsigned char B000367f8_eu[];  
+void FUN_00014ef0(void) { int k, p, fd; for (p = 0; p < 2; p++) { memset(B000367f8_eu + p * 0x248 + 0x10b, 0, B000367f8_eu + (p + 1) * 0x248 - (B000367f8_eu + p * 0x248 + 0x10b)); B00036813_eu[p * 0x248] = 10; *(short *)((char *)B00036814_eu + p * 0x248) = *(short *)((char *)B00036816_eu + p * 0x248); for (k = 0; k < 7; k++) B0003682b_eu[p * 0x248 + k * 2] = B0003682a_eu[p * 0x248 + k * 2]; B00036929_eu[p * 0x248] = 0; if (M0003680d_eu[p * 0x248] == 3 || M0003680e_eu[p * 0x248] == 3 || B0003680f_eu[p * 0x248] == 3) B00036929_eu[p * 0x248] |= 1; if (M0003680d_eu[p * 0x248] == 4 || M0003680e_eu[p * 0x248] == 4 || B0003680f_eu[p * 0x248] == 4) B00036929_eu[p * 0x248] |= 2; } FUN_000163a4("CHARS"); FUN_000162f0(FUN_000162d8("CHARS")); fd = FUN_000162c0("CHARS"); FUN_00016320(B000367f8_eu, 0x920, fd); FUN_000162f0(fd); }
 
-#undef B0003680d_eu
-#undef B0003680e_eu
+#undef M0003680d_eu
+#undef M0003680e_eu
 /* ---- from build/var/mod/parts/p15014.c */
 extern void FUN_00014ef0(void); /* module prototype */
 #define DAT_000304c4 (*(unsigned char *)&DAT_000304c4)

@@ -148,7 +148,9 @@ struct S *FUN_00017868(int pg, int x, int y, int w, int key) { unsigned short n;
 /* ---- from build/var/mod/parts/p17944.c */
 #define SR T14_SR
 struct SR { short size, n, w; unsigned char hb, flag; unsigned char data[1]; };
-extern int DAT_000304cc, DAT_000304d0; extern unsigned char B0003680b_eu[];
+extern unsigned char B000367f8_eu[];
+#define B0003680b_eu ((unsigned char *)((char *)&B000367f8_eu + 19)) /* STANDIN: view, B000367f8_eu + 0x13 */
+extern int DAT_000304cc, DAT_000304d0; 
 extern void FUN_00011464(int, int, int, int, int, int, int, int, int, int, int, int, int), FUN_000115b0(int, int, int, int), FUN_000166c0(unsigned char *, int, int, int, int), FUN_000165c0(int, int, int, int), FUN_000165e8(int, int, int, int);
 extern unsigned FUN_0001043c(void);
 /* FUN_00017944 @ 00017944: fill in the sprite header at s (size, one frame, width, height/8, key flag) and grab the w x h image at (b, c) into it */
@@ -225,7 +227,8 @@ int FUN_00017b74(int n) { B00038988_eu = FUN_0001954c(n, 0); return (*(unsigned 
 #undef SR
 /* ---- from build/var/mod/parts/p17b94.c */
 struct CHR { char b[0x248]; };
-extern int DAT_00032908, B0003898c_eu, B00038990_eu, DAT_000304cc, DAT_000304d0; extern unsigned char B0003680c_eu[];
+#define B0003680c_eu ((unsigned char *)((char *)&B000367f8_eu + 20)) /* STANDIN: view, B000367f8_eu + 0x14 */
+extern int DAT_00032908, B0003898c_eu, B00038990_eu, DAT_000304cc, DAT_000304d0; 
 extern unsigned char *FUN_0001954c(int, int); extern void FUN_00016824(int, int, int, int, int), FUN_000167c8(int, int, int, int);
 extern void FUN_00011464(int, int, int, int, int, int, int, int, int, int, int, int, int), FUN_000115b0(int, int, int, int);
 /* FUN_00017b94 @ 00017b94: draw character c in font font at the text cursor and advance it (CODE.1 copy of CODE.2 FUN_00040354) */
