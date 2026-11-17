@@ -1,3 +1,9 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+short B0007223e_dx;
+unsigned short B0007223c_dz;
+short B0007223a_et;
+char B00072238_dL[2];
+/* BSS end */
 /* Module: FUN_000270ac, FUN_000271d0, FUN_000271fc, FUN_00027838, FUN_00027a68, FUN_000281b4 */
 /* names inside DAT_0005819c (tools/dataview.py): views of the object the module defines */
 #define DAT_000581a4 (*(char *)((char *)DAT_0005819c + 0x8))
@@ -49,7 +55,7 @@ extern char DAT_0005819c[], *DAT_00058190, *DAT_00058194;
 
 extern unsigned short B000698e0_b7[];
 extern unsigned char *DAT_0005cb3c[], *DAT_0005cd3c[];
-extern char B00064d80_ay[], B00072238_dL[], B00067618_e7[], *DAT_0005cf44;
+extern char B00064d80_ay[], B00072238_dL[2], B00067618_e7[], *DAT_0005cf44;
 void FUN_000271d0(void *p, int len, int fd)
 {
     if (FUN_00041304(p, len, fd) != len) FUN_0003f580(DAT_00058190);
@@ -61,7 +67,7 @@ extern unsigned char DAT_0005a79d, DAT_0005cf50, DAT_00051760[], DAT_00055760[];
 extern char DAT_0005819c[], *DAT_00058190, *DAT_00058194;
 extern unsigned short B000698e0_b7[];
 extern unsigned char *DAT_0005cb3c[], *DAT_0005cd3c[];
-extern char B00064d80_ay[], B00072238_dL[], B00067618_e7[], *DAT_0005cf44;
+extern char B00064d80_ay[], B00072238_dL[2], B00067618_e7[], *DAT_0005cf44;
 
 void FUN_000271fc(int lvl)
 {
