@@ -24,7 +24,6 @@ c    m270ac   -3s -ox -oe -ot -w0
 c    m28d90   -3s -ox -oe -oa -ot -j -w0
 c    m29c80   -3s -ox -oe -oa -ot -w0
 c    m2af90   -3s -ox -oe -oa -ot -w0
-asm  b2af90   -3p -c
 c    m2c0c0   -3s -ox -oe -oa -ot -w0
 asm  b2c0c0   -3p -c
 c    m307e8   -3s -ox -oe -oa -ot -w0
