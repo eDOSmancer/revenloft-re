@@ -27,31 +27,31 @@ int FUN_00041218(const char *path, unsigned short mode) { return access(path, mo
 /* ---- from build/var/mod/parts/p41234.c */
 /* FUN_00041234, FUN_00041258: first / next file matching path and attributes; the name, or 0. FUN_00041274: attributes of the found file */
 #include <dos.h>
-extern struct find_t DAT_0007b6d0;
+extern struct find_t B0007b6d0_hn;
 char *FUN_00041234(char *path, unsigned short attr)
 {
-    if (_dos_findfirst(path, attr, &DAT_0007b6d0)) return 0;
-    return DAT_0007b6d0.name;
+    if (_dos_findfirst(path, attr, &B0007b6d0_hn)) return 0;
+    return B0007b6d0_hn.name;
 }
 
 /* ---- from build/var/mod/parts/p41258.c */
 char *FUN_00041258(void)
 {
-    if (_dos_findnext(&DAT_0007b6d0)) return 0;
-    return DAT_0007b6d0.name;
+    if (_dos_findnext(&B0007b6d0_hn)) return 0;
+    return B0007b6d0_hn.name;
 }
 
 /* ---- from build/var/mod/parts/p41274.c */
 char FUN_00041274(void)
 {
-    return DAT_0007b6d0.attrib;
+    return B0007b6d0_hn.attrib;
 }
 
 /* ---- from build/var/mod/parts/p4127c.c */
 /* FUN_0004127c @ 0004127c */
 long FUN_0004127c(const char *path)
 {
-    if (_dos_findfirst(path, 0, &DAT_0007b6d0) == 0) return DAT_0007b6d0.size;
+    if (_dos_findfirst(path, 0, &B0007b6d0_hn) == 0) return B0007b6d0_hn.size;
     return -1;
 }
 
@@ -112,7 +112,7 @@ int FUN_00041390(int a) { int r; _dos_setdrive(a, (unsigned *)&r); return r; }
 #include <dos.h>
 #include <direct.h>
 #include <ctype.h>
-extern char DAT_0007b6fb[];
+extern char B0007b6fb_iP[];
 /* FUN_000413ac @ 000413ac: current drive (1 = A:) */
 unsigned FUN_000413ac(void) { unsigned d; _dos_getdrive(&d); return d; }
 
@@ -123,8 +123,8 @@ unsigned FUN_000413c4(void) { unsigned n, d; _dos_getdrive(&d); _dos_setdrive(d,
 
 /* ---- from build/var/mod/parts/p413ec.c */
 /* ---- from build/var/mod/parts/p413ec.c */
-/* FUN_000413ec @ 000413ec: remember the current directory in DAT_0007b6fb */
-void FUN_000413ec(void) { getcwd(DAT_0007b6fb, 0x50); }
+/* FUN_000413ec @ 000413ec: remember the current directory in B0007b6fb_iP */
+void FUN_000413ec(void) { getcwd(B0007b6fb_iP, 0x50); }
 
 /* ---- from build/var/mod/parts/p413fc.c */
 /* ---- from build/var/mod/parts/p413fc.c */

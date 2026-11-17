@@ -24,51 +24,51 @@ extrn DAT_0005c738:byte
 extrn DAT_0005c73c:byte
 extrn DAT_0005cf50:byte
 extrn DAT_0005ef4d:byte
-extrn DAT_00065618:byte
-extrn DAT_00065a18:byte
-extrn DAT_00065a1c:byte
-extrn DAT_00065a20:byte
-extrn DAT_00065a24:byte
-extrn DAT_00065a28:byte
-extrn DAT_00065a2c:byte
-extrn DAT_00065a30:byte
-extrn DAT_00068fe0:byte
-extrn DAT_000698e0:byte
-extrn DAT_00072220:byte
-extrn DAT_000748e4:byte
-extrn DAT_000748e6:byte
-extrn DAT_000748e8:byte
-extrn DAT_000748ea:byte
-extrn DAT_000755d0:byte
-extrn DAT_000755d2:byte
-extrn DAT_000755d4:byte
-extrn DAT_000755d6:byte
-extrn DAT_000755e4:byte
-extrn DAT_000755e8:byte
-extrn DAT_000755ea:byte
-extrn DAT_000755ec:byte
-extrn DAT_000755ee:byte
-extrn DAT_000755f0:byte
-extrn DAT_000755f2:byte
-extrn DAT_000755f4:byte
-extrn DAT_000755f6:byte
-extrn DAT_000755f8:byte
-extrn DAT_000755fc:byte
-extrn DAT_00075600:byte
-extrn DAT_00075604:byte
-extrn DAT_00075606:byte
-extrn DAT_00075608:byte
-extrn DAT_0007560c:byte
-extrn DAT_00075610:byte
-extrn DAT_00075612:byte
-extrn DAT_00075619:byte
-extrn DAT_0007561b:byte
-extrn DAT_00075621:byte
-extrn DAT_00075622:byte
-extrn DAT_000756a2:byte
-extrn DAT_00075722:byte
-extrn DAT_000757a2:byte
-extrn DAT_000758c4:byte
+extrn B00065618_e1:byte
+extrn B00065a18_cn:byte
+extrn B00065a1c_ai:byte
+extrn B00065a20_bf:byte
+extrn B00065a24_aj:byte
+extrn B00065a28_bn:byte
+extrn B00065a2c_ay:byte
+extrn B00065a30_af:byte
+extrn B00068fe0_eN:byte
+extrn B000698e0_b7:byte
+extrn B00072220_gw:byte
+extrn B000748e4_h8:byte
+extrn B000748e6_h6:byte
+extrn B000748e8_jD:byte
+extrn B000748ea_bm:byte
+extrn B000755d0_ao:byte
+extrn B000755d2_ai:byte
+extrn B000755d4_ak:byte
+extrn B000755d6_ae:byte
+extrn B000755e4_bk:byte
+extrn B000755e8_ag:byte
+extrn B000755ea_aN:byte
+extrn B000755ec_aH:byte
+extrn B000755ee_aJ:byte
+extrn B000755f0_co:byte
+extrn B000755f2_by:byte
+extrn B000755f4_ck:byte
+extrn B000755f6_bu:byte
+extrn B000755f8_bg:byte
+extrn B000755fc_ax:byte
+extrn B00075600_b9:byte
+extrn B00075604_mM:byte
+extrn B00075606_b3:byte
+extrn B00075608_c1:byte
+extrn B0007560c_hn:byte
+extrn B00075610_a9:byte
+extrn B00075612_lo:byte
+extrn B00075619_b0:byte
+extrn B0007561b_io:byte
+extrn B00075621_lx:byte
+extrn B00075622_mo:byte
+extrn B000756a2_ah:byte
+extrn B00075722_nn:byte
+extrn B000757a2_bK:byte
+extrn B000758c4_j7:byte
 extrn DAT_0005c664:byte
 _DATA segment dword public use32 'DATA'
 DAT_0005fcd0 label byte
@@ -118,7 +118,7 @@ L_00042620:
     push ecx
     mov edi, dword ptr [ebp + 0xc]
     mov ecx, dword ptr [ebp + 0x10]
-    mov esi, dword ptr [DAT_000755e4]
+    mov esi, dword ptr [B000755e4_bk]
     call dword ptr [ebp + 8]
     pop ecx
     pop edi
@@ -144,11 +144,11 @@ L_0004263c:
     mov edx, 0x1c
     mul edx
     db 08bh, 0d8h    ; mov ebx, eax (WASM encodes it differently)
-    mov ebx, dword ptr [ebx + DAT_00065a18]
+    mov ebx, dword ptr [ebx + B00065a18_cn]
     and ebx, 0xfff8
     shr ebx, 1
     mov dword ptr [ebp - 0x14], ebx
-    mov edi, dword ptr [DAT_000758c4]
+    mov edi, dword ptr [B000758c4_j7]
     movzx eax, word ptr [edi]
     cmp dword ptr [DAT_0005c6f4 + 0ch], 0x242
     jl short L_000426ac
@@ -184,7 +184,7 @@ L_000426e7:
     mov dword ptr [ebp - 0x10], eax
 L_000426f9:
     and ebx, 0xfffc
-    mov eax, dword ptr [ebx + DAT_00068fe0]
+    mov eax, dword ptr [ebx + B00068fe0_eN]
     mov dword ptr [ebp - 4], eax
     mov dword ptr [ebp - 0x1c], eax
     mov eax, dword ptr [DAT_0005c6f4 + 04h]
@@ -207,7 +207,7 @@ L_000426f9:
     db 02bh, 0c2h    ; sub eax, edx (WASM encodes it differently)
     jle near ptr L_0004294d
     mov eax, dword ptr [ebp - 0x14]
-    movsx edx, byte ptr [DAT_00075621]
+    movsx edx, byte ptr [B00075621_lx]
     mul edx
     add eax, 0x40
     adc edx, 0
@@ -232,7 +232,7 @@ L_000426f9:
 L_000427a1:
     sub dword ptr [ebp - 0x1c], 0x204
     mov edi, dword ptr [ebp - 0x1c]
-    movsx ebx, byte ptr [DAT_00075621]
+    movsx ebx, byte ptr [B00075621_lx]
     inc ebx
     movzx ebx, word ptr [edi + ebx*2]
     mov al, byte ptr [edi + ebx]
@@ -281,7 +281,7 @@ L_0004281c:
     add esp, 0xc
 L_00042843:
     mov edi, dword ptr [ebp - 0x1c]
-    movsx ebx, byte ptr [DAT_00075621]
+    movsx ebx, byte ptr [B00075621_lx]
     inc ebx
     movzx ebx, word ptr [edi + ebx*2]
     pop eax
@@ -297,7 +297,7 @@ L_0004285b:
     cmp eax, dword ptr [DAT_0005c730]
     jle short L_000428ee
     push dword ptr [ebp - 8]
-    push dword ptr [DAT_000755e4]
+    push dword ptr [B000755e4_bk]
     push dword ptr [ebp - 0x14]
     push dword ptr [ebp - 0x10]
     call L_000438c8
@@ -310,7 +310,7 @@ L_0004285b:
     mov dx, 0x3c4
     out dx, ax
     push dword ptr [ebp - 8]
-    push dword ptr [DAT_000755e4]
+    push dword ptr [B000755e4_bk]
     push dword ptr [ebp - 0x14]
     push dword ptr [ebp - 0x10]
     call L_000438c8
@@ -324,7 +324,7 @@ L_000428bb:
     mov dx, 0x3c4
     out dx, ax
     push dword ptr [ebp - 8]
-    push dword ptr [DAT_000755e4]
+    push dword ptr [B000755e4_bk]
     push dword ptr [ebp - 0x14]
     push dword ptr [ebp - 0x10]
     call L_000438c8
@@ -357,11 +357,11 @@ L_00042926:
     db 08bh, 0deh    ; mov ebx, esi (WASM encodes it differently)
     sub ebx, 0xa8c
     mov eax, dword ptr [edi + ebx*4]
-    mov dword ptr [DAT_00075608], eax
+    mov dword ptr [B00075608_c1], eax
     mov ebx, 0xe0f
     db 02bh, 0deh    ; sub ebx, esi (WASM encodes it differently)
     mov eax, dword ptr [edi + ebx*4]
-    mov dword ptr [DAT_00075600], eax
+    mov dword ptr [B00075600_b9], eax
     push dword ptr [DAT_0005c6f4 + 01ch]
     push dword ptr [DAT_0005c6f4 + 014h]
     jmp short L_00042b80
@@ -369,40 +369,40 @@ L_00042b75:
     sub esi, 0xe10
     jmp near ptr L_00042a19
 L_00042b80:
-    push dword ptr [DAT_00075608]
+    push dword ptr [B00075608_c1]
     call FUN_000456d8
     add esp, 8
-    add eax, dword ptr [DAT_000755ec]
-    mov dword ptr [DAT_000755f0], eax
-    movsx ecx, word ptr [DAT_000755f2]
-    push dword ptr [DAT_00075600]
+    add eax, dword ptr [B000755ec_aH]
+    mov dword ptr [B000755f0_co], eax
+    movsx ecx, word ptr [B000755f2_by]
+    push dword ptr [B00075600_b9]
     call FUN_000456d8
     add esp, 8
-    add eax, dword ptr [DAT_000755f4]
-    mov dword ptr [DAT_000755e8], eax
-    movsx ebx, word ptr [DAT_000755ea]
+    add eax, dword ptr [B000755f4_ck]
+    mov dword ptr [B000755e8_ag], eax
+    movsx ebx, word ptr [B000755ea_aN]
     mov eax, dword ptr [DAT_0005c6f4 + 030h]
     shl eax, 0x10
-    add eax, dword ptr [DAT_00075610]
-    mov dword ptr [DAT_000748e4], eax
+    add eax, dword ptr [B00075610_a9]
+    mov dword ptr [B000748e4_h8], eax
     mov eax, dword ptr [DAT_0005c6f4 + 02ch]
     shl eax, 0x10
-    add eax, dword ptr [DAT_00075604]
-    mov dword ptr [DAT_000748e8], eax
-    movsx eax, word ptr [DAT_000748e6]
-    movsx edx, word ptr [DAT_00075619]
+    add eax, dword ptr [B00075604_mM]
+    mov dword ptr [B000748e8_jD], eax
+    movsx eax, word ptr [B000748e6_h6]
+    movsx edx, word ptr [B00075619_b0]
     mul edx
     db 003h, 0c3h    ; add eax, ebx (WASM encodes it differently)
     db 08bh, 0f0h    ; mov esi, eax (WASM encodes it differently)
     shl esi, 1
     db 08bh, 0c1h    ; mov eax, ecx (WASM encodes it differently)
-    movsx edx, word ptr [DAT_00075619]
+    movsx edx, word ptr [B00075619_b0]
     mul edx
-    add ax, word ptr [DAT_000748ea]
+    add ax, word ptr [B000748ea_bm]
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
     shl edi, 1
 L_00042c12:
-    cmp bx, word ptr [DAT_000748ea]
+    cmp bx, word ptr [B000748ea_bm]
     db 00fh
 L_00042c1a:
     db 08eh, 0eah, 000h, 000h, 000h
@@ -415,18 +415,18 @@ L_00042c1f:
     jmp near ptr L_000429b2
 L_00042c39:
     shl esi, 1
-    test word ptr [esi + DAT_000698e0], 0x3f
+    test word ptr [esi + B000698e0_b7], 0x3f
     jne short L_00042c89
 L_00042c46:
-    or word ptr [esi + DAT_000698e0], 0x440
+    or word ptr [esi + B000698e0_b7], 0x440
 L_00042c4f:
-    mov eax, dword ptr [DAT_00075610]
-    add dword ptr [DAT_000748e4], eax
-    mov eax, dword ptr [DAT_00075600]
-    add dword ptr [DAT_000755e8], eax
-    movsx ebx, word ptr [DAT_000755ea]
-    movsx eax, word ptr [DAT_000748e6]
-    movsx edx, word ptr [DAT_00075619]
+    mov eax, dword ptr [B00075610_a9]
+    add dword ptr [B000748e4_h8], eax
+    mov eax, dword ptr [B00075600_b9]
+    add dword ptr [B000755e8_ag], eax
+    movsx ebx, word ptr [B000755ea_aN]
+    movsx eax, word ptr [B000748e6_h6]
+    movsx edx, word ptr [B00075619_b0]
     mul edx
     db 003h, 0c3h    ; add eax, ebx (WASM encodes it differently)
     db 08bh, 0f0h    ; mov esi, eax (WASM encodes it differently)
@@ -436,11 +436,11 @@ L_00042c4f:
 L_00042c89:
     test dword ptr [DAT_0005fd08], 0xffffffff
     je short L_00042ca0
-    test word ptr [esi + DAT_000698e0], 0x800
+    test word ptr [esi + B000698e0_b7], 0x800
     jne short L_00042c46
 L_00042ca0:
-    or word ptr [esi + DAT_000698e0], 0x440
-    movzx eax, word ptr [esi + DAT_000698e0]
+    or word ptr [esi + B000698e0_b7], 0x440
+    movzx eax, word ptr [esi + B000698e0_b7]
     push eax
     and eax, 0x200
     shr eax, 9
@@ -448,17 +448,17 @@ L_00042ca0:
     pop eax
     and eax, 0x3f
     mov dword ptr [DAT_0005c6f4 + 0ch], eax
-    test word ptr [esi + DAT_000698e0], 0x80
+    test word ptr [esi + B000698e0_b7], 0x80
     jne near ptr L_00042de6
-    mov eax, dword ptr [DAT_000748e4]
+    mov eax, dword ptr [B000748e4_h8]
     mov ax, 0
-    mov dword ptr [DAT_000755f0], eax
-    mov word ptr [DAT_000748ea], bx
+    mov dword ptr [B000755f0_co], eax
+    mov word ptr [B000748ea_bm], bx
     call L_00042f8c
-    movsx ecx, word ptr [DAT_000755f2]
+    movsx ecx, word ptr [B000755f2_by]
     jmp near ptr L_000429b2
 L_00042cfc:
-    cmp cx, word ptr [DAT_000748e6]
+    cmp cx, word ptr [B000748e6_h6]
     db 00fh
 L_00042d04:
     db 08eh, 016h, 0ffh, 0ffh, 0ffh
@@ -480,11 +480,11 @@ L_00042d09:
     db 02bh, 0deh    ; sub ebx, esi (WASM encodes it differently)
     mov eax, dword ptr [edi + ebx*4]
     neg eax
-    mov dword ptr [DAT_00075608], eax
+    mov dword ptr [B00075608_c1], eax
     db 08bh, 0deh    ; mov ebx, esi (WASM encodes it differently)
     sub ebx, 0x708
     mov eax, dword ptr [edi + ebx*4]
-    mov dword ptr [DAT_00075600], eax
+    mov dword ptr [B00075600_b9], eax
     push dword ptr [DAT_0005c6f4 + 018h]
     push dword ptr [DAT_0005c6f4 + 014h]
     jmp short L_00042b80
@@ -492,44 +492,44 @@ L_00042b1e:
     cmp esi, 0xe10
     jge short L_00042b75
 L_00042b26:
-    mov dword ptr [DAT_00075610], 0x10000
-    mov dword ptr [DAT_00075604], 0x10000
+    mov dword ptr [B00075610_a9], 0x10000
+    mov dword ptr [B00075604_mM], 0x10000
     org 0471h
     db 08bh, 0deh    ; mov ebx, esi (WASM encodes it differently)
     sub ebx, 0x384
     mov eax, dword ptr [edi + ebx*4]
     neg eax
-    mov dword ptr [DAT_00075608], eax
+    mov dword ptr [B00075608_c1], eax
     mov ebx, 0x707
     db 02bh, 0deh    ; sub ebx, esi (WASM encodes it differently)
     mov eax, dword ptr [edi + ebx*4]
     neg eax
-    mov dword ptr [DAT_00075600], eax
+    mov dword ptr [B00075600_b9], eax
     push dword ptr [DAT_0005c6f4 + 018h]
     push dword ptr [DAT_0005c6f4 + 010h]
     jmp near ptr L_00042b80
 L_00042ac5:
     cmp esi, 0xa8c
     jge short L_00042b1e
-    mov dword ptr [DAT_00075610], 0xffff0000
-    mov dword ptr [DAT_00075604], 0x10000
+    mov dword ptr [B00075610_a9], 0xffff0000
+    mov dword ptr [B00075604_mM], 0x10000
     org 041bh
     mov ebx, 0x383
     db 02bh, 0deh    ; sub ebx, esi (WASM encodes it differently)
     mov eax, dword ptr [edi + ebx*4]
-    mov dword ptr [DAT_00075608], eax
+    mov dword ptr [B00075608_c1], eax
     db 08bh, 0deh    ; mov ebx, esi (WASM encodes it differently)
     mov eax, dword ptr [edi + ebx*4]
     neg eax
-    mov dword ptr [DAT_00075600], eax
+    mov dword ptr [B00075600_b9], eax
     push dword ptr [DAT_0005c6f4 + 01ch]
     push dword ptr [DAT_0005c6f4 + 010h]
     jmp near ptr L_00042b80
 L_00042a67:
     cmp esi, 0x708
     jge short L_00042ac5
-    mov dword ptr [DAT_00075610], 0xffff0000
-    mov dword ptr [DAT_00075604], 0xffff0000
+    mov dword ptr [B00075610_a9], 0xffff0000
+    mov dword ptr [B00075604_mM], 0xffff0000
     org 030fh
     cmp ah, 0
     je short L_0004294d
@@ -559,10 +559,10 @@ L_00042954:
     cmp dword ptr [DAT_0005fd04], eax
     jne short L_0004299c
     mov eax, dword ptr [DAT_0005fcfc]
-    cmp dword ptr [DAT_000755d0], eax
+    cmp dword ptr [B000755d0_ao], eax
     jne short L_0004299c
     mov eax, dword ptr [DAT_0005fd00]
-    cmp dword ptr [DAT_000755d4], eax
+    cmp dword ptr [B000755d4_ak], eax
     je short L_000429a6
 L_0004299c:
     push ebx
@@ -602,28 +602,28 @@ L_00042a11:
     cmp esi, 0x384
     jge short L_00042a67
 L_00042a19:
-    mov dword ptr [DAT_00075610], 0x10000
-    mov dword ptr [DAT_00075604], 0xffff0000
+    mov dword ptr [B00075610_a9], 0x10000
+    mov dword ptr [B00075604_mM], 0xffff0000
     org 06f7h
     jb short L_00042d23
     call L_00042f4c
     jmp near ptr L_000429b2
 L_00042d23:
     shl edi, 1
-    test word ptr [edi + DAT_000698e0], 0x3f
+    test word ptr [edi + B000698e0_b7], 0x3f
     jne short L_00042d73
 L_00042d30:
-    or word ptr [edi + DAT_000698e0], 0x440
+    or word ptr [edi + B000698e0_b7], 0x440
 L_00042d39:
-    mov eax, dword ptr [DAT_00075604]
-    add dword ptr [DAT_000748e8], eax
-    mov eax, dword ptr [DAT_00075608]
-    add dword ptr [DAT_000755f0], eax
-    movsx ecx, word ptr [DAT_000755f2]
+    mov eax, dword ptr [B00075604_mM]
+    add dword ptr [B000748e8_jD], eax
+    mov eax, dword ptr [B00075608_c1]
+    add dword ptr [B000755f0_co], eax
+    movsx ecx, word ptr [B000755f2_by]
     db 08bh, 0c1h    ; mov eax, ecx (WASM encodes it differently)
-    movsx edx, word ptr [DAT_00075619]
+    movsx edx, word ptr [B00075619_b0]
     mul edx
-    add ax, word ptr [DAT_000748ea]
+    add ax, word ptr [B000748ea_bm]
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
     shl edi, 1
     mov dword ptr [DAT_0005fcdc], eax
@@ -631,11 +631,11 @@ L_00042d39:
 L_00042d73:
     test dword ptr [DAT_0005fd08], 0xffffffff
     je short L_00042d8a
-    test word ptr [edi + DAT_000698e0], 0x800
+    test word ptr [edi + B000698e0_b7], 0x800
     jne short L_00042d30
 L_00042d8a:
-    or word ptr [edi + DAT_000698e0], 0x440
-    movzx eax, word ptr [edi + DAT_000698e0]
+    or word ptr [edi + B000698e0_b7], 0x440
+    movzx eax, word ptr [edi + B000698e0_b7]
     push eax
     and eax, 0x200
     shr eax, 9
@@ -643,19 +643,19 @@ L_00042d8a:
     pop eax
     and eax, 0x3f
     mov dword ptr [DAT_0005c6f4 + 0ch], eax
-    test word ptr [edi + DAT_000698e0], 0x80
+    test word ptr [edi + B000698e0_b7], 0x80
     jne near ptr L_00042e9d
-    mov eax, dword ptr [DAT_000748e8]
+    mov eax, dword ptr [B000748e8_jD]
     mov ax, 0
-    mov dword ptr [DAT_000755e8], eax
-    mov word ptr [DAT_000748e6], cx
+    mov dword ptr [B000755e8_ag], eax
+    mov word ptr [B000748e6_h6], cx
     call L_00043124
-    movsx ebx, word ptr [DAT_000755ea]
+    movsx ebx, word ptr [B000755ea_aN]
     jmp near ptr L_000429b2
 L_00042de6:
-    mov eax, dword ptr [DAT_00075600]
+    mov eax, dword ptr [B00075600_b9]
     sar eax, 1
-    add eax, dword ptr [DAT_000755e8]
+    add eax, dword ptr [B000755e8_ag]
     ror eax, 0x10
     db 066h, 03bh, 0d8h    ; cmp bx, ax (WASM encodes it differently)
     jne near ptr L_00042c4f
@@ -692,18 +692,18 @@ L_00042e49:
     jae short L_00042e71
     jmp near ptr L_00042c4f
 L_00042e71:
-    mov dword ptr [DAT_000755e8], edx
-    mov eax, dword ptr [DAT_000748e4]
+    mov dword ptr [B000755e8_ag], edx
+    mov eax, dword ptr [B000748e4_h8]
     mov ax, 0x8000
-    mov dword ptr [DAT_000755f0], eax
+    mov dword ptr [B000755f0_co], eax
     call L_000432b4
-    movsx ecx, word ptr [DAT_000755f2]
-    movsx ebx, word ptr [DAT_000755ea]
+    movsx ecx, word ptr [B000755f2_by]
+    movsx ebx, word ptr [B000755ea_aN]
     jmp near ptr L_000429b2
 L_00042e9d:
-    mov eax, dword ptr [DAT_00075608]
+    mov eax, dword ptr [B00075608_c1]
     sar eax, 1
-    add eax, dword ptr [DAT_000755f0]
+    add eax, dword ptr [B000755f0_co]
     ror eax, 0x10
     db 066h, 03bh, 0c8h    ; cmp cx, ax (WASM encodes it differently)
     jne near ptr L_00042d39
@@ -738,13 +738,13 @@ L_00042ef6:
     jae short L_00042f1e
     jmp near ptr L_00042d39
 L_00042f1e:
-    mov dword ptr [DAT_000755f0], edx
-    mov eax, dword ptr [DAT_000748e8]
+    mov dword ptr [B000755f0_co], edx
+    mov eax, dword ptr [B000748e8_jD]
     mov ax, 0x8000
-    mov dword ptr [DAT_000755e8], eax
+    mov dword ptr [B000755e8_ag], eax
     call L_000433bc
-    movsx ecx, word ptr [DAT_000755f2]
-    movsx ebx, word ptr [DAT_000755ea]
+    movsx ecx, word ptr [B000755f2_by]
+    movsx ebx, word ptr [B000755ea_aN]
     org $
     jmp near ptr L_000429b2
     xchg ebx, ebx
@@ -754,7 +754,7 @@ L_00042f4c:
     db 06bh, 005h    ; imul eax, dword ptr [DAT_0005c6f4 + 08h], 0x1c (WASM adds the displacement constant to the immediate)
     dd offset DAT_0005c6f4 + 08h
     db 01ch
-    add eax, offset DAT_00065a18
+    add eax, offset B00065a18_cn
     mov dword ptr [eax], 0
     mov dword ptr [eax + 4], 0x93
     mov dword ptr [eax + 8], 0x93
@@ -771,17 +771,17 @@ L_00042f8c:
     push ebx
     push esi
     push edi
-    mov eax, dword ptr [DAT_000755e8]
+    mov eax, dword ptr [B000755e8_ag]
     shr eax, 4
     and eax, 0xfc0
     db 08bh, 0f0h    ; mov esi, eax (WASM encodes it differently)
     mov dword ptr [ebp - 4], esi
-    cmp dword ptr [DAT_00075610], 0xffff0000
+    cmp dword ptr [B00075610_a9], 0xffff0000
     jne short L_00042fc2
     mov eax, 0xfc0
     db 02bh, 0c6h    ; sub eax, esi (WASM encodes it differently)
     mov dword ptr [ebp - 4], eax
-    inc word ptr [DAT_000755f2]
+    inc word ptr [B000755f2_by]
 L_00042fc2:
     call FUN_00045730
     mov dword ptr [ebp - 8], eax
@@ -790,24 +790,24 @@ L_00042fc2:
     mov dword ptr [ebp - 0x10], 0
     mov edi, dword ptr [DAT_0005fcdc]
     shl edi, 1
-    or word ptr [edi + DAT_000698e0], 0x440
-    movzx eax, word ptr [edi + DAT_000698e0]
+    or word ptr [edi + B000698e0_b7], 0x440
+    movzx eax, word ptr [edi + B000698e0_b7]
     and eax, 0xc000
     shr eax, 0xe
     push eax
-    test word ptr [edi + DAT_000698e0], 0x100
+    test word ptr [edi + B000698e0_b7], 0x100
     je short L_00043049
-    movsx eax, word ptr [DAT_00075612]
-    movsx edx, word ptr [DAT_00075619]
+    movsx eax, word ptr [B00075612_lo]
+    movsx edx, word ptr [B00075619_b0]
     mul edx
     shl eax, 1
     db 08bh, 0d7h    ; mov edx, edi (WASM encodes it differently)
     db 02bh, 0f8h    ; sub edi, eax (WASM encodes it differently)
-    mov ax, word ptr [DAT_000755ea]
-    mov word ptr [DAT_000748ea], ax
-    test word ptr [edi + DAT_000698e0], 0x80
+    mov ax, word ptr [B000755ea_aN]
+    mov word ptr [B000748ea_bm], ax
+    test word ptr [edi + B000698e0_b7], 0x80
     je short L_00043049
-    movzx eax, word ptr [edi + DAT_000698e0]
+    movzx eax, word ptr [edi + B000698e0_b7]
     and eax, 0x3f
     mov dword ptr [ebp - 0xc], eax
     mov dword ptr [ebp - 4], esi
@@ -815,8 +815,8 @@ L_00042fc2:
 L_00043049:
     mov edi, dword ptr [DAT_0005fcdc]
     shl edi, 1
-    or word ptr [edi + DAT_000698e0], 0x440
-    test word ptr [edi + DAT_000698e0], 0x1000
+    or word ptr [edi + B000698e0_b7], 0x440
+    test word ptr [edi + B000698e0_b7], 0x1000
     je short L_00043085
     cmp dword ptr [ebp - 0x10], 0
     jne short L_00043085
@@ -835,31 +835,31 @@ L_00043085:
     mul edx
     db 08bh, 0f0h    ; mov esi, eax (WASM encodes it differently)
     pop eax
-    mov dword ptr [esi + DAT_00065a30], eax
+    mov dword ptr [esi + B00065a30_af], eax
     mov eax, dword ptr [ebp - 8]
-    mov dword ptr [esi + DAT_00065a18], eax
+    mov dword ptr [esi + B00065a18_cn], eax
     mov eax, dword ptr [ebp - 4]
-    mov dword ptr [esi + DAT_00065a28], eax
+    mov dword ptr [esi + B00065a28_bn], eax
     mov ebx, dword ptr [ebp - 0xc]
     shl ebx, 1
-    movzx eax, word ptr [ebx + DAT_000757a2]
+    movzx eax, word ptr [ebx + B000757a2_bK]
     add eax, dword ptr [ebp - 0x10]
-    mov dword ptr [esi + DAT_00065a1c], eax
-    movzx eax, word ptr [ebx + DAT_00075722]
+    mov dword ptr [esi + B00065a1c_ai], eax
+    movzx eax, word ptr [ebx + B00075722_nn]
     add eax, dword ptr [ebp - 0x10]
-    mov dword ptr [esi + DAT_00065a20], eax
+    mov dword ptr [esi + B00065a20_bf], eax
     mov eax, dword ptr [DAT_0005fcd4]
-    mov dword ptr [esi + DAT_00065a24], eax
+    mov dword ptr [esi + B00065a24_aj], eax
     mov eax, dword ptr [DAT_0005fcdc]
-    mov dword ptr [esi + DAT_00065a2c], eax
-    cmp dword ptr [esi + DAT_00065a20], 0x93
+    mov dword ptr [esi + B00065a2c_ay], eax
+    cmp dword ptr [esi + B00065a20_bf], 0x93
     jne short L_000430fd
-    mov dword ptr [DAT_00072220], 0
+    mov dword ptr [B00072220_gw], 0
 L_000430fd:
-    mov eax, dword ptr [esi + DAT_00065a18]
-    cmp eax, dword ptr [DAT_00072220]
+    mov eax, dword ptr [esi + B00065a18_cn]
+    cmp eax, dword ptr [B00072220_gw]
     jge short L_00043110
-    mov dword ptr [DAT_00072220], eax
+    mov dword ptr [B00072220_gw], eax
 L_00043110:
     cmp eax, dword ptr [DAT_0005bf34]
     jle short L_0004311d
@@ -878,14 +878,14 @@ L_00043124:
     push ebx
     push esi
     push edi
-    mov eax, dword ptr [DAT_000755f0]
+    mov eax, dword ptr [B000755f0_co]
     shr eax, 4
     and eax, 0xfc0
     db 08bh, 0f0h    ; mov esi, eax (WASM encodes it differently)
     mov dword ptr [ebp - 4], esi
-    cmp dword ptr [DAT_00075604], 0xffff0000
+    cmp dword ptr [B00075604_mM], 0xffff0000
     jne short L_00043152
-    inc word ptr [DAT_000755ea]
+    inc word ptr [B000755ea_aN]
     jmp short L_0004315c
 L_00043152:
     mov eax, 0xfc0
@@ -899,22 +899,22 @@ L_0004315c:
     mov dword ptr [ebp - 0x10], 0
     mov edi, dword ptr [DAT_0005fcdc]
     shl edi, 1
-    or word ptr [edi + DAT_000698e0], 0x440
-    movzx eax, word ptr [edi + DAT_000698e0]
+    or word ptr [edi + B000698e0_b7], 0x440
+    movzx eax, word ptr [edi + B000698e0_b7]
     and eax, 0xc000
     shr eax, 0xe
     push eax
-    test word ptr [edi + DAT_000698e0], 0x100
+    test word ptr [edi + B000698e0_b7], 0x100
     je short L_000431da
-    movsx eax, word ptr [DAT_00075606]
+    movsx eax, word ptr [B00075606_b3]
     shl eax, 1
     db 08bh, 0d7h    ; mov edx, edi (WASM encodes it differently)
     db 02bh, 0f8h    ; sub edi, eax (WASM encodes it differently)
-    mov ax, word ptr [DAT_000755f2]
-    mov word ptr [DAT_000748e6], ax
-    test word ptr [edi + DAT_000698e0], 0x80
+    mov ax, word ptr [B000755f2_by]
+    mov word ptr [B000748e6_h6], ax
+    test word ptr [edi + B000698e0_b7], 0x80
     je short L_000431da
-    movzx eax, word ptr [edi + DAT_000698e0]
+    movzx eax, word ptr [edi + B000698e0_b7]
     and eax, 0x3f
     mov dword ptr [ebp - 0xc], eax
     mov dword ptr [ebp - 4], esi
@@ -922,8 +922,8 @@ L_0004315c:
 L_000431da:
     mov edi, dword ptr [DAT_0005fcdc]
     shl edi, 1
-    or word ptr [edi + DAT_000698e0], 0x440
-    test word ptr [edi + DAT_000698e0], 0x1000
+    or word ptr [edi + B000698e0_b7], 0x440
+    test word ptr [edi + B000698e0_b7], 0x1000
     je short L_00043216
     cmp dword ptr [ebp - 0x10], 0
     jne short L_00043216
@@ -942,31 +942,31 @@ L_00043216:
     mul edx
     db 08bh, 0f0h    ; mov esi, eax (WASM encodes it differently)
     pop eax
-    mov dword ptr [esi + DAT_00065a30], eax
+    mov dword ptr [esi + B00065a30_af], eax
     mov eax, dword ptr [ebp - 8]
-    mov dword ptr [esi + DAT_00065a18], eax
+    mov dword ptr [esi + B00065a18_cn], eax
     mov eax, dword ptr [ebp - 4]
-    mov dword ptr [esi + DAT_00065a28], eax
+    mov dword ptr [esi + B00065a28_bn], eax
     mov ebx, dword ptr [ebp - 0xc]
     shl ebx, 1
-    movzx eax, word ptr [ebx + DAT_000756a2]
+    movzx eax, word ptr [ebx + B000756a2_ah]
     add eax, dword ptr [ebp - 0x10]
-    mov dword ptr [esi + DAT_00065a1c], eax
-    movzx eax, word ptr [ebx + DAT_00075622]
+    mov dword ptr [esi + B00065a1c_ai], eax
+    movzx eax, word ptr [ebx + B00075622_mo]
     add eax, dword ptr [ebp - 0x10]
-    mov dword ptr [esi + DAT_00065a20], eax
+    mov dword ptr [esi + B00065a20_bf], eax
     mov eax, dword ptr [DAT_0005fcd4]
-    mov dword ptr [esi + DAT_00065a24], eax
+    mov dword ptr [esi + B00065a24_aj], eax
     mov eax, dword ptr [DAT_0005fcdc]
-    mov dword ptr [esi + DAT_00065a2c], eax
-    cmp dword ptr [esi + DAT_00065a20], 0x93
+    mov dword ptr [esi + B00065a2c_ay], eax
+    cmp dword ptr [esi + B00065a20_bf], 0x93
     jne short L_0004328e
-    mov dword ptr [DAT_00072220], 0
+    mov dword ptr [B00072220_gw], 0
 L_0004328e:
-    mov eax, dword ptr [esi + DAT_00065a18]
-    cmp eax, dword ptr [DAT_00072220]
+    mov eax, dword ptr [esi + B00065a18_cn]
+    cmp eax, dword ptr [B00072220_gw]
     jge short L_000432a1
-    mov dword ptr [DAT_00072220], eax
+    mov dword ptr [B00072220_gw], eax
 L_000432a1:
     cmp eax, dword ptr [DAT_0005bf34]
     jle short L_000432ae
@@ -984,16 +984,16 @@ L_000432b4:
     push ebx
     push esi
     push edi
-    cmp word ptr [DAT_000755e8], 0x8000
+    cmp word ptr [B000755e8_ag], 0x8000
     jb short L_000432df
-    mov eax, dword ptr [DAT_000755e8]
+    mov eax, dword ptr [B000755e8_ag]
     movzx ebx, word ptr [DAT_0005fce4]
     sub ebx, 0x8000
     db 02bh, 0c3h    ; sub eax, ebx (WASM encodes it differently)
     shr eax, 4
     jmp short L_000432f6
 L_000432df:
-    mov eax, dword ptr [DAT_000755e8]
+    mov eax, dword ptr [B000755e8_ag]
     movzx ebx, word ptr [DAT_0005fce4]
     sub ebx, 0x8000
     db 003h, 0c3h    ; add eax, ebx (WASM encodes it differently)
@@ -1003,8 +1003,8 @@ L_000432f6:
     and esi, 0xfc0
     mov edi, dword ptr [DAT_0005fcdc]
     shl edi, 1
-    or word ptr [edi + DAT_000698e0], 0x440
-    movzx eax, word ptr [edi + DAT_000698e0]
+    or word ptr [edi + B000698e0_b7], 0x440
+    movzx eax, word ptr [edi + B000698e0_b7]
     and eax, 0xc000
     shr eax, 0xe
     push eax
@@ -1015,28 +1015,28 @@ L_000432f6:
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
     pop eax
-    mov dword ptr [edi + DAT_00065a18], eax
+    mov dword ptr [edi + B00065a18_cn], eax
     pop eax
-    mov dword ptr [edi + DAT_00065a30], eax
-    mov dword ptr [edi + DAT_00065a28], esi
+    mov dword ptr [edi + B00065a30_af], eax
+    mov dword ptr [edi + B00065a28_bn], esi
     mov eax, dword ptr [DAT_0005fcd4]
-    mov dword ptr [edi + DAT_00065a24], eax
+    mov dword ptr [edi + B00065a24_aj], eax
     mov eax, dword ptr [DAT_0005fcdc]
-    mov dword ptr [edi + DAT_00065a2c], eax
+    mov dword ptr [edi + B00065a2c_ay], eax
     mov ebx, dword ptr [DAT_0005c6f4 + 0ch]
     shl ebx, 1
-    movzx eax, word ptr [ebx + DAT_000756a2]
-    mov dword ptr [edi + DAT_00065a1c], eax
-    movzx eax, word ptr [ebx + DAT_00075622]
-    mov dword ptr [edi + DAT_00065a20], eax
-    cmp dword ptr [edi + DAT_00065a20], 0x93
+    movzx eax, word ptr [ebx + B000756a2_ah]
+    mov dword ptr [edi + B00065a1c_ai], eax
+    movzx eax, word ptr [ebx + B00075622_mo]
+    mov dword ptr [edi + B00065a20_bf], eax
+    cmp dword ptr [edi + B00065a20_bf], 0x93
     jne short L_00043395
-    mov dword ptr [DAT_00072220], 0
+    mov dword ptr [B00072220_gw], 0
 L_00043395:
-    mov eax, dword ptr [edi + DAT_00065a18]
-    cmp eax, dword ptr [DAT_00072220]
+    mov eax, dword ptr [edi + B00065a18_cn]
+    cmp eax, dword ptr [B00072220_gw]
     jge short L_000433a8
-    mov dword ptr [DAT_00072220], eax
+    mov dword ptr [B00072220_gw], eax
 L_000433a8:
     cmp eax, dword ptr [DAT_0005bf34]
     jle short L_000433b5
@@ -1055,16 +1055,16 @@ L_000433bc:
     push ebx
     push esi
     push edi
-    cmp word ptr [DAT_000755f0], 0x8000
+    cmp word ptr [B000755f0_co], 0x8000
     jb short L_000433e7
-    mov eax, dword ptr [DAT_000755f0]
+    mov eax, dword ptr [B000755f0_co]
     movzx ebx, word ptr [DAT_0005fce4]
     sub ebx, 0x8000
     db 02bh, 0c3h    ; sub eax, ebx (WASM encodes it differently)
     shr eax, 4
     jmp short L_000433fe
 L_000433e7:
-    mov eax, dword ptr [DAT_000755f0]
+    mov eax, dword ptr [B000755f0_co]
     movzx ebx, word ptr [DAT_0005fce4]
     sub ebx, 0x8000
     db 003h, 0c3h    ; add eax, ebx (WASM encodes it differently)
@@ -1074,8 +1074,8 @@ L_000433fe:
     and esi, 0xfc0
     mov edi, dword ptr [DAT_0005fcdc]
     shl edi, 1
-    or word ptr [edi + DAT_000698e0], 0x440
-    movzx eax, word ptr [edi + DAT_000698e0]
+    or word ptr [edi + B000698e0_b7], 0x440
+    movzx eax, word ptr [edi + B000698e0_b7]
     and eax, 0xc000
     shr eax, 0xe
     push eax
@@ -1086,28 +1086,28 @@ L_000433fe:
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
     pop eax
-    mov dword ptr [edi + DAT_00065a18], eax
+    mov dword ptr [edi + B00065a18_cn], eax
     pop eax
-    mov dword ptr [edi + DAT_00065a30], eax
-    mov dword ptr [edi + DAT_00065a28], esi
+    mov dword ptr [edi + B00065a30_af], eax
+    mov dword ptr [edi + B00065a28_bn], esi
     mov eax, dword ptr [DAT_0005fcd4]
-    mov dword ptr [edi + DAT_00065a24], eax
+    mov dword ptr [edi + B00065a24_aj], eax
     mov eax, dword ptr [DAT_0005fcdc]
-    mov dword ptr [edi + DAT_00065a2c], eax
+    mov dword ptr [edi + B00065a2c_ay], eax
     mov ebx, dword ptr [DAT_0005c6f4 + 0ch]
     shl ebx, 1
-    movzx eax, word ptr [ebx + DAT_000756a2]
-    mov dword ptr [edi + DAT_00065a1c], eax
-    movzx eax, word ptr [ebx + DAT_00075622]
-    mov dword ptr [edi + DAT_00065a20], eax
-    cmp dword ptr [edi + DAT_00065a20], 0x93
+    movzx eax, word ptr [ebx + B000756a2_ah]
+    mov dword ptr [edi + B00065a1c_ai], eax
+    movzx eax, word ptr [ebx + B00075622_mo]
+    mov dword ptr [edi + B00065a20_bf], eax
+    cmp dword ptr [edi + B00065a20_bf], 0x93
     jne short L_0004349d
-    mov dword ptr [DAT_00072220], 0
+    mov dword ptr [B00072220_gw], 0
 L_0004349d:
-    mov eax, dword ptr [edi + DAT_00065a18]
-    cmp eax, dword ptr [DAT_00072220]
+    mov eax, dword ptr [edi + B00065a18_cn]
+    cmp eax, dword ptr [B00072220_gw]
     jge short L_000434b0
-    mov dword ptr [DAT_00072220], eax
+    mov dword ptr [B00072220_gw], eax
 L_000434b0:
     cmp eax, dword ptr [DAT_0005bf34]
     jle short L_000434bd
@@ -1126,14 +1126,14 @@ FUN_000434c4:
     push ebx
     push edi
     push esi
-    movzx eax, word ptr [DAT_00075619]
-    movzx ebx, word ptr [DAT_0007561b]
+    movzx eax, word ptr [B00075619_b0]
+    movzx ebx, word ptr [B0007561b_io]
     imul eax, ebx
     mov dword ptr [DAT_0005fd0c], eax
     mov ebx, 0
     mov ecx, dword ptr [DAT_0005fd0c]
 L_000434ec:
-    and byte ptr [ebx*2 + DAT_000698e0], 0xbf
+    and byte ptr [ebx*2 + B000698e0_b7], 0xbf
     inc ebx
     dec ecx
     jne short L_000434ec
@@ -1144,46 +1144,46 @@ L_000434ec:
     mov edi, dword ptr [DAT_0005c65c]
     mov ebx, dword ptr [DAT_0005c658]
     mov eax, dword ptr [edi + ebx*4]
-    mov dword ptr [DAT_000755fc], eax
+    mov dword ptr [B000755fc_ax], eax
     add ebx, 0x5a
     mov eax, dword ptr [edi + ebx*4]
-    mov dword ptr [DAT_000755f8], eax
-    push dword ptr [DAT_000755f8]
-    push dword ptr [DAT_0007560c]
+    mov dword ptr [B000755f8_bg], eax
+    push dword ptr [B000755f8_bg]
+    push dword ptr [B0007560c_hn]
     call FUN_00045680
     add esp, 8
     push eax
     pop ebx
-    mov eax, dword ptr [DAT_000755d4]
+    mov eax, dword ptr [B000755d4_ak]
     db 02bh, 0c3h    ; sub eax, ebx (WASM encodes it differently)
-    mov dword ptr [DAT_000755ec], eax
+    mov dword ptr [B000755ec_aH], eax
     and eax, 0xffff
     mov dword ptr [DAT_0005c6f4 + 018h], eax
     neg eax
     mov dword ptr [DAT_0005c6f4 + 01ch], eax
-    push dword ptr [DAT_000755fc]
-    push dword ptr [DAT_0007560c]
+    push dword ptr [B000755fc_ax]
+    push dword ptr [B0007560c_hn]
     call FUN_00045680
     add esp, 8
     push eax
     pop ebx
-    mov eax, dword ptr [DAT_000755d0]
+    mov eax, dword ptr [B000755d0_ao]
     db 003h, 0c3h    ; add eax, ebx (WASM encodes it differently)
-    mov dword ptr [DAT_000755f4], eax
+    mov dword ptr [B000755f4_ck], eax
     and eax, 0xffff
     mov dword ptr [DAT_0005c6f4 + 010h], eax
     neg eax
     mov dword ptr [DAT_0005c6f4 + 014h], eax
-    movsx eax, word ptr [DAT_000755ee]
+    movsx eax, word ptr [B000755ee_aJ]
     mov dword ptr [DAT_0005c6f4 + 030h], eax
-    movsx eax, word ptr [DAT_000755f6]
+    movsx eax, word ptr [B000755f6_bu]
     mov dword ptr [DAT_0005c6f4 + 02ch], eax
-    movsx eax, word ptr [DAT_000755d6]
+    movsx eax, word ptr [B000755d6_ae]
     mov dword ptr [DAT_0005c6f4 + 028h], eax
-    movsx eax, word ptr [DAT_000755d2]
+    movsx eax, word ptr [B000755d2_ai]
     mov dword ptr [DAT_0005c6f4 + 024h], eax
     mov dword ptr [DAT_0005c6f4 + 038h], 0xffffffff
-    mov dword ptr [DAT_00072220], 0x800
+    mov dword ptr [B00072220_gw], 0x800
     call L_00042954
     pop esi
     pop edi
@@ -1194,7 +1194,7 @@ L_000434ec:
 FUN_000435dc:
     enter 0, 0
     pushad
-    mov esi, offset DAT_00065a18
+    mov esi, offset B00065a18_cn
     mov edi, 0
     mov dword ptr [DAT_0005fcd0], 1
     mov dword ptr [DAT_0005c6f4], 1
@@ -1217,13 +1217,13 @@ L_00043625:
     mov dword ptr [DAT_0005c6f4 + 0ch], eax
     mov eax, dword ptr [esi + 0x10]
     shl eax, 1
-    mov dword ptr [DAT_000755e4], eax
+    mov dword ptr [B000755e4_bk], eax
     push 4
     push dword ptr [DAT_0005c6f4 + 0ch]
     call FUN_0003f29c
     add esp, 8
     add eax, 2
-    add dword ptr [DAT_000755e4], eax
+    add dword ptr [B000755e4_bk], eax
     jmp short L_000436e2
 L_0004366c:
     cmp dword ptr [esi + 0xc], 1
@@ -1251,10 +1251,10 @@ L_00043692:
     call FUN_0003f29c
     add esp, 8
     add eax, 2
-    mov dword ptr [DAT_000755e4], eax
+    mov dword ptr [B000755e4_bk], eax
     mov eax, dword ptr [esi + 0x10]
     shl eax, 1
-    add dword ptr [DAT_000755e4], eax
+    add dword ptr [B000755e4_bk], eax
     jmp short L_000436e2
 L_000436dc:
     inc dword ptr [DAT_0005c6f4]
@@ -1265,7 +1265,7 @@ L_000436e2:
     jne near ptr L_0004366c
     call L_0004263c
 L_000436f7:
-    mov esi, offset DAT_00065a18
+    mov esi, offset B00065a18_cn
     mov edi, 0
     mov dword ptr [DAT_0005fcd0], 0
     mov dword ptr [DAT_0005c6f4], 1
@@ -1276,13 +1276,13 @@ L_000436f7:
     mov dword ptr [DAT_0005fcf2], eax
     mov eax, dword ptr [esi + 0x10]
     shl eax, 1
-    mov dword ptr [DAT_000755e4], eax
+    mov dword ptr [B000755e4_bk], eax
     push 4
     push dword ptr [DAT_0005c6f4 + 0ch]
     call FUN_0003f29c
     add esp, 8
     add eax, 2
-    add dword ptr [DAT_000755e4], eax
+    add dword ptr [B000755e4_bk], eax
     jmp short L_000437b3
 L_00043754:
     mov eax, dword ptr [esi]
@@ -1304,10 +1304,10 @@ L_00043763:
     call FUN_0003f29c
     add esp, 8
     add eax, 2
-    mov dword ptr [DAT_000755e4], eax
+    mov dword ptr [B000755e4_bk], eax
     mov eax, dword ptr [esi + 0x10]
     shl eax, 1
-    add dword ptr [DAT_000755e4], eax
+    add dword ptr [B000755e4_bk], eax
     jmp short L_000437b3
 L_000437ad:
     inc dword ptr [DAT_0005c6f4]
@@ -1330,7 +1330,7 @@ L_000437c8:
     mov edi, dword ptr [ebp + 8]
     mov ecx, 0
     mov edx, dword ptr [ebp + 0xc]
-    movsx ebx, byte ptr [DAT_00075621]
+    movsx ebx, byte ptr [B00075621_lx]
     shl ebx, 1
 L_000437e3:
     add cx, word ptr [edi + ebx + 0x102]
@@ -1359,15 +1359,15 @@ FUN_00043808:
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
     mov esi, dword ptr [ebp + 0x14]
-    mov eax, dword ptr [edi + DAT_00065a20]
+    mov eax, dword ptr [edi + B00065a20_bf]
     mov dword ptr [esi], eax
     mov esi, dword ptr [ebp + 0x18]
-    mov eax, dword ptr [edi + DAT_00065a28]
+    mov eax, dword ptr [edi + B00065a28_bn]
     shr eax, 6
     mov dword ptr [esi], eax
-    mov eax, dword ptr [edi + DAT_00065a2c]
+    mov eax, dword ptr [edi + B00065a2c_ay]
     mov edx, 0
-    movsx ebx, word ptr [DAT_00075619]
+    movsx ebx, word ptr [B00075619_b0]
     div ebx
     mov esi, dword ptr [ebp + 0x20]
     mov dword ptr [esi], edx
@@ -1380,10 +1380,10 @@ FUN_00043808:
     mov ebx, dword ptr [ebp + 8]
     cmp ebx, dword ptr [DAT_0005c738]
     jae short L_000438c2
-    mov eax, dword ptr [ebx*4 + DAT_00065618]
+    mov eax, dword ptr [ebx*4 + B00065618_e1]
     cmp eax, 0
     je short L_000438c2
-    mov edi, dword ptr [ebx*4 + DAT_00068fe0]
+    mov edi, dword ptr [ebx*4 + B00068fe0_eN]
     sub edi, 0x102
     db 08bh, 0d8h    ; mov ebx, eax (WASM encodes it differently)
     shr eax, 3

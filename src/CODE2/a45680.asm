@@ -24,16 +24,16 @@ extrn DAT_0005c6e0:byte
 extrn DAT_0005c730:byte
 extrn DAT_0005c738:byte
 extrn DAT_0005ef4d:byte
-extrn DAT_00065a18:byte
-extrn DAT_00068fe0:byte
-extrn DAT_000755e0:byte
-extrn DAT_000755e8:byte
-extrn DAT_000755ec:byte
-extrn DAT_000755f0:byte
-extrn DAT_000755f4:byte
-extrn DAT_000755f8:byte
-extrn DAT_000755fc:byte
-extrn DAT_000758c4:byte
+extrn B00065a18_cn:byte
+extrn B00068fe0_eN:byte
+extrn B000755e0_bo:byte
+extrn B000755e8_ag:byte
+extrn B000755ec_aH:byte
+extrn B000755f0_co:byte
+extrn B000755f4_ck:byte
+extrn B000755f8_bg:byte
+extrn B000755fc_ax:byte
+extrn B000758c4_j7:byte
 extrn DAT_0005c664:byte
 CONST segment dword public use32 'DATA'
 DAT_00051604 label byte
@@ -219,16 +219,16 @@ FUN_00045730:
     enter 0, 0
     push ecx
     push ebx
-    mov eax, dword ptr [DAT_000755f0]
-    sub eax, dword ptr [DAT_000755ec]
-    mov ebx, dword ptr [DAT_000755e8]
-    sub ebx, dword ptr [DAT_000755f4]
-    push dword ptr [DAT_000755f8]
+    mov eax, dword ptr [B000755f0_co]
+    sub eax, dword ptr [B000755ec_aH]
+    mov ebx, dword ptr [B000755e8_ag]
+    sub ebx, dword ptr [B000755f4_ck]
+    push dword ptr [B000755f8_bg]
     push eax
     call L_00045680
     add esp, 8
     push eax
-    push dword ptr [DAT_000755fc]
+    push dword ptr [B000755fc_ax]
     push ebx
     call L_00045680
     add esp, 8
@@ -241,7 +241,7 @@ FUN_00045730:
 L_0004577d:
     shr eax, 8
     db 08bh, 0d8h    ; mov ebx, eax (WASM encodes it differently)
-    mov eax, dword ptr [DAT_000755e0]
+    mov eax, dword ptr [B000755e0_bo]
     mov edx, 0
     div ebx
     and eax, 0xffff
@@ -257,17 +257,17 @@ FUN_00045798:
     mov esi, dword ptr [ebp + 0x10]
     mov edi, dword ptr [ebp + 0x14]
     mov eax, dword ptr [ebp + 8]
-    sub eax, dword ptr [DAT_000755ec]
+    sub eax, dword ptr [B000755ec_aH]
     mov dword ptr [ebp - 0xc], eax
     mov ebx, dword ptr [ebp + 0xc]
-    sub ebx, dword ptr [DAT_000755f4]
+    sub ebx, dword ptr [B000755f4_ck]
     mov dword ptr [ebp - 0x10], ebx
-    push dword ptr [DAT_000755f8]
+    push dword ptr [B000755f8_bg]
     push eax
     call L_00045680
     add esp, 8
     push eax
-    push dword ptr [DAT_000755fc]
+    push dword ptr [B000755fc_ax]
     push ebx
     call L_00045680
     add esp, 8
@@ -277,12 +277,12 @@ FUN_00045798:
     db 02bh, 0c3h    ; sub eax, ebx (WASM encodes it differently)
     sub eax, 0x2000
     mov dword ptr [ebp - 4], eax
-    push dword ptr [DAT_000755fc]
+    push dword ptr [B000755fc_ax]
     push dword ptr [ebp - 0xc]
     call L_00045680
     add esp, 8
     push eax
-    push dword ptr [DAT_000755f8]
+    push dword ptr [B000755f8_bg]
     push dword ptr [ebp - 0x10]
     call L_00045680
     add esp, 8
@@ -313,7 +313,7 @@ L_00045834:
     mov word ptr [esi], dx
     mov ebx, dword ptr [ebp - 4]
     sar ebx, 8
-    mov eax, dword ptr [DAT_000755e0]
+    mov eax, dword ptr [B000755e0_bo]
     org $
     cdq
     idiv ebx
@@ -2285,7 +2285,7 @@ L_00046d54:
     mov dword ptr [DAT_000605e7], eax
     jmp short L_00046d8c
 L_00046d7d:
-    mov edi, dword ptr [DAT_000758c4]
+    mov edi, dword ptr [B000758c4_j7]
     movzx eax, word ptr [edi + ebx*2]
     mov dword ptr [DAT_000605e7], eax
 L_00046d8c:
@@ -2298,7 +2298,7 @@ L_00046da2:
     mov edi, 0
     shl ebx, 2
     mov dword ptr [ebp - 8], ebx
-    mov eax, dword ptr [ebx + DAT_00068fe0]
+    mov eax, dword ptr [ebx + B00068fe0_eN]
     mov dword ptr [DAT_000605d7], eax
     cmp dword ptr [ebp + 0x18], 0
     jne short L_00046e15
@@ -2417,7 +2417,7 @@ L_00046eed:
     mov edx, 0x1c
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jge near ptr L_00047094
     push 1
@@ -2450,7 +2450,7 @@ L_00046fbe:
     mov edx, 0x1c
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jge short L_00046fdb
     mov bh, 1
@@ -2462,7 +2462,7 @@ L_00046fdb:
     mov edx, 0x1c
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     org $
     cmp eax, dword ptr [ebp + 0x1c]
     jge short L_00047001
@@ -2485,7 +2485,7 @@ L_0004701a:
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
 L_00047031:
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jl short L_00047047
     dec dword ptr [DAT_000605df]
@@ -2505,7 +2505,7 @@ L_00047056:
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
 L_00047069:
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jl short L_00047085
     inc dword ptr [DAT_000605e3]
@@ -2579,7 +2579,7 @@ L_000470ff:
     mov edx, 0x1c
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jge near ptr L_0004729b
     push 1
@@ -2612,7 +2612,7 @@ L_000471c7:
     mov edx, 0x1c
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jge short L_000471e4
     mov bh, 1
@@ -2624,7 +2624,7 @@ L_000471e4:
     mov edx, 0x1c
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jge short L_0004720a
     mov bl, 1
@@ -2646,7 +2646,7 @@ L_00047223:
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
 L_0004723a:
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jl short L_00047250
     dec dword ptr [DAT_000605df]
@@ -2666,7 +2666,7 @@ L_0004725f:
     mul edx
     db 08bh, 0f8h    ; mov edi, eax (WASM encodes it differently)
 L_00047272:
-    mov eax, dword ptr [edi + DAT_00065a18]
+    mov eax, dword ptr [edi + B00065a18_cn]
     cmp eax, dword ptr [ebp + 0x1c]
     jl short L_0004728e
     inc dword ptr [DAT_000605e3]

@@ -32,11 +32,11 @@ int FUN_00029cc4(void) { return DAT_0005a7e4; }
 /* FUN_00029ccc @ 00029ccc: push onto a small undo stack (14 entries) */
 extern unsigned char DAT_0005a7ec;
 extern int DAT_0005a7e8;
-extern unsigned char DAT_000640a0[];
+extern unsigned char B000640a0_hC[];
 void FUN_00029ccc(int v)
 {
     if (DAT_0005a7ec < 14) {
-        DAT_000640a0[DAT_0005a7ec] = DAT_0005a7e8;
+        B000640a0_hC[DAT_0005a7ec] = DAT_0005a7e8;
         DAT_0005a7ec++;
         DAT_0005a7e8 = v;
     }
@@ -46,10 +46,10 @@ void FUN_00029ccc(int v)
 /* FUN_00029cf4 @ 00029cf4: pop from the undo stack (module flag -oa caches the counter in dl) */
 extern unsigned char DAT_0005a7ec;
 extern int DAT_0005a7e8;
-extern unsigned char DAT_000640a0[];
+extern unsigned char B000640a0_hC[];
 void FUN_00029cf4(void)
 {
-    if (DAT_0005a7ec) DAT_0005a7e8 = DAT_000640a0[--DAT_0005a7ec];
+    if (DAT_0005a7ec) DAT_0005a7e8 = B000640a0_hC[--DAT_0005a7ec];
 }
 
 /* ---- from build/var/mod/parts/p29d18.c */
@@ -163,7 +163,7 @@ extern short DAT_000585fc[2];
 extern unsigned char DAT_00059e31[2];
 void *memmove(void *, const void *, unsigned);
 extern int FUN_0003e340(void); extern void FUN_00043d38(int, int), FUN_00043d18(int, int), FUN_00043c90(int, int), FUN_000396c0(int, int, int, int); extern char *FUN_00043cb0(void); extern void *FUN_0003f29c(int, int);
-extern short DAT_0005a6b8, DAT_0005a6b4, DAT_0005a6b6; extern unsigned char DAT_00059e21[]; extern unsigned char DAT_0005ef4e, DAT_0005880d[]; extern int DAT_000758dc;
+extern short DAT_0005a6b8, DAT_0005a6b4, DAT_0005a6b6; extern unsigned char DAT_00059e21[]; extern unsigned char DAT_0005ef4e, DAT_0005880d[]; extern int B000758dc_cl;
 void FUN_0002a0b0(void)
 {
     int k, j; char *p; void *q; short mx, my;
@@ -188,7 +188,7 @@ void FUN_0002a0b0(void)
         MOUSEV.x = mx;
         for (k = 0; k < 2; k++)
             for (j = 0; j < 4; j++) *(short *)((char *)&DAT_00059e21 + (k * 8 + j * 2)) = -1;
-        q = FUN_0003f29c(DAT_000758dc + 0x2f, 0);
+        q = FUN_0003f29c(B000758dc_cl + 0x2f, 0);
         memmove(DAT_0005880d, q, 0x1614);
         FUN_000396c0(0, 0, 0x18f, 0x13f);
         FUN_0002a064(0xffff);
@@ -198,7 +198,7 @@ void FUN_0002a0b0(void)
 extern short DAT_000585fc[2];
 extern unsigned char DAT_00059e31[2];
 extern int FUN_0003e340(void); extern void FUN_00043d38(int, int), FUN_00043d18(int, int), FUN_00043c90(int, int), FUN_000396c0(int, int, int, int); extern char *FUN_00043cb0(void); extern void *FUN_0003f29c(int, int);
-extern short DAT_0005a6b8, DAT_0005a6b4, DAT_0005a6b6; extern unsigned char DAT_00059e21[]; extern unsigned char DAT_0005ef4e, DAT_0005880d[]; extern int DAT_000758dc;
+extern short DAT_0005a6b8, DAT_0005a6b4, DAT_0005a6b6; extern unsigned char DAT_00059e21[]; extern unsigned char DAT_0005ef4e, DAT_0005880d[]; extern int B000758dc_cl;
 
 extern void FUN_00043b44(void);
 /* FUN_0002a1d0 @ 0002a1d0: refresh the mouse cursor (redraw it when it is shown) */
@@ -276,7 +276,7 @@ void FUN_0002a344(short a, unsigned char b)
     CURSV.f = 0;
     CURSV.spr = CURSV.id = a;
     if (a != -1) {
-        CURSV.spr = *(short *)(((char *)DAT_000755d8) + a * 0x41 + 0x2d);
+        CURSV.spr = *(short *)(((char *)B000755d8_aw) + a * 0x41 + 0x2d);
         CURSV.f = b;
         p = FUN_0003f29c(CURSV.spr, 1);
         memmove(DAT_00058603, p, 0x20a);
@@ -383,7 +383,7 @@ void FUN_0002a5b0(int pg, short spr, unsigned char c)
             CURSV.id = spr;
             CURSV.spr = spr;
             if (spr != -1) {
-                CURSV.spr = *(short *)(((char *)DAT_000755d8) + spr * 0x41 + 0x2d);
+                CURSV.spr = *(short *)(((char *)B000755d8_aw) + spr * 0x41 + 0x2d);
                 img = FUN_0003f29c(CURSV.spr, 1);
                 memmove(DAT_00058603, img, 0x20a);
             }
@@ -443,7 +443,7 @@ void FUN_0002a724(int pg, short spr, unsigned char c, int x, int y, int w, int h
             CURSV.id = spr;
             CURSV.spr = spr;
             if (spr != -1) {
-                CURSV.spr = *(short *)(((char *)DAT_000755d8) + spr * 0x41 + 0x2d);
+                CURSV.spr = *(short *)(((char *)B000755d8_aw) + spr * 0x41 + 0x2d);
                 img = FUN_0003f29c(CURSV.spr, 1);
                 memmove(DAT_00058603, img, 0x20a);
             }
@@ -620,7 +620,7 @@ void FUN_0002ac0c(void) { DAT_0005a6bc = 1; }
 /* FUN_0002ac38 @ 0002ac38: click at (x, y) on the movement panel (big compass) or on the map's scroll arrows: set the move direction, scroll the map */
 struct R { short x0, y0, x1, y1, dx, dy; };
 extern struct R DAT_0005a6dc[7], DAT_0005a730[8];
-extern short DAT_0005a6bc, DAT_0005a6be, DAT_000758fc, DAT_000758fe;
+extern short DAT_0005a6bc, DAT_0005a6be, B000758fc_kL, B000758fe_j6;
 extern void FUN_0002f7f8(int, int);
 void FUN_0002ac38(int x, int y)
 {
@@ -629,8 +629,8 @@ void FUN_0002ac38(int x, int y)
         DAT_0005a6be = 1;
         for (i = 0; i < 7; i++) {
             if (x >= DAT_0005a6dc[i].x0 && x <= DAT_0005a6dc[i].x1 && y >= DAT_0005a6dc[i].y0 && y <= DAT_0005a6dc[i].y1) {
-                DAT_000758fc = DAT_0005a6dc[i].dx;
-                DAT_000758fe = DAT_0005a6dc[i].dy;
+                B000758fc_kL = DAT_0005a6dc[i].dx;
+                B000758fe_j6 = DAT_0005a6dc[i].dy;
                 return;
             }
         }
@@ -638,8 +638,8 @@ void FUN_0002ac38(int x, int y)
         DAT_0005a6bc = 1;
         for (i = 0; i < 8; i++) {
             if (x >= DAT_0005a730[i].x0 && x <= DAT_0005a730[i].x1 && y >= DAT_0005a730[i].y0 && y <= DAT_0005a730[i].y1) {
-                DAT_000758fc = DAT_0005a730[i].dx;
-                DAT_000758fe = DAT_0005a730[i].dy;
+                B000758fc_kL = DAT_0005a730[i].dx;
+                B000758fe_j6 = DAT_0005a730[i].dy;
                 switch (i) {
                 case 0: FUN_0002f7f8(0, 0x56 - (x - 4)); FUN_0002f7f8(1, 0x56 - (y - 0x20)); break;
                 case 1: FUN_0002f7f8(0, 0x56 - (x - 4)); break;

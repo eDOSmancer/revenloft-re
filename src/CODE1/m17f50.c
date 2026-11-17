@@ -25,18 +25,18 @@ void FUN_00017f8c(int v) { _disable(); DAT_00032934 = v; _enable(); }
 
 /* ---- from build/var/mod/parts/p17fa8.c */
 /* FUN_00017fa8 */
-void *memmove(void *, const void *, unsigned); extern volatile unsigned char DAT_00032930, DAT_0003291a, DAT_00032919, DAT_000389d0[], DAT_000389cf[];
-void FUN_00017fa8(int k) { int i; for (i = 0; i < DAT_00032930; i++) if (DAT_000389d0[i] == k) { memmove((void *)&DAT_000389d0[i], (void *)&DAT_000389d0[i + 1], DAT_00032930 - i - 1); DAT_00032930--; break; } if (!DAT_00032930) DAT_0003291a = 0; else DAT_0003291a = DAT_000389cf[DAT_00032930]; DAT_00032919 = DAT_0003291a; }
+void *memmove(void *, const void *, unsigned); extern volatile unsigned char DAT_00032930, DAT_0003291a, DAT_00032919, B000389d0_eu[], B000389cf_eu[];
+void FUN_00017fa8(int k) { int i; for (i = 0; i < DAT_00032930; i++) if (B000389d0_eu[i] == k) { memmove((void *)&B000389d0_eu[i], (void *)&B000389d0_eu[i + 1], DAT_00032930 - i - 1); DAT_00032930--; break; } if (!DAT_00032930) DAT_0003291a = 0; else DAT_0003291a = B000389cf_eu[DAT_00032930]; DAT_00032919 = DAT_0003291a; }
 
 /* ---- from build/var/mod/parts/p1802c.c */
 /* FUN_0001802c */
-extern void FUN_00017fa8(int); extern volatile unsigned char DAT_00032930, DAT_0003291a, DAT_00032919, DAT_000389d0[];
-void FUN_0001802c(int k) { int i; for (i = 0; i < DAT_00032930; i++) if (DAT_000389d0[i] == k) { FUN_00017fa8(k); break; } DAT_000389d0[DAT_00032930] = k; DAT_00032930++; DAT_0003291a = k; DAT_00032919 = DAT_0003291a; }
+extern void FUN_00017fa8(int); extern volatile unsigned char DAT_00032930, DAT_0003291a, DAT_00032919, B000389d0_eu[];
+void FUN_0001802c(int k) { int i; for (i = 0; i < DAT_00032930; i++) if (B000389d0_eu[i] == k) { FUN_00017fa8(k); break; } B000389d0_eu[DAT_00032930] = k; DAT_00032930++; DAT_0003291a = k; DAT_00032919 = DAT_0003291a; }
 
 /* ---- from build/var/mod/parts/p1808c.c */
 
 /* FUN_0001808c @ 0001808c: 1 when key code c is in the queued key list */
-int FUN_0001808c(int c) { int i; for (i = 0; i < DAT_00032930; i++) if (DAT_000389d0[i] == c) return 1; return 0; }
+int FUN_0001808c(int c) { int i; for (i = 0; i < DAT_00032930; i++) if (B000389d0_eu[i] == c) return 1; return 0; }
 
 /* ---- from build/var/mod/parts/p180bc.c */
 #include <conio.h>
@@ -93,13 +93,13 @@ void FUN_00018270(void)
 }
 
 /* ---- from build/var/mod/parts/p18278.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_00018278 @ 00018278 */
 int FUN_00018278(int m) { return DAT_0003291b & m; }
 
 /* ---- from build/var/mod/parts/p1828c.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_0001828c @ 0001828c: fetch and clear the pending key flag */
 int FUN_0001828c(void) { int v; v = DAT_0003291c; DAT_0003291c = 0; return v; }
@@ -116,7 +116,7 @@ int FUN_000182c0(void) { int r; while (!DAT_0003291a) FUN_00019ae8(); r = DAT_00
 
 /* ---- from build/var/mod/parts/p182ec.c */
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, int, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_000182ec @ 000182ec */
@@ -125,7 +125,7 @@ void FUN_000182ec(void) { DAT_00032930 = 0; DAT_00032919 = 0; }
 /* ---- from build/var/mod/parts/p18304.c */
 #define SB T13_SB
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, int, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_00018304 @ 00018304 */
@@ -171,7 +171,7 @@ extern void (__interrupt __far *DAT_00032924)();
 void FUN_00018424(void) { if (DAT_0003291d) { _dos_setvect(9, DAT_0003291e); _dos_setvect(8, DAT_0003292a); _dos_setvect(0, DAT_00032924); DAT_0003291d = 0; } }
 
 /* ---- from build/var/mod/parts/p18484.c */
-extern unsigned char DAT_00038919, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00018484 @ 00018484 */
 int FUN_00018484(void) { return DAT_0003291d; }

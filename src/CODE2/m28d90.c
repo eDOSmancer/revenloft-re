@@ -11,7 +11,7 @@ int rand(void);
 struct QZ { int page; char *head, *nth, *ans; };
 struct GS { char p0[0x72]; unsigned char asked; };
 extern struct QZ DAT_000582cc[]; extern struct GS *DAT_0005f050; extern int DAT_0005c050; extern unsigned char DAT_0005c054[];
-extern int DAT_000758dc; extern char DAT_0005759c[];
+extern int B000758dc_cl; extern char DAT_0005759c[];
 extern unsigned short FUN_000390d0(unsigned short); extern int FUN_000411e0(void), FUN_00040aec(void); int strcmp(const char *, const char *); extern void *FUN_00040070(int, int, int, int, int);
 extern void FUN_0002aacc(void), FUN_00030294(void), FUN_0002a288(void), FUN_000391b0(unsigned char), FUN_000391c8(unsigned char), FUN_00039b40(int, int, int, int, int);
 extern void FUN_0003975c(int, int, int, int, int), FUN_000425b0(unsigned char *, int, int, char *, int), FUN_000422ec(unsigned char *, int, int, unsigned char, unsigned char, unsigned char), FUN_00042220(unsigned char *, int, int, unsigned char, unsigned char, unsigned char);
@@ -29,19 +29,19 @@ void FUN_00028d90(void)
     FUN_000391c8(DAT_0005c050 ^ 1);
     FUN_00039b40(0, 0, 0x190, 0x140, 0);
     for (x = 0xa0; x < 0xf0; x += 0x10)
-        for (y = 0; y < 0x140; y += 8) FUN_0003975c((unsigned)rand() * 4 >> 15, x, y, DAT_000758dc + 0x35, 0);
+        for (y = 0; y < 0x140; y += 8) FUN_0003975c((unsigned)rand() * 4 >> 15, x, y, B000758dc_cl + 0x35, 0);
     for (y = 0; y < 0x140; y += 8) {
-        FUN_0003975c(((unsigned)rand() * 2 >> 15) + 9, 0xa0, y, DAT_000758dc + 0x35, 0);
-        FUN_0003975c(((unsigned)rand() * 2 >> 15) + 5, 0xe0, y, DAT_000758dc + 0x35, 0);
+        FUN_0003975c(((unsigned)rand() * 2 >> 15) + 9, 0xa0, y, B000758dc_cl + 0x35, 0);
+        FUN_0003975c(((unsigned)rand() * 2 >> 15) + 5, 0xe0, y, B000758dc_cl + 0x35, 0);
     }
     for (x = 0xb0; x < 0xe0; x += 0x10) {
-        FUN_0003975c(((unsigned)rand() * 2 >> 15) + 0xc, x, 0, DAT_000758dc + 0x35, 0);
-        FUN_0003975c(((unsigned)rand() * 2 >> 15) + 0xe, x, 0x138, DAT_000758dc + 0x35, 0);
+        FUN_0003975c(((unsigned)rand() * 2 >> 15) + 0xc, x, 0, B000758dc_cl + 0x35, 0);
+        FUN_0003975c(((unsigned)rand() * 2 >> 15) + 0xe, x, 0x138, B000758dc_cl + 0x35, 0);
     }
-    FUN_0003975c(8, 0xa0, 0, DAT_000758dc + 0x35, 0);
-    FUN_0003975c(0xb, 0xa0, 0x138, DAT_000758dc + 0x35, 0);
-    FUN_0003975c(4, 0xe0, 0, DAT_000758dc + 0x35, 0);
-    FUN_0003975c(7, 0xe0, 0x138, DAT_000758dc + 0x35, 0);
+    FUN_0003975c(8, 0xa0, 0, B000758dc_cl + 0x35, 0);
+    FUN_0003975c(0xb, 0xa0, 0x138, B000758dc_cl + 0x35, 0);
+    FUN_0003975c(4, 0xe0, 0, B000758dc_cl + 0x35, 0);
+    FUN_0003975c(7, 0xe0, 0x138, B000758dc_cl + 0x35, 0);
     spr = FUN_00040070(0xa0, 0, 0x50, 0x140, 0xff);
     loaded = 0;
     tries = 0;
@@ -95,7 +95,7 @@ int abs(int);
 #pragma intrinsic(abs)
 struct PT { int x, y; };
 extern void FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_000397d0(int, int, int, int), FUN_000391c8(unsigned char);
-extern struct PT DAT_00058210[4], DAT_00058230[4], DAT_00058250[4], DAT_00058270[4]; extern int DAT_0005c050, DAT_000758dc;
+extern struct PT DAT_00058210[4], DAT_00058230[4], DAT_00058250[4], DAT_00058270[4]; extern int DAT_0005c050, B000758dc_cl;
 void FUN_000291c0(void)
 {
     int k, j, dx, dy, tx, ty;
@@ -109,8 +109,8 @@ void FUN_000291c0(void)
             DAT_00058270[j].x = DAT_00058210[j].x + tx;
             DAT_00058270[j].y = DAT_00058210[j].y + ty;
         }
-        FUN_0003e510(0, 0, DAT_000758dc + 0x52, 0);
-        for (j = 0; j < 4; j++) FUN_000397d0(DAT_00058270[j].x, DAT_00058270[j].y, DAT_000758dc + 0x53 + j, 0);
+        FUN_0003e510(0, 0, B000758dc_cl + 0x52, 0);
+        for (j = 0; j < 4; j++) FUN_000397d0(DAT_00058270[j].x, DAT_00058270[j].y, B000758dc_cl + 0x53 + j, 0);
         FUN_000391c8(DAT_0005c050);
         DAT_0005c050 ^= 1;
     }
@@ -119,15 +119,15 @@ void FUN_000291c0(void)
 /* ---- from build/var/mod/parts/p292cc.c */
 /* FUN_000292cc @ 000292cc: draw the title screen */
 extern void FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_0004060c(int, int, char *, int), FUN_0002ea78(void), FUN_0002a9f8(void);
-extern int DAT_0005c050, DAT_000758dc; extern char s_Ver_1_2a_000582c0[];
+extern int DAT_0005c050, B000758dc_cl; extern char s_Ver_1_2a_000582c0[];
 void FUN_000292cc(void)
 {
     FUN_000391b0(DAT_0005c050);
-    FUN_0003e510(0, 0, DAT_000758dc + 0x52, 0);
-    FUN_0003e510(7, 0x55, DAT_000758dc + 0x53, 0);
-    FUN_0003e510(0x4f, 0, DAT_000758dc + 0x54, 0);
-    FUN_0003e510(0xc8, 0, DAT_000758dc + 0x55, 0);
-    FUN_0003e510(0x155, 0x8f, DAT_000758dc + 0x56, 0);
+    FUN_0003e510(0, 0, B000758dc_cl + 0x52, 0);
+    FUN_0003e510(7, 0x55, B000758dc_cl + 0x53, 0);
+    FUN_0003e510(0x4f, 0, B000758dc_cl + 0x54, 0);
+    FUN_0003e510(0xc8, 0, B000758dc_cl + 0x55, 0);
+    FUN_0003e510(0x155, 0x8f, B000758dc_cl + 0x56, 0);
     FUN_0004060c(0, 0, s_Ver_1_2a_000582c0, 1);
     FUN_0002ea78();
     FUN_0002a9f8();
@@ -168,11 +168,11 @@ void FUN_00029378(void)
 #undef DAT_0005759c
 /* ---- from build/var/mod/parts/p2942c.c */
 #define DAT_0005880d ((char *)DAT_0005880d)
-/* FUN_0002942c @ 0002942c: load the 0x1614-byte table from resource DAT_000758dc + 0x2f */
-void *memmove(void *, const void *, unsigned); extern void *FUN_0003f29c(int, int); extern int DAT_000758dc; 
+/* FUN_0002942c @ 0002942c: load the 0x1614-byte table from resource B000758dc_cl + 0x2f */
+void *memmove(void *, const void *, unsigned); extern void *FUN_0003f29c(int, int); extern int B000758dc_cl; 
 void FUN_0002942c(void)
 {
-    void *p = FUN_0003f29c(DAT_000758dc + 0x2f, 0);
+    void *p = FUN_0003f29c(B000758dc_cl + 0x2f, 0);
     memmove(DAT_0005880d, p, 0x1614);
 }
 
@@ -188,8 +188,8 @@ extern void FUN_0002a0b0(void), FUN_0002a288(void), FUN_00030294(void), FUN_0002
 extern int FUN_0002a1f4(void), FUN_00023ef8(int), FUN_00017b94(void); extern void *FUN_0003f29c(int, int);
 extern void FUN_000425b0(unsigned char *, int, int, char *, int), FUN_000422ec(unsigned char *, int, int, unsigned char, unsigned char, unsigned char), FUN_00042220(unsigned char *, int, int, unsigned char, unsigned char, unsigned char);
 extern void FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_00039234(unsigned char *);
-extern unsigned char DAT_0005c054[], DAT_0005880d[], DAT_00059e39, DAT_0005c02c, DAT_0005c02b, DAT_00064090, DAT_00064094;
-extern int DAT_0005c050, DAT_000758dc; extern short DAT_00059e31, DAT_00059e33; 
+extern unsigned char DAT_0005c054[], DAT_0005880d[], DAT_00059e39, DAT_0005c02c, DAT_0005c02b, B00064090_dP, B00064094_eL;
+extern int DAT_0005c050, B000758dc_cl; extern short DAT_00059e31, DAT_00059e33; 
 void FUN_00029464(void)
 {
     int sel, ly, lx, done, n, k; void *p;
@@ -217,7 +217,7 @@ void FUN_00029464(void)
                 break;
             case 1:
                 FUN_00042220(DAT_0005c054, 0, 0xff, 0, 0, 0);
-                p = FUN_0003f29c(DAT_000758dc + 0x2f, 0);
+                p = FUN_0003f29c(B000758dc_cl + 0x2f, 0);
                 memmove(DAT_0005880d, p, 0x1614);
                 FUN_0002aacc();
                 FUN_00030294();
@@ -226,9 +226,9 @@ void FUN_00029464(void)
                 FUN_00039234(DAT_0005c054);
                 done = FUN_00017b94() == 0;
                 if (done) {
-                    DAT_0005c02c = DAT_00064090;
-                    DAT_0005c02b = DAT_00064094;
-                    p = FUN_0003f29c(DAT_000758dc + 0x2f, 0);
+                    DAT_0005c02c = B00064090_dP;
+                    DAT_0005c02b = B00064094_eL;
+                    p = FUN_0003f29c(B000758dc_cl + 0x2f, 0);
                 memmove(DAT_0005880d, p, 0x1614);
                     continue;
                 }
@@ -240,7 +240,7 @@ void FUN_00029464(void)
                 break;
             case 2:
                 FUN_00042220(DAT_0005c054, 0, 0xff, 0, 0, 0);
-                p = FUN_0003f29c(DAT_000758dc + 0x2f, 0);
+                p = FUN_0003f29c(B000758dc_cl + 0x2f, 0);
                 memmove(DAT_0005880d, p, 0x1614);
                 FUN_000305b4(10);
                 break;
@@ -260,14 +260,14 @@ void FUN_00029464(void)
         }
         if (n == sel) continue;
         FUN_000391b0(DAT_0005c050);
-        FUN_0003e510(0xc8, 0, DAT_000758dc + 0x55, 0);
-        if (n != -1) FUN_0003e510(DAT_00058290[n].x, DAT_00058290[n].y, DAT_000758dc + 0x57 + n, 0);
+        FUN_0003e510(0xc8, 0, B000758dc_cl + 0x55, 0);
+        if (n != -1) FUN_0003e510(DAT_00058290[n].x, DAT_00058290[n].y, B000758dc_cl + 0x57 + n, 0);
         FUN_0002ea78();
         sel = n;
     } while (done != 1);
     if (sel != 1) {
         FUN_00042220(DAT_0005c054, 0, 0xff, 0, 0, 0);
-        p = FUN_0003f29c(DAT_000758dc + 0x2f, 0);
+        p = FUN_0003f29c(B000758dc_cl + 0x2f, 0);
                 memmove(DAT_0005880d, p, 0x1614);
     }
 }
@@ -277,7 +277,7 @@ void FUN_00029464(void)
 /* FUN_000297b8 @ 000297b8: play the 82-frame title animation; 1 when Esc skipped it */
 extern void FUN_000391b0(unsigned char), FUN_000391c8(unsigned char), FUN_0003e608(void), FUN_0003e614(unsigned, int), FUN_000422ec(unsigned char *, int, int, unsigned char, unsigned char, unsigned char), FUN_0003a020(int);
 extern unsigned FUN_00040700(void); extern int FUN_00040b40(void); extern unsigned char *FUN_0003f29c(int, int);
-extern int DAT_0005c050, DAT_000758dc; extern unsigned char DAT_0005c054[];
+extern int DAT_0005c050, B000758dc_cl; extern unsigned char DAT_0005c054[];
 int FUN_000297b8(void)
 {
     int k, esc; unsigned t; unsigned char *img;
@@ -287,7 +287,7 @@ int FUN_000297b8(void)
     for (k = 0; k < 0x52; k++) {
         FUN_0003e608();
         t = FUN_00040700() + 0x12;
-        img = FUN_0003f29c(DAT_000758dc + 0x7e + k, 0);
+        img = FUN_0003f29c(B000758dc_cl + 0x7e + k, 0);
         if (k == 0) {
             FUN_0003a380(0, 0, 0, img);
             FUN_0003e614(0x12, 0);
@@ -321,7 +321,7 @@ extern void FUN_0003f844(void), FUN_00039234(unsigned char *), FUN_000425b0(unsi
 extern int FUN_00023ef8(int), FUN_00040b40(void);
 extern unsigned FUN_00040700(void);
 extern unsigned char DAT_0005c02c, DAT_0005c02b, DAT_0005c054[];
-extern int DAT_000758dc;
+extern int B000758dc_cl;
 
 
 void FUN_00029888(void)
@@ -329,8 +329,8 @@ void FUN_00029888(void)
     int skip;
     unsigned t;
     FUN_0003f844();
-    *(int *)&DAT_00064090 = DAT_0005c02c;
-    *(int *)&DAT_00064094 = DAT_0005c02b;
+    *(int *)&B00064090_dP = DAT_0005c02c;
+    *(int *)&B00064094_eL = DAT_0005c02b;
     DAT_0005c02c = 1;
     DAT_0005c02b = 1;
     if (!DAT_0005f050[0x72]) {
@@ -359,9 +359,9 @@ void FUN_00029888(void)
             FUN_00030294();
             FUN_000425b0(DAT_0005c054, 0, 0xe, "COLORS.", 0x100);
             t = FUN_00040700() + 0x78;
-            FUN_0003e510(0x8f, 0x28, DAT_000758dc + 0x4f, 0);
+            FUN_0003e510(0x8f, 0x28, B000758dc_cl + 0x4f, 0);
             FUN_000422ec(DAT_0005c054, 0, 0xff, 0, 0, 0);
-            FUN_0003ecb4(DAT_000758dc + 0x50, 0);
+            FUN_0003ecb4(B000758dc_cl + 0x50, 0);
             while (t > FUN_00040700())
                 if (FUN_00040b40() == 0x1b) {
                     skip = 1;
@@ -372,9 +372,9 @@ void FUN_00029888(void)
             FUN_00042220(DAT_0005c054, 0, 0xff, 0, 0, 0);
             FUN_00030294();
             t = FUN_00040700() + 0x6a;
-            FUN_0003e510(0x8a, 0x24, DAT_000758dc + 0x50, 0);
+            FUN_0003e510(0x8a, 0x24, B000758dc_cl + 0x50, 0);
             FUN_000422ec(DAT_0005c054, 0, 0xff, 0, 0, 0);
-            FUN_0003ecb4(DAT_000758dc + 0x51, 0);
+            FUN_0003ecb4(B000758dc_cl + 0x51, 0);
             while (t > FUN_00040700())
                 if (FUN_00040b40() == 0x1b) {
                     skip = 1;
@@ -386,9 +386,9 @@ void FUN_00029888(void)
             FUN_00030294();
             t = FUN_00040700() + 0x79;
             FUN_000425b0(DAT_0005c054, 0, 9, "COLORS", 0x100);
-            FUN_0003e510(0, 0, DAT_000758dc + 0x51, 0);
+            FUN_0003e510(0, 0, B000758dc_cl + 0x51, 0);
             FUN_000422ec(DAT_0005c054, 0, 0xff, 0, 0, 0);
-            FUN_0003ecb4(DAT_000758dc + 0x52, 0);
+            FUN_0003ecb4(B000758dc_cl + 0x52, 0);
             while (t > FUN_00040700())
                 if (FUN_00040b40() == 0x1b) {
                     skip = 1;
@@ -401,7 +401,7 @@ void FUN_00029888(void)
         if (!skip) {
             t = FUN_00040700() + 0x37;
             FUN_000425b0(DAT_0005c054, 0, 0xc, "COLORS", 0x100);
-            FUN_0003e510(0, 0, DAT_000758dc + 0x52, 0);
+            FUN_0003e510(0, 0, B000758dc_cl + 0x52, 0);
             FUN_000422ec(DAT_0005c054, 0, 0xff, 0, 0, 0);
             while (t > FUN_00040700())
                 if (FUN_00040b40() == 0x1b) {

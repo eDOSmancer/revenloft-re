@@ -4,8 +4,8 @@
 #pragma pack(1)
 struct KD { unsigned char c[3]; short idx; short left, right; };
 #pragma pack()
-extern struct KD DAT_00037ff0[];
-void FUN_00015880(struct KD v, short n) { short prev = 0, cur = DAT_00037ff0[0].right, axis = -1, side = 1; DAT_00037ff0[n].c[1] = v.c[1]; DAT_00037ff0[n].c[0] = v.c[0]; DAT_00037ff0[n].c[2] = v.c[2]; DAT_00037ff0[n].idx = v.idx; DAT_00037ff0[n].left = DAT_00037ff0[n].right = 0x101; while (cur != 0x101) { prev = cur; if (axis == 2) axis = 0; else axis++; side = 0; if (v.c[axis] >= DAT_00037ff0[cur].c[axis]) { cur = DAT_00037ff0[cur].right; side = 1; } else cur = DAT_00037ff0[cur].left; } if (!side) DAT_00037ff0[prev].left = n; else DAT_00037ff0[prev].right = n; }
+extern struct KD B00037ff0_eu[];
+void FUN_00015880(struct KD v, short n) { short prev = 0, cur = B00037ff0_eu[0].right, axis = -1, side = 1; B00037ff0_eu[n].c[1] = v.c[1]; B00037ff0_eu[n].c[0] = v.c[0]; B00037ff0_eu[n].c[2] = v.c[2]; B00037ff0_eu[n].idx = v.idx; B00037ff0_eu[n].left = B00037ff0_eu[n].right = 0x101; while (cur != 0x101) { prev = cur; if (axis == 2) axis = 0; else axis++; side = 0; if (v.c[axis] >= B00037ff0_eu[cur].c[axis]) { cur = B00037ff0_eu[cur].right; side = 1; } else cur = B00037ff0_eu[cur].left; } if (!side) B00037ff0_eu[prev].left = n; else B00037ff0_eu[prev].right = n; }
 
 #pragma pack()
 /* ---- from build/var/mod/parts/p159ac.c */
@@ -19,19 +19,19 @@ extern short FUN_000159ac(unsigned char *pal); /* module prototype */
 #pragma pack(1)
 struct PE { unsigned char g, r, b; short idx; short x, y; };
 #pragma pack()
-extern short DAT_00037ff3, DAT_00037ff5, DAT_00037ff7, DAT_000388fc, DAT_000388fe, DAT_00038900, DAT_00030982;
+extern short B00037ff3_eu, B00037ff5_eu, B00037ff7_eu, B000388fc_eu, B000388fe_eu, B00038900_eu, DAT_00030982;
  
 /* FUN_00015a34 @ 00015a34: feed every palette entry to FUN_00015880, from the start index down to 0 and then up to 255 */
 void FUN_00015a34(unsigned char *pal)
 {
     volatile struct PE e; int i, j, n;
     n = 1;
-    DAT_00037ff3 = -1;
-    DAT_00037ff5 = 0x101;
-    DAT_00037ff7 = 0x101;
-    DAT_000388fc = -1;
-    DAT_000388fe = 0x101;
-    DAT_00038900 = 0x101;
+    B00037ff3_eu = -1;
+    B00037ff5_eu = 0x101;
+    B00037ff7_eu = 0x101;
+    B000388fc_eu = -1;
+    B000388fe_eu = 0x101;
+    B00038900_eu = 0x101;
     e.x = 0;
     e.y = 0;
     i = ((int (*)(unsigned char *))FUN_000159ac)(pal);   /* TODO types: the original call does not sign-extend the short result */
@@ -61,8 +61,8 @@ void FUN_00015a34(unsigned char *pal)
 #pragma pack(1)
 /* struct KD: defined above */
 #pragma pack()
-extern struct KD DAT_00037ff0[];
-extern short DAT_00030980, DAT_00030982, DAT_00030984, DAT_00037bf0[];
+extern struct KD B00037ff0_eu[];
+extern short DAT_00030980, DAT_00030982, DAT_00030984, B00037bf0_eu[];
 
 short FUN_00015b64(unsigned char r, unsigned char g, unsigned char b, short d)
 {
@@ -80,34 +80,34 @@ short FUN_00015b64(unsigned char r, unsigned char g, unsigned char b, short d)
     lim[0][1] = g + d;
     lim[2][0] = b - d;
     lim[2][1] = b + d;
-    DAT_00037bf0[DAT_00030980++] = -1;
-    DAT_00037bf0[DAT_00030980++] = 0;
+    B00037bf0_eu[DAT_00030980++] = -1;
+    B00037bf0_eu[DAT_00030980++] = 0;
     while (DAT_00030980 != 0 && best != 0) {
-        n = DAT_00037ff0[DAT_00037bf0[--DAT_00030980]].right;
-        axis = DAT_00037bf0[--DAT_00030980];
+        n = B00037ff0_eu[B00037bf0_eu[--DAT_00030980]].right;
+        axis = B00037bf0_eu[--DAT_00030980];
         while (n != 0x101 && best != 0) {
             DAT_00030984++;
             if (axis == 2) axis = 0; else axis++;
-            v = DAT_00037ff0[n].c[axis];
+            v = B00037ff0_eu[n].c[axis];
             if (v > lim[axis][0]) {
                 if (v <= lim[axis][1]) {
-                    DAT_00037bf0[DAT_00030980++] = axis;
-                    DAT_00037bf0[DAT_00030980++] = n;
-                    cr = DAT_00037ff0[n].c[1];
-                    cg = DAT_00037ff0[n].c[0];
-                    cb = DAT_00037ff0[n].c[2];
+                    B00037bf0_eu[DAT_00030980++] = axis;
+                    B00037bf0_eu[DAT_00030980++] = n;
+                    cr = B00037ff0_eu[n].c[1];
+                    cg = B00037ff0_eu[n].c[0];
+                    cb = B00037ff0_eu[n].c[2];
                     dist = (cr - r) * (cr - r) + (cg - g) * (cg - g) + (cb - b) * (cb - b);
                     if (dist < best) {
                         best = dist;
                         bestn = n;
                     }
                 }
-                n = DAT_00037ff0[n].left;
+                n = B00037ff0_eu[n].left;
             } else
-                n = DAT_00037ff0[n].right;
+                n = B00037ff0_eu[n].right;
         }
     }
-    return DAT_00037ff0[bestn].idx;
+    return B00037ff0_eu[bestn].idx;
 }
 
 #pragma pack()

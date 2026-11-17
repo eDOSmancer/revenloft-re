@@ -18,7 +18,7 @@ extrn DAT_0005c658:byte
 extrn DAT_0005ef4d:byte
 extrn DAT_0005efe0:byte
 extrn DAT_0005fdbc:byte
-extrn DAT_000758dc:byte
+extrn B000758dc_cl:byte
 _DATA segment dword public use32 'DATA'
 public DAT_0005d8e0
 DAT_0005d8e0 label byte
@@ -196,7 +196,7 @@ L_000374e4:
     call FUN_000396c0
     add esp, 0x10
     push 0
-    mov eax, dword ptr [DAT_000758dc]
+    mov eax, dword ptr [B000758dc_cl]
     org $
     add eax, 0x2c
     push eax

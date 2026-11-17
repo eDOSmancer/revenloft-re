@@ -120,12 +120,12 @@ void FUN_0003e564(unsigned short *img) { int k; for (k = 0; k < img[1]; k++) FUN
 extern void FUN_0003f580(char *msg); /* module prototype */
 /* FUN_0003e590 @ 0003e590: push the page stack (the post-increment index form also compiles like the original under the module's -oa; n = count, count = n + 1 does not) */
  extern void FUN_000391b0(unsigned char);
-extern unsigned char DAT_0005f0d0, DAT_0007b644[], DAT_0005ef4d;
+extern unsigned char DAT_0005f0d0, B0007b644_dg[], DAT_0005ef4d;
 
 void FUN_0003e590(unsigned char page)
 {
     if (DAT_0005f0d0 == 10) FUN_0003f580("Page Stack Overflow");
-    DAT_0007b644[DAT_0005f0d0++] = DAT_0005ef4d;
+    B0007b644_dg[DAT_0005f0d0++] = DAT_0005ef4d;
     FUN_000391b0(page);
 }
 
@@ -133,19 +133,19 @@ void FUN_0003e590(unsigned char page)
 extern void FUN_0003f580(char *msg); /* module prototype */
 /* FUN_0003e5d4 @ 0003e5d4: pop the page stack */
  extern void FUN_000391b0(unsigned char);
-extern unsigned char DAT_0005f0d0, DAT_0007b644[];
+extern unsigned char DAT_0005f0d0, B0007b644_dg[];
 
 void FUN_0003e5d4(void)
 {
     if (DAT_0005f0d0 == 0) FUN_0003f580("Page Stack Underflow");
     DAT_0005f0d0--;
-    FUN_000391b0(DAT_0007b644[DAT_0005f0d0]);
+    FUN_000391b0(B0007b644_dg[DAT_0005f0d0]);
 }
 
 /* ---- from build/var/mod/parts/p3e608.c */
 /* FUN_0003e608 @ 0003e608: remember the current timer value */
-extern unsigned FUN_00040700(void); extern unsigned DAT_0007b640;
-void FUN_0003e608(void) { DAT_0007b640 = FUN_00040700(); }
+extern unsigned FUN_00040700(void); extern unsigned B0007b640_gk;
+void FUN_0003e608(void) { B0007b640_gk = FUN_00040700(); }
 
 /* ---- from build/var/mod/parts/p3e614.c */
 extern int FUN_0003e340(void); /* module prototype */
@@ -153,17 +153,17 @@ extern void FUN_0003f868(void); /* module prototype */
 #define FUN_00040700 ((int (*)(void))FUN_00040700)
 /* FUN_0003e614 @ 0003e614: wait up to t ticks for input (flags: 1 key, 2 mouse button, 4 return at once); returns the key, 0x1f8 + button, 0x1f0 or 0 */
 extern int FUN_00040ad8(void), FUN_00040aec(void); extern short *FUN_00043cb0(void); 
-extern unsigned DAT_0007b640;
+extern unsigned B0007b640_gk;
 int FUN_0003e614(unsigned t, int flags)
 {
     unsigned end; int k; short *p;
-    if (DAT_0007b640) end = DAT_0007b640 + t;
+    if (B0007b640_gk) end = B0007b640_gk + t;
     else end = t + FUN_00040700();
     if (flags & 4) flags &= ~4;
     do {
         FUN_0003f868();
         if ((flags & 1) && FUN_00040ad8()) {
-            DAT_0007b640 = 0;
+            B0007b640_gk = 0;
             return FUN_00040aec();
         }
         if ((flags & 2) && FUN_0003e340()) {
@@ -171,16 +171,16 @@ int FUN_0003e614(unsigned t, int flags)
             if (*p) {
                 k = *p;
                 while (*FUN_00043cb0()) ;
-                DAT_0007b640 = 0;
+                B0007b640_gk = 0;
                 return k + 0x1f8;
             }
         }
         if (flags & 4) {
-            DAT_0007b640 = 0;
+            B0007b640_gk = 0;
             return 0x1f0;
         }
     } while (FUN_00040700() < end);
-    DAT_0007b640 = 0;
+    B0007b640_gk = 0;
     return 0;
 }
 
@@ -194,14 +194,14 @@ void FUN_0003e6d0(void) { sound(0x416); FUN_0003e614(6, 0); nosound(); }
 /* ---- from build/var/mod/parts/p3e6f0.c */
 /* FUN_0003e6f0 @ 0003e6f0: a as a decimal string (itoa, the library function at 0x473bf) */
 extern char *itoa(int, char *, int);
-extern char DAT_0007b64e[];
-char *FUN_0003e6f0(int a) { itoa(a, DAT_0007b64e, 10); return DAT_0007b64e; }
+extern char B0007b64e_bV[];
+char *FUN_0003e6f0(int a) { itoa(a, B0007b64e_bV, 10); return B0007b64e_bV; }
 
 /* ---- from build/var/mod/parts/p3e70c.c */
 /* FUN_0003e70c @ 0003e70c: a as a decimal string (ltoa, the library function at 0x47483) */
 extern char *ltoa(long, char *, int);
-extern char DAT_0007b64e[];
-char *FUN_0003e70c(int a) { ltoa(a, DAT_0007b64e, 10); return DAT_0007b64e; }
+extern char B0007b64e_bV[];
+char *FUN_0003e70c(int a) { ltoa(a, B0007b64e_bV, 10); return B0007b64e_bV; }
 
 /* ---- from build/var/mod/parts/p3e728.c */
 /* FUN_0003e728 @ 0003e728: sign of v (-1, 0, 1) */
@@ -426,7 +426,7 @@ extern void FUN_0003f580(char *msg); /* module prototype */
 struct REC { unsigned short type : 4, locked : 1; unsigned char loaded; unsigned short used; void *data; };
 #pragma pack()
 struct GRP { int fh, nloaded, n; struct REC *rec; };
- extern void (*DAT_0005f0cc)(int, int); extern struct RES DAT_0007b670;
+ extern void (*DAT_0005f0cc)(int, int); extern struct RES B0007b670_fk;
 extern void FUN_000410b0(void *);
  
 extern void *FUN_0003fd9c(struct RES *, int), *FUN_000401a8(struct RES *, int), *FUN_000386c4(struct RES *, int), *FUN_00038020(struct RES *, int), *FUN_000474e0(struct RES *, int), *FUN_00047590(struct RES *, int), *ALT_00047590(struct RES *, int);
@@ -445,21 +445,21 @@ void FUN_0003ecb4(int idx, int grp)
     }
     if (!DAT_0005f0b8[grp].rec[idx].loaded) {
         if (DAT_0005f0cc) DAT_0005f0cc(idx, grp);
-        FUN_0003eb60(&DAT_0007b670, idx, DAT_0005f0b8[grp].fh, grp);
-        switch (DAT_0007b670.k) {
-        case 1: DAT_0005f0b8[grp].rec[idx].data = FUN_0003fd9c(&DAT_0007b670, DAT_0005f0b8[grp].fh); break;
-        case 2: DAT_0005f0b8[grp].rec[idx].data = FUN_000401a8(&DAT_0007b670, DAT_0005f0b8[grp].fh); break;
-        case 3: DAT_0005f0b8[grp].rec[idx].data = FUN_000386c4(&DAT_0007b670, DAT_0005f0b8[grp].fh); break;
-        case 4: DAT_0005f0b8[grp].rec[idx].data = FUN_00038020(&DAT_0007b670, DAT_0005f0b8[grp].fh); break;
-        case 5: DAT_0005f0b8[grp].rec[idx].data = FUN_000474e0(&DAT_0007b670, DAT_0005f0b8[grp].fh); break;
-        case 6: DAT_0005f0b8[grp].rec[idx].data = FUN_00047590(&DAT_0007b670, DAT_0005f0b8[grp].fh); break;
-        case 7: DAT_0005f0b8[grp].rec[idx].data = ALT_00047590(&DAT_0007b670, DAT_0005f0b8[grp].fh); break;
+        FUN_0003eb60(&B0007b670_fk, idx, DAT_0005f0b8[grp].fh, grp);
+        switch (B0007b670_fk.k) {
+        case 1: DAT_0005f0b8[grp].rec[idx].data = FUN_0003fd9c(&B0007b670_fk, DAT_0005f0b8[grp].fh); break;
+        case 2: DAT_0005f0b8[grp].rec[idx].data = FUN_000401a8(&B0007b670_fk, DAT_0005f0b8[grp].fh); break;
+        case 3: DAT_0005f0b8[grp].rec[idx].data = FUN_000386c4(&B0007b670_fk, DAT_0005f0b8[grp].fh); break;
+        case 4: DAT_0005f0b8[grp].rec[idx].data = FUN_00038020(&B0007b670_fk, DAT_0005f0b8[grp].fh); break;
+        case 5: DAT_0005f0b8[grp].rec[idx].data = FUN_000474e0(&B0007b670_fk, DAT_0005f0b8[grp].fh); break;
+        case 6: DAT_0005f0b8[grp].rec[idx].data = FUN_00047590(&B0007b670_fk, DAT_0005f0b8[grp].fh); break;
+        case 7: DAT_0005f0b8[grp].rec[idx].data = ALT_00047590(&B0007b670_fk, DAT_0005f0b8[grp].fh); break;
         default: FUN_0003f580("Unknown resource type");
         }
         DAT_0005f0b8[grp].rec[idx].loaded = 1;
-        DAT_0005f0b8[grp].rec[idx].type = DAT_0007b670.k;
+        DAT_0005f0b8[grp].rec[idx].type = B0007b670_fk.k;
         DAT_0005f0b8[grp].rec[idx].locked = 0;
-        if (DAT_0007b670.data) FUN_000410b0(DAT_0007b670.data);
+        if (B0007b670_fk.data) FUN_000410b0(B0007b670_fk.data);
         DAT_0005f0b8[grp].nloaded++;
     }
     DAT_0005f0b8[grp].rec[idx].used = FUN_00040700() >> 5;

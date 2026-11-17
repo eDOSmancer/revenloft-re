@@ -15,7 +15,7 @@ int FUN_00016f10(int n, int *seg, short *sel) { union REGS r; volatile union REG
 int FUN_00016f74(int sel) { union REGS r; volatile union REGS o; r.x.eax = 0x101; r.w.dx = sel; int386(0x31, &r, (union REGS *)&o); return ((o.x.cflag & 1) == 0) - 1; }
 
 /* ---- from build/var/mod/parts/p16fac.c */
-extern unsigned char DAT_00038919, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00016fac @ 00016fac */
 void FUN_00016fac(unsigned short a) { _dos_freemem(a); }
@@ -77,7 +77,7 @@ extern void FUN_000164dc(int), FUN_0001cf98(void), FUN_00018424(void), FUN_00019
 void FUN_00017184(void) { FUN_000164dc(0xff); FUN_000161d0("Terminal Error: Trouble in memory management.\n\r"); FUN_0001cf98(); FUN_00018424(); FUN_000197d4(10); }
 
 /* ---- from build/var/mod/parts/p171bc.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[]; 
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[]; 
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_000171bc @ 000171bc */
 int FUN_000171bc(void) { return _memmax(); }

@@ -4,41 +4,41 @@
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
-public DAT_00038988
-DAT_00038988 label byte
+public B00038988_eu
+B00038988_eu label byte
     db 4 dup(?)
-public DAT_0003898c
-DAT_0003898c label byte
+public B0003898c_eu
+B0003898c_eu label byte
     db 4 dup(?)
-public DAT_00038990
-DAT_00038990 label byte
+public B00038990_eu
+B00038990_eu label byte
     db 4 dup(?)
-public DAT_00038994
-DAT_00038994 label byte
+public B00038994_eu
+B00038994_eu label byte
     db 8 dup(?)
-public DAT_0003899c
-DAT_0003899c label byte
+public B0003899c_eu
+B0003899c_eu label byte
     db 8 dup(?)
-public DAT_000389a4
-DAT_000389a4 label byte
+public B000389a4_eu
+B000389a4_eu label byte
     db 16 dup(?)
-public DAT_000389b4
-DAT_000389b4 label byte
+public B000389b4_eu
+B000389b4_eu label byte
     db 4 dup(?)
-public DAT_000389b8
-DAT_000389b8 label byte
+public B000389b8_eu
+B000389b8_eu label byte
     db 12 dup(?)
-public DAT_000389c4
-DAT_000389c4 label byte
+public B000389c4_eu
+B000389c4_eu label byte
     db 4 dup(?)
-public DAT_000389c8
-DAT_000389c8 label byte
+public B000389c8_eu
+B000389c8_eu label byte
     db 6 dup(?)
-public DAT_000389ce
-DAT_000389ce label byte
+public B000389ce_eu
+B000389ce_eu label byte
     db 1 dup(?)
-public DAT_000389cf
-DAT_000389cf label byte
+public B000389cf_eu
+B000389cf_eu label byte
     db 1 dup(?)
 _BSS ends
 end

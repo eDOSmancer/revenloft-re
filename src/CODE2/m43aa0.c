@@ -21,22 +21,22 @@ void FUN_00043aa0(void *rmregs)
 /* FUN_00043af4 @ 00043af4: real-mode INT 15h AX=53C1h (APM) through the DPMI call block; true when AX comes back 1 */
 void *memset(void *, int, unsigned); extern void FUN_00043aa0(void *); extern unsigned DAT_0005fd14;
 struct RMI { int edi, esi, ebp, res, ebx, edx, ecx, eax; short flags, es, ds, fs, gs, ip, cs, sp, ss; };
-extern struct RMI DAT_0007b770;
+extern struct RMI B0007b770_gl;
 int FUN_00043af4(void)
 {
-    memset(&DAT_0007b770, 0, 0x32);
-    DAT_0007b770.eax = 0x53c1;
-    DAT_0007b770.edx = 0;
-    DAT_0007b770.es = DAT_0005fd14 >> 16;
-    FUN_00043aa0(&DAT_0007b770);
-    return DAT_0007b770.eax == 1;
+    memset(&B0007b770_gl, 0, 0x32);
+    B0007b770_gl.eax = 0x53c1;
+    B0007b770_gl.edx = 0;
+    B0007b770_gl.es = DAT_0005fd14 >> 16;
+    FUN_00043aa0(&B0007b770_gl);
+    return B0007b770_gl.eax == 1;
 }
 
 /* ---- from build/var/mod/parts/p43b44.c */
 /* FUN_00043b44 .. FUN_00043cb0: mouse driver reset and status (int 33h), twins of CODE.1 FUN_0001cf98 and
    FUN_0001d0b4. The moves between the driver's registers and the locals are byte-coded in the pragmas (32-bit
    displacement forms); "modify [esp]" gives the ebp frame; the locals the inline code writes are volatile. */
-extern short DAT_0007b7a2, DAT_0007b7a4, DAT_0007b7a6, DAT_0007b7a8, DAT_0007b7ac, DAT_0007b7ae;
+extern short B0007b7a2_c0, B0007b7a4_c2, B0007b7a6_c4, B0007b7a8_b6, B0007b7ac_kp, B0007b7ae_hb;
 extern unsigned char *DAT_0005fd10; extern unsigned short DAT_0005fd18;
 extern int DAT_0005ee78, DAT_0005ee40;
 extern struct CFG { char pad[8]; short f8; char pad2[0xa]; short f14; } *DAT_0005f050;
@@ -52,13 +52,13 @@ short *FUN_00043b44(void)
     volatile int ax, bx;
     ax = bx = 0;
     ms_reset();
-    DAT_0007b7a2 = ax;
-    DAT_0007b7a4 = bx;
-    DAT_0007b7a6 = 0;
-    if (DAT_0007b7a2) {
+    B0007b7a2_c0 = ax;
+    B0007b7a4_c2 = bx;
+    B0007b7a6_c4 = 0;
+    if (B0007b7a2_c0) {
         if ((DAT_0005fd10 = FUN_00040d80(0x40, (int *)&DAT_0005fd14, &DAT_0005fd18)) != 0) {
-            if (FUN_00043af4()) DAT_0007b7a6 = *DAT_0005fd10;
-            if (!DAT_0007b7a6) FUN_00040de8(DAT_0005fd18);
+            if (FUN_00043af4()) B0007b7a6_c4 = *DAT_0005fd10;
+            if (!B0007b7a6_c4) FUN_00040de8(DAT_0005fd18);
         }
     } else {
         struct CFG *cfg;
@@ -73,21 +73,21 @@ short *FUN_00043b44(void)
         FUN_00040c38();
         exit(1);
     }
-    return &DAT_0007b7a2;
+    return &B0007b7a2_c0;
 }
 
 /* ---- from build/var/mod/parts/p43c90.c */
-extern int FUN_0003e340(void); extern short DAT_0007b7a8, DAT_0007b7ac, DAT_0007b7ae;
+extern int FUN_0003e340(void); extern short B0007b7a8_b6, B0007b7ac_kp, B0007b7ae_hb;
 void mouse_setpos(int x, int y);
 #pragma aux mouse_setpos = 0xb8 0x04 0x00 0x00 0x00 0x31 0xdb 0x01 0xc9 0xcd 0x33 parm [edx] [ecx] modify [eax ebx];
 /* FUN_00043c90 @ 00043c90: put the mouse cursor at (x, y) (when a mouse is present) */
 void FUN_00043c90(int x, int y) { if (FUN_0003e340()) mouse_setpos(x, y); }
 
 /* ---- from build/var/mod/parts/p43cb0.c */
-/* FUN_00043cb0 @ 00043cb0: read buttons and position into DAT_0007b7a8 (buttons), DAT_0007b7ac (x / 2),
-   DAT_0007b7ae (y); see f43b44.c for the pragma conventions. The short casts are what keep it from being
+/* FUN_00043cb0 @ 00043cb0: read buttons and position into B0007b7a8_b6 (buttons), B0007b7ac_kp (x / 2),
+   B0007b7ae_hb (y); see f43b44.c for the pragma conventions. The short casts are what keep it from being
    expanded inline into FUN_00043d58/FUN_00043d78 (21 expression nodes, over the -oe threshold of 20) */
-extern short DAT_0007b7a8, DAT_0007b7ac, DAT_0007b7ae; extern int FUN_0003e340(void);
+extern short B0007b7a8_b6, B0007b7ac_kp, B0007b7ae_hb; extern int FUN_0003e340(void);
 void ms_status(void);
 #pragma aux ms_status = "mov eax, 3" "int 33h" 0x66 0x89 0x9d 0xf4 0xff 0xff 0xff 0x66 0x89 0x95 0xf8 0xff 0xff 0xff 0x66 0x89 0x8d 0xfc 0xff 0xff 0xff modify [eax ebx ecx edx esp];
 short *FUN_00043cb0(void)
@@ -96,11 +96,11 @@ short *FUN_00043cb0(void)
     bx = dy = cx = 0;
     if (FUN_0003e340()) {
         ms_status();
-        DAT_0007b7a8 = (short)bx;
-        DAT_0007b7ae = (short)dy;
-        DAT_0007b7ac = (short)((short)cx >> 1);
+        B0007b7a8_b6 = (short)bx;
+        B0007b7ae_hb = (short)dy;
+        B0007b7ac_kp = (short)((short)cx >> 1);
     }
-    return &DAT_0007b7a8;
+    return &B0007b7a8_b6;
 }
 
 /* ---- from build/var/mod/parts/p43d18.c */

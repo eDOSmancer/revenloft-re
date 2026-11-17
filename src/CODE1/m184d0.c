@@ -21,7 +21,7 @@ extern short *DAT_00032a9c;
 int FUN_000184e0(void) { return DAT_00032a9c[2] == 1; }
 
 /* ---- from build/var/mod/parts/p184f8.c */
-extern short *DAT_00032a9c; extern unsigned short **DAT_00038988; extern char DAT_00038904[], DAT_00038922[];
+extern short *DAT_00032a9c; extern unsigned short **B00038988_eu; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a010(int, int, int), FUN_0001a2b0(int, int);
 extern int FUN_0001d2ad(char *);
 struct SR { short size, n, w; unsigned char h, f; };
@@ -31,7 +31,7 @@ int FUN_000184f8(void) { if (*DAT_00032a9c) return DAT_00032a9c[1]; return 0; }
 /* ---- from build/var/mod/parts/p18514.c */
 #define SR T3_SR
 struct SR { short size, n, w; unsigned char hb, flag; unsigned char data[1]; };
-extern int DAT_000304cc, DAT_000304d0; extern unsigned char DAT_0003680b[];
+extern int DAT_000304cc, DAT_000304d0; extern unsigned char B0003680b_eu[];
 extern void FUN_00011464(int, int, int, int, int, int, int, int, int, int, int, int, int), FUN_000115b0(int, int, int, int), FUN_000166c0(void *, int, int, int, int), FUN_000165c0(int, int, int, int), FUN_000165e8(int, int, int, int);
 extern unsigned FUN_0001043c(void);
 /* FUN_00018514 @ 00018514: outline of a w x h box at (x, y) in colour col */
@@ -40,7 +40,7 @@ void FUN_00018514(int x, int y, int w, int h, unsigned char col) { FUN_000165c0(
 #undef SR
 /* ---- from build/var/mod/parts/p185a8.c */
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, int, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_000185a8 @ 000185a8 */
@@ -61,7 +61,7 @@ void FUN_000185d4(int x, int y, int first, int n, unsigned short *img)
 
 /* ---- from build/var/mod/parts/p1862c.c */
 #define SR T6_SR
-extern short *DAT_00032a9c; extern unsigned short **DAT_00038988; extern char DAT_00038904[], DAT_00038922[];
+extern short *DAT_00032a9c; extern unsigned short **B00038988_eu; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a010(int, int, int), FUN_0001a2b0(int, int);
 extern int FUN_0001d2ad(char *);
 struct SR { short size, n, w; unsigned char h, f; };
@@ -76,7 +76,7 @@ void FUN_0001864c(int x, int y, int from, int to, unsigned short *img) { int k, 
 
 /* ---- from build/var/mod/parts/p186a4.c */
 #define SR T8_SR
-extern short *DAT_00032a9c; extern unsigned short **DAT_00038988; extern char DAT_00038904[], DAT_00038922[];
+extern short *DAT_00032a9c; extern unsigned short **B00038988_eu; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a010(int, int, int), FUN_0001a2b0(int, int);
 extern int FUN_0001d2ad(char *);
 struct SR { short size, n, w; unsigned char h, f; };
@@ -92,7 +92,7 @@ void FUN_000186c4(int a, int b, int c, int d) { FUN_0001864c(a, b, 0, -1, FUN_00
 /* ---- from build/var/mod/parts/p186f0.c */
 #define SB T10_SB
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, int, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_000186f0 @ 000186f0 */
@@ -102,7 +102,7 @@ void FUN_000186f0(struct SB *r) { int i; for (i = 0; i < r->n; i++) FUN_0001a5c8
 /* ---- from build/var/mod/parts/p18718.c */
 #define SB T11_SB
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, int, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_00018718 @ 00018718 */
@@ -111,24 +111,24 @@ void FUN_00018718(struct SB *r) { int i; for (i = 0; i < r->n; i++) FUN_0001a678
 #undef SB
 /* ---- from build/var/mod/parts/p18740.c */
 /* FUN_00018740 */
-extern void FUN_00019814(char *), FUN_00016588(int); extern unsigned char DAT_00032b20, DAT_000389ec[];
-void FUN_00018740(unsigned char c) { if (DAT_00032b20 == 10) FUN_00019814("Page Stack Overflow"); DAT_000389ec[DAT_00032b20++] = DAT_000323e5; FUN_00016588(c); }
+extern void FUN_00019814(char *), FUN_00016588(int); extern unsigned char DAT_00032b20, B000389ec_eu[];
+void FUN_00018740(unsigned char c) { if (DAT_00032b20 == 10) FUN_00019814("Page Stack Overflow"); B000389ec_eu[DAT_00032b20++] = DAT_000323e5; FUN_00016588(c); }
 
 /* ---- from build/var/mod/parts/p18788.c */
 /* FUN_00018788 */
-extern void FUN_00019814(char *), FUN_00016588(int); extern unsigned char DAT_00032b20, DAT_000389ec[];
-void FUN_00018788(void) { if (!DAT_00032b20) FUN_00019814("Page Stack Underflow"); DAT_00032b20--; FUN_00016588(DAT_000389ec[DAT_00032b20]); }
+extern void FUN_00019814(char *), FUN_00016588(int); extern unsigned char DAT_00032b20, B000389ec_eu[];
+void FUN_00018788(void) { if (!DAT_00032b20) FUN_00019814("Page Stack Underflow"); DAT_00032b20--; FUN_00016588(B000389ec_eu[DAT_00032b20]); }
 
 /* ---- from build/var/mod/parts/p187c4.c */
 /* FUN_000187c4 */
-extern unsigned FUN_00017f50(void); extern int DAT_000389e8;
-void FUN_000187c4(void) { DAT_000389e8 = FUN_00017f50(); }
+extern unsigned FUN_00017f50(void); extern int B000389e8_eu;
+void FUN_000187c4(void) { B000389e8_eu = FUN_00017f50(); }
 
 /* ---- from build/var/mod/parts/p187d8.c */
-/* FUN_000187d8: wait up to t ticks (from the pending deadline base DAT_000389e8, else now) for a mouse click (f & 1), a key (f & 2) or nothing (f & 4); returns the event code */
+/* FUN_000187d8: wait up to t ticks (from the pending deadline base B000389e8_eu, else now) for a mouse click (f & 1), a key (f & 2) or nothing (f & 4); returns the event code */
 extern void FUN_00019ae8(void); extern int FUN_000182a4(void), FUN_000182c0(void), FUN_000184d0(void); extern short *FUN_0001d0b4(void);
 
-int FUN_000187d8(int t, int f) { unsigned end; short *p; int k; if (((unsigned)DAT_000389e8)) end = ((unsigned)DAT_000389e8) + t; else end = t + FUN_00017f50(); if (f & 4) f &= ~4; do { FUN_00019ae8(); if ((f & 1) && FUN_000182a4()) { (*(unsigned *)&DAT_000389e8) = 0; return FUN_000182c0(); } if ((f & 2) && FUN_000184d0() && *(p = FUN_0001d0b4())) { k = *p; while (*FUN_0001d0b4()) ; (*(unsigned *)&DAT_000389e8) = 0; return k + 0x1f8; } if (f & 4) { (*(unsigned *)&DAT_000389e8) = 0; return 0x1f0; } } while (FUN_00017f50() < end); (*(unsigned *)&DAT_000389e8) = 0; return 0; }
+int FUN_000187d8(int t, int f) { unsigned end; short *p; int k; if (((unsigned)B000389e8_eu)) end = ((unsigned)B000389e8_eu) + t; else end = t + FUN_00017f50(); if (f & 4) f &= ~4; do { FUN_00019ae8(); if ((f & 1) && FUN_000182a4()) { (*(unsigned *)&B000389e8_eu) = 0; return FUN_000182c0(); } if ((f & 2) && FUN_000184d0() && *(p = FUN_0001d0b4())) { k = *p; while (*FUN_0001d0b4()) ; (*(unsigned *)&B000389e8_eu) = 0; return k + 0x1f8; } if (f & 4) { (*(unsigned *)&B000389e8_eu) = 0; return 0x1f0; } } while (FUN_00017f50() < end); (*(unsigned *)&B000389e8_eu) = 0; return 0; }
 
 /* ---- from build/var/mod/parts/p188b0.c */
 #include <i86.h>
@@ -141,18 +141,18 @@ void FUN_000188b0(void) { sound(0x416); FUN_000187d8(6, 0); nosound(); }
 
 /* ---- from build/var/mod/parts/p188d8.c */
 /* FUN_000188d8 */
-extern char DAT_000389f6[];
-char *FUN_000188d8(int v) { itoa(v, DAT_000389f6, 10); return DAT_000389f6; }
+extern char B000389f6_eu[];
+char *FUN_000188d8(int v) { itoa(v, B000389f6_eu, 10); return B000389f6_eu; }
 
 /* ---- from build/var/mod/parts/p188f8.c */
 /* FUN_000188f8 */
-extern char DAT_000389f6[];
-char *FUN_000188f8(int v) { ltoa(v, DAT_000389f6, 10); return DAT_000389f6; }
+extern char B000389f6_eu[];
+char *FUN_000188f8(int v) { ltoa(v, B000389f6_eu, 10); return B000389f6_eu; }
 
 /* ---- from build/var/mod/parts/p18918.c */
 #define SB T19_SB
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, int, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_00018918 @ 00018918: sign of v */
@@ -160,13 +160,13 @@ int FUN_00018918(int v) { if (v < 0) return -1; if (v > 0) return 1; return 0; }
 
 #undef SB
 /* ---- from build/var/mod/parts/p18940.c */
-extern unsigned char DAT_00038919, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00018940 @ 00018940 */
 void FUN_00018940(int v) { DAT_00032b1c = v; }
 
 /* ---- from build/var/mod/parts/p18950.c */
-extern unsigned char DAT_00038919, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00018950 @ 00018950 */
 void FUN_00018950(int v) { DAT_00032b18 = v; }
@@ -291,7 +291,7 @@ void FUN_00018d0c(struct RES *r, int pos, int fh, int n)
 
 #pragma pack()
 /* ---- from build/var/mod/parts/p18df0.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[]; 
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[]; 
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_00018df0 @ 00018df0 */
 int FUN_00018df0(int k) { return *(int *)(((char *)DAT_00032b08) + k * 16); }
@@ -614,7 +614,7 @@ void FUN_00019ae8(void)
 }
 
 /* ---- from build/var/mod/parts/p19bc4.c */
-extern unsigned char DAT_00038919, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00019bc4 @ 00019bc4: request the quit prompt and poll the keyboard hooks */
 void FUN_00019bc4(void) { DAT_00032b01 |= 1; FUN_00019ae8(); }

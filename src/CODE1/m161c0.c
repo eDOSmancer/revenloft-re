@@ -6,7 +6,7 @@
 #include <direct.h>
 #include <ctype.h>
 /* ---- from build/var/mod/parts/p161c0.c */
-extern unsigned char DAT_00038919, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_000161c0 @ 000161c0: BIOS timer tick count (0x46c) */
 int FUN_000161c0(void) { return *(int *)0x46c; }
@@ -28,36 +28,36 @@ void FUN_000161d0(char *s)
 }
 
 /* ---- from build/var/mod/parts/p16200.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_00016200 @ 00016200 */
 int FUN_00016200(int a, unsigned short b) { return access((char *)a, b) == 0; }
 
 /* ---- from build/var/mod/parts/p16220.c */
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern struct find_t DAT_00038904;
+extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern struct find_t B00038904_eu;
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, int, int), FUN_00018960(void);
 /* FUN_00016220 @ 00016220 */
-char *FUN_00016220(int a, unsigned short b) { if (_dos_findfirst((char *)a, b, &DAT_00038904)) return 0; return DAT_00038904.name; }
+char *FUN_00016220(int a, unsigned short b) { if (_dos_findfirst((char *)a, b, &B00038904_eu)) return 0; return B00038904_eu.name; }
 
 /* ---- from build/var/mod/parts/p1624c.c */
-extern short *DAT_00032a9c; extern unsigned short **DAT_00038988;
+extern short *DAT_00032a9c; extern unsigned short **B00038988_eu;
 extern void FUN_000185d4(int, int, int, int, int), FUN_0001864c(int, int, int, int, int), FUN_0001a010(int, int, int), FUN_0001a2b0(int, int);
 extern unsigned short **FUN_0001954c(int, int);
 struct SR { short size, n, w; unsigned char h, f; };
 /* FUN_0001624c @ 0001624c */
-char *FUN_0001624c(void) { if (_dos_findnext(&DAT_00038904)) return 0; return DAT_00038904.name; }
+char *FUN_0001624c(void) { if (_dos_findnext(&B00038904_eu)) return 0; return B00038904_eu.name; }
 
 /* ---- from build/var/mod/parts/p16270.c */
-extern unsigned char DAT_00038919, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00016270 @ 00016270 */
-unsigned char FUN_00016270(void) { return DAT_00038919; }
+unsigned char FUN_00016270(void) { return B00038919_eu; }
 
 /* ---- from build/var/mod/parts/p1627c.c */
 /* FUN_0001627c */
 
-long FUN_0001627c(char *path) { if (!_dos_findfirst(path, 0, &DAT_00038904)) return DAT_00038904.size; return -1; }
+long FUN_0001627c(char *path) { if (!_dos_findfirst(path, 0, &B00038904_eu)) return B00038904_eu.size; return -1; }
 
 /* ---- from build/var/mod/parts/p162a8.c */
 /* FUN_000162a8 */
@@ -105,28 +105,28 @@ int unlink(const char *);
 void FUN_000163a4(char *s) { unlink(s); }
 
 /* ---- from build/var/mod/parts/p163b8.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_000163b8 @ 000163b8 */
 int FUN_000163b8(int a) { int v; _dos_setdrive(a, (unsigned *)&v); return v; }
 
 /* ---- from build/var/mod/parts/p163d8.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_000163d8 @ 000163d8 */
 int FUN_000163d8(void) { int v; _dos_getdrive((unsigned *)&v); return v; }
 
 /* ---- from build/var/mod/parts/p163f4.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_000163f4 @ 000163f4 */
 void FUN_000163f4(void) { FUN_000163b8(FUN_000163d8()); }
 
 /* ---- from build/var/mod/parts/p1640c.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_0001640c @ 0001640c */
-void FUN_0001640c(void) { getcwd(DAT_0003892f, 0x50); }
+void FUN_0001640c(void) { getcwd(B0003892f_eu, 0x50); }
 
 /* ---- from build/var/mod/parts/p16424.c */
 struct CB { char b[0x18]; };
@@ -138,7 +138,7 @@ extern int FUN_00016a04(int, int, int, unsigned char *, int, struct CB *), FUN_0
 int FUN_00016424(signed char *path) { int d, cur, r; cur = FUN_000163d8(); if (path[1] == ':') { d = toupper(path[0]) - 'A'; FUN_000163b8(d); if (FUN_000163d8() != d) return -1; path += 2; } r = chdir((char *)path); if (r == -1) FUN_000163b8(cur); return r; }
 
 /* ---- from build/var/mod/parts/p16490.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_00016490 @ 00016490 */
 void FUN_00016490(int a) { mkdir((char *)a); }

@@ -5,14 +5,14 @@
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
     db 4 dup(?)
-public DAT_00072244
-DAT_00072244 label byte
+public B00072244_c8
+B00072244_c8 label byte
     db 2 dup(?)
-public DAT_00072246
-DAT_00072246 label byte
+public B00072246_dJ
+B00072246_dJ label byte
     db 6 dup(?)
-public DAT_0007224c
-DAT_0007224c label byte
+public B0007224c_ez
+B0007224c_ez label byte
     db 9880 dup(?)
 _BSS ends
 end

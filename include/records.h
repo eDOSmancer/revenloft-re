@@ -41,13 +41,13 @@ struct PC {
     int f1ea, f1ee, f1f2;               /* +0x1ea */
     char p1f6[0x52];
 };
-/* each file declares `extern struct PC DAT_000718e0[];` itself: tools/mergemod.py turns a file-level declaration that
+/* each file declares `extern struct PC B000718e0_iO[];` itself: tools/mergemod.py turns a file-level declaration that
    differs from an earlier part's into a cast view of the one symbol, which it cannot do for a header's */
 
 /* spell panel line: 2 panels of 90 lines of 0x22 bytes at 0x75900 (0xbf4 per panel); FUN_000331c0 fills, FUN_00033438 reads */
 struct SPL { char name[0x1e]; signed char lvl, idx, who, kind; };
 
-/* item record: 0x41 bytes each in the block DAT_000755d8 points to (the pointer itself is a scalar, world.h) */
+/* item record: 0x41 bytes each in the block B000755d8_aw points to (the pointer itself is a scalar, world.h) */
 struct ITEM {
     char name[0x28];                    /* +0x00 */
     short f28;                          /* +0x28 */
@@ -60,9 +60,9 @@ struct ITEM {
     unsigned short kind : 2, speed : 4, rest : 10;      /* +0x35 */
     unsigned char ac, nd, ds, add, y[6];                /* +0x37 */
 };
-#define ITEMS ((struct ITEM *)DAT_000755d8)      /* world.h leaves struct IT incomplete: unconverted files define their own */
+#define ITEMS ((struct ITEM *)B000755d8_aw)      /* world.h leaves struct IT incomplete: unconverted files define their own */
 
-/* monster type: 0x45 bytes each in the block DAT_00072230 points to (the pointer is a scalar; files declare it char * / unsigned char * / void *) */
+/* monster type: 0x45 bytes each in the block B00072230_c4 points to (the pointer is a scalar; files declare it char * / unsigned char * / void *) */
 struct MTYPE { char name[0x16]; unsigned short rad; char p18[0x1a]; int imm; char p36[4]; int f3a; char p3e[7]; };
 
 /* container type: 10 bytes each at 0x57330 */
@@ -71,7 +71,7 @@ struct CONT { unsigned char n, cols, maxw, y0, kind; short *slots; unsigned char
 /* open container of a character: 4 records of 4 bytes at 0x56fa0 (FUN_000314b8 fills, FUN_00020a70 / FUN_00020bbc / FUN_00021c3c read) */
 struct OPENC { signed char kind, type, st, item; };
 
-/* monster / entity: DAT_00075618.nent records of 0x16 bytes at 0x64d80 (position 16.16, cell, type, timer, hit points) */
+/* monster / entity: B00075618_b1.nent records of 0x16 bytes at 0x64d80 (position 16.16, cell, type, timer, hit points) */
 struct MONR {
     int a, b;                           /* +0x00 x, +0x04 y */
     unsigned char f8, f9, fa;           /* +0x08 */

@@ -4,15 +4,15 @@
 struct DE { short f0; unsigned short dist; unsigned short h; short idx, kind, fa, f0c, f0e, f10, f12, f14; };
 struct MO { int a, b; unsigned char f8, f9, fa, fb; unsigned short cell, type; short timer, w12; unsigned short lo : 6, frame : 3, rest : 7; };
 struct CELL { unsigned short lo : 6, seen : 1, rest : 9; };
-extern struct DE DAT_00077148[]; extern void *DAT_00072230; extern struct MO DAT_00072238[]; extern struct CELL DAT_000698e0[];
+extern struct DE B00077148_eJ[]; extern void *B00072230_c4; extern struct MO B00072238_dL[]; extern struct CELL B000698e0_b7[];
  extern int DAT_0005c050; extern unsigned char DAT_0005c02d;
 extern void FUN_00045798(int, int, void *, unsigned short *), FUN_0003b2f4(void *, void *, int, int, int), FUN_0003b088(int, int), FUN_00031bf0(void *, int);
 int rand(void);
-extern short DAT_00077106;
+extern short B00077106_dq;
 
 extern int FUN_000469a7(int); /* abs */
 struct O { int a, b; unsigned char f8, f9, fa; unsigned char fb0 : 1, dead : 1, fb2 : 6; unsigned short s, type; short timer, w12; unsigned short w14; };
-extern struct O DAT_00064d80[];  extern int DAT_000755d0, DAT_000755d4;
+extern struct O B00064d80_ay[];  extern int B000755d0_ao, B000755d4_ak;
 
 int FUN_0003ac80(int t)
 {
@@ -62,20 +62,20 @@ int FUN_0003ae30(int x, int y)
 {
     int i, t; struct DE2 *e;
     if (DAT_0005d680) return 0;
-    e = (struct DE2 *)((char *)DAT_00077148 + (DAT_0005c050 ^ 1) * 0x2260);
+    e = (struct DE2 *)((char *)B00077148_eJ + (DAT_0005c050 ^ 1) * 0x2260);
     for (i = 0; i < DAT_0005f038[DAT_0005c050 ^ 1]; i++) {
         if (e[i].kind == 0) {
-            if (FUN_0003acdc(DAT_00064d80[e[i].idx].type)) {
+            if (FUN_0003acdc(B00064d80_ay[e[i].idx].type)) {
                 if ((int)(e[i].dist - 0x7d00) >> 3 < 0x39) continue;
             }
         }
         if ((e[i].f0e <= x && e[i].f10 >= x) && (e[i].f12 <= y && e[i].f14 >= y)) {
             if (e[i].kind == 0) {
-                t = DAT_00064d80[e[i].idx].type;
+                t = B00064d80_ay[e[i].idx].type;
                 if (FUN_0003ad18(t) || FUN_0003ade0(t)) return 2;
                 if (FUN_0003acdc(t)) return 1;
             } else if (e[i].kind == 1) {
-                t = ((struct SO2 *)DAT_00072238)[e[i].idx].type;
+                t = ((struct SO2 *)B00072238_dL)[e[i].idx].type;
                 if (FUN_0003ac80(t)) return 2;
             }
         }
@@ -84,30 +84,30 @@ int FUN_0003ae30(int x, int y)
 }
 
 struct W { int w[5]; int cell, val; };
-extern struct W DAT_00065a18[]; extern short DAT_00077108[], DAT_00077128[];
+extern struct W B00065a18_cn[]; extern short B00077108_dk[], B00077128_fk[];
 void FUN_0003b088(int n, int c)
 {
     int last, j, i, v;
     last = -1;
     for (i = 0; i < 0x100; i++) {
-        if (last != DAT_00065a18[i].cell) {
-            last = DAT_00065a18[i].cell;
-            v = DAT_00065a18[i].val;
+        if (last != B00065a18_cn[i].cell) {
+            last = B00065a18_cn[i].cell;
+            v = B00065a18_cn[i].val;
             if (last == c) v += n;
             else {
                 if (n > 1) {
                     for (j = 0; j < 8; j++) {
-                        if (DAT_00077108[j] + c == last) { v += n - 1; break; }
+                        if (B00077108_dk[j] + c == last) { v += n - 1; break; }
                     }
                 }
                 if (n == 3) {
                     for (j = 0; j < 16; j++) {
-                        if (DAT_00077128[j] + c == last) { v++; break; }
+                        if (B00077128_fk[j] + c == last) { v++; break; }
                     }
                 }
             }
         }
-        DAT_00065a18[i].val = v;
+        B00065a18_cn[i].val = v;
     }
 }
 
@@ -122,11 +122,11 @@ int FUN_0003b1bc(void)
     {
         int i, best, d;
         best = 0xf;
-        for (i = 0; i < DAT_00075618.nent; i++) {
-            if (DAT_00064d80[i].dead) continue;
-            if (DAT_00064d80[i].type == 8) continue;
-            if (FUN_0003acdc(DAT_00064d80[i].type)) {
-                d = FUN_000469a7(DAT_00064d80[i].b - DAT_000755d0) > FUN_000469a7(DAT_00064d80[i].a - DAT_000755d4) ? FUN_000469a7(DAT_00064d80[i].b - DAT_000755d0) : FUN_000469a7(DAT_00064d80[i].a - DAT_000755d4);
+        for (i = 0; i < B00075618_b1.nent; i++) {
+            if (B00064d80_ay[i].dead) continue;
+            if (B00064d80_ay[i].type == 8) continue;
+            if (FUN_0003acdc(B00064d80_ay[i].type)) {
+                d = FUN_000469a7(B00064d80_ay[i].b - B000755d0_ao) > FUN_000469a7(B00064d80_ay[i].a - B000755d4_ak) ? FUN_000469a7(B00064d80_ay[i].b - B000755d0_ao) : FUN_000469a7(B00064d80_ay[i].a - B000755d4_ak);
                 d += 0x8000;
                 d >>= 16;
                 if (d < best) best = d;
@@ -138,7 +138,7 @@ int FUN_0003b1bc(void)
 
 struct OB { int a, b; unsigned char f8, f9, fa, fb; unsigned short cell, type; short timer, w12; unsigned short lo1 : 1, st : 2, face : 3, rest : 10; };
 struct DE3 { unsigned short f0, dist, h; short idx, kind, fa, f0c, f0e, f10, f12, f14; };
-extern short DAT_0007b608[], DAT_0007b61c[], DAT_00077100[]; extern int DAT_0005c6d0, DAT_0005c658;
+extern short B0007b608_e2[], B0007b61c_dd[], B00077100_ds[]; extern int DAT_0005c6d0, DAT_0005c658;
 /* FUN_0003b2f4 @ 0003b2f4: choose the frame of sprite e for object o of draw kind k, type t, with nf direction frames (groups of three scenery pieces share one direction) */
 void FUN_0003b2f4(void *o_p, void *e_p, int k, int t, int nf)
 {
@@ -150,17 +150,17 @@ void FUN_0003b2f4(void *o_p, void *e_p, int k, int t, int nf)
     if (g >= 0 && g < 10) isg = 1;
     else isg = 0;
     if (k == 1 && (isg && s > 0)) {
-        a = DAT_0005c6d0 - DAT_0007b608[g];
+        a = DAT_0005c6d0 - B0007b608_e2[g];
         a /= 8;
         a += DAT_0005c658;
-        a = a - 0xb4 + ((struct OB *)DAT_00072238)[DAT_0007b61c[g]].face * 0x2d;
+        a = a - 0xb4 + ((struct OB *)B00072238_dL)[B0007b61c_dd[g]].face * 0x2d;
     } else {
         a = DAT_0005c6d0 - e->f0;
         a /= 8;
         a += DAT_0005c658;
         a = a - 0xb4 + o->face * 0x2d;
     }
-    if (k == 1 && (isg && s == 0)) DAT_0007b608[g] = e->f0;
+    if (k == 1 && (isg && s == 0)) B0007b608_e2[g] = e->f0;
     if (nf == 0x10) {
         a += 0x16;
         a -= 16 / nf * 0xb;
@@ -191,7 +191,7 @@ void FUN_0003b2f4(void *o_p, void *e_p, int k, int t, int nf)
             }
         } else if (!o->st) e->h += a / (8 / nf);
     }
-    e->h += DAT_00077100[k];
+    e->h += B00077100_ds[k];
 }
 #undef o
 #undef e
@@ -202,21 +202,21 @@ struct OC { int a, b; unsigned char f8, f9, fa; unsigned char fb0 : 1, dead : 1,
 #pragma pack(1)
 struct TY { unsigned char p0[0x14]; unsigned short w14; unsigned char p16[2]; unsigned char f18, f19, f1a, f1b, f1c; unsigned char p1d[0xa]; unsigned short w27; unsigned char tab[0x1c]; };
 #pragma pack()
-/* the module declares DAT_00072230 as void * (cast view, recipe 29) */
-#define DAT_00072230 (*(struct TY **)&DAT_00072230)
-extern short DAT_00077100[];
+/* the module declares B00072230_c4 as void * (cast view, recipe 29) */
+#define B00072230_c4 (*(struct TY **)&B00072230_c4)
+extern short B00077100_ds[];
 int rand(void); void srand(unsigned); extern unsigned FUN_00040700(void);
 /* FUN_0003b6d0 @ 0003b6d0: put the visible creatures into draw list slot n onwards (frame from type, state and animation), return the next free slot */
 int FUN_0003b6d0(int n)
 {
     int z, i; unsigned char *q; struct DE *e; struct OC *o; struct TY *ty;
     z = 0;
-    for (i = 0; i < DAT_00075618.nent; i++) {
-        if (((struct OC *)DAT_00064d80)[i].dead) continue;
-        e = (struct DE *)((char *)DAT_00077148 + DAT_0005c050 * 0x2260) + n;
-        o = (struct OC *)DAT_00064d80 + i;
-        ty = DAT_00072230 + o->type;
-        if (DAT_000698e0[o->cell].seen) {
+    for (i = 0; i < B00075618_b1.nent; i++) {
+        if (((struct OC *)B00064d80_ay)[i].dead) continue;
+        e = (struct DE *)((char *)B00077148_eJ + DAT_0005c050 * 0x2260) + n;
+        o = (struct OC *)B00064d80_ay + i;
+        ty = B00072230_c4 + o->type;
+        if (B000698e0_b7[o->cell].seen) {
             if (o->dead) continue;
             e->h = ty->w14;
             if (o->type == 8) {
@@ -238,7 +238,7 @@ int FUN_0003b6d0(int n)
                 srand(i);
                 e->h += ((unsigned)rand() * 2 >> 15) * (ty->f1a + 1);
                 e->h += ty->f1a;
-                e->h += DAT_00077100[0];
+                e->h += B00077100_ds[0];
                 srand(FUN_00040700());
             } else if (o->st) {
                 e->h += ty->f19 * ty->f18;
@@ -278,17 +278,17 @@ int FUN_0003b6d0(int n)
     }
     return n;
 }
-#undef DAT_00072230
+#undef B00072230_c4
 
 int FUN_0003bba0(int n)
 {
     int i; struct DE *e; struct MO *o;
-    for (i = 0; i < DAT_00075618.ndoor; i++) {
-        e = (struct DE *)((char *)DAT_00077148 + DAT_0005c050 * 0x2260) + n;
-        o = DAT_00072238 + i;
-        if (DAT_000698e0[o->cell].seen) {
-            e->h = DAT_000755dc[o->type * 7 + 4] * o->frame;
-            e->h += *(unsigned short *)(DAT_000755dc + o->type * 7);
+    for (i = 0; i < B00075618_b1.ndoor; i++) {
+        e = (struct DE *)((char *)B00077148_eJ + DAT_0005c050 * 0x2260) + n;
+        o = B00072238_dL + i;
+        if (B000698e0_b7[o->cell].seen) {
+            e->h = B000755dc_aX[o->type * 7 + 4] * o->frame;
+            e->h += *(unsigned short *)(B000755dc_aX + o->type * 7);
             e->f0c = 0;
             FUN_00045798(o->a, o->b, e, &e->dist);
             e->f0e = 0;
@@ -304,8 +304,8 @@ int FUN_0003bba0(int n)
                     e->dist -= 0x7d00;
                 }
                 if (n != 400) n++;
-                FUN_0003b2f4(o, e, 1, o->type, DAT_000755dc[o->type * 7 + 4]);
-                if (DAT_000755dc[o->type * 7 + 6]) FUN_0003b088(DAT_000755dc[o->type * 7 + 6], o->cell);
+                FUN_0003b2f4(o, e, 1, o->type, B000755dc_aX[o->type * 7 + 4]);
+                if (B000755dc_aX[o->type * 7 + 6]) FUN_0003b088(B000755dc_aX[o->type * 7 + 6], o->cell);
                 e->kind = 1;
                 e->idx = i;
             }
@@ -317,17 +317,17 @@ int FUN_0003bba0(int n)
 /* FUN_0003bdf4 @ 0003bdf4: add the visible items lying on the floor to the draw list from entry n on; returns the next free entry; debug-info module */
 struct DEI { short f0; unsigned short dist; short h, idx, kind, fa, f0c, f0e, f10, f12, f14; };
 struct MOI { int a, b; unsigned char f8, f9, fa, fb; unsigned short cell, item; short timer, w12; unsigned short lo : 6, frame : 3, rest : 7; };
-extern struct MOI DAT_00067618[];
+extern struct MOI B00067618_e7[];
  
 int FUN_0003bdf4(int n)
 {
     int i; struct DEI *e; struct MOI *o;
-    for (i = 0; i < DAT_00075618.n4; i++) {
-        e = (struct DEI *)((char *)DAT_00077148 + DAT_0005c050 * 0x2260) + n;
-        o = DAT_00067618 + i;
-        if (DAT_000698e0[o->cell].seen) {
-            e->h = ((unsigned char *)DAT_000755d8)[o->item * 0x41 + 0x2a] * o->frame;
-            e->h += *(short *)(((unsigned char *)DAT_000755d8) + o->item * 0x41 + 0x28);
+    for (i = 0; i < B00075618_b1.n4; i++) {
+        e = (struct DEI *)((char *)B00077148_eJ + DAT_0005c050 * 0x2260) + n;
+        o = B00067618_e7 + i;
+        if (B000698e0_b7[o->cell].seen) {
+            e->h = ((unsigned char *)B000755d8_aw)[o->item * 0x41 + 0x2a] * o->frame;
+            e->h += *(short *)(((unsigned char *)B000755d8_aw) + o->item * 0x41 + 0x28);
             e->f0c = 0;
             FUN_00045798(o->a, o->b, e, &e->dist);
             e->f0e = 0;
@@ -336,8 +336,8 @@ int FUN_0003bdf4(int n)
             e->f14 = 0;
             if (e->dist != 0 && e->dist > DAT_0005c02d) {
                 if (n != 400) n++;
-                FUN_0003b2f4(o, e, 2, o->item, ((unsigned char *)DAT_000755d8)[o->item * 0x41 + 0x2a]);
-                if (((unsigned char *)DAT_000755d8)[o->item * 0x41 + 0x2b]) FUN_0003b088(((unsigned char *)DAT_000755d8)[o->item * 0x41 + 0x2b], o->cell);
+                FUN_0003b2f4(o, e, 2, o->item, ((unsigned char *)B000755d8_aw)[o->item * 0x41 + 0x2a]);
+                if (((unsigned char *)B000755d8_aw)[o->item * 0x41 + 0x2b]) FUN_0003b088(((unsigned char *)B000755d8_aw)[o->item * 0x41 + 0x2b], o->cell);
                 e->kind = 2;
                 e->idx = i;
                 e->dist += 0x7d00;
@@ -352,28 +352,28 @@ int FUN_0003bdf4(int n)
 }
 
 /* FUN_0003bfec @ 0003bfec: add the visible projectiles to the draw list from entry n on (flames flicker); returns the next free entry; debug-info module */
-extern struct MO DAT_000748ec[];
-extern int DAT_0005c038; extern unsigned char *DAT_00072234;
+extern struct MO B000748ec_bk[];
+extern int DAT_0005c038; extern unsigned char *B00072234_hx;
 int FUN_0003bfec(int n)
 {
     int i; struct DE *e; struct MO *o;
     for (i = 0; i < DAT_0005c038; i++) {
-        e = (struct DE *)((char *)DAT_00077148 + DAT_0005c050 * 0x2260) + n;
-        o = DAT_000748ec + i;
-        if (DAT_000698e0[o->cell].seen) {
-            e->h = DAT_00072234[o->type * 7 + 4] * o->frame;
-            e->h += *(unsigned short *)(DAT_00072234 + o->type * 7);
+        e = (struct DE *)((char *)B00077148_eJ + DAT_0005c050 * 0x2260) + n;
+        o = B000748ec_bk + i;
+        if (B000698e0_b7[o->cell].seen) {
+            e->h = B00072234_hx[o->type * 7 + 4] * o->frame;
+            e->h += *(unsigned short *)(B00072234_hx + o->type * 7);
             e->f0c = 0;
             FUN_00045798(o->a, o->b, e, &e->dist);
             if (e->dist != 0 && e->dist > DAT_0005c02d) {
                 if (n != 400) n++;
-                FUN_0003b2f4(o, e, 3, o->type, DAT_00072234[o->type * 7 + 4]);
+                FUN_0003b2f4(o, e, 3, o->type, B00072234_hx[o->type * 7 + 4]);
                 if (o->type == 0 || o->type == 3 || o->type == 4 || o->type == 7) {
-                    if (e->h == *(unsigned short *)(DAT_00072234 + o->type * 7) + 4 + DAT_00077106) {
-                        if ((int)((unsigned)rand() * 10 >> 15) > 5) e->h = *(unsigned short *)(DAT_00072234 + o->type * 7) + 8 + DAT_00077106 + ((unsigned)rand() * 2 >> 15);
+                    if (e->h == *(unsigned short *)(B00072234_hx + o->type * 7) + 4 + B00077106_dq) {
+                        if ((int)((unsigned)rand() * 10 >> 15) > 5) e->h = *(unsigned short *)(B00072234_hx + o->type * 7) + 8 + B00077106_dq + ((unsigned)rand() * 2 >> 15);
                     }
                 }
-                if (DAT_00072234[o->type * 7 + 6]) FUN_0003b088(DAT_00072234[o->type * 7 + 6], o->cell);
+                if (B00072234_hx[o->type * 7 + 6]) FUN_0003b088(B00072234_hx[o->type * 7 + 6], o->cell);
                 e->kind = 3;
                 e->idx = i;
             }
@@ -396,7 +396,7 @@ struct DE5 { unsigned short f0, dist, h, idx, kind, fa, f0c, f0e, f10, f12, f14;
 struct O5 { int a, b; unsigned char f80 : 3, glow : 1, f84 : 4; unsigned char f9, fa, fb; unsigned short s, type; short timer, w12; unsigned short w14; };
 struct IT5 { unsigned char f0; unsigned char b0 : 1, big : 1, b2 : 6; unsigned char rest[0x14]; };
 struct TY5 { unsigned char pad[0x31]; unsigned char nolabel : 1, b1 : 7; unsigned char rest[0x13]; };
-extern struct IT5 DAT_0006762c[]; extern char *DAT_000758dc; extern short DAT_0005f03c, DAT_0005f03e;
+extern struct IT5 B0006762c_ey[]; extern char *B000758dc_cl; extern short DAT_0005f03c, DAT_0005f03e;
 extern void *memset(void *, int, unsigned);
 extern void FUN_000435dc(void), FUN_00039738(int *), FUN_000396c0(int, int, int, int), FUN_00046cec(int, int, int, int, int, int), FUN_0003978c(int, int, int, int, int);
 /* FUN_0003c294 @ 0003c294: build and draw the 3-D view list: collect creatures, objects, items and missiles, then draw them farthest first (creature labels in the debug views) */
@@ -405,7 +405,7 @@ void FUN_0003c294(void)
 {
     int r[4] = { 0 };
     int best, k, bi; struct DE5 *e; int j;
-    memset((char *)DAT_00077148 + DAT_0005c050 * 0x2260, 0, 0x1130);
+    memset((char *)B00077148_eJ + DAT_0005c050 * 0x2260, 0, 0x1130);
     DAT_0005f038[DAT_0005c050] = 0;
     DAT_0005f038[DAT_0005c050] = FUN_0003b6d0(DAT_0005f038[DAT_0005c050]);
     DAT_0005f038[DAT_0005c050] = FUN_0003bba0(DAT_0005f038[DAT_0005c050]);
@@ -420,33 +420,33 @@ void FUN_0003c294(void)
         for (k = 0; k < DAT_0005f038[DAT_0005c050]; k++) {
             best = 0x7d00;
             j = 0;
-            e = (struct DE5 *)((char *)DAT_00077148 + DAT_0005c050 * 0x2260);
+            e = (struct DE5 *)((char *)B00077148_eJ + DAT_0005c050 * 0x2260);
             while (j < DAT_0005f038[DAT_0005c050]) {
                 if (e->dist < best) {
                     best = e->dist;
                     bi = j;
                 }
                 j++;
-                e = (struct DE5 *)((char *)DAT_00077148 + DAT_0005c050 * 0x2260) + j;
+                e = (struct DE5 *)((char *)B00077148_eJ + DAT_0005c050 * 0x2260) + j;
             }
-            e = (struct DE5 *)((char *)DAT_00077148 + DAT_0005c050 * 0x2260) + bi;
-            if (e->kind == 0 && DAT_00064d80[e->idx].type == 8) {
+            e = (struct DE5 *)((char *)B00077148_eJ + DAT_0005c050 * 0x2260) + bi;
+            if (e->kind == 0 && B00064d80_ay[e->idx].type == 8) {
                 FUN_00046cec(e->f0, e->h + 0x12, (e->dist * 0x78 + 0x6c) / 0xd8, e->f0c, 0x58, e->dist);
                 FUN_00046cec(e->f0, e->h, (e->dist * 0x78 + 0x6c) / 0xd8, e->f0c, 0, e->dist);
             } else {
                 if (e->kind == 1) {
-                    if (FUN_0003b188(DAT_00072238[e->idx].type)) FUN_00046cec(e->f0, e->h + 8, e->dist, e->f0c, 0x58, e->dist);
+                    if (FUN_0003b188(B00072238_dL[e->idx].type)) FUN_00046cec(e->f0, e->h + 8, e->dist, e->f0c, 0x58, e->dist);
                 }
                 if (e->kind == 2) {
-                    if (DAT_0006762c[e->idx].big) FUN_00046cec(e->f0, e->h, e->dist, e->f0c, 0x3c, e->dist);
+                    if (B0006762c_ey[e->idx].big) FUN_00046cec(e->f0, e->h, e->dist, e->f0c, 0x3c, e->dist);
                     else FUN_00046cec(e->f0, e->h, e->dist, e->f0c, 0, e->dist);
                 } else FUN_00046cec(e->f0, e->h, e->dist, e->f0c, 0, e->dist);
             }
             if (e->kind == 0) {
-                if (((struct O5 *)DAT_00064d80)[e->idx].glow) FUN_00046cec(e->f0, DAT_00077106 + 0x41, e->dist, e->f0c, 0, e->dist);
+                if (((struct O5 *)B00064d80_ay)[e->idx].glow) FUN_00046cec(e->f0, B00077106_dq + 0x41, e->dist, e->f0c, 0, e->dist);
             }
-            if (DAT_0005f03c || DAT_0005f03e) if (e->kind == 0) if (DAT_00064d80[e->idx].type < 0x22) if (DAT_0005f03e || !((struct TY5 *)DAT_00072230)[DAT_00064d80[e->idx].type].nolabel)
-                FUN_0003978c(0, FUN_0003c230(e->dist), e->f0 + 0x18, (int)(DAT_000758dc + 0x48), 0);
+            if (DAT_0005f03c || DAT_0005f03e) if (e->kind == 0) if (B00064d80_ay[e->idx].type < 0x22) if (DAT_0005f03e || !((struct TY5 *)B00072230_c4)[B00064d80_ay[e->idx].type].nolabel)
+                FUN_0003978c(0, FUN_0003c230(e->dist), e->f0 + 0x18, (int)(B000758dc_cl + 0x48), 0);
             e->fa = k;
             e->dist += 0x7d00;
         }

@@ -3,14 +3,14 @@
 /* FUN_000414b0 @ 000414b0: draw the outdoor sky for sky set n: the cloud band (random tiles, darker at night) then the sky pictures (sun, moon, mountains) placed by the view angle, wrapping round 360 degrees */
 #include "world.h"
 struct SKY { short id, ang, w, y; };
-extern short DAT_0007b750[]; extern struct SKY **DAT_0007b764; extern int DAT_0005c658; extern unsigned char DAT_0005f918;
+extern short B0007b750_el[]; extern struct SKY **B0007b764_fp; extern int DAT_0005c658; extern unsigned char DAT_0005f918;
 extern void FUN_000396c0(int, int, int, int), FUN_00039838(int, int, int, int, int, unsigned char), FUN_0003986c(int, int, int, int, int, unsigned char);
 extern void srand(unsigned); extern unsigned rand(void); extern int FUN_00040700(void);
 void FUN_000414b0(int n)
 {
     int i, y, x; struct SKY *sky; int a, base, sh, pic;
-    base = DAT_0007b750[n];
-    sky = DAT_0007b764[n];
+    base = B0007b750_el[n];
+    sky = B0007b764_fp[n];
     FUN_000396c0(4, 0x20, 0x83, 0x11f);
     srand(DAT_0005c658);
     if (DAT_0005f918 <= 8) {
@@ -57,7 +57,7 @@ void FUN_000414b0(int n)
 
 /* ---- from build/var/mod/parts/p418b4.c */
 /* FUN_000418b4 @ 000418b4: build the shading table for the indoor light level lvl: per distance step the dithered shade pair, full darkness (8) beyond the view distance, and the floor/ceiling fade bytes for the near half */
-extern int DAT_0005c730, DAT_0005c738; extern unsigned char DAT_0005f918; extern short *DAT_000758c4; extern unsigned short DAT_0005fcfa;
+extern int DAT_0005c730, DAT_0005c738; extern unsigned char DAT_0005f918; extern short *B000758c4_j7; extern unsigned short DAT_0005fcfa;
 extern signed char DAT_0005fe14[], DAT_0005fe94[];
 void FUN_000418b4(int lvl)
 {
@@ -82,7 +82,7 @@ void FUN_000418b4(int lvl)
         v = c2;
         v <<= 8;
         v += c1;
-        DAT_000758c4[i] = v;
+        B000758c4_j7[i] = v;
         if (i < 0x80) {
             if (c1 > 8) c1 = 8;
             DAT_0005fe14[0x7f - i] = c1;
@@ -95,7 +95,7 @@ void FUN_000418b4(int lvl)
 /* ---- from build/var/mod/parts/p41a14.c */
 /* FUN_00041a14 @ 00041a14: build the distance shading table for light level lvl and darkness dark (0..8): per distance step the two shade indices (dithered pair), the floor and ceiling fade bytes */
 extern int DAT_0005c730, DAT_0005c738; extern unsigned char DAT_0005f918; extern short DAT_0005f954[];
-extern short *DAT_000758c4; extern unsigned short DAT_0005fcfa; extern signed char DAT_0005fe4e[], DAT_0005fe14[];
+extern short *B000758c4_j7; extern unsigned short DAT_0005fcfa; extern signed char DAT_0005fe4e[], DAT_0005fe14[];
 void FUN_00041a14(int lvl, int dark)
 {
     int i, n1, v, l1, t, d1, sub, a, b; signed char c1, c2;
@@ -128,7 +128,7 @@ void FUN_00041a14(int lvl, int dark)
         v = c2;
         v <<= 8;
         v += c1;
-        DAT_000758c4[i] = v;
+        B000758c4_j7[i] = v;
         if (c1 > 8) c1 = 8;
         if (i >= 0x46 && i < 0xc6) DAT_0005fe4e[i] = c1;
         if (i >= 0x32 && i < 0xb2) DAT_0005fe14[0x7f - (i - 0x32)] = c1;
@@ -138,7 +138,7 @@ void FUN_00041a14(int lvl, int dark)
 
 /* ---- from build/var/mod/parts/p41c58.c */
 /* FUN_00041c58 @ 00041c58: build the fog shading table for fog density p: clear near band, solid fog far band, a linear ramp between (dithered pairs), and the matching floor/ceiling fade bytes */
-extern int DAT_0005c730; extern unsigned char DAT_0005f918; extern short *DAT_000758c4; extern unsigned short DAT_0005fcfa;
+extern int DAT_0005c730; extern unsigned char DAT_0005f918; extern short *B000758c4_j7; extern unsigned short DAT_0005fcfa;
 extern signed char DAT_0005fe14[], DAT_0005fe94[];
 void FUN_00041c58(int p)
 {
@@ -165,7 +165,7 @@ void FUN_00041c58(int p)
         v = c2;
         v <<= 8;
         v |= c1;
-        DAT_000758c4[i] = v;
+        B000758c4_j7[i] = v;
     }
     DAT_0005fcfa = v;
     s = a * 5;
@@ -183,14 +183,14 @@ void FUN_00041c58(int p)
 
 /* ---- from build/var/mod/parts/p41e74.c */
 /* FUN_00041e74 @ 00041e74: 8 if a living party member carries a light (status bits 0x402), else 0; debug-info module */
-extern unsigned short DAT_000718f0[], DAT_00071a12[];
+extern unsigned short B000718f0_hO[], B00071a12_dx[];
 int FUN_00041e74(void)
 {
     int i, r;
     r = 0;
     for (i = 0; i < 4; i++) {
-        if (*(unsigned short *)((char *)DAT_000718f0 + i * 0x248) >= 0x4000) continue;
-        if (*(unsigned *)((char *)DAT_00071a12 + i * 0x248) & 0x402) r = 8;
+        if (*(unsigned short *)((char *)B000718f0_hO + i * 0x248) >= 0x4000) continue;
+        if (*(unsigned *)((char *)B00071a12_dx + i * 0x248) & 0x402) r = 8;
     }
     return r;
 }
@@ -230,8 +230,8 @@ void FUN_00041f94(void)
     h = h % 0x18;
     DAT_0005cf4c = ((unsigned)h << 16) + (DAT_0005cf4c & 0xffff);
     if (h != DAT_0005f9cc) {
-        if (DAT_00075618.solo != 0xff) {
-            p = ((unsigned short **)DAT_0007b764)[DAT_00075618.solo];
+        if (B00075618_b1.solo != 0xff) {
+            p = ((unsigned short **)B0007b764_fp)[B00075618_b1.solo];
             if (DAT_0005f924[h] < 10) {
                 p[0] = 0x18;
                 DAT_0005f910 = -1;

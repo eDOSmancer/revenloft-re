@@ -21,14 +21,14 @@ void FUN_0001cef0(void *rmregs)
 void *memset(void *, int, unsigned); extern void FUN_0001cef0(void *);
 unsigned char *DAT_000330a4 = 0; unsigned DAT_000330a8 = 0; unsigned short DAT_000330ac = 0;
 struct RMI { int edi, esi, ebp, res, ebx, edx, ecx, eax; short flags, es, ds, fs, gs, ip, cs, sp, ss; };
-extern struct RMI DAT_00038a28;
-int FUN_0001cf44(void) { memset(&DAT_00038a28, 0, 0x32); DAT_00038a28.eax = 0x53c1; DAT_00038a28.es = DAT_000330a8 >> 16; DAT_00038a28.edx = 0; FUN_0001cef0(&DAT_00038a28); return DAT_00038a28.eax == 1; }
+extern struct RMI B00038a28_eu;
+int FUN_0001cf44(void) { memset(&B00038a28_eu, 0, 0x32); B00038a28_eu.eax = 0x53c1; B00038a28_eu.es = DAT_000330a8 >> 16; B00038a28_eu.edx = 0; FUN_0001cef0(&B00038a28_eu); return B00038a28_eu.eax == 1; }
 
 /* ---- from build/var/mod/parts/p1cf98.c */
 /* FUN_0001cf98 .. FUN_0001d17c @ 0001cf98: mouse driver interface (int 33h). Each call is inline machine code
    (#pragma aux); the moves between the driver's registers and the C parameters/locals are coded as bytes,
    because the original has the 32-bit displacement forms, which the pragma assembler does not produce. */
-extern short DAT_00038a5a, DAT_00038a5c, DAT_00038a5e, DAT_00038a60, DAT_00038a64, DAT_00038a66;
+extern short B00038a5a_eu, B00038a5c_eu, B00038a5e_eu, B00038a60_eu, B00038a64_eu, B00038a66_eu;
 extern int DAT_00032b84, DAT_00032f48;
 extern struct SNDCFG { char pad[8]; short f8; char pad2[0xa]; short f14; } *DAT_00032aa0;
 extern void *FUN_00016f10(int, int *, unsigned short *); extern void FUN_00016f74(int), FUN_000161d0(char *);
@@ -50,13 +50,13 @@ short *FUN_0001cf98(void)
 {
     volatile int ax, bx; struct SNDCFG *cfg;
     ms_reset();
-    DAT_00038a5a = ax;
-    DAT_00038a5c = bx;
-    DAT_00038a5e = 0;
-    if (DAT_00038a5a) {
+    B00038a5a_eu = ax;
+    B00038a5c_eu = bx;
+    B00038a5e_eu = 0;
+    if (B00038a5a_eu) {
         if ((DAT_000330a4 = FUN_00016f10(0x40, (int *)&DAT_000330a8, &DAT_000330ac)) != 0) {
-            if (FUN_0001cf44()) DAT_00038a5e = *DAT_000330a4;
-            if (!DAT_00038a5e) FUN_00016f74(DAT_000330ac);
+            if (FUN_0001cf44()) B00038a5e_eu = *DAT_000330a4;
+            if (!B00038a5e_eu) FUN_00016f74(DAT_000330ac);
         }
     } else {
         FUN_000161d0("No Mouse Installed.  Ravenloft requires a mouse to run.\r\n");
@@ -70,7 +70,7 @@ short *FUN_0001cf98(void)
         FUN_00018424();
         exit(1);
     }
-    return &DAT_00038a5a;
+    return &B00038a5a_eu;
 }
 
 /* ---- from build/var/mod/parts/p1d08c.c */
@@ -81,17 +81,17 @@ void FUN_0001d08c(int x, int y)
 }
 
 /* ---- from build/var/mod/parts/p1d0b4.c */
-/* FUN_0001d0b4: read buttons and position into DAT_00038a60 (buttons), DAT_00038a64 (x / 2), DAT_00038a66 (y) */
+/* FUN_0001d0b4: read buttons and position into B00038a60_eu (buttons), B00038a64_eu (x / 2), B00038a66_eu (y) */
 short *FUN_0001d0b4(void)
 {
     volatile int dy, cx, bx;
     if (FUN_000184d0()) {
         ms_status();
-        DAT_00038a60 = bx;
-        DAT_00038a66 = dy;
-        DAT_00038a64 = (short)cx >> 1;
+        B00038a60_eu = bx;
+        B00038a66_eu = dy;
+        B00038a64_eu = (short)cx >> 1;
     }
-    return &DAT_00038a60;
+    return &B00038a60_eu;
 }
 
 /* ---- from build/var/mod/parts/p1d10c.c */

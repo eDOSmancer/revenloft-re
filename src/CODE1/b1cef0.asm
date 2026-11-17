@@ -4,26 +4,26 @@
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
-public DAT_00038a28
-DAT_00038a28 label byte
+public B00038a28_eu
+B00038a28_eu label byte
     db 50 dup(?)
-public DAT_00038a5a
-DAT_00038a5a label byte
+public B00038a5a_eu
+B00038a5a_eu label byte
     db 2 dup(?)
-public DAT_00038a5c
-DAT_00038a5c label byte
+public B00038a5c_eu
+B00038a5c_eu label byte
     db 2 dup(?)
-public DAT_00038a5e
-DAT_00038a5e label byte
+public B00038a5e_eu
+B00038a5e_eu label byte
     db 2 dup(?)
-public DAT_00038a60
-DAT_00038a60 label byte
+public B00038a60_eu
+B00038a60_eu label byte
     db 4 dup(?)
-public DAT_00038a64
-DAT_00038a64 label byte
+public B00038a64_eu
+B00038a64_eu label byte
     db 2 dup(?)
-public DAT_00038a66
-DAT_00038a66 label byte
+public B00038a66_eu
+B00038a66_eu label byte
     db 2 dup(?)
 _BSS ends
 end

@@ -23,13 +23,13 @@ unsigned short FUN_00017360(void) { unsigned char *p; unsigned short c; if (!DAT
 
 /* ---- from build/var/mod/parts/p1738c.c */
 /* FUN_0001738c */
-extern void FUN_00019ae8(void), FUN_0001a57c(int, int, unsigned char *, void *, int); extern volatile unsigned char DAT_000389cf; extern unsigned char DAT_000389ce; extern char *DAT_000389c8, *DAT_000389c4; extern int DAT_000389b8, DAT_000389a4, DAT_000389b4, DAT_0003899c; extern unsigned char *DAT_00038994;
-void FUN_0001738c(char c) { if (DAT_000389cf) { if (!DAT_000389ce) { DAT_000389c8[DAT_000389b8] = c; DAT_000389b8++; if (DAT_000389b8 >= DAT_000389a4) { FUN_00019ae8(); FUN_0001a57c(DAT_000389b4, DAT_000389a4, (unsigned char *)DAT_000389c8, (void *)DAT_0003899c, DAT_00038994[5]); DAT_000389b8 = 0; DAT_000389b4++; } if (*(short *)DAT_00038994 <= DAT_000389b4) DAT_000389ce = 1; } } else if (!DAT_000389ce) { DAT_000389c4[DAT_000389b8] = c; DAT_000389b8++; if (DAT_000389b8 >= DAT_000389a4) { FUN_00019ae8(); DAT_000389b8 = 0; DAT_000389ce = 1; } } }
+extern void FUN_00019ae8(void), FUN_0001a57c(int, int, unsigned char *, void *, int); extern volatile unsigned char B000389cf_eu; extern unsigned char B000389ce_eu; extern char *B000389c8_eu, *B000389c4_eu; extern int B000389b8_eu, B000389a4_eu, B000389b4_eu, B0003899c_eu; extern unsigned char *B00038994_eu;
+void FUN_0001738c(char c) { if (B000389cf_eu) { if (!B000389ce_eu) { B000389c8_eu[B000389b8_eu] = c; B000389b8_eu++; if (B000389b8_eu >= B000389a4_eu) { FUN_00019ae8(); FUN_0001a57c(B000389b4_eu, B000389a4_eu, (unsigned char *)B000389c8_eu, (void *)B0003899c_eu, B00038994_eu[5]); B000389b8_eu = 0; B000389b4_eu++; } if (*(short *)B00038994_eu <= B000389b4_eu) B000389ce_eu = 1; } } else if (!B000389ce_eu) { B000389c4_eu[B000389b8_eu] = c; B000389b8_eu++; if (B000389b8_eu >= B000389a4_eu) { FUN_00019ae8(); B000389b8_eu = 0; B000389ce_eu = 1; } } }
 
 /* ---- from build/var/mod/parts/p1746c.c */
 /* FUN_0001746c */
 extern void FUN_0001db80(void);
-void FUN_0001746c(int a, int b, int c, int d, unsigned char e) { DAT_000389cf = e; DAT_000389ce = 0; DAT_00038994 = (unsigned char *)b; DAT_000389b8 = 0; DAT_000389b4 = 0; DAT_000389a4 = d; DAT_0003899c = a; if (DAT_000389cf) DAT_000389c8 = (char *)c; else DAT_000389c4 = (char *)c; FUN_0001db80(); }
+void FUN_0001746c(int a, int b, int c, int d, unsigned char e) { B000389cf_eu = e; B000389ce_eu = 0; B00038994_eu = (unsigned char *)b; B000389b8_eu = 0; B000389b4_eu = 0; B000389a4_eu = d; B0003899c_eu = a; if (B000389cf_eu) B000389c8_eu = (char *)c; else B000389c4_eu = (char *)c; FUN_0001db80(); }
 
 /* ---- from build/var/mod/parts/p174d0.c */
 /* FUN_000174d0 */
@@ -128,7 +128,7 @@ struct S *FUN_00017868(int pg, int x, int y, int w, int key) { unsigned short n;
 /* ---- from build/var/mod/parts/p17944.c */
 #define SR T14_SR
 struct SR { short size, n, w; unsigned char hb, flag; unsigned char data[1]; };
-extern int DAT_000304cc, DAT_000304d0; extern unsigned char DAT_0003680b[];
+extern int DAT_000304cc, DAT_000304d0; extern unsigned char B0003680b_eu[];
 extern void FUN_00011464(int, int, int, int, int, int, int, int, int, int, int, int, int), FUN_000115b0(int, int, int, int), FUN_000166c0(unsigned char *, int, int, int, int), FUN_000165c0(int, int, int, int), FUN_000165e8(int, int, int, int);
 extern unsigned FUN_0001043c(void);
 /* FUN_00017944 @ 00017944: fill in the sprite header at s (size, one frame, width, height/8, key flag) and grab the w x h image at (b, c) into it */
@@ -173,8 +173,8 @@ char *FUN_00017a84(char *s, char k) { char *r; r = s; if (s) while (*s) { *s += 
 
 /* ---- from build/var/mod/parts/p17ab4.c */
 /* FUN_00017ab4 @ 00017ab4: pixel width of string s in font font (module compiled with -os) */
-extern unsigned char *FUN_0001954c(int, int); extern unsigned char *DAT_00038988;
-int FUN_00017ab4(signed char *s, int font) { int w; DAT_00038988 = FUN_0001954c(font, 0); w = 0; if (s) while (*s) { w += (DAT_00038988 + 4)[*s]; s++; } return w; }
+extern unsigned char *FUN_0001954c(int, int); extern unsigned char *B00038988_eu;
+int FUN_00017ab4(signed char *s, int font) { int w; B00038988_eu = FUN_0001954c(font, 0); w = 0; if (s) while (*s) { w += (B00038988_eu + 4)[*s]; s++; } return w; }
 
 /* ---- from build/var/mod/parts/p17afc.c */
 #define RF T19_RF
@@ -185,14 +185,14 @@ struct RF { int fh, n, count; struct RE *tab; };
 extern int DAT_0003246c, DAT_00032b04;
 extern unsigned char *FUN_0001954c(int, int); extern void FUN_0001da18(void), FUN_0001da1a(void), FUN_0001862c(int, int, unsigned char *);
 /* FUN_00017afc @ 00017afc: pixel width of the first n characters of s in font font */
-int FUN_00017afc(signed char *s, int font, int n) { int w; DAT_00038988 = FUN_0001954c(font, 0); w = 0; if (s) while (*s && n) { w += (DAT_00038988 + 4)[*s]; s++; n--; } return w; }
+int FUN_00017afc(signed char *s, int font, int n) { int w; B00038988_eu = FUN_0001954c(font, 0); w = 0; if (s) while (*s && n) { w += (B00038988_eu + 4)[*s]; s++; n--; } return w; }
 
 #undef RF
 #pragma pack()
 /* ---- from build/var/mod/parts/p17b50.c */
 /* FUN_00017b50 */
 extern unsigned char *FUN_0001954c(int, int);
-int FUN_00017b50(signed char c, int id) { unsigned char *p = FUN_0001954c(id, 0); DAT_00038988 = p; return p[c + 4]; }
+int FUN_00017b50(signed char c, int id) { unsigned char *p = FUN_0001954c(id, 0); B00038988_eu = p; return p[c + 4]; }
 
 /* ---- from build/var/mod/parts/p17b74.c */
 #define SR T21_SR
@@ -200,33 +200,33 @@ extern short *DAT_00032a9c;
 extern void FUN_000185d4(int, int, int, int, int), FUN_0001864c(int, int, int, int, int), FUN_0001a010(int, int, int), FUN_0001a2b0(int, int);
 struct SR { short size, n, w; unsigned char h, f; };
 /* FUN_00017b74 @ 00017b74: select font n and return its height */
-int FUN_00017b74(int n) { DAT_00038988 = FUN_0001954c(n, 0); return (*(unsigned short **)DAT_00038988)[2]; }
+int FUN_00017b74(int n) { B00038988_eu = FUN_0001954c(n, 0); return (*(unsigned short **)B00038988_eu)[2]; }
 
 #undef SR
 /* ---- from build/var/mod/parts/p17b94.c */
 struct CHR { char b[0x248]; };
-extern int DAT_00032908, DAT_0003898c, DAT_00038990, DAT_000304cc, DAT_000304d0; extern unsigned char DAT_0003680c[];
+extern int DAT_00032908, B0003898c_eu, B00038990_eu, DAT_000304cc, DAT_000304d0; extern unsigned char B0003680c_eu[];
 extern unsigned char *FUN_0001954c(int, int); extern void FUN_00016824(int, int, int, int, int), FUN_000167c8(int, int, int, int);
 extern void FUN_00011464(int, int, int, int, int, int, int, int, int, int, int, int, int), FUN_000115b0(int, int, int, int);
 /* FUN_00017b94 @ 00017b94: draw character c in font font at the text cursor and advance it (CODE.1 copy of CODE.2 FUN_00040354) */
-void FUN_00017b94(int c, int font) { DAT_00038988 = FUN_0001954c(font, 0); if (DAT_00032908) FUN_00016824((signed char)c, DAT_00038990, DAT_0003898c, *(int *)DAT_00038988, DAT_00032908); else FUN_000167c8((signed char)c, DAT_00038990, DAT_0003898c, *(int *)DAT_00038988); DAT_0003898c += *(DAT_00038988 + 4 + (signed char)c); }
+void FUN_00017b94(int c, int font) { B00038988_eu = FUN_0001954c(font, 0); if (DAT_00032908) FUN_00016824((signed char)c, B00038990_eu, B0003898c_eu, *(int *)B00038988_eu, DAT_00032908); else FUN_000167c8((signed char)c, B00038990_eu, B0003898c_eu, *(int *)B00038988_eu); B0003898c_eu += *(B00038988_eu + 4 + (signed char)c); }
 
 /* ---- from build/var/mod/parts/p17c0c.c */
 /* FUN_00017c0c */
-extern unsigned char *FUN_0001954c(int, int); extern void FUN_00016824(int, int, int, int, int), FUN_000167c8(int, int, int, int); extern int DAT_00032908, DAT_0003898c, DAT_00038990;
-void FUN_00017c0c(signed char *s, int font) { DAT_00038988 = FUN_0001954c(font, 0); if (s) while (*s) { if (DAT_00032908) FUN_00016824(*s, DAT_00038990, DAT_0003898c, *(int *)DAT_00038988, DAT_00032908); else FUN_000167c8(*s, DAT_00038990, DAT_0003898c, *(int *)DAT_00038988); DAT_0003898c += (DAT_00038988 + 4)[*s]; s++; } }
+extern unsigned char *FUN_0001954c(int, int); extern void FUN_00016824(int, int, int, int, int), FUN_000167c8(int, int, int, int); extern int DAT_00032908, B0003898c_eu, B00038990_eu;
+void FUN_00017c0c(signed char *s, int font) { B00038988_eu = FUN_0001954c(font, 0); if (s) while (*s) { if (DAT_00032908) FUN_00016824(*s, B00038990_eu, B0003898c_eu, *(int *)B00038988_eu, DAT_00032908); else FUN_000167c8(*s, B00038990_eu, B0003898c_eu, *(int *)B00038988_eu); B0003898c_eu += (B00038988_eu + 4)[*s]; s++; } }
 
 /* ---- from build/var/mod/parts/p17cb0.c */
-extern int DAT_00032908, DAT_0003898c, DAT_00038990;
+extern int DAT_00032908, B0003898c_eu, B00038990_eu;
 extern unsigned char *FUN_0001954c(int, int); extern void FUN_00016824(int, int, int, int, int), FUN_000167c8(int, int, int, int);
 /* FUN_00017cb0 @ 00017cb0: draw at most n characters of s in font font at the text cursor (CODE.1 copy of CODE.2 FUN_00040458) */
 void FUN_00017cb0(signed char *s, int font, int n)
 {
-    DAT_00038988 = FUN_0001954c(font, 0);
+    B00038988_eu = FUN_0001954c(font, 0);
     if (s) while (*s && n) {
-        if (DAT_00032908) FUN_00016824(*s, DAT_00038990, DAT_0003898c, *(int *)DAT_00038988, DAT_00032908);
-        else FUN_000167c8(*s, DAT_00038990, DAT_0003898c, *(int *)DAT_00038988);
-        DAT_0003898c += *(DAT_00038988 + 4 + *s);
+        if (DAT_00032908) FUN_00016824(*s, B00038990_eu, B0003898c_eu, *(int *)B00038988_eu, DAT_00032908);
+        else FUN_000167c8(*s, B00038990_eu, B0003898c_eu, *(int *)B00038988_eu);
+        B0003898c_eu += *(B00038988_eu + 4 + *s);
         s++;
         n--;
     }
@@ -234,23 +234,23 @@ void FUN_00017cb0(signed char *s, int font, int n)
 
 /* ---- from build/var/mod/parts/p17d68.c */
 /* FUN_00017d68 */
-extern int DAT_00038990, DAT_0003898c;
-void FUN_00017d68(int a, int b) { DAT_00038990 = a; DAT_0003898c = b; }
+extern int B00038990_eu, B0003898c_eu;
+void FUN_00017d68(int a, int b) { B00038990_eu = a; B0003898c_eu = b; }
 
 /* ---- from build/var/mod/parts/p17d80.c */
 /* FUN_00017d80 */
-extern unsigned char *FUN_0001954c(int, int); extern int FUN_00017ab4(char *, int); extern void FUN_00017c0c(char *, int); extern int DAT_00038990, DAT_0003898c;
-void FUN_00017d80(int x, int y, int w, char *s, int font) { if (s) { DAT_00038988 = FUN_0001954c(font, 0); DAT_00038990 = x; DAT_0003898c = y + ((w - FUN_00017ab4(s, font)) >> 1); FUN_00017c0c(s, font); } }
+extern unsigned char *FUN_0001954c(int, int); extern int FUN_00017ab4(char *, int); extern void FUN_00017c0c(char *, int); extern int B00038990_eu, B0003898c_eu;
+void FUN_00017d80(int x, int y, int w, char *s, int font) { if (s) { B00038988_eu = FUN_0001954c(font, 0); B00038990_eu = x; B0003898c_eu = y + ((w - FUN_00017ab4(s, font)) >> 1); FUN_00017c0c(s, font); } }
 
 /* ---- from build/var/mod/parts/p17ddc.c */
 /* FUN_00017ddc */
-extern int DAT_00038990;
-int FUN_00017ddc(void) { return DAT_00038990; }
+extern int B00038990_eu;
+int FUN_00017ddc(void) { return B00038990_eu; }
 
 /* ---- from build/var/mod/parts/p17de8.c */
 /* FUN_00017de8 */
-extern int DAT_0003898c;
-int FUN_00017de8(void) { return DAT_0003898c; }
+extern int B0003898c_eu;
+int FUN_00017de8(void) { return B0003898c_eu; }
 
 /* ---- from build/var/mod/parts/p17df4.c */
 /* FUN_00017df4 */
@@ -268,21 +268,21 @@ void FUN_00017e04(int a, int b, int c, int d) { if (c) { FUN_00017d68(a, b - FUN
 void FUN_00017e44(int a, int b, int c, int d) { FUN_00017d68(a, b); FUN_00017c0c(c, d); }
 
 /* ---- from build/var/mod/parts/p17e6c.c */
-extern int DAT_00032908, DAT_0003898c, DAT_00038990;
+extern int DAT_00032908, B0003898c_eu, B00038990_eu;
 extern unsigned char *FUN_0001954c(int, int); extern void FUN_00017d68(int, int), FUN_00016824(int, int, int, int, int), FUN_000167c8(int, int, int, int);
 /* FUN_00017e6c @ 00017e6c: draw s in font font from (x, y) while it fits in w pixels */
 void FUN_00017e6c(int x, int y, unsigned char *s, int font, int w)
 {
     FUN_00017d68(x, y);
-    DAT_00038988 = FUN_0001954c(font, 0);
+    B00038988_eu = FUN_0001954c(font, 0);
     if (s) {
-        w -= DAT_00038988[*s + 4];
+        w -= B00038988_eu[*s + 4];
         while (*s && w > 0) {
-            if (DAT_00032908) FUN_00016824(*s, DAT_00038990, DAT_0003898c, *(int *)DAT_00038988, DAT_00032908);
-            else FUN_000167c8(*s, DAT_00038990, DAT_0003898c, *(int *)DAT_00038988);
-            DAT_0003898c += (DAT_00038988 + 4)[*s];
+            if (DAT_00032908) FUN_00016824(*s, B00038990_eu, B0003898c_eu, *(int *)B00038988_eu, DAT_00032908);
+            else FUN_000167c8(*s, B00038990_eu, B0003898c_eu, *(int *)B00038988_eu);
+            B0003898c_eu += (B00038988_eu + 4)[*s];
             s++;
-            w -= DAT_00038988[*s + 4];
+            w -= B00038988_eu[*s + 4];
         }
     }
 }

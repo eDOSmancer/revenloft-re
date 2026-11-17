@@ -28,45 +28,45 @@ void FUN_00040738(int v) { _disable(); DAT_0005f58c = v; _enable(); }
 /* FUN_00040748, FUN_000407f0: remove / add a key in the pressed-key list (the key count and the current key are volatile: the keyboard interrupt updates them); FUN_000407f0 also turns cursor keys into a move direction */
 void *memmove(void *, const void *, unsigned);
 extern volatile unsigned char DAT_0005f588;
-extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, DAT_0007b6c4[], DAT_0007b6c3[];
+extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, B0007b6c4_dQ[], B0007b6c3_dR[];
 void FUN_00040748(int key)
 {
     int k;
     for (k = 0; k < DAT_0005f588; k++) {
-        if (DAT_0007b6c4[k] == key) {
-            memmove(&DAT_0007b6c4[k], &DAT_0007b6c4[k + 1], DAT_0005f588 - k - 1);
+        if (B0007b6c4_dQ[k] == key) {
+            memmove(&B0007b6c4_dQ[k], &B0007b6c4_dQ[k + 1], DAT_0005f588 - k - 1);
             DAT_0005f588--;
             break;
         }
     }
     if (DAT_0005f588 == 0) DAT_0005f572 = 0;
-    else DAT_0005f572 = DAT_0007b6c3[DAT_0005f588];
+    else DAT_0005f572 = B0007b6c3_dR[DAT_0005f588];
     DAT_0005f571 = DAT_0005f572;
 }
 
 extern volatile unsigned char DAT_0005f588;
-extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, DAT_0007b6c4[], DAT_0007b6c3[];
+extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, B0007b6c4_dQ[], B0007b6c3_dR[];
 
-extern short DAT_000758fc, DAT_000758fe;
+extern short B000758fc_kL, B000758fe_j6;
 /* FUN_000407f0 @ 000407f0: add a key to the pressed-key list and turn cursor keys into a move direction (fc) and sense (fe) */
 void FUN_000407f0(int key)
 {
     int k;
     for (k = 0; k < DAT_0005f588; k++) {
-        if (DAT_0007b6c4[k] == key) {
+        if (B0007b6c4_dQ[k] == key) {
             FUN_00040748(key);
             break;
         }
     }
-    DAT_0007b6c4[DAT_0005f588] = key;
+    B0007b6c4_dQ[DAT_0005f588] = key;
     DAT_0005f588++;
     switch (key) {
-    case 0x48: DAT_000758fc = 3; DAT_000758fe = -1; break;
-    case 0x47: DAT_000758fc = 1; DAT_000758fe = -1; break;
-    case 0x49: DAT_000758fc = 1; DAT_000758fe = 1; break;
-    case 0x4b: DAT_000758fc = 2; DAT_000758fe = -1; break;
-    case 0x4d: DAT_000758fc = 2; DAT_000758fe = 1; break;
-    case 0x50: DAT_000758fc = 0; DAT_000758fe = 1; break;
+    case 0x48: B000758fc_kL = 3; B000758fe_j6 = -1; break;
+    case 0x47: B000758fc_kL = 1; B000758fe_j6 = -1; break;
+    case 0x49: B000758fc_kL = 1; B000758fe_j6 = 1; break;
+    case 0x4b: B000758fc_kL = 2; B000758fe_j6 = -1; break;
+    case 0x4d: B000758fc_kL = 2; B000758fe_j6 = 1; break;
+    case 0x50: B000758fc_kL = 0; B000758fe_j6 = 1; break;
     }
     DAT_0005f572 = key;
     DAT_0005f571 = DAT_0005f572;
@@ -77,15 +77,15 @@ void FUN_000407f0(int key)
 /* FUN_000408bc @ 000408bc, FUN_000408f4 @ 000408f4 (round 15: the original's `pop ebx; nop; ret` is FUN_000408bc's exit
    falling through the 4-byte procedure alignment into the empty function FUN_000408f4, whose `ret` it shares: 10.0a's
    peephole drops a jump to an identical return sequence that follows; FUN_000408f4 is referenced nowhere in the program) */
-extern unsigned char DAT_0007b6c4[];
+extern unsigned char B0007b6c4_dQ[];
 int FUN_000408bc(int v)
 {
     int i;
-    for (i = 0; i < DAT_0005f588; i++) if (DAT_0007b6c4[i] == v) return 1;
+    for (i = 0; i < DAT_0005f588; i++) if (B0007b6c4_dQ[i] == v) return 1;
     return 0;
 }
 
-extern unsigned char DAT_0007b6c4[];
+extern unsigned char B0007b6c4_dQ[];
 
 
 void FUN_000408f4(void)
@@ -100,7 +100,7 @@ extern void FUN_000407f0(int key); /* module prototype */
 #include <conio.h>
 #include <i86.h>
 extern volatile unsigned char DAT_0005f570; extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, DAT_0005f573, DAT_0005f0b1; extern volatile unsigned char DAT_0005f574;
-extern volatile short DAT_0006457c;
+extern volatile short B0006457c_bO;
 
 void __interrupt __far LAB_000408f8(void)
 {
@@ -144,7 +144,7 @@ void __interrupt __far LAB_000408f8(void)
         _enable();
         return;
     } else if (DAT_0005f572 == 0x19) {
-        DAT_0006457c = 1;
+        B0006457c_bO = 1;
         outp(0x20, 0x20);
         _enable();
         return;
@@ -265,7 +265,7 @@ void FUN_00040c38(void)
 #include <dos.h>
 #include <direct.h>
 #include <ctype.h>
-extern unsigned char DAT_0005f575; extern char DAT_0007b6fb[];
+extern unsigned char DAT_0005f575; extern char B0007b6fb_iP[];
 /* FUN_00040c94 @ 00040c94 */
 int FUN_00040c94(void) { return DAT_0005f575; }
 

@@ -43,45 +43,45 @@ unsigned short FUN_0003f9e4(void)
 /* ---- from build/var/mod/parts/p3fa30.c */
 /* FUN_0003fa30 @ 0003fa30: append one byte to the current picture row buffer */
 extern void FUN_0003f868(void), FUN_0003a20c(int, int, unsigned char *, int, int);
-extern unsigned char DAT_0007b6c3, DAT_0007b6c2, *DAT_0007b694, *DAT_0007b698, *DAT_0007b6a4; extern int DAT_0007b68c, DAT_0007b6b4, DAT_0007b688, DAT_0007b6bc;
+extern unsigned char B0007b6c3_dR, B0007b6c2_dS, *B0007b694_aV, *B0007b698_aB, *B0007b6a4_d1; extern int B0007b68c_a5, B0007b6b4_da, B0007b688_ar, B0007b6bc_d2;
 void FUN_0003fa30(int c)
 {
-    int n = DAT_0007b68c + 1; unsigned char *p;
-    if (DAT_0007b6c3) {
-        if (DAT_0007b6c2) return;
-        p = DAT_0007b694 + DAT_0007b68c;
-        DAT_0007b68c = n;
+    int n = B0007b68c_a5 + 1; unsigned char *p;
+    if (B0007b6c3_dR) {
+        if (B0007b6c2_dS) return;
+        p = B0007b694_aV + B0007b68c_a5;
+        B0007b68c_a5 = n;
         *p = c;
-        if (n >= DAT_0007b6b4) {
+        if (n >= B0007b6b4_da) {
             FUN_0003f868();
-            FUN_0003a20c(DAT_0007b688, DAT_0007b6b4, DAT_0007b694, DAT_0007b6bc, DAT_0007b6a4[5]);
-            DAT_0007b68c = 0;
-            DAT_0007b688++;
+            FUN_0003a20c(B0007b688_ar, B0007b6b4_da, B0007b694_aV, B0007b6bc_d2, B0007b6a4_d1[5]);
+            B0007b68c_a5 = 0;
+            B0007b688_ar++;
         }
-        if (DAT_0007b688 < *(short *)DAT_0007b6a4) return;
+        if (B0007b688_ar < *(short *)B0007b6a4_d1) return;
     } else {
-        if (DAT_0007b6c2) return;
-        p = DAT_0007b698 + DAT_0007b68c;
-        DAT_0007b68c = n;
+        if (B0007b6c2_dS) return;
+        p = B0007b698_aB + B0007b68c_a5;
+        B0007b68c_a5 = n;
         *p = c;
-        if (n < DAT_0007b6b4) return;
+        if (n < B0007b6b4_da) return;
         FUN_0003f868();
-        DAT_0007b68c = 0;
+        B0007b68c_a5 = 0;
     }
-    DAT_0007b6c2 = 1;
+    B0007b6c2_dS = 1;
 }
 
 /* ---- from build/var/mod/parts/p3fb04.c */
 /* FUN_0003fb04 @ 0003fb04 */
 extern void FUN_00047700(void);
-extern unsigned char DAT_0007b6c3, DAT_0007b6c2, *DAT_0007b694, *DAT_0007b698, *DAT_0007b6a4; extern int DAT_0007b68c, DAT_0007b6b4, DAT_0007b688, DAT_0007b6bc;
+extern unsigned char B0007b6c3_dR, B0007b6c2_dS, *B0007b694_aV, *B0007b698_aB, *B0007b6a4_d1; extern int B0007b68c_a5, B0007b6b4_da, B0007b688_ar, B0007b6bc_d2;
 void FUN_0003fb04(int a, int b, int c, int d, unsigned char e)
 {
-    DAT_0007b6c3 = e; DAT_0007b6c2 = 0;
-    DAT_0007b6a4 = (unsigned char *)b; DAT_0007b68c = 0;
-    DAT_0007b688 = 0; DAT_0007b6b4 = d;
-    DAT_0007b6bc = a;
-    if (e) DAT_0007b694 = (unsigned char *)c; else DAT_0007b698 = (unsigned char *)c;
+    B0007b6c3_dR = e; B0007b6c2_dS = 0;
+    B0007b6a4_d1 = (unsigned char *)b; B0007b68c_a5 = 0;
+    B0007b688_ar = 0; B0007b6b4_da = d;
+    B0007b6bc_d2 = a;
+    if (e) B0007b694_aV = (unsigned char *)c; else B0007b698_aB = (unsigned char *)c;
     FUN_00047700();
 }
 
@@ -173,7 +173,7 @@ void FUN_0003fd3c(unsigned char *dst, int w, int h)
 extern void FUN_0003fb04(int a, int b, int c, int d, unsigned char e); /* module prototype */
 extern unsigned char FUN_0003fc48(void); /* module prototype */
 #define FUN_0003a20c ((void (*)(int, int, unsigned char *, void *, int))FUN_0003a20c)
-/* MATCH (2026-11-11, round 17, in module 0x3f960 -ox -oe -oa -ot): case 3 is the expanded call FUN_0003fb04(r, h, buf, len, mode) with an int mode = 1. The parameter e is unsigned char, so the expansion assigns e = (unsigned char)mode, a conversion of a variable: copy propagation (cg cse.c PropMoves) does not carry the constant through it, so e stays a value in al (mov eax,1 ... mov [c3],al ... test al,al) and the if (e) of the body is not folded. With the literal 1 the front end folds (unsigned char)1, the parameter assignment is a constant move, PropMoves puts 1 into the store and the test and ConstFold removes the branch (real 10.0a micro-tests build/var/c3: literal folded, int variable kept). The store order c2, 8c, 88, a4, b4, c3, bc needs FUN_0003fb04's statements in CODE.1's order (DAT_0007b688 = 0 before DAT_0007b6b4 = d, as in the verified twin FUN_0001746c); both orders compile FUN_0003fb04 alone the same. Earlier: was NEAR MISS 652/676 with -oa (module m3f96c: FUN_0003f96c is inlined), 74 lines (new candidate): FUN_0003a20c is (i, len, buf, r, f), separate case counters k/i, "p = buf; m = w * h * 8;" loops; everything but case 3 matches. Left: case 3 (the inlined LZW set-up, cf. FUN_0003fb04) keeps the mode 1 in al and tests it at run time, store order c2, 8c, 88, a4, b4, c3, bc; here the test is folded (a local, the inlined FUN_0003fb04 and both store orders all fold it) CODE.1 evidence: its twin FUN_0001767c calls the set-up FUN_0001746c(r, h, buf, len, 1), whose matched source tests the global (if (DAT_000389cf)), so this case is the inlined FUN_0003fb04 with e = 1; inlining it here (with either test) still folds the constant. Also from CODE.1: cases 0/1 there call the row helpers (FUN_0001762c raw, FUN_000175f0 packed = CODE.2 FUN_0003fd3c / FUN_0003fd0c), so here they are those helpers inlined; FUN_0003fd3c is then "*dst++ = FUN_0003f9e4()" (CODE.1 FUN_0001762c calls the reader), but in a module test our compiler does not inline FUN_0003f9e4 into it (original does, without FUN_0003f9b0). 2026-11-10 (module round): case 3 written as the call FUN_0003fb04((int)r, (int)h, (int)buf, len, 1) is expanded and folds the constant too (35 lines either way); the original keeps e = 1 in eax, stores it as the last of the globals but bc and tests al, so the expanded parameter was not a known constant to its optimiser. Q1-Q4 do not apply (no register question: a missed or extra constant propagation). Not explained. */
+/* MATCH (2026-11-11, round 17, in module 0x3f960 -ox -oe -oa -ot): case 3 is the expanded call FUN_0003fb04(r, h, buf, len, mode) with an int mode = 1. The parameter e is unsigned char, so the expansion assigns e = (unsigned char)mode, a conversion of a variable: copy propagation (cg cse.c PropMoves) does not carry the constant through it, so e stays a value in al (mov eax,1 ... mov [c3],al ... test al,al) and the if (e) of the body is not folded. With the literal 1 the front end folds (unsigned char)1, the parameter assignment is a constant move, PropMoves puts 1 into the store and the test and ConstFold removes the branch (real 10.0a micro-tests build/var/c3: literal folded, int variable kept). The store order c2, 8c, 88, a4, b4, c3, bc needs FUN_0003fb04's statements in CODE.1's order (B0007b688_ar = 0 before B0007b6b4_da = d, as in the verified twin FUN_0001746c); both orders compile FUN_0003fb04 alone the same. Earlier: was NEAR MISS 652/676 with -oa (module m3f96c: FUN_0003f96c is inlined), 74 lines (new candidate): FUN_0003a20c is (i, len, buf, r, f), separate case counters k/i, "p = buf; m = w * h * 8;" loops; everything but case 3 matches. Left: case 3 (the inlined LZW set-up, cf. FUN_0003fb04) keeps the mode 1 in al and tests it at run time, store order c2, 8c, 88, a4, b4, c3, bc; here the test is folded (a local, the inlined FUN_0003fb04 and both store orders all fold it) CODE.1 evidence: its twin FUN_0001767c calls the set-up FUN_0001746c(r, h, buf, len, 1), whose matched source tests the global (if (DAT_000389cf)), so this case is the inlined FUN_0003fb04 with e = 1; inlining it here (with either test) still folds the constant. Also from CODE.1: cases 0/1 there call the row helpers (FUN_0001762c raw, FUN_000175f0 packed = CODE.2 FUN_0003fd3c / FUN_0003fd0c), so here they are those helpers inlined; FUN_0003fd3c is then "*dst++ = FUN_0003f9e4()" (CODE.1 FUN_0001762c calls the reader), but in a module test our compiler does not inline FUN_0003f9e4 into it (original does, without FUN_0003f9b0). 2026-11-10 (module round): case 3 written as the call FUN_0003fb04((int)r, (int)h, (int)buf, len, 1) is expanded and folds the constant too (35 lines either way); the original keeps e = 1 in eax, stores it as the last of the globals but bc and tests al, so the expanded parameter was not a known constant to its optimiser. Q1-Q4 do not apply (no register question: a missed or extra constant propagation). Not explained. */
 /* Buffered byte reader over the level file: FUN_0003f96c, FUN_0003f9b0, FUN_0003f9e4 (one -oa module; FUN_0003f9b0 is expanded inline into FUN_0003f9e4, which leaves its test duplicated). */
 extern long FUN_0004131c(long, int, int); extern int FUN_000412ec(void *, unsigned, int);
 extern int DAT_0005f4d8, DAT_0005f568; extern unsigned char *DAT_0005f4d4; extern unsigned char DAT_0005f0d4[];
@@ -376,13 +376,13 @@ extern void FUN_000410b0(void *);
    FUN_000405a8 calls FUN_0004060c, which -oe also expands inline. */
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 int FUN_00040288(signed char *s, int font)
 {
     int w;
-    DAT_0007b67c = FUN_0003f29c(font, 0);
+    B0007b67c_at = FUN_0003f29c(font, 0);
     w = 0;
-    if (s) while (*s) { w += DAT_0007b67c[*s + 4]; s++; }
+    if (s) while (*s) { w += B0007b67c_at[*s + 4]; s++; }
     return w;
 }
 
@@ -391,14 +391,14 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 int FUN_000402cc(signed char *s, int font, int n)
 {
     int w;
-    DAT_0007b67c = FUN_0003f29c(font, 0);
+    B0007b67c_at = FUN_0003f29c(font, 0);
     w = 0;
-    if (s) while (*s && n) { w += DAT_0007b67c[*s++ + 4]; n--; }
+    if (s) while (*s && n) { w += B0007b67c_at[*s++ + 4]; n--; }
     return w;
 }
 
@@ -407,12 +407,12 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 int FUN_00040318(int c, int font)
 {
-    DAT_0007b67c = FUN_0003f29c(font, 0);
-    return DAT_0007b67c[(signed char)c + 4];
+    B0007b67c_at = FUN_0003f29c(font, 0);
+    return B0007b67c_at[(signed char)c + 4];
 }
 
 extern void FUN_000410b0(void *);
@@ -420,12 +420,12 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 int FUN_00040338(int font)   /* font height; not in Ghidra's function list */
 {
-    DAT_0007b67c = FUN_0003f29c(font, 0);
-    return *(unsigned short *)(*(char **)DAT_0007b67c + 4);
+    B0007b67c_at = FUN_0003f29c(font, 0);
+    return *(unsigned short *)(*(char **)B0007b67c_at + 4);
 }
 
 extern void FUN_000410b0(void *);
@@ -433,14 +433,14 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 void FUN_00040354(int c, int font)
 {
-    DAT_0007b67c = FUN_0003f29c(font, 0);
-    if (DAT_0005f56c) FUN_000393ec((signed char)c, DAT_0007b684, DAT_0007b680, *(int *)DAT_0007b67c, DAT_0005f56c);
-    else FUN_0003939c((signed char)c, DAT_0007b684, DAT_0007b680, *(int *)DAT_0007b67c);
-    DAT_0007b680 += DAT_0007b67c[(signed char)c + 4];
+    B0007b67c_at = FUN_0003f29c(font, 0);
+    if (DAT_0005f56c) FUN_000393ec((signed char)c, B0007b684_aF, B0007b680_az, *(int *)B0007b67c_at, DAT_0005f56c);
+    else FUN_0003939c((signed char)c, B0007b684_aF, B0007b680_az, *(int *)B0007b67c_at);
+    B0007b680_az += B0007b67c_at[(signed char)c + 4];
 }
 
 extern void FUN_000410b0(void *);
@@ -448,15 +448,15 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 void FUN_000403c8(signed char *s, int font)
 {
-    DAT_0007b67c = FUN_0003f29c(font, 0);
+    B0007b67c_at = FUN_0003f29c(font, 0);
     if (s) while (*s) {
-        if (DAT_0005f56c) FUN_000393ec(*s, DAT_0007b684, DAT_0007b680, *(int *)DAT_0007b67c, DAT_0005f56c);
-        else FUN_0003939c(*s, DAT_0007b684, DAT_0007b680, *(int *)DAT_0007b67c);
-        DAT_0007b680 += DAT_0007b67c[*s + 4];
+        if (DAT_0005f56c) FUN_000393ec(*s, B0007b684_aF, B0007b680_az, *(int *)B0007b67c_at, DAT_0005f56c);
+        else FUN_0003939c(*s, B0007b684_aF, B0007b680_az, *(int *)B0007b67c_at);
+        B0007b680_az += B0007b67c_at[*s + 4];
         s++;
     }
 }
@@ -466,15 +466,15 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 void FUN_00040458(signed char *s, int font, int n)   /* draw at most n characters; not in Ghidra's function list */
 {
-    DAT_0007b67c = FUN_0003f29c(font, 0);
+    B0007b67c_at = FUN_0003f29c(font, 0);
     if (s) while (*s && n) {
-        if (DAT_0005f56c) FUN_000393ec(*s, DAT_0007b684, DAT_0007b680, *(int *)DAT_0007b67c, DAT_0005f56c);
-        else FUN_0003939c(*s, DAT_0007b684, DAT_0007b680, *(int *)DAT_0007b67c);
-        DAT_0007b680 += DAT_0007b67c[*s + 4];
+        if (DAT_0005f56c) FUN_000393ec(*s, B0007b684_aF, B0007b680_az, *(int *)B0007b67c_at, DAT_0005f56c);
+        else FUN_0003939c(*s, B0007b684_aF, B0007b680_az, *(int *)B0007b67c_at);
+        B0007b680_az += B0007b67c_at[*s + 4];
         s++;
         n--;
     }
@@ -485,25 +485,25 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
-void FUN_000404f4(int a, int b) { DAT_0007b684 = a; DAT_0007b680 = b; }
+void FUN_000404f4(int a, int b) { B0007b684_aF = a; B0007b680_az = b; }
 
 extern void FUN_000410b0(void *);
 
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 void FUN_00040508(int a, int b, int c, signed char *s, int font)
 {
     int w;
     if (s) {
-        DAT_0007b67c = FUN_0003f29c(font, 0);
-        DAT_0007b684 = a;
+        B0007b67c_at = FUN_0003f29c(font, 0);
+        B0007b684_aF = a;
         w = FUN_00040288(s, font);
-        DAT_0007b680 = b + ((c - w) >> 1);
+        B0007b680_az = b + ((c - w) >> 1);
         FUN_000403c8(s, font);
     }
 }
@@ -513,25 +513,25 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
-int FUN_0004058c(void) { return DAT_0007b684; }
-
-extern void FUN_000410b0(void *);
-
-
-extern unsigned char *FUN_0003f29c(int, int);
-extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
-
-int FUN_00040594(void) { return DAT_0007b680; }
+int FUN_0004058c(void) { return B0007b684_aF; }
 
 extern void FUN_000410b0(void *);
 
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
+
+int FUN_00040594(void) { return B0007b680_az; }
+
+extern void FUN_000410b0(void *);
+
+
+extern unsigned char *FUN_0003f29c(int, int);
+extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 void FUN_0004059c(int a) { DAT_0005f56c = a; }
 
@@ -540,7 +540,7 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 void FUN_000405a8(int a, int b, signed char *s, int font)
 {
@@ -553,11 +553,11 @@ extern void FUN_000410b0(void *);
 
 extern unsigned char *FUN_0003f29c(int, int);
 extern void FUN_0003939c(int, int, int, int); extern void FUN_000393ec(int, int, int, int, int);
-extern unsigned char *DAT_0007b67c; extern int DAT_0007b680, DAT_0007b684, DAT_0005f56c;
+extern unsigned char *B0007b67c_at; extern int B0007b680_az, B0007b684_aF, DAT_0005f56c;
 
 void FUN_0004060c(int a, int b, signed char *s, int font)
 {
-    DAT_0007b684 = a; DAT_0007b680 = b;
+    B0007b684_aF = a; B0007b680_az = b;
     FUN_000403c8(s, font);
 }
 
@@ -567,19 +567,19 @@ extern void FUN_000410b0(void *);
 /* ---- from build/var/mod/parts/p40630.c */
 /* FUN_00040630 @ 00040630: draw string s at (x, y) in font f, stopping when the next glyph would not fit in width w */
 extern unsigned char *FUN_0003f29c(int, int); extern void FUN_000393ec(int, int, int, int, int), FUN_0003939c(int, int, int, int);
-extern int DAT_0007b684, DAT_0007b680, DAT_0005f56c; extern unsigned char *DAT_0007b67c;
+extern int B0007b684_aF, B0007b680_az, DAT_0005f56c; extern unsigned char *B0007b67c_at;
 void FUN_00040630(int y, int x, unsigned char *s, int f, int w)
 {
-    DAT_0007b684 = y;
-    DAT_0007b680 = x;
-    DAT_0007b67c = FUN_0003f29c(f, 0);
+    B0007b684_aF = y;
+    B0007b680_az = x;
+    B0007b67c_at = FUN_0003f29c(f, 0);
     if (s == 0) return;
-    w -= DAT_0007b67c[*s + 4];
+    w -= B0007b67c_at[*s + 4];
     while (*s && w > 0) {
-        if (DAT_0005f56c) FUN_000393ec(*s, DAT_0007b684, DAT_0007b680, *(int *)DAT_0007b67c, DAT_0005f56c);
-        else FUN_0003939c(*s, DAT_0007b684, DAT_0007b680, *(int *)DAT_0007b67c);
-        DAT_0007b680 += DAT_0007b67c[*s + 4];
-        w -= DAT_0007b67c[s[1] + 4];
+        if (DAT_0005f56c) FUN_000393ec(*s, B0007b684_aF, B0007b680_az, *(int *)B0007b67c_at, DAT_0005f56c);
+        else FUN_0003939c(*s, B0007b684_aF, B0007b680_az, *(int *)B0007b67c_at);
+        B0007b680_az += B0007b67c_at[*s + 4];
+        w -= B0007b67c_at[s[1] + 4];
         s++;
     }
 }

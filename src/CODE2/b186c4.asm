@@ -5,44 +5,44 @@
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
     db 3 dup(?)
-public DAT_00064d8b
-DAT_00064d8b label byte
+public B00064d8b_a7
+B00064d8b_a7 label byte
     db 1 dup(?)
-public DAT_00064d8c
-DAT_00064d8c label byte
+public B00064d8c_bX
+B00064d8c_bX label byte
     db 2 dup(?)
-public DAT_00064d8e
-DAT_00064d8e label byte
+public B00064d8e_a6
+B00064d8e_a6 label byte
     db 4 dup(?)
-public DAT_00064d92
-DAT_00064d92 label byte
+public B00064d92_aW
+B00064d92_aW label byte
     db 2 dup(?)
-public DAT_00064d94
-DAT_00064d94 label byte
+public B00064d94_aU
+B00064d94_aU label byte
     db 2180 dup(?)
-public DAT_00065618
-DAT_00065618 label byte
+public B00065618_e1
+B00065618_e1 label byte
     db 1024 dup(?)
-public DAT_00065a18
-DAT_00065a18 label byte
+public B00065a18_cn
+B00065a18_cn label byte
     db 4 dup(?)
-public DAT_00065a1c
-DAT_00065a1c label byte
+public B00065a1c_ai
+B00065a1c_ai label byte
     db 4 dup(?)
-public DAT_00065a20
-DAT_00065a20 label byte
+public B00065a20_bf
+B00065a20_bf label byte
     db 4 dup(?)
-public DAT_00065a24
-DAT_00065a24 label byte
+public B00065a24_aj
+B00065a24_aj label byte
     db 4 dup(?)
-public DAT_00065a28
-DAT_00065a28 label byte
+public B00065a28_bn
+B00065a28_bn label byte
     db 4 dup(?)
-public DAT_00065a2c
-DAT_00065a2c label byte
+public B00065a2c_ay
+B00065a2c_ay label byte
     db 4 dup(?)
-public DAT_00065a30
-DAT_00065a30 label byte
+public B00065a30_af
+B00065a30_af label byte
     db 7144 dup(?)
 _BSS ends
 end

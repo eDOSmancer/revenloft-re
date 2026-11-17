@@ -8,7 +8,7 @@ _TEXT segment para public use32 'CODE'
 _TEXT ends
 extrn FUN_0003f9e4:near
 extrn FUN_0003fa30:near
-extrn DAT_0007b6c2:byte
+extrn B0007b6c2_dS:byte
 _DATA segment dword public use32 'DATA'
 DAT_00060604 label byte
     db 000h, 000h, 000h, 000h, 000h, 000h, 000h, 000h, 000h, 000h, 000h, 000h    ; 00060604  ............
@@ -40,7 +40,7 @@ L_00047724:
     shr si, 1
     test si, 0x100
     jne short L_00047746
-    cmp byte ptr [DAT_0007b6c2], 1
+    cmp byte ptr [B0007b6c2_dS], 1
     jne short L_0004773c
     jmp near ptr L_0004780a
 L_0004773c:
@@ -50,7 +50,7 @@ L_0004773c:
 L_00047746:
     test si, 1
     je short L_00047785
-    cmp byte ptr [DAT_0007b6c2], 1
+    cmp byte ptr [B0007b6c2_dS], 1
     jne short L_0004775b
     jmp near ptr L_0004780a
 L_0004775b:
@@ -66,11 +66,11 @@ L_0004775b:
     mov word ptr [ebp - 6], bx
     jmp near ptr L_00047805
 L_00047785:
-    cmp byte ptr [DAT_0007b6c2], 1
+    cmp byte ptr [B0007b6c2_dS], 1
     je short L_0004780a
     call FUN_0003f9e4
     mov word ptr [ebp - 2], ax
-    cmp byte ptr [DAT_0007b6c2], 1
+    cmp byte ptr [B0007b6c2_dS], 1
     je short L_0004780a
     call FUN_0003f9e4
     db 066h, 08bh, 0f8h    ; mov di, ax (WASM encodes it differently)

@@ -38,7 +38,7 @@ void FUN_000165a4(unsigned char c) { FUN_0001a36c(c); DAT_000323e6 = c; }
 
 /* ---- from build/var/mod/parts/p165c0.c */
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, unsigned char *, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_000165c0 @ 000165c0: vertical line of length c at (a, b) */
@@ -47,7 +47,7 @@ void FUN_000165c0(int a, int b, int c, unsigned char d) { FUN_0001a05c(a, b, a, 
 /* ---- from build/var/mod/parts/p165e8.c */
 #define SB T5_SB
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, unsigned char *, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_000165e8 @ 000165e8: horizontal line of length c at (a, b) */
@@ -60,7 +60,7 @@ extern void FUN_0001a010(void *, int, int);
 void FUN_00016618(void *p) { FUN_0001a010(p, 0, 0x300); }
 
 /* ---- from build/var/mod/parts/p16634.c */
-extern short *DAT_00032a9c; extern unsigned short **DAT_00038988; extern char DAT_00038904[], DAT_00038922[];
+extern short *DAT_00032a9c; extern unsigned short **B00038988_eu; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_000185d4(int, int, int, int, int), FUN_0001864c(int, int, int, int, int), FUN_0001a010(void *, int, int), FUN_0001a2b0(int, int);
 extern unsigned short **FUN_0001954c(int, int); extern int FUN_0001d2ad(char *);
 struct SR { short size, n, w; unsigned char h, f; };
@@ -68,14 +68,14 @@ struct SR { short size, n, w; unsigned char h, f; };
 void FUN_00016634(int a, int b, int c) { FUN_0001a010((void *)c, a, b * 2 + b); }
 
 /* ---- from build/var/mod/parts/p16654.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_00016654 @ 00016654 */
 void FUN_00016654(int x) { FUN_0001a2b0(DAT_000323d7 - x, x); }
 
 /* ---- from build/var/mod/parts/p16674.c */
 #define SR T9_SR
-extern short *DAT_00032a9c; extern unsigned short **DAT_00038988; extern char DAT_00038904[], DAT_00038922[];
+extern short *DAT_00032a9c; extern unsigned short **B00038988_eu; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_000185d4(int, int, int, int, int), FUN_0001864c(int, int, int, int, int), FUN_0001a010(void *, int, int), FUN_0001a2b0(int, int);
 extern unsigned short **FUN_0001954c(int, int); extern int FUN_0001d2ad(char *);
 struct SR { short size, n, w; unsigned char h, f; };
@@ -84,13 +84,13 @@ void FUN_00016674(int x) { FUN_0001a2b0(DAT_000323d7 - x, x - DAT_000323d7); }
 
 #undef SR
 /* ---- from build/var/mod/parts/p16694.c */
-extern unsigned char DAT_00038919, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
+extern unsigned char B00038919_eu, DAT_0003291d, DAT_00032b01; extern int DAT_00032b1c, DAT_00032b18;
 extern void FUN_0001a21c(int), FUN_00019ae8(void), FUN_0001da6c(int);
 /* FUN_00016694 @ 00016694 */
 void FUN_00016694(int a) { FUN_0001a21c(a); }
 
 /* ---- from build/var/mod/parts/p166a8.c */
-extern unsigned char DAT_0003291b, DAT_0003291c; extern char DAT_0003892f[];  extern char *DAT_00032b08;
+extern unsigned char DAT_0003291b, DAT_0003291c; extern char B0003892f_eu[];  extern char *DAT_00032b08;
 extern int FUN_0001daa6(void), FUN_000163d8(void), FUN_0001d23a(int, int); extern int FUN_000163b8(int); extern void FUN_0001d9ca(int), FUN_0001a21c(int), FUN_0001d906(char *, int), FUN_0001d8d0(int *), FUN_0001d8e8(int, int *), FUN_0001a2b0(int, int);
 /* FUN_000166a8 @ 000166a8 */
 void FUN_000166a8(int a) { FUN_0001a21c(-a); }
@@ -113,7 +113,7 @@ void FUN_000167c8(int a, int b, int c, int d) { if (d) { FUN_0001a6f0(a, b, c, (
 /* ---- from build/var/mod/parts/p167f4.c */
 #define SB T15_SB
 struct SB { short size; unsigned short n; };
-extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char DAT_00038904[], DAT_00038922[];
+extern unsigned char DAT_00032930, DAT_00032919, DAT_0003291a, DAT_0003291c; extern char B00038904_eu[], DAT_00038922[];
 extern void FUN_0001a5c8(int, struct SB *), FUN_0001a678(int, struct SB *), FUN_0001ae0c(int, int, struct SB *), FUN_0001a05c(int, int, int, int, int), FUN_0001a7e8(int, int, int, unsigned char *, int), FUN_00018960(void);
 extern int FUN_0001d280(int, int, char *);
 /* FUN_000167f4 @ 000167f4 */

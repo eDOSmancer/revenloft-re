@@ -4,179 +4,179 @@
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
-public DAT_000748e4
-DAT_000748e4 label byte
+public B000748e4_h8
+B000748e4_h8 label byte
     db 2 dup(?)
-public DAT_000748e6
-DAT_000748e6 label byte
+public B000748e6_h6
+B000748e6_h6 label byte
     db 2 dup(?)
-public DAT_000748e8
-DAT_000748e8 label byte
+public B000748e8_jD
+B000748e8_jD label byte
     db 2 dup(?)
-public DAT_000748ea
-DAT_000748ea label byte
+public B000748ea_bm
+B000748ea_bm label byte
     db 2 dup(?)
-public DAT_000748ec
-DAT_000748ec label byte
+public B000748ec_bk
+B000748ec_bk label byte
     db 20 dup(?)
-public DAT_00074900
-DAT_00074900 label byte
+public B00074900_bn
+B00074900_bn label byte
     db 3280 dup(?)
-public DAT_000755d0
-DAT_000755d0 label byte
+public B000755d0_ao
+B000755d0_ao label byte
     db 2 dup(?)
-public DAT_000755d2
-DAT_000755d2 label byte
+public B000755d2_ai
+B000755d2_ai label byte
     db 2 dup(?)
-public DAT_000755d4
-DAT_000755d4 label byte
+public B000755d4_ak
+B000755d4_ak label byte
     db 2 dup(?)
-public DAT_000755d6
-DAT_000755d6 label byte
+public B000755d6_ae
+B000755d6_ae label byte
     db 2 dup(?)
-public DAT_000755d8
-DAT_000755d8 label byte
+public B000755d8_aw
+B000755d8_aw label byte
     db 4 dup(?)
-public DAT_000755dc
-DAT_000755dc label byte
+public B000755dc_aX
+B000755dc_aX label byte
     db 4 dup(?)
-public DAT_000755e0
-DAT_000755e0 label byte
+public B000755e0_bo
+B000755e0_bo label byte
     db 4 dup(?)
-public DAT_000755e4
-DAT_000755e4 label byte
+public B000755e4_bk
+B000755e4_bk label byte
     db 4 dup(?)
-public DAT_000755e8
-DAT_000755e8 label byte
+public B000755e8_ag
+B000755e8_ag label byte
     db 2 dup(?)
-public DAT_000755ea
-DAT_000755ea label byte
+public B000755ea_aN
+B000755ea_aN label byte
     db 2 dup(?)
-public DAT_000755ec
-DAT_000755ec label byte
+public B000755ec_aH
+B000755ec_aH label byte
     db 2 dup(?)
-public DAT_000755ee
-DAT_000755ee label byte
+public B000755ee_aJ
+B000755ee_aJ label byte
     db 2 dup(?)
-public DAT_000755f0
-DAT_000755f0 label byte
+public B000755f0_co
+B000755f0_co label byte
     db 2 dup(?)
-public DAT_000755f2
-DAT_000755f2 label byte
+public B000755f2_by
+B000755f2_by label byte
     db 2 dup(?)
-public DAT_000755f4
-DAT_000755f4 label byte
+public B000755f4_ck
+B000755f4_ck label byte
     db 2 dup(?)
-public DAT_000755f6
-DAT_000755f6 label byte
+public B000755f6_bu
+B000755f6_bu label byte
     db 2 dup(?)
-public DAT_000755f8
-DAT_000755f8 label byte
+public B000755f8_bg
+B000755f8_bg label byte
     db 4 dup(?)
-public DAT_000755fc
-DAT_000755fc label byte
+public B000755fc_ax
+B000755fc_ax label byte
     db 4 dup(?)
-public DAT_00075600
-DAT_00075600 label byte
+public B00075600_b9
+B00075600_b9 label byte
     db 4 dup(?)
-public DAT_00075604
-DAT_00075604 label byte
+public B00075604_mM
+B00075604_mM label byte
     db 2 dup(?)
-public DAT_00075606
-DAT_00075606 label byte
+public B00075606_b3
+B00075606_b3 label byte
     db 2 dup(?)
-public DAT_00075608
-DAT_00075608 label byte
+public B00075608_c1
+B00075608_c1 label byte
     db 4 dup(?)
-public DAT_0007560c
-DAT_0007560c label byte
+public B0007560c_hn
+B0007560c_hn label byte
     db 4 dup(?)
-public DAT_00075610
-DAT_00075610 label byte
+public B00075610_a9
+B00075610_a9 label byte
     db 2 dup(?)
-public DAT_00075612
-DAT_00075612 label byte
+public B00075612_lo
+B00075612_lo label byte
     db 2 dup(?)
-public DAT_00075614
-DAT_00075614 label byte
+public B00075614_lm
+B00075614_lm label byte
     db 4 dup(?)
-public DAT_00075618
-DAT_00075618 label byte
+public B00075618_b1
+B00075618_b1 label byte
     db 1 dup(?)
-public DAT_00075619
-DAT_00075619 label byte
+public B00075619_b0
+B00075619_b0 label byte
     db 2 dup(?)
-public DAT_0007561b
-DAT_0007561b label byte
+public B0007561b_io
+B0007561b_io label byte
     db 6 dup(?)
-public DAT_00075621
-DAT_00075621 label byte
+public B00075621_lx
+B00075621_lx label byte
     db 1 dup(?)
-public DAT_00075622
-DAT_00075622 label byte
+public B00075622_mo
+B00075622_mo label byte
     db 128 dup(?)
-public DAT_000756a2
-DAT_000756a2 label byte
+public B000756a2_ah
+B000756a2_ah label byte
     db 128 dup(?)
-public DAT_00075722
-DAT_00075722 label byte
+public B00075722_nn
+B00075722_nn label byte
     db 128 dup(?)
-public DAT_000757a2
-DAT_000757a2 label byte
+public B000757a2_bK
+B000757a2_bK label byte
     db 282 dup(?)
-public DAT_000758bc
-DAT_000758bc label byte
+public B000758bc_al
+B000758bc_al label byte
     db 4 dup(?)
-public DAT_000758c0
-DAT_000758c0 label byte
+public B000758c0_kK
+B000758c0_kK label byte
     db 4 dup(?)
-public DAT_000758c4
-DAT_000758c4 label byte
+public B000758c4_j7
+B000758c4_j7 label byte
     db 4 dup(?)
-public DAT_000758c8
-DAT_000758c8 label byte
+public B000758c8_as
+B000758c8_as label byte
     db 4 dup(?)
-public DAT_000758cc
-DAT_000758cc label byte
+public B000758cc_fL
+B000758cc_fL label byte
     db 4 dup(?)
-public DAT_000758d0
-DAT_000758d0 label byte
+public B000758d0_jK
+B000758d0_jK label byte
     db 4 dup(?)
-public DAT_000758d4
-DAT_000758d4 label byte
+public B000758d4_jG
+B000758d4_jG label byte
     db 4 dup(?)
-public DAT_000758d8
-DAT_000758d8 label byte
+public B000758d8_j3
+B000758d8_j3 label byte
     db 4 dup(?)
-public DAT_000758dc
-DAT_000758dc label byte
+public B000758dc_cl
+B000758dc_cl label byte
     db 4 dup(?)
-public DAT_000758e0
-DAT_000758e0 label byte
+public B000758e0_iK
+B000758e0_iK label byte
     db 4 dup(?)
-public DAT_000758e4
-DAT_000758e4 label byte
+public B000758e4_h7
+B000758e4_h7 label byte
     db 4 dup(?)
-public DAT_000758e8
-DAT_000758e8 label byte
+public B000758e8_jC
+B000758e8_jC label byte
     db 4 dup(?)
-public DAT_000758ec
-DAT_000758ec label byte
+public B000758ec_bl
+B000758ec_bl label byte
     db 4 dup(?)
-public DAT_000758f0
-DAT_000758f0 label byte
+public B000758f0_hK
+B000758f0_hK label byte
     db 4 dup(?)
-public DAT_000758f4
-DAT_000758f4 label byte
+public B000758f4_hG
+B000758f4_hG label byte
     db 4 dup(?)
-public DAT_000758f8
-DAT_000758f8 label byte
+public B000758f8_h3
+B000758f8_h3 label byte
     db 4 dup(?)
-public DAT_000758fc
-DAT_000758fc label byte
+public B000758fc_kL
+B000758fc_kL label byte
     db 2 dup(?)
-public DAT_000758fe
-DAT_000758fe label byte
+public B000758fe_j6
+B000758fe_j6 label byte
     db 2 dup(?)
 _BSS ends
 end

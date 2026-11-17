@@ -4,15 +4,15 @@
 /* FUN_00010010 @ 00010010: mark the door at (x, y) */
  
 #include "world.h"
-extern short DAT_0007223a, DAT_0007223e; extern unsigned short DAT_00072246, DAT_0007224c;
-#define DR_KIND(i) (*(unsigned short *)((char *)&DAT_00072246 + (i) * 0x16))
-#define DR_X(i)    (*(short *)((char *)&DAT_0007223e + (i) * 0x16))
-#define DR_Y(i)    (*(short *)((char *)&DAT_0007223a + (i) * 0x16))
-#define DR_ST(i)   (*(unsigned short *)((char *)&DAT_0007224c + (i) * 0x16))
+extern short B0007223a_et, B0007223e_dx; extern unsigned short B00072246_dJ, B0007224c_ez;
+#define DR_KIND(i) (*(unsigned short *)((char *)&B00072246_dJ + (i) * 0x16))
+#define DR_X(i)    (*(short *)((char *)&B0007223e_dx + (i) * 0x16))
+#define DR_Y(i)    (*(short *)((char *)&B0007223a_et + (i) * 0x16))
+#define DR_ST(i)   (*(unsigned short *)((char *)&B0007224c_ez + (i) * 0x16))
 void FUN_00010010(int x, int y)
 {
     int i;
-    for (i = 0; i < DAT_00075618.ndoor; i++) {
+    for (i = 0; i < B00075618_b1.ndoor; i++) {
         if (DR_KIND(i) == 0x54 && DR_X(i) == x && DR_Y(i) == y) {
             DR_ST(i) &= 0xfe3f;
             DR_ST(i) |= 0x40;
@@ -29,26 +29,26 @@ void FUN_00010010(int x, int y)
 /* FUN_00010074 @ 00010074 */
 #include "world.h"
 struct R22 { unsigned char flags; char pad[2]; unsigned short type; char pad2[17]; };
-extern struct R22 DAT_00064d8b[]; 
+extern struct R22 B00064d8b_a7[]; 
 extern void FUN_00026524(int); extern void FUN_0002c124(int); extern void FUN_0002f1c8(void);
 void FUN_00010074(void)
 {
     int i;
     FUN_00026524(0x1c);
     FUN_0002c124(0x3a);
-    for (i = 0; i < DAT_00075618.nent; i++)
-        if (DAT_00064d8b[i].type == 8) DAT_00064d8b[i].flags &= ~2;
+    for (i = 0; i < B00075618_b1.nent; i++)
+        if (B00064d8b_a7[i].type == 8) B00064d8b_a7[i].flags &= ~2;
     FUN_0002f1c8();
 }
 
 /* ---- from build/var/mod/parts/p100b8.c */
-/* the module declaration (seen through a cast view below) */ extern unsigned char DAT_000718e0;
-#define DAT_000718e0 ((char *)&DAT_000718e0)
+/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
+#define B000718e0_iO ((char *)&B000718e0_iO)
 /* FUN_000100b8: matched 2026-11-10 in module 0x10010. The else-branch loops count k only (the compiler makes the 0x248 offset itself; with an explicit off it strength-reduces name into a fourth induction register), and the flag is set before the possession byte. */
 /* FUN_000100b8 @ 000100b8: Strahd's possession: pick the first ordinary party member (not Irmgarde, Vladislav or Tatian) and mark them possessed */
 int strcmp(const char *, const char *);
 extern int FUN_0002c1dc(int); extern void FUN_00026524(int), FUN_0002c124(int), FUN_0002c160(int);
-extern unsigned short DAT_000718f0; extern unsigned char DAT_0005cf5a; 
+extern unsigned short B000718f0_hO; extern unsigned char DAT_0005cf5a; 
 void FUN_000100b8(void)
 {
     int k, off; char *name;
@@ -61,7 +61,7 @@ void FUN_000100b8(void)
         off = 0;
         while (1) {
             (&DAT_0005cf5a)[k] = 1;
-            *(unsigned short *)((char *)&DAT_000718f0 + off) &= 0xfebf;
+            *(unsigned short *)((char *)&B000718f0_hO + off) &= 0xfebf;
             off += 0x248;
             k++;
             if (k >= 4) break;
@@ -69,30 +69,30 @@ void FUN_000100b8(void)
     } else {
         if (FUN_0002c1dc(0x3c)) return;
         for (k = 0; k < 4; k++) {
-            if (!(*(unsigned short *)((char *)&DAT_000718f0 + k * 0x248) & 0xe000) && !(*(unsigned short *)((char *)&DAT_000718f0 + k * 0x248) & 0x80)) break;
+            if (!(*(unsigned short *)((char *)&B000718f0_hO + k * 0x248) & 0xe000) && !(*(unsigned short *)((char *)&B000718f0_hO + k * 0x248) & 0x80)) break;
         }
         if (k == 4) {
             for (k = 0; k < 4; k++) {
-                if (!(*(unsigned short *)((char *)&DAT_000718f0 + k * 0x248) & 0xe000)) {
-                    name = DAT_000718e0 + k * 0x248;
+                if (!(*(unsigned short *)((char *)&B000718f0_hO + k * 0x248) & 0xe000)) {
+                    name = B000718e0_iO + k * 0x248;
                     if (strcmp(name, "IRMGARDE") && strcmp(name, "VLADISLAV") && strcmp(name, "TATIAN")) break;
                 }
             }
         }
         FUN_00026524(9);
-        *(unsigned short *)((char *)&DAT_000718f0 + k * 0x248) |= 0x100;
+        *(unsigned short *)((char *)&B000718f0_hO + k * 0x248) |= 0x100;
         (&DAT_0005cf5a)[k] = 1;
         FUN_0002c124(0x3c);
     }
 }
 
-#undef DAT_000718e0
+#undef B000718e0_iO
 /* ---- from build/var/mod/parts/p101fc.c */
 /* FUN_000101fc @ 000101fc */
 #include "chars.h"
 #include "world.h"
 extern int FUN_0002c1dc(int), FUN_00024a60(char *); extern void FUN_0002c124(int);
- extern int DAT_0005bf44;  extern unsigned short DAT_0006994c;
+ extern int DAT_0005bf44;  extern unsigned short B0006994c_hI;
 int FUN_000101fc(void)
 {
     int k, r;
@@ -100,8 +100,8 @@ int FUN_000101fc(void)
         k = FUN_00024a60("IRMGARDE");
         if (k == -1) { DAT_0005bf44 = 0x4a; return 0; }
         if ((*(unsigned short *)(CHAR_REC(k) + 0x10) & 0x5000) == 0) {
-            r = DAT_00075618.w * 0x12;
-            ((unsigned short *)&DAT_0006994c)[r] &= 0xffc0;
+            r = B00075618_b1.w * 0x12;
+            ((unsigned short *)&B0006994c_hI)[r] &= 0xffc0;
             FUN_0002c124(0x46);
             DAT_0005bf44 = 0x33;
             return 1;
@@ -121,7 +121,7 @@ extern int FUN_000101fc(void); /* module prototype */
 struct OBJ { unsigned char kind; unsigned char f0 : 2, open : 1, f3 : 3, b6 : 1, b7 : 1; signed char c2; unsigned char p3, p4, p5, c6; };
 union POS { int v; struct { unsigned short f; short i; } s; };
 struct CELL { unsigned short deco : 6, rest : 10; };
-extern unsigned char *DAT_0005cf44, DAT_0005759c[]; extern struct CELL DAT_000698e0[]; extern short DAT_00058600; extern unsigned char DAT_00058602;
+extern unsigned char *DAT_0005cf44, DAT_0005759c[]; extern struct CELL B000698e0_b7[]; extern short DAT_00058600; extern unsigned char DAT_00058602;
 extern int DAT_0005c050, DAT_0005bf44;
 extern struct OBJ *FUN_0002e8c8(int, int); extern int FUN_00030c0c(int, int, struct OBJ *), FUN_00023ef8(int), FUN_0002a1f4(void);
 extern void FUN_00018a80(int, int, int, int, int), FUN_00038110(int, int, int, int), FUN_00038dcc(int), FUN_00038ef0(void), FUN_00038c54(int, int);
@@ -172,8 +172,8 @@ void FUN_000102a8(int n)
             else o->f0 ^= 1;
             break;
         case 4:
-            t = p[2] * DAT_00075618.w + p[3]; /* product first: sum in edx, stored, then copied to eax (original order) */
-            DAT_000698e0[t].deco = p[4];
+            t = p[2] * B00075618_b1.w + p[3]; /* product first: sum in edx, stored, then copied to eax (original order) */
+            B000698e0_b7[t].deco = p[4];
             break;
         case 3:
             m = p[4];

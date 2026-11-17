@@ -11,17 +11,17 @@
 #include "world.h"
 void *memmove(void *, const void *, unsigned);
 
- extern short DAT_0007223a, DAT_0007223e; extern unsigned short DAT_00072246; extern unsigned char DAT_00072238[];
-#define DR_KIND(i) (*(unsigned short *)((char *)&DAT_00072246 + (i) * 0x16))
-#define DR_X(i)    (*(short *)((char *)&DAT_0007223e + (i) * 0x16))
-#define DR_Y(i)    (*(short *)((char *)&DAT_0007223a + (i) * 0x16))
+ extern short B0007223a_et, B0007223e_dx; extern unsigned short B00072246_dJ; extern unsigned char B00072238_dL[];
+#define DR_KIND(i) (*(unsigned short *)((char *)&B00072246_dJ + (i) * 0x16))
+#define DR_X(i)    (*(short *)((char *)&B0007223e_dx + (i) * 0x16))
+#define DR_Y(i)    (*(short *)((char *)&B0007223a_et + (i) * 0x16))
 void FUN_000231dc(void)
 {
     int i;
-    for (i = 0; i < DAT_00075618.ndoor; i++) {
+    for (i = 0; i < B00075618_b1.ndoor; i++) {
         if (DR_Y(i) == 0x1f && DR_X(i) == 0xd && DR_KIND(i) == 0x3c) {
-            memmove(DAT_00072238 + i * 0x16, DAT_00072238 + (i + 1) * 0x16, (DAT_00075618.ndoor - i - 1) * 0x16);
-            DAT_00075618.ndoor--;
+            memmove(B00072238_dL + i * 0x16, B00072238_dL + (i + 1) * 0x16, (B00075618_b1.ndoor - i - 1) * 0x16);
+            B00075618_b1.ndoor--;
             return;
         }
     }
@@ -193,7 +193,7 @@ void *memset(void *, int, unsigned);
 extern void FUN_000412ec(void *, unsigned, int), FUN_00039b40(int, int, int, int, int), FUN_00039234(unsigned char *);
 extern void FUN_00037bd8(int), FUN_00037aec(int), FUN_00037b84(int), FUN_00038dcc(int), FUN_00038ef0(void), FUN_00039008(int), FUN_00038f58(int), FUN_00038e58(int, int, int);
 extern void FUN_00038110(int, int, int, int), FUN_000246b8(int), FUN_0002c368(void *, int);
-extern int DAT_00057f7c, DAT_00057f88, DAT_00057f78, DAT_00057fa4, DAT_00057fa8, DAT_0005c050, DAT_000758d0;
+extern int DAT_00057f7c, DAT_00057f88, DAT_00057f78, DAT_00057fa4, DAT_00057fa8, DAT_0005c050, B000758d0_jK;
 extern unsigned char DAT_00057f80, DAT_00057f8c, DAT_0005c355[], DAT_0005759c[];
 void FUN_000235c4(void)
 {
@@ -226,7 +226,7 @@ void FUN_000235c4(void)
         a = ((short *)DAT_00057f84)[0];
         DAT_00057f88 = 2;
         if (a == 3 || a == 0xf || a == 0x88) break;
-        FUN_00038110(a + DAT_000758d0, 0xff, 0, 1);
+        FUN_00038110(a + B000758d0_jK, 0xff, 0, 1);
         break;
     case 9:
         a = ((short *)DAT_00057f84)[0];
@@ -257,7 +257,7 @@ extern void FUN_000235c4(void); /* module prototype */
 extern void FUN_000412ec(void *, unsigned, int), FUN_000391b0(unsigned char), FUN_000391c8(unsigned char), FUN_0003e608(void), FUN_00040700(void), FUN_0003f868(void);
 extern void FUN_00039b40(int, int, int, int, int), FUN_0003a020(int), FUN_00038168(void), FUN_00039234(unsigned char *), FUN_0003e614(unsigned, int);
 extern int FUN_00023fd4(int, int, int, int, int, char *, int), FUN_00040b40(void);
-extern int DAT_00057f7c, DAT_00057f90, DAT_00057fa4, DAT_00057fa8, DAT_0005c050, DAT_00062c10, DAT_00057f94; extern unsigned char DAT_00057f80, DAT_00057f8c, DAT_0005c355[]; 
+extern int DAT_00057f7c, DAT_00057f90, DAT_00057fa4, DAT_00057fa8, DAT_0005c050, B00062c10_h8, DAT_00057f94; extern unsigned char DAT_00057f80, DAT_00057f8c, DAT_0005c355[]; 
 int FUN_00023834(void)
 {
     unsigned short nfr, n, k, j; int r;
@@ -286,7 +286,7 @@ int FUN_00023834(void)
             FUN_00039234(DAT_0005c355);
             DAT_00057f8c = 0;
         }
-        if (DAT_00057f80) FUN_0003e614(DAT_00062c10, 0); else FUN_0003e614(DAT_00057f90, 0);
+        if (DAT_00057f80) FUN_0003e614(B00062c10_h8, 0); else FUN_0003e614(DAT_00057f90, 0);
         FUN_0003f868();
         if (FUN_00040b40() == 0x1b) {
             r = 1;
@@ -329,7 +329,7 @@ extern int FUN_000239ac(int n); /* module prototype */
 #define FUN_0004131c ((int (*)(int, int, int))FUN_0004131c)
 /* FUN_00023ad8 @ 00023ad8: set up scene *mode: save the audio state (except mode 12), adjust the mode to the party, open its data stream */
 extern void FUN_00029ccc(int), FUN_00038dcc(int), FUN_0002aacc(void); extern int FUN_00039048(void), FUN_00039050(void), FUN_00039098(void), FUN_000390a0(void); extern void *FUN_0004104c(int);
-extern char DAT_000718f0[]; extern int DAT_00062c10, DAT_00057f78, DAT_00057f88, DAT_00057f94, DAT_00057fa4, DAT_00057fa0, DAT_00057fb0, DAT_00057f7c, DAT_00057fac;
+extern char B000718f0_hO[]; extern int B00062c10_h8, DAT_00057f78, DAT_00057f88, DAT_00057f94, DAT_00057fa4, DAT_00057fa0, DAT_00057fb0, DAT_00057f7c, DAT_00057fac;
 extern unsigned char DAT_00057f8c;
 /* struct CSEQ: defined above */   /* DAT_00057f98, DAT_00057f9c: see f23248.c */
 extern struct CSEQ DAT_00057f98;
@@ -344,20 +344,20 @@ void FUN_00023ad8(int *pmode, int *a, int *b, int *c, int *d)
         v3 = FUN_00039098();
         v4 = FUN_000390a0();
         FUN_00038dcc(0x9c4);
-        DAT_00062c10 = 6;
+        B00062c10_h8 = 6;
     } else {
-        DAT_00062c10 = 2;
+        B00062c10_h8 = 2;
     }
     FUN_0002aacc();
     if (mode == 2) {
         n = 0;
-        for (k = 0; k < 4; k++) if (!(*(unsigned short *)(DAT_000718f0 + k * 0x248) & 0x8000)) n++;
+        for (k = 0; k < 4; k++) if (!(*(unsigned short *)(B000718f0_hO + k * 0x248) & 0x8000)) n++;
         mode += n - 1;
     }
     if (mode == 10) {
         n = 0;
         for (k = 0; k < 4; k++)
-            if (*(unsigned short *)(DAT_000718f0 + k * 0x248) < 0x4000 && !(*(unsigned short *)(DAT_000718f0 + k * 0x248) & 0x80)) n++;
+            if (*(unsigned short *)(B000718f0_hO + k * 0x248) < 0x4000 && !(*(unsigned short *)(B000718f0_hO + k * 0x248) & 0x80)) n++;
         if (!n) mode = 0xb;
     }
     DAT_00057f78 = mode;
@@ -391,7 +391,7 @@ extern void FUN_0002c124(int), FUN_00038ef0(void), FUN_00038ce8(void), FUN_00028
 extern void FUN_00039008(int), FUN_00038f58(int), FUN_00038e58(int, int, int), FUN_0002f8fc(void), FUN_00029cf4(void);
 extern int FUN_00039050(void);
  extern int DAT_00057f7c, DAT_0005c658, DAT_0005c034;
-extern short DAT_000755d0, DAT_000755d2, DAT_000755d4, DAT_000755d6;
+extern short B000755d0_ao, B000755d2_ai, B000755d4_ak, B000755d6_ae;
 extern unsigned char DAT_0005c054[];
 void FUN_00023c88(int sc, int s, int v, int f, int p)
 {
@@ -407,19 +407,19 @@ void FUN_00023c88(int sc, int s, int v, int f, int p)
     switch (sc) {
     case 1: FUN_0002c124(0x2b); break;
     case 2: case 3: case 4: case 5:
-        DAT_000755d2 = 0x16; DAT_000755d6 = 0xd; DAT_000755d4 = 0x8000; DAT_000755d0 = 0x8000; DAT_0005c658 = 0;
+        B000755d2_ai = 0x16; B000755d6_ae = 0xd; B000755d4_ak = 0x8000; B000755d0_ao = 0x8000; DAT_0005c658 = 0;
         FUN_00038ef0(); FUN_00038ce8(); s = -2; FUN_000281b4(0xc);
         break;
     case 6:
-        DAT_000755d2 = 0x17; DAT_000755d6 = 0x17; DAT_000755d4 = 0x8000; DAT_000755d0 = 0x8000; DAT_0005c658 = 0x10e;
+        B000755d2_ai = 0x17; B000755d6_ae = 0x17; B000755d4_ak = 0x8000; B000755d0_ao = 0x8000; DAT_0005c658 = 0x10e;
         FUN_00038ef0(); FUN_00038ce8(); s = -2; FUN_000281b4(0xc);
         break;
     case 7:
-        DAT_000755d2 = 2; DAT_000755d6 = 0x41; DAT_000755d4 = 0x8000; DAT_000755d0 = 0x8000; DAT_0005c658 = 0x10e;
+        B000755d2_ai = 2; B000755d6_ae = 0x41; B000755d4_ak = 0x8000; B000755d0_ao = 0x8000; DAT_0005c658 = 0x10e;
         FUN_00038ef0(); FUN_00038ce8(); FUN_000281b4(0xb); FUN_0002c124(0x25); FUN_00025050(0x6e); s = -2; FUN_000231dc();
         break;
     case 9:
-        DAT_000755d2 = 0x15; DAT_000755d6 = 0x2b; DAT_0005c658 = 0xb4;
+        B000755d2_ai = 0x15; B000755d6_ae = 0x2b; DAT_0005c658 = 0xb4;
         break;
     }
     if (sc != 0 && sc != 12) {

@@ -13,8 +13,8 @@
 /* FUN_000307e8 @ 000307e8: facing angle of a map entity (3-bit direction field) */
 extern void FUN_0003df2c(int, int, int, int);
 struct ENT { unsigned short f0 : 3, dir : 3, rest : 10; };
-extern struct ENT DAT_00064d94;
-#define ENT(i) ((struct ENT *)((char *)&DAT_00064d94 + (i) * 0x16))
+extern struct ENT B00064d94_aU;
+#define ENT(i) ((struct ENT *)((char *)&B00064d94_aU + (i) * 0x16))
 void FUN_000307e8(int i, int turn, int c, int d)
 {
     int t = 0;
@@ -31,24 +31,24 @@ extern void FUN_000307e8(int i, int turn, int c, int d); /* module prototype */
 #define FUN_000307e8 ((void (*)(int, unsigned, int *, int *))FUN_000307e8)
 
 extern int FUN_0003acdc(int); extern short FUN_0003d5d0(int, int, int); extern void FUN_0001e0f8(int);
- extern char DAT_00064d80[];
-#define EF(k) (*(int *)(DAT_00064d80 + (k) * 0x16 + 0xb))
-#define EID(k) (*(unsigned short *)(DAT_00064d80 + (k) * 0x16 + 0xe))
-#define EX(k) (*(int *)(DAT_00064d80 + (k) * 0x16))
-#define EY(k) (*(int *)(DAT_00064d80 + (k) * 0x16 + 4))
+ extern char B00064d80_ay[];
+#define EF(k) (*(int *)(B00064d80_ay + (k) * 0x16 + 0xb))
+#define EID(k) (*(unsigned short *)(B00064d80_ay + (k) * 0x16 + 0xe))
+#define EX(k) (*(int *)(B00064d80_ay + (k) * 0x16))
+#define EY(k) (*(int *)(B00064d80_ay + (k) * 0x16 + 4))
 struct DIR { unsigned short lo : 3, dir : 3, hi : 10; };
-#define ED(k) (*(struct DIR *)(DAT_00064d80 + (k) * 0x16 + 0x14))
+#define ED(k) (*(struct DIR *)(B00064d80_ay + (k) * 0x16 + 0x14))
 void FUN_00030850(void)
 {
     int k, x, y;
-    for (k = 0; k < DAT_00075618.nent; k++) {
+    for (k = 0; k < B00075618_b1.nent; k++) {
         if (EF(k) & 2) continue;
         if (!FUN_0003acdc(EID(k))) continue;
-        *(short *)(DAT_00064d80 + k * 0x16) = 0x8000;
-        *(short *)(DAT_00064d80 + k * 0x16 + 4) = 0x8000;
+        *(short *)(B00064d80_ay + k * 0x16) = 0x8000;
+        *(short *)(B00064d80_ay + k * 0x16 + 4) = 0x8000;
         ED(k).dir &= 6;
     }
-    for (k = 0; k < DAT_00075618.nent; k++) {
+    for (k = 0; k < B00075618_b1.nent; k++) {
         if (EF(k) & 2) continue;
         if (!FUN_0003acdc(EID(k))) continue;
         x = EX(k);
@@ -74,14 +74,14 @@ void FUN_00030850(void)
 extern void FUN_00030850(void); /* module prototype */
 /* FUN_00030994 @ 00030994: toggle stepping mode */
 extern void FUN_0002c21c(char *);
-extern unsigned char DAT_0005c02f; extern int DAT_0005c658; extern short DAT_000755d0, DAT_000755d4; extern char *PTR_s_Stepping_Mode_On_0005d670, *PTR_s_Stepping_Mode_Off_0005d674;
+extern unsigned char DAT_0005c02f; extern int DAT_0005c658; extern short B000755d0_ao, B000755d4_ak; extern char *PTR_s_Stepping_Mode_On_0005d670, *PTR_s_Stepping_Mode_Off_0005d674;
 void FUN_00030994(void)
 {
     DAT_0005c02f ^= 1;
     if (DAT_0005c02f) {
         DAT_0005c658 = (((DAT_0005c658 / 45 + 1) % 8) / 2) * 90;
-        DAT_000755d0 = 0x8000;
-        DAT_000755d4 = 0x8000;
+        B000755d0_ao = 0x8000;
+        B000755d4_ak = 0x8000;
         FUN_00030850();
     }
     if (DAT_0005c02f) FUN_0002c21c(PTR_s_Stepping_Mode_On_0005d670);
@@ -89,24 +89,24 @@ void FUN_00030994(void)
 }
 
 /* ---- from build/var/mod/parts/p30a24.c */
-/* MATCH (round 36, real 10.0a trace + DOSBox match.py alone and modmerge 0x307e8 19 -> 20/27): the cell sum assigned to type first and type reused for the t0 lookup, as the sibling FUN_000310b0 writes `id = o->x + W * o->y; id = t0[cell[id] & 0x3f];` (type's web then starts at the sum, which takes ECX); that left a pure pass-1 tie (abs temps t10/t11, t14/t15 and the setg index t27/dist at 46/48 savings) that a replay showed flips with one conflict node fewer; `snd += DAT_000758bc;` before the first call (recipe 105, same add edi,[DAT]) is that node. */
+/* MATCH (round 36, real 10.0a trace + DOSBox match.py alone and modmerge 0x307e8 19 -> 20/27): the cell sum assigned to type first and type reused for the t0 lookup, as the sibling FUN_000310b0 writes `id = o->x + W * o->y; id = t0[cell[id] & 0x3f];` (type's web then starts at the sum, which takes ECX); that left a pure pass-1 tie (abs temps t10/t11, t14/t15 and the setg index t27/dist at 46/48 savings) that a replay showed flips with one conflict node fewer; `snd += B000758bc_al;` before the first call (recipe 105, same add edi,[DAT]) is that node. */
 /* Round 31 (real 10.0a, module m307e8 -oa, 48 compiles): a named cell variable placed before, between or after the two abs lines x both abs operand orders x four sum orders: best 3 lines (unchanged); the product still receives the sum. */
 /* Round 29 (real 10.0a, module m307e8 -oa, 35 compiles): 3 lines; the sum takes the product's register (add edx,ebx) where the original adds the product into e[5]'s (movzx ecx,e[5]; add ecx,edx). Tried: 16 operand orders / pointer forms of the cell index, casts on e[5], on the product and on the index, (e[5] & 0xff), *(e + 5), the cell in a named variable (type, k, v, dist, vol, snd; 64-80 lines). The split oracle (docs/data/splitoracle.CODE2.csv) changes nothing. */
-/* NEAR MISS (round 22): 6 lines in module 0x307e8 (was 10). First difference was the cell product: the original loads the map width first and multiplies into its register (`imul edx, ebx` with W in edx), i.e. `DAT_00075618.w * e[4]` (left operand W; with the LEV member the operand order of round 19 no longer gives it). Left (also tried c = e[5]; c += W * e[4]: 177 lines; the party y as the cast view ((short *)&DAT_000755d4)[1] as in FUN_0001083c/FUN_00019368: 8, with e[4] * W 12): the sum e[5] + product goes to the product's register (edx) here, to e[5]'s (ecx) in the original - a register choice of the sum temp; `W * e[4] + e[5]` is worse (8), the scalar short W (as in module 0x2af90) is worse (10). 3 real compiles. Round 27 (gate STRUCTURE, so no trace; 12 real in module): original block - edx=party x, eax=e[4]-x abs -> [esp]; same for y -> [esp+4] (eax stays live to the compare); edx=W, ebx=e[4], imul edx,ebx; ecx=e[5], add ecx,edx (sum in e[5]'s register, which then carries the t0 index and type). Tested: (unsigned)e[5], parenthesised product, the cell as a bit-field view .lo, *(DAT_000698e0 + ...): no change (6); the cell in a named variable (type, dist, k, v, vol, snd reused): the sum goes to ecx as in the original, but the abs operands and the d[] index swap registers (177, +4 bytes). Most likely untested cause: the abs() parts written differently so that the named cell variable keeps them (e.g. differences in variables before abs), or a cell helper the original expanded (-oe parameter copies). */
+/* NEAR MISS (round 22): 6 lines in module 0x307e8 (was 10). First difference was the cell product: the original loads the map width first and multiplies into its register (`imul edx, ebx` with W in edx), i.e. `B00075618_b1.w * e[4]` (left operand W; with the LEV member the operand order of round 19 no longer gives it). Left (also tried c = e[5]; c += W * e[4]: 177 lines; the party y as the cast view ((short *)&B000755d4_ak)[1] as in FUN_0001083c/FUN_00019368: 8, with e[4] * W 12): the sum e[5] + product goes to the product's register (edx) here, to e[5]'s (ecx) in the original - a register choice of the sum temp; `W * e[4] + e[5]` is worse (8), the scalar short W (as in module 0x2af90) is worse (10). 3 real compiles. Round 27 (gate STRUCTURE, so no trace; 12 real in module): original block - edx=party x, eax=e[4]-x abs -> [esp]; same for y -> [esp+4] (eax stays live to the compare); edx=W, ebx=e[4], imul edx,ebx; ecx=e[5], add ecx,edx (sum in e[5]'s register, which then carries the t0 index and type). Tested: (unsigned)e[5], parenthesised product, the cell as a bit-field view .lo, *(B000698e0_b7 + ...): no change (6); the cell in a named variable (type, dist, k, v, vol, snd reused): the sum goes to ecx as in the original, but the abs operands and the d[] index swap registers (177, +4 bytes). Most likely untested cause: the abs() parts written differently so that the named cell variable keeps them (e.g. differences in variables before abs), or a cell helper the original expanded (-oe parameter copies). */
 /* [2026-11-09: declaration order from an automatic sweep, 6 diff lines] */
 /* NEAR MISS 284/284 with -oa, 4 instr: with "e[5] + e[4] * W" the product matches; left: e[5] is loaded into ebx (orig ecx, then add ecx,edx) and the d[] index byte goes through ebp (orig eax). Index local, casts, d[0] < d[1] do not change it */
 /* FUN_00030a24 @ 00030a24: play entity e's ambient sound, its volume falling off with the distance to the party */
 #include <stdlib.h>
 #include "world.h"
 extern void FUN_00038110(int, int, int, int), FUN_00038164(int, int, unsigned char);
-extern short DAT_000755d6, DAT_000755d2, DAT_0005d7a0[]; extern unsigned short DAT_000698e0[]; extern int DAT_000758bc;
+extern short B000755d6_ae, B000755d2_ai, DAT_0005d7a0[]; extern unsigned short B000698e0_b7[]; extern int B000758bc_al;
 void FUN_00030a24(unsigned char *e)
 {
     int dist; int v; int d[2]; int type; int k; int vol; int snd;
-    d[0] = abs(e[4] - DAT_000755d6);
-    d[1] = abs(e[5] - DAT_000755d2);
-    type = e[5] + DAT_00075618.w * e[4];
-    type = DAT_00075618.t0[DAT_000698e0[type] & 0x3f];
+    d[0] = abs(e[4] - B000755d6_ae);
+    d[1] = abs(e[5] - B000755d2_ai);
+    type = e[5] + B00075618_b1.w * e[4];
+    type = B00075618_b1.t0[B000698e0_b7[type] & 0x3f];
     dist = d[d[1] > d[0]];
     v = 0x40 - dist * 8;
     vol = ((unsigned short)v * 0xff + 0x20) / 0x40;
@@ -115,9 +115,9 @@ void FUN_00030a24(unsigned char *e)
         for (k = 0; k < 0x22; k++) if (DAT_0005d7a0[k * 2] == type) break;
         if (k != 0x22) snd = DAT_0005d7a0[k * 2 + 1];
         if ((e[6] == 0 || e[6] == 8) && e[7]) {
-            snd += DAT_000758bc;
+            snd += B000758bc_al;
             FUN_00038110(snd, vol, 0, dist);
-        } else FUN_00038164(DAT_000758bc + snd, 0, vol);
+        } else FUN_00038164(B000758bc_al + snd, 0, vol);
     }
 }
 
@@ -129,7 +129,7 @@ void FUN_00030b40(void)
 {
     int x2, x1, off;
     if (DAT_0005cf50) {
-        for (x1 = 0; x1 < DAT_00075618.w; x1++) {
+        for (x1 = 0; x1 < B00075618_b1.w; x1++) {
             if (DAT_0005cd3c[x1]) {
                 off = 0;
             l1: if (DAT_0005cd3c[x1][off] != 0) {
@@ -144,7 +144,7 @@ void FUN_00030b40(void)
             }
         }
         if (DAT_0005cf50 == 0) {
-            for (x2 = 0; x2 < DAT_00075618.w; x2++) {
+            for (x2 = 0; x2 < B00075618_b1.w; x2++) {
                 if (DAT_0005cd3c[x2]) {
                     off = 0;
                 l2: if (DAT_0005cd3c[x2][off] != 0) {
@@ -214,14 +214,14 @@ int FUN_00030cf4(int k)
 
 /* ---- from build/var/mod/parts/p30d7c.c */
 /* FUN_00030d7c @ 00030d7c: find the first party member holding a level-5 class */
-extern unsigned short DAT_000718f0;
-#define CB(off, o) (*(signed char *)((char *)&DAT_000718f0 + (off) + (o)))
-#define CW(off, o) (*(short *)((char *)&DAT_000718f0 + (off) + (o)))
+extern unsigned short B000718f0_hO;
+#define CB(off, o) (*(signed char *)((char *)&B000718f0_hO + (off) + (o)))
+#define CW(off, o) (*(short *)((char *)&B000718f0_hO + (off) + (o)))
 void FUN_00030d7c(int *w, int *lvl)
 {
     int k; int *who = w; int off; int *l = lvl;
     for (k = 0, off = 0; off < 0x920; off += 0x248, k++) {
-        if ((*(unsigned short *)((char *)&DAT_000718f0 + off) & 0xf240) == 0) {
+        if ((*(unsigned short *)((char *)&B000718f0_hO + off) & 0xf240) == 0) {
             if (CB(off, 5) == 5) { *who = k; *l = CW(off, 0x10); return; }
             if (CB(off, 6) == 5) { *who = k; *l = CW(off, 0x12); return; }
             if (CB(off, 7) == 5) { *who = k; *l = CW(off, 0x14); return; }
@@ -240,7 +240,7 @@ extern void FUN_00030d7c(int *w, int *lvl); /* module prototype */
 /* FUN_00030e08 @ 00030e08: click (x, y) on locked object obj of entity e: inside its lock area, pick the lock (thieves' tools, item 0x32) or try the held key; 1 when handled */
 #include "dice.h"
  extern int FUN_0001f390(short, short); extern void FUN_0002a344(short, unsigned char), FUN_00038110(int, int, int, int), FUN_000102a8(int);
-extern short DAT_00058600, DAT_0005d828[]; extern int DAT_0005bf44, DAT_000758bc;
+extern short DAT_00058600, DAT_0005d828[]; extern int DAT_0005bf44, B000758bc_al;
 int FUN_00030e08(int x, int y, int obj, unsigned char *e)
 {
     int k, pick, r, skill;
@@ -275,7 +275,7 @@ use:
                 r = FUN_0002c328(1, 0x14, 0, 0);
                 skill += 3;
                 if (r != 0x14 && r >= skill) {
-                    FUN_00038110(DAT_000758bc + 6, 0xff, 1, 2);
+                    FUN_00038110(B000758bc_al + 6, 0xff, 1, 2);
                     FUN_000102a8((signed char)e[2]);
                     e[1] &= 0xfb;
                 } else if (FUN_0002c328(1, 0x14, 0, 0) <= 2) {
@@ -291,7 +291,7 @@ use:
     }
     if (DAT_00058600 != -1) {
         if (FUN_0001f390(DAT_00058600, e[6])) {
-            FUN_00038110(DAT_000758bc + 6, 0xff, 1, 2);
+            FUN_00038110(B000758bc_al + 6, 0xff, 1, 2);
             FUN_000102a8((signed char)e[2]);
             e[1] &= 0xfb;
         } else {
@@ -308,7 +308,7 @@ fail:
 #include "world.h"
 struct OBJ { unsigned char b0; unsigned char dir : 2, flag4 : 1, rest : 5; signed char snd; unsigned char b3, y, x; };
 extern void FUN_00038110(int, int, int, int), FUN_000102a8(int);
-extern unsigned short DAT_0005d734; extern unsigned char DAT_0005d737, DAT_0005d739, DAT_0005d736, DAT_0005d738; extern short DAT_0005d858, DAT_0005d85a; extern unsigned short DAT_000698e0[]; extern int DAT_000758bc;
+extern unsigned short DAT_0005d734; extern unsigned char DAT_0005d737, DAT_0005d739, DAT_0005d736, DAT_0005d738; extern short DAT_0005d858, DAT_0005d85a; extern unsigned short B000698e0_b7[]; extern int B000758bc_al;
 int FUN_000310b0(int a, int b, unsigned c, struct OBJ *o)
 {
     int k; int off; int j; int v; int id; int idx; unsigned t;
@@ -324,15 +324,15 @@ int FUN_000310b0(int a, int b, unsigned c, struct OBJ *o)
         }
     }
     if (*(unsigned short *)((char *)&DAT_0005d734 + k * 6) == 0xffffffff) goto fail;
-    id = o->x + DAT_00075618.w * o->y;
-    id = DAT_00075618.t0[DAT_000698e0[id] & 0x3f];
+    id = o->x + B00075618_b1.w * o->y;
+    id = B00075618_b1.t0[B000698e0_b7[id] & 0x3f];
     v = 3;
     for (j = 0, off = 0; off < 0x44; j++, off += 4) {
         if (*(short *)((char *)&DAT_0005d858 + off) == id) break;
     }
     if (j != 0x11) v = *(short *)((char *)&DAT_0005d85a + j * 4);
     o->dir ^= 1;
-    FUN_00038110(v + DAT_000758bc, 0xff, 1, 2);
+    FUN_00038110(v + B000758bc_al, 0xff, 1, 2);
     FUN_000102a8(o->snd);
     return 1;
 fail:
@@ -346,9 +346,9 @@ fail:
    are read as record members, so the list is the one of the plain compile, which gives the original registers. */
 #include "world.h"
 struct IP { unsigned char *p; };
-#define ITEMP (((struct IP *)((char *)&DAT_00075618 - 0x40))->p) /* STANDIN: the item-table pointer DAT_000755d8 read through the level record DAT_00075618 (0x75618 - 0x40 = 0x755d8, same address and bytes): a record access is no -oa memory node, and the module keeps world.h's one declaration of DAT_000755d8 */
+#define ITEMP (((struct IP *)((char *)&B00075618_b1 - 0x40))->p) /* STANDIN: the item-table pointer B000755d8_aw read through the level record B00075618_b1 (0x75618 - 0x40 = 0x755d8, same address and bytes): a record access is no -oa memory node, and the module keeps world.h's one declaration of B000755d8_aw */
 #include "records.h"
-#define DAT_000718f0 ((char *)&DAT_000718f0)
+#define B000718f0_hO ((char *)&B000718f0_hO)
 #define FUN_0002a344 ((void (*)(int, unsigned char))FUN_0002a344)
 extern struct CURSOR DAT_000585fc; /* STANDIN: held item DAT_00058600 / DAT_00058602 as CURSOR members .id / .f - removes two -oa memory nodes */
 #pragma pack(1)
@@ -358,7 +358,7 @@ extern void FUN_00033438(int, int, int), FUN_0001f290(int, int, int), FUN_0002c2
 extern unsigned char DAT_0005d681[];
 extern struct BAG DAT_00057330[];
 struct FL { unsigned short x : 15, busy : 1; };
-extern char DAT_00071946[], DAT_0007193c[], DAT_0007193e[], DAT_00071920[];
+extern char B00071946_l7[], B0007193c_aB[], B0007193e_bP[], B00071920_bM[];
 struct MSGQ { char *s; int q; }; extern struct MSGQ PTR_s_NOT_ENOUGH_SPACE_IN_INVENTORY_0005d678; /* STANDIN: message pointer as a record member - removes its -oa memory node */
 #define RS(f) (*(short *)((f) + m * 0x248))
 #define ITEM(i, o) ITEMP[(i) * 0x41 + (o)]
@@ -375,14 +375,14 @@ void FUN_000311d8(int m, int a, int b, int flags)
         if (it == -1) return;
         ok = 1;
         if (ITEM(it, 0x2f) == 0xf) {
-            e = RS(DAT_00071946);
+            e = RS(B00071946_l7);
             if (e != -1) {
                 pk = &DAT_00057330[(signed char)ITEM(e, 0x31)];
                 for (k = 0; k < pk->n; k++) {
                     v = pk->slots[k];
                     if (v == -1) {
                         pk->slots[k] = DAT_000585fc.id;
-                        FUN_0001f290((signed char)ITEM(RS(DAT_00071946), 0x31), k, DAT_000585fc.f);
+                        FUN_0001f290((signed char)ITEM(RS(B00071946_l7), 0x31), k, DAT_000585fc.f);
                         FUN_0002a344(v, 0);
                         ok = 0;
                         break;
@@ -391,25 +391,25 @@ void FUN_000311d8(int m, int a, int b, int flags)
             }
         } else if (ITEM(it, 0x2f) == 0xd) {
             slot = -1;
-            e = RS(DAT_0007193c);
+            e = RS(B0007193c_aB);
             if (e != -1) {
                 if (ITEM(e, 0x2f) == 1 && DAT_00057330[(signed char)ITEM(e, 0x31)].kind == 3) slot = 0;
                 else e = -1;
             }
             if (e == -1) {
-                e = RS(DAT_0007193e);
+                e = RS(B0007193e_bP);
                 if (e != -1) {
                     if (ITEM(e, 0x2f) == 1 && DAT_00057330[(signed char)ITEM(e, 0x31)].kind == 3) slot = 1;
                     else e = -1;
                 }
             }
             if (e != -1) {
-                pk = &DAT_00057330[(signed char)ITEM(*(short *)(DAT_0007193c + slot * 2 + m * 0x248), 0x31)];
+                pk = &DAT_00057330[(signed char)ITEM(*(short *)(B0007193c_aB + slot * 2 + m * 0x248), 0x31)];
                 for (k = 0; k < pk->n; k++) {
                     v = pk->slots[k];
                     if (v == -1) {
                         pk->slots[k] = DAT_000585fc.id;
-                        FUN_0001f290((signed char)ITEM(*(short *)(DAT_0007193c + slot * 2 + m * 0x248), 0x31), k, DAT_000585fc.f);
+                        FUN_0001f290((signed char)ITEM(*(short *)(B0007193c_aB + slot * 2 + m * 0x248), 0x31), k, DAT_000585fc.f);
                         FUN_0002a344(v, 0);
                         ok = 0;
                         break;
@@ -419,19 +419,19 @@ void FUN_000311d8(int m, int a, int b, int flags)
         }
         if (ok) {
             for (k = 0; k < 12; k++)
-                if (*(short *)(DAT_00071920 + m * 0x248 + k * 2) == -1) {
-                    *(short *)(DAT_00071920 + m * 0x248 + k * 2) = DAT_000585fc.id;
+                if (*(short *)(B00071920_bM + m * 0x248 + k * 2) == -1) {
+                    *(short *)(B00071920_bM + m * 0x248 + k * 2) = DAT_000585fc.id;
                     FUN_0002a344(-1, 0);
                     break;
                 }
             if (k == 12) FUN_0002c21c(PTR_s_NOT_ENOUGH_SPACE_IN_INVENTORY_0005d678.s);
         }
     } else if (flags & 1) {
-        if (!(*(unsigned short *)(DAT_000718f0 + m * 0x248) & 0x8000)) FUN_00023118();
+        if (!(*(unsigned short *)(B000718f0_hO + m * 0x248) & 0x8000)) FUN_00023118();
     }
 }
 
-#undef DAT_000718f0
+#undef B000718f0_hO
 #undef FUN_0002a344
 #undef ITEMP
 #undef RS
@@ -445,19 +445,19 @@ extern void FUN_000391b0(unsigned char), FUN_0001f238(int, int, int), FUN_0002ea
 extern void FUN_0002a8c8(int, int, int, int, int), FUN_00036018(int, int, int);
 extern unsigned char FUN_0001f218(int, int);
 extern int FUN_00034478(int, int);
-extern char DAT_0007193c[], DAT_00071a7e[];
+extern char B0007193c_aB[], B00071a7e_dD[];
 #include "records.h"
 extern struct CURSOR DAT_000585fc; /* STANDIN: held item DAT_00058600 / DAT_00058602 as CURSOR members .id / .f - removes two -oa memory nodes */
 extern int DAT_0005c050;
 #include "world.h"
-#define DAT_000718f0 ((char *)&DAT_000718f0)
+#define B000718f0_hO ((char *)&B000718f0_hO)
 #define FUN_0002a344 ((void (*)(short, int))FUN_0002a344)
 /* struct IP: defined above */
-#define ITEMP (((struct IP *)((char *)&DAT_00075618 - 0x40))->p) /* STANDIN: the item-table pointer DAT_000755d8 read through the level record DAT_00075618 (0x75618 - 0x40 = 0x755d8, same address and bytes): a record access is no -oa memory node, and the module keeps world.h's one declaration of DAT_000755d8 */
+#define ITEMP (((struct IP *)((char *)&B00075618_b1 - 0x40))->p) /* STANDIN: the item-table pointer B000755d8_aw read through the level record B00075618_b1 (0x75618 - 0x40 = 0x755d8, same address and bytes): a record access is no -oa memory node, and the module keeps world.h's one declaration of B000755d8_aw */
 extern signed char DAT_00056fa0[];
 
-#define FL(m) (*(unsigned short *)(DAT_000718f0 + (m) * 0x248))
-#define HAND(m, s) (*(short *)(DAT_0007193c + (m) * 0x248 + (s) * 2))
+#define FL(m) (*(unsigned short *)(B000718f0_hO + (m) * 0x248))
+#define HAND(m, s) (*(short *)(B0007193c_aB + (m) * 0x248 + (s) * 2))
 #define ITEM(i, o) ITEMP[(i) * 0x41 + (o)]
 void FUN_000314b8(int m, int s, int flags)
 {
@@ -478,7 +478,7 @@ void FUN_000314b8(int m, int s, int flags)
         FUN_0002a344(it, FUN_0001f218(m, k));
         HAND(m, s) = n;
         FUN_0001f238(m, k, f);
-        *(int *)(DAT_00071a7e + m * 0x248 + s * 4) = 0;
+        *(int *)(B00071a7e_dD + m * 0x248 + s * 4) = 0;
         FUN_0002ea90(m, s, -1);
         FUN_0002ea90(m, s ^ 1, -1);
         FUN_0002a8c8(DAT_0005c050, 0x113, x, 0x7d, 0x35);
@@ -503,7 +503,7 @@ void FUN_000314b8(int m, int s, int flags)
     }
 }
 
-#undef DAT_000718f0
+#undef B000718f0_hO
 #undef FUN_0002a344
 #undef ITEMP
 #undef FL
@@ -516,12 +516,12 @@ void FUN_000314b8(int m, int s, int flags)
 struct OBJ2 { char pad[0xe]; short f; char pad2[4]; unsigned short b0 : 10, b10 : 1, rest : 5; };
 void *memmove(void *, const void *, unsigned);
 extern void FUN_0002a344(short, unsigned char); extern int FUN_0001f4b0(short), FUN_0001f2b4(int), FUN_0002c1dc(int);
-extern struct OBJ2 DAT_00067618[]; extern short DAT_00058600; extern int DAT_0005bf44;
+extern struct OBJ2 B00067618_e7[]; extern short DAT_00058600; extern int DAT_0005bf44;
 void FUN_00031704(int i)
 {
-    FUN_0002a344(DAT_00067618[i].f, DAT_00067618[i].b10);
-    memmove(&DAT_00067618[i], &DAT_00067618[i + 1], (DAT_00075618.n4 - 1 - i) * 0x16);
-    DAT_00075618.n4--;
+    FUN_0002a344(B00067618_e7[i].f, B00067618_e7[i].b10);
+    memmove(&B00067618_e7[i], &B00067618_e7[i + 1], (B00075618_b1.n4 - 1 - i) * 0x16);
+    B00075618_b1.n4--;
     if (DAT_00058600 >= 0x61 && DAT_00058600 <= 0x64 && FUN_0001f4b0(0x35)) DAT_0005bf44 = 0xf;
     if (DAT_00058600 == 0x49) DAT_0005bf44 = 0x25;
     if (DAT_00058600 == 0x9e) DAT_0005bf44 = 0x36;
@@ -537,11 +537,11 @@ void FUN_00031704(int i)
 /* ---- from build/var/mod/parts/p31880.c */
 #define OBJ T13_OBJ
 extern void FUN_0003df2c(int, int, int, int);
-extern struct ENT DAT_00064d94;
+extern struct ENT B00064d94_aU;
 
 /* FUN_00031880: in area 16, once all four marker objects (type 0x89) stand on their four cells, solve the puzzle */
 #include "world.h"
-#define DAT_00067618 ((struct OBJ *)DAT_00067618)
+#define B00067618_e7 ((struct OBJ *)B00067618_e7)
 void *memset(void *, int, unsigned);
 extern int FUN_0002c1dc(int);
 extern void FUN_0002c124(int), FUN_00023ef8(int), FUN_00025050(int);
@@ -556,10 +556,10 @@ void FUN_00031880(void)
     if (DAT_0005c6c8 != 16) return;
     if (FUN_0002c1dc(0x44)) return;
     memset(found, 0, sizeof(found));
-    for (i = 0; i < DAT_00075618.n4; i++) {
-        if (DAT_00067618[i].type == 0x89) {
+    for (i = 0; i < B00075618_b1.n4; i++) {
+        if (B00067618_e7[i].type == 0x89) {
             for (k = 0; k < 4; k++) {
-                if (DAT_00067618[i].x == cell[k * 2] && DAT_00067618[i].y == cell[k * 2 + 1]) {
+                if (B00067618_e7[i].x == cell[k * 2] && B00067618_e7[i].y == cell[k * 2 + 1]) {
                     found[k] = 1;
                     break;
                 }
@@ -573,32 +573,32 @@ void FUN_00031880(void)
     }
 }
 
-#undef DAT_00067618
+#undef B00067618_e7
 #undef OBJ
 /* ---- from build/var/mod/parts/p3195c.c */
 extern void FUN_00031880(void); /* module prototype */
 /* FUN_0003195c @ 0003195c: drop object type t at position (px, py) (thrown along the view from screen column sx when thrown), append it to the floor-object list (oldest dropped when full) */
 /* In module 0x307e8 (-ox -oe -oa -ot, 2026-11-10): matches only without -oa. Under -oa the two cell products
-   DAT_00075618.w * y take the other operand order (first: y loaded into eax, width into edx; second: the product in
+   B00075618_b1.w * y take the other operand order (first: y loaded into eax, width into edx; second: the product in
    eax instead of ebx, x added into ebx). Q1 no clobber; Q2 equal; Q3 operand order of a commutative multiply, which
    under -oa depends on the conflict list (the width is a plain global); Q4 -. Tried (with the count as LCNT.n4):
    swapping the first product's operands (fixes the first site), x + W * y, x + y * W, y * W + x at the second
    site (the product stays in eax); 6 experiments. Blocked. */
 #include "world.h"
-#define DAT_00067618 ((char *)DAT_00067618)
+#define B00067618_e7 ((char *)B00067618_e7)
 #define FUN_0003df2c ((void (*)(int *, int *, int, int))FUN_0003df2c)
 void *memmove(void *, const void *, unsigned);
 extern void FUN_0002a344(short, unsigned char); extern short FUN_0003d5d0(int, int, int);
 extern int DAT_0005c658; extern unsigned char DAT_0005c02f; 
 
 struct FB { unsigned short lo : 3, z : 6, keep : 1, flag : 1, hi : 5; };
-/* Round 18: inside module 0x307e8 (-oa) this file matches with the two cell sums written `((short *)pos)[3] * DAT_00075618.w +
-   ((short *)pos)[1]` (first) and `((short *)pos)[1] + ((short *)pos)[3] * DAT_00075618.w` (second); alone (default flags) only the orders
+/* Round 18: inside module 0x307e8 (-oa) this file matches with the two cell sums written `((short *)pos)[3] * B00075618_b1.w +
+   ((short *)pos)[1]` (first) and `((short *)pos)[1] + ((short *)pos)[3] * B00075618_b1.w` (second); alone (default flags) only the orders
    below match. Apply the swap when the module is promoted.
    Round 29 (real 10.0a, all 16 operand-order combinations of the two sites in build/var/mod/m307e8.c, then DOSBox
    match.py on that text): in the current module text (world.h declarations) the in-module form is
-   first `cell = ((short *)pos)[3] * DAT_00075618.w + ((short *)pos)[1];`, second
-   `cell = DAT_00075618.w * ((short *)pos)[3] + ((short *)pos)[1];` (the two forms below exchanged): MATCH under
+   first `cell = ((short *)pos)[3] * B00075618_b1.w + ((short *)pos)[1];`, second
+   `cell = B00075618_b1.w * ((short *)pos)[3] + ((short *)pos)[1];` (the two forms below exchanged): MATCH under
    -ox -oe -oa -ot (also `x + y * W` first); the round-18 forms give 3 lines now. Alone under plain -ox this form fails,
    so the file keeps the alone form until module 0x307e8 is turned into a module file or promoted. */
 void FUN_0003195c(int sx, int t, int flag, int px, int py, int thrown, int redraw)
@@ -619,41 +619,41 @@ void FUN_0003195c(int sx, int t, int flag, int px, int py, int thrown, int redra
         *(short *)&pos[1] = 0x8000;
         *(short *)&pos[0] = 0x8000;
     }
-    cell = ((short *)pos)[3] * DAT_00075618.w + ((short *)pos)[1];
+    cell = ((short *)pos)[3] * B00075618_b1.w + ((short *)pos)[1];
     if (FUN_0003d5d0(pos[1], pos[0], 0x190) == 0) {
         pos[1] = py;
         pos[0] = px;
-        cell = ((short *)pos)[3] * DAT_00075618.w + ((short *)pos)[1];
+        cell = ((short *)pos)[3] * B00075618_b1.w + ((short *)pos)[1];
     }
-    n = DAT_00075618.n4;
+    n = B00075618_b1.n4;
     if (n == 300) {
-        memmove(DAT_00067618, DAT_00067618 + 0x16, 0x19b2);
+        memmove(B00067618_e7, B00067618_e7 + 0x16, 0x19b2);
         n = 299;
     }
     o = n * 0x16;
-    *(short *)(DAT_00067618 + o + 0xe) = t;
-    *(int *)(DAT_00067618 + o) = pos[1];
-    *(int *)(DAT_00067618 + o + 4) = pos[0];
-    *(short *)(DAT_00067618 + o + 0xc) = cell;
-    ((struct FB *)(DAT_00067618 + o + 0x14))->z = 0;
-    ((struct FB *)(DAT_00067618 + o + 0x14))->flag = flag;
-    DAT_00075618.n4++;
+    *(short *)(B00067618_e7 + o + 0xe) = t;
+    *(int *)(B00067618_e7 + o) = pos[1];
+    *(int *)(B00067618_e7 + o + 4) = pos[0];
+    *(short *)(B00067618_e7 + o + 0xc) = cell;
+    ((struct FB *)(B00067618_e7 + o + 0x14))->z = 0;
+    ((struct FB *)(B00067618_e7 + o + 0x14))->flag = flag;
+    B00075618_b1.n4++;
     if (redraw) FUN_0002a344(-1, 0);
     if (t == 0x89) FUN_00031880();
 }
 
-#undef DAT_00067618
+#undef B00067618_e7
 #undef FUN_0003df2c
 /* ---- from build/var/mod/parts/p31adc.c */
 /* FUN_00031adc @ 00031adc */
 struct R22 { unsigned char flags; char pad[2]; unsigned short type; char pad2[17]; };
-extern struct R22 DAT_00064d8b[];
+extern struct R22 B00064d8b_a7[];
 extern int FUN_0003ad18(int); extern void FUN_00026524(int);
 int FUN_00031adc(int i, int c)
 {
-    if (c == 0 && FUN_0003ad18(DAT_00064d8b[i].type)) {
-        if (DAT_00064d8b[i].type == 0x52) FUN_00026524(0x25);
-        else FUN_00026524(DAT_00064d8b[i].type - 0x22);
+    if (c == 0 && FUN_0003ad18(B00064d8b_a7[i].type)) {
+        if (B00064d8b_a7[i].type == 0x52) FUN_00026524(0x25);
+        else FUN_00026524(B00064d8b_a7[i].type - 0x22);
         return 1;
     }
     return 0;
@@ -662,12 +662,12 @@ int FUN_00031adc(int i, int c)
 /* ---- from build/var/mod/parts/p31b44.c */
 /* FUN_00031b44 @ 00031b44: on first sight (t == 0) of a talking monster e, say its greeting line; 1 when one was said */
 extern int FUN_0003ade0(int); extern void FUN_0002cd48(int, int, int, int, int, int, int, int, int);
-extern unsigned short DAT_00064d8e;
+extern unsigned short B00064d8e_a6;
 int FUN_00031b44(int e, int t)
 {
     int r = 0;
-    if (t == 0 && FUN_0003ade0(*(unsigned short *)((char *)&DAT_00064d8e + e * 0x16))) {
-        switch (*(unsigned short *)((char *)&DAT_00064d8e + e * 0x16)) {
+    if (t == 0 && FUN_0003ade0(*(unsigned short *)((char *)&B00064d8e_a6 + e * 0x16))) {
+        switch (*(unsigned short *)((char *)&B00064d8e_a6 + e * 0x16)) {
         case 0x48: r = 1; FUN_0002cd48(-1, 0x21, 0x34, -1, -1, -1, -1, -1, -1); break;
         case 0x49: r = 1; FUN_0002cd48(-1, 0x21, 0x33, -1, -1, -1, -1, -1, -1); break;
         case 0x4a: r = 1; FUN_0002cd48(-1, 0x21, 0x31, -1, -1, -1, -1, -1, -1); break;
@@ -779,12 +779,12 @@ extern void FUN_00029ccc(int), FUN_0002f1c8(void), FUN_0002ea78(void), FUN_0002c
 extern void FUN_000380e8(void), FUN_0003e608(void), FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_0002ea04(void), FUN_00038168(void), FUN_0003e614(unsigned, int), FUN_000281b4(int), FUN_0001f540(int), FUN_00029cf4(void);
 extern int DAT_0005c658;
 extern int DAT_0005bf30;
-extern short DAT_000755d2, DAT_000755d6;
+extern short B000755d2_ai, B000755d6_ae;
 
 extern unsigned DAT_0005cf4c;
 
 
-extern char *DAT_000758d0, *DAT_000758dc;
+extern char *B000758d0_jK, *B000758dc_cl;
 void FUN_00031f70(void)
 {
     int i;
@@ -792,7 +792,7 @@ void FUN_00031f70(void)
     FUN_0002f1c8();
     FUN_0002ea78();
     DAT_0005bf30 = 1;
-    if (DAT_000755d2 > 0x17) {
+    if (B000755d2_ai > 0x17) {
         for (;;) {
             if (DAT_0005c658 == 0x5a) break;
             if (DAT_0005c658 >= 0x55 && DAT_0005c658 <= 0x5f) DAT_0005c658 = 0x5a;
@@ -809,9 +809,9 @@ void FUN_00031f70(void)
             FUN_0002f1c8();
             FUN_0002ea78();
         }
-        DAT_000755d0 = 0x8000;
-        while (DAT_000755d2 != 0x17) {
-            DAT_000755d2--;
+        B000755d0_ao = 0x8000;
+        while (B000755d2_ai != 0x17) {
+            B000755d2_ai--;
             FUN_0002f1c8();
             FUN_0002ea78();
         }
@@ -832,14 +832,14 @@ void FUN_00031f70(void)
             FUN_0002f1c8();
             FUN_0002ea78();
         }
-        DAT_000755d0 = 0x8000;
-        while (DAT_000755d2 != 0x17) {
-            DAT_000755d2++;
+        B000755d0_ao = 0x8000;
+        while (B000755d2_ai != 0x17) {
+            B000755d2_ai++;
             FUN_0002f1c8();
             FUN_0002ea78();
         }
     }
-    if (DAT_000755d6 > 7) {
+    if (B000755d6_ae > 7) {
         for (;;) {
             if (DAT_0005c658 == 0xb4) break;
             if (DAT_0005c658 >= 0xaf && DAT_0005c658 <= 0xb9) DAT_0005c658 = 0xb4;
@@ -853,9 +853,9 @@ void FUN_00031f70(void)
             FUN_0002f1c8();
             FUN_0002ea78();
         }
-        DAT_000755d4 = 0x8000;
-        while (DAT_000755d6 != 7) {
-            DAT_000755d6--;
+        B000755d4_ak = 0x8000;
+        while (B000755d6_ae != 7) {
+            B000755d6_ae--;
             FUN_0002f1c8();
             FUN_0002ea78();
         }
@@ -878,9 +878,9 @@ void FUN_00031f70(void)
             FUN_0002f1c8();
             FUN_0002ea78();
         }
-        DAT_000755d4 = 0x8000;
-        while (DAT_000755d6 != 7) {
-            DAT_000755d6++;
+        B000755d4_ak = 0x8000;
+        while (B000755d6_ae != 7) {
+            B000755d6_ae++;
             FUN_0002f1c8();
             FUN_0002ea78();
         }
@@ -910,20 +910,20 @@ void FUN_00031f70(void)
         FUN_0002ea78();
     }
     for (i = 0; i < 0x16; i++) {
-        if (!FUN_000380e8) FUN_00038110(DAT_000758d0 + 5, 0xff, 0, 1);
+        if (!FUN_000380e8) FUN_00038110(B000758d0_jK + 5, 0xff, 0, 1);
         FUN_0003e608();
         FUN_000391b0(((unsigned char)DAT_0005c050));
-        FUN_0003e510(4, 0x20, (int)(DAT_000758dc + 0x67 + i), 0);
+        FUN_0003e510(4, 0x20, (int)(B000758dc_cl + 0x67 + i), 0);
         FUN_0002ea04();
         FUN_0002ea78();
         FUN_00038168();
         FUN_0003e614(9, 0);
         if (i == 0x14) {
-            DAT_000755d2 = 9;
-            DAT_000755d6 = 0x3a;
+            B000755d2_ai = 9;
+            B000755d6_ae = 0x3a;
             DAT_0005c658 = 0xb4;
-            DAT_000755d4 = 0x8000;
-            DAT_000755d0 = 0x8000;
+            B000755d4_ak = 0x8000;
+            B000755d0_ao = 0x8000;
             FUN_000281b4(0x17);
         }
     }
@@ -946,7 +946,7 @@ extern void FUN_00031f70(void); /* module prototype */
 #include <string.h>
 #include "world.h"
 #define DAT_0005759c ((char *)DAT_0005759c)
-extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], DAT_00077148, DAT_00077152, DAT_00064d8e, DAT_00067626, DAT_00072246;
+extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], B00077148_eJ, B00077152_el, B00064d8e_a6, B00067626_hm, B00072246_dJ;
 extern unsigned char DAT_00058602, DAT_0005cf68; 
 extern int FUN_0003ac80(int), FUN_0001f4b0(short), FUN_0002c1dc(int), FUN_0003ad18(int), FUN_0003ade0(int), FUN_0003acdc(int);
 extern int FUN_00034478(int, int), FUN_000343e0(int, int);
@@ -958,23 +958,23 @@ int FUN_000323f4(int x, int y, int fl)
     int n, k, off, id, type; unsigned item; char *b;
     for (n = DAT_0005f038[DAT_0005c050 ^ 1] - 1; n >= 0; n--) {
         for (k = 0, off = 0; k < DAT_0005f038[DAT_0005c050 ^ 1]; off += 0x16, k++) {
-            if (*(unsigned short *)((char *)&DAT_00077152 + (DAT_0005c050 ^ 1) * 0x2260 + off) == n) break;
+            if (*(unsigned short *)((char *)&B00077152_el + (DAT_0005c050 ^ 1) * 0x2260 + off) == n) break;
         }
-        b = (char *)&DAT_00077148 + (DAT_0005c050 ^ 1) * 0x2260 + k * 0x16;
+        b = (char *)&B00077148_eJ + (DAT_0005c050 ^ 1) * 0x2260 + k * 0x16;
         if (BW(b, 8) == 3) continue;
-        if (BW(b, 8) == 1 && !FUN_0003ac80(*(unsigned short *)((char *)&DAT_00072246 + BW(b, 6) * 0x16))) continue;
+        if (BW(b, 8) == 1 && !FUN_0003ac80(*(unsigned short *)((char *)&B00072246_dJ + BW(b, 6) * 0x16))) continue;
         if (!FUN_00031bf0(b, 0x1e)) continue;
         id = BW(b, 6);
         type = BW(b, 8);
         if (BW(b, 0xe) > x || BW(b, 0x10) < x || BW(b, 0x12) > y || BW(b, 0x14) < y) continue;
         if (type == 2 && (fl & 1)) {
-            item = *(unsigned short *)((char *)&DAT_00067626 + id * 0x16);
+            item = *(unsigned short *)((char *)&B00067626_hm + id * 0x16);
             FUN_00031704(id);
             strcpy(DAT_0005759c, DAT_0005d67c);
-            strcat(DAT_0005759c, ((char *)DAT_000755d8) + item * 0x41);
-            if (DAT_00058602 && ((char *)DAT_000755d8)[item * 0x41 + 0x37]) {
+            strcat(DAT_0005759c, ((char *)B000755d8_aw) + item * 0x41);
+            if (DAT_00058602 && ((char *)B000755d8_aw)[item * 0x41 + 0x37]) {
                 strcat(DAT_0005759c, " +");
-                strcat(DAT_0005759c, FUN_0003e6f0((unsigned char)((char *)DAT_000755d8)[item * 0x41 + 0x37]));
+                strcat(DAT_0005759c, FUN_0003e6f0((unsigned char)((char *)B000755d8_aw)[item * 0x41 + 0x37]));
             }
             FUN_0002c21c(DAT_0005759c);
             if ((item == 0x87 && FUN_0001f4b0(0x88) && FUN_0001f4b0(0x74) && FUN_0001f4b0(0xe9))
@@ -985,11 +985,11 @@ int FUN_000323f4(int x, int y, int fl)
             return 1;
         }
         if (BW(b, 8) == 0) {
-            k = *(unsigned short *)((char *)&DAT_00064d8e + BW(b, 6) * 0x16);
+            k = *(unsigned short *)((char *)&B00064d8e_a6 + BW(b, 6) * 0x16);
             if (FUN_0003ad18(k) && (fl & 1)) return FUN_00031adc(id, type);
             if (FUN_0003ade0(k) && (fl & 1)) return FUN_00031b44(id, type);
             if (!FUN_0003acdc(k)) continue;
-            if (*(int *)((char *)&(*(int *)&DAT_00064d8b) + BW(b, 6) * 0x16) & 2) continue;
+            if (*(int *)((char *)&(*(int *)&B00064d8b_a7) + BW(b, 6) * 0x16) & 2) continue;
             if (((BW(b, 2) - 0x7d00) >> 3) < 0x39) continue;
             if ((fl & 1) && FUN_00034478(DAT_0005cf68 / 2, DAT_0005cf68 % 2) && FUN_000343e0(DAT_0005cf68 / 2, DAT_0005cf68 % 2))
                 FUN_00036018(DAT_0005cf68 / 2, DAT_0005cf68 % 2, BW(b, 6));
@@ -997,7 +997,7 @@ int FUN_000323f4(int x, int y, int fl)
             return 1;
         }
         if (BW(b, 8) == 1) {
-            FUN_00031f1c(*(unsigned short *)((char *)&DAT_00072246 + BW(b, 6) * 0x16));
+            FUN_00031f1c(*(unsigned short *)((char *)&B00072246_dJ + BW(b, 6) * 0x16));
             return 1;
         }
     }
@@ -1010,15 +1010,15 @@ int FUN_000323f4(int x, int y, int fl)
 /* FUN_00032894 @ 00032894: hit-test row y of a perspective strip of width r against window win; report the window geometry and the column index; round 21: the map width is the level header member (the old `const short` fit stood in for the module -oa) */
 #include "world.h"
 struct W { int a, w, h, c, d, e, f; };
-extern struct W DAT_00065a18[];
+extern struct W B00065a18_cn[];
 void FUN_00032894(int r, int y, int win, int *ph, int *pd, int *res, int *pcol, int *prow)
 {
     struct W *w; int k, s, base;
-    w = (struct W *)(win * 0x1c + (int)DAT_00065a18);
+    w = (struct W *)(win * 0x1c + (int)B00065a18_cn);
     *ph = w->h;
     *pd = w->d >> 6;
-    *pcol = w->e % DAT_00075618.w;
-    *prow = w->e / DAT_00075618.w;
+    *pcol = w->e % B00075618_b1.w;
+    *prow = w->e / B00075618_b1.w;
     s = r * 4;
     base = 0x84 - s / 2;
     base += s / 8;
@@ -1048,9 +1048,9 @@ extern void FUN_00032894(int r, int y, int win, int *ph, int *pd, int *res, int 
 struct BOX { short x0, y0, x1, y1; };
 /* struct W: defined above */
 extern struct BOX DAT_0005d684[];
-extern struct W DAT_00065a18[];
+extern struct W B00065a18_cn[];
 extern short DAT_00058600; extern unsigned char DAT_00058602, DAT_0005d681[], DAT_0005d682;
-extern short DAT_000755d0, DAT_000755d4; extern int DAT_0005c738;
+extern short B000755d0_ao, B000755d4_ak; extern int DAT_0005c738;
 extern void FUN_0001c704(void);
 
 extern void FUN_00043808(int, int, int, int *, int *, int *, int *, int *);
@@ -1070,11 +1070,11 @@ void FUN_000329cc(int x, int y, int fl)
     case 0:
         if (fl & 2) FUN_0001c704();
         else if (DAT_00058600 != -1 && x > 0xbc)
-            FUN_0003195c(y, DAT_00058600, DAT_00058602, *(int *)&DAT_000755d0, *(int *)&DAT_000755d4, 1, 1);
+            FUN_0003195c(y, DAT_00058600, DAT_00058602, *(int *)&B000755d0_ao, *(int *)&B000755d4_ak, 1, 1);
         else {
             y -= 0x20;
             if (!FUN_000323f4(x, y, fl)) {
-                v = DAT_00065a18[y].a / 8;
+                v = B00065a18_cn[y].a / 8;
                 if (v >= 0x2d) {
                     if (v >= DAT_0005c738) FUN_00032894(v, x, y, &a, &b, &c, &col, &row);
                     else FUN_00043808(v, x, y, &a, &b, &c, &col, &row);

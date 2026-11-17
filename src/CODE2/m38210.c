@@ -39,7 +39,7 @@ extern int FUN_000412ec(void *, unsigned, int); extern void FUN_000412dc(int), F
 extern int DAT_0005ee78, DAT_0005ee94, DAT_0005ee40, DAT_0005ee84, DAT_0005eef8, DAT_0005eebc[], DAT_0005ee80, DAT_0005eef0;
 extern unsigned short DAT_0005ee98, DAT_0005eedc[], DAT_0005eef4;
 extern void *DAT_0005ee90, *DAT_0005ee9c[], *DAT_0005eeec;
-extern char *DAT_0005f050, *DAT_000770f0;
+extern char *DAT_0005f050, *B000770f0_a0;
 #pragma aux (cdecl) FUN_00045a0c;
 #pragma aux (cdecl) FUN_00046254;
 #pragma aux (cdecl) FUN_000462be;
@@ -111,8 +111,8 @@ void FUN_000382bc(char *name, int a, int b, int c, int d)
         }
         FUN_00046885(DAT_0005ee84, DAT_0005eeec, DAT_0005ee80);
     }
-    DAT_000770f0 = DAT_0005f050;
-    if (((struct SNDCFG *)DAT_000770f0)->mode && ((struct SNDCFG *)DAT_000770f0)->mode != 3) FUN_00038210();
+    B000770f0_a0 = DAT_0005f050;
+    if (((struct SNDCFG *)B000770f0_a0)->mode && ((struct SNDCFG *)B000770f0_a0)->mode != 3) FUN_00038210();
     DAT_0005ee78 = 1;
 }
 
@@ -181,7 +181,7 @@ void FUN_0003871c(void *p) { if (DAT_0005ee78 && p) FUN_000410b0(p); }
 extern int DAT_0005ef30;
 int FUN_0003873c(void)
 {
-    DAT_000770f0 = DAT_0005f050;
+    B000770f0_a0 = DAT_0005f050;
     if (*(short *)(DAT_0005f050 + 0x32) == 3) return (DAT_0005ef30 * 0x5a + 0x32) / 100;
     return DAT_0005ef30;
 }
@@ -270,7 +270,7 @@ void FUN_000388fc(int k)
     DAT_0005ef2c = k;
     DAT_0005ef24 = DAT_0005eefc[k];
     if (DAT_0005ef24 == -1 || k == -1) return;
-    DAT_000770f0 = DAT_0005f050;
+    B000770f0_a0 = DAT_0005f050;
     if (*(short *)(DAT_0005f050 + 0x32) == 3) vol = (DAT_0005ef30 * 0x5a + 0x32) / 100;
     else vol = DAT_0005ef30;
     FUN_000468fd(DAT_0005ee84, DAT_0005ef24, vol, 0);
@@ -302,7 +302,7 @@ void FUN_000389e4(int k, int t)
     FUN_00046907(DAT_0005ee84, DAT_0005ef24, DAT_0005ef34, 0);
     FUN_000468c1(DAT_0005ee84, DAT_0005ef24);
     FUN_000468fd(DAT_0005ee84, DAT_0005ef24, 0, 0);
-    DAT_000770f0 = DAT_0005f050;
+    B000770f0_a0 = DAT_0005f050;
     if (*(short *)(DAT_0005f050 + 0x32) == 3) vol = (DAT_0005ef30 * 0x5a + 0x32) / 100;
     else vol = DAT_0005ef30;
     FUN_000468fd(DAT_0005ee84, DAT_0005ef24, vol, t);
@@ -326,14 +326,14 @@ void FUN_00038ae0(int k, int t)
         FUN_000389e4(k, t);
         return;
     }
-    DAT_000770f0 = DAT_0005f050;
+    B000770f0_a0 = DAT_0005f050;
     if (*(short *)(DAT_0005f050 + 0x32) == 3) vol = (DAT_0005ef30 * 0x5a + 0x32) / 100;
     else vol = DAT_0005ef30;
     FUN_000468fd(DAT_0005ee84, DAT_0005ef24, vol, 0);
     FUN_000468d5(DAT_0005ee84, DAT_0005ef24);
     if (t) {
         FUN_000468fd(DAT_0005ee84, DAT_0005ef24, 0, 0);
-        DAT_000770f0 = DAT_0005f050;
+        B000770f0_a0 = DAT_0005f050;
         if (*(short *)(DAT_0005f050 + 0x32) == 3) vol = (DAT_0005ef30 * 0x5a + 0x32) / 100;
         else vol = DAT_0005ef30;
         FUN_000468fd(DAT_0005ee84, DAT_0005ef24, vol, t);
@@ -471,7 +471,7 @@ void FUN_00038f58(int v)
     if (DAT_0005ef30 == v) return;
     DAT_0005ef30 = v;
     if (DAT_0005ee78 && DAT_0005ef2c != -1 && FUN_000468e9(DAT_0005ee84, DAT_0005ef24) == 0x64) {
-        DAT_000770f0 = DAT_0005f050;
+        B000770f0_a0 = DAT_0005f050;
         if (*(short *)(DAT_0005f050 + 0x32) == 3) vol = (DAT_0005ef30 * 0x5a + 0x32) / 100;
         else vol = DAT_0005ef30;
         FUN_000468fd(DAT_0005ee84, DAT_0005ef24, vol, 0);

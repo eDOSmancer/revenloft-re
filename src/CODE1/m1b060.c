@@ -49,7 +49,7 @@ extern void FUN_00016f74(int), FUN_000162f0(int), FUN_00017240(void *), FUN_0001
 extern int DAT_00032b84, DAT_00032ba0, DAT_00032b90, DAT_00032f48, DAT_00032c04, DAT_00032bc8[], DAT_00032b8c, DAT_00032bfc;
 extern unsigned short DAT_00032ba4, DAT_00032be8[], DAT_00032c00;
 extern void *DAT_00032b9c, *DAT_00032ba8[], *DAT_00032bf8;
-extern struct SNDCFG *DAT_00032aa0, *DAT_00038a18;
+extern struct SNDCFG *DAT_00032aa0, *B00038a18_eu;
 void FUN_0001b0f8(char *name, int a, int b, int c, int d)
 {
     int fd; int k; int j; int i; void *buf; void *h;
@@ -111,7 +111,7 @@ void FUN_0001b0f8(char *name, int a, int b, int c, int d)
         }
         FUN_0001ecb1(DAT_00032b90, DAT_00032bf8, DAT_00032b8c);
     }
-    DAT_00038a18 = DAT_00032aa0;
+    B00038a18_eu = DAT_00032aa0;
     if (DAT_00032aa0->mode && DAT_00032aa0->mode != 3) FUN_0001b060();
     DAT_00032b84 = 1;
 }
@@ -149,13 +149,13 @@ void FUN_0001b574(int p) { if (DAT_00032b84 && p) FUN_00017240(p); }
 #undef FUN_00017240
 /* ---- from build/var/mod/parts/p1b598.c */
 #define DAT_00032aa0 (*(char **)&DAT_00032aa0)
-#define DAT_00038a18 (*(char **)&DAT_00038a18)
+#define B00038a18_eu (*(char **)&B00038a18_eu)
 /* FUN_0001b598 @ 0001b598: current music volume, scaled to 90% in the quiet mode (module compiled for a 486/Pentium target, -5s) */
 extern int DAT_00032c3c; 
-int FUN_0001b598(void) { int vol; DAT_00038a18 = DAT_00032aa0; if (*(short *)(DAT_00032aa0 + 0x32) == 3) vol = (DAT_00032c3c * 0x5a + 0x32) / 100; else vol = DAT_00032c3c; return vol; }
+int FUN_0001b598(void) { int vol; B00038a18_eu = DAT_00032aa0; if (*(short *)(DAT_00032aa0 + 0x32) == 3) vol = (DAT_00032c3c * 0x5a + 0x32) / 100; else vol = DAT_00032c3c; return vol; }
 
 #undef DAT_00032aa0
-#undef DAT_00038a18
+#undef B00038a18_eu
 /* ---- from build/var/mod/parts/p1b5e4.c */
 extern char *FUN_0001b4d4(unsigned short a, unsigned short b); /* module prototype */
 #define DAT_00032b9c (*(int *)&DAT_00032b9c)

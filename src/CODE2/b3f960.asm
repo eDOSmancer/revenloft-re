@@ -4,41 +4,41 @@
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
-public DAT_0007b67c
-DAT_0007b67c label byte
+public B0007b67c_at
+B0007b67c_at label byte
     db 4 dup(?)
-public DAT_0007b680
-DAT_0007b680 label byte
+public B0007b680_az
+B0007b680_az label byte
     db 4 dup(?)
-public DAT_0007b684
-DAT_0007b684 label byte
+public B0007b684_aF
+B0007b684_aF label byte
     db 4 dup(?)
-public DAT_0007b688
-DAT_0007b688 label byte
+public B0007b688_ar
+B0007b688_ar label byte
     db 4 dup(?)
-public DAT_0007b68c
-DAT_0007b68c label byte
+public B0007b68c_a5
+B0007b68c_a5 label byte
     db 8 dup(?)
-public DAT_0007b694
-DAT_0007b694 label byte
+public B0007b694_aV
+B0007b694_aV label byte
     db 4 dup(?)
-public DAT_0007b698
-DAT_0007b698 label byte
+public B0007b698_aB
+B0007b698_aB label byte
     db 12 dup(?)
-public DAT_0007b6a4
-DAT_0007b6a4 label byte
+public B0007b6a4_d1
+B0007b6a4_d1 label byte
     db 16 dup(?)
-public DAT_0007b6b4
-DAT_0007b6b4 label byte
+public B0007b6b4_da
+B0007b6b4_da label byte
     db 8 dup(?)
-public DAT_0007b6bc
-DAT_0007b6bc label byte
+public B0007b6bc_d2
+B0007b6bc_d2 label byte
     db 6 dup(?)
-public DAT_0007b6c2
-DAT_0007b6c2 label byte
+public B0007b6c2_dS
+B0007b6c2_dS label byte
     db 1 dup(?)
-public DAT_0007b6c3
-DAT_0007b6c3 label byte
+public B0007b6c3_dR
+B0007b6c3_dR label byte
     db 1 dup(?)
 _BSS ends
 end

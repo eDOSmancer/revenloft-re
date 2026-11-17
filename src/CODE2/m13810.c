@@ -24,7 +24,7 @@ extern int FUN_00013820(int n); /* module prototype */
    counter is a block-scope static (`static int used` at 0x56094, referenced nowhere else): the 10.0a front end drops
    FUNC_OK_TO_INLINE for a function that declares a static variable (OW1 cc/c/csym.c, block exit; round 15). */
 extern int FUN_000412a0(char *); extern void *FUN_0004104c(int); extern void FUN_000412ec(void *, unsigned, int), FUN_000412dc(int);
-extern char *DAT_0005c65c, *DAT_0005c664, *DAT_0005c660, *DAT_000758c4; extern char DAT_00069660[], DAT_000693e0[], DAT_0005c73c[]; extern int DAT_0005c6d8, DAT_0005c6d4, DAT_0005c6d0, DAT_0005c6dc, DAT_0005c6e0, DAT_0007560c, DAT_0005c6cc, DAT_000755e0, DAT_0005c738, DAT_0005c730, DAT_0005c734, DAT_00056090, DAT_00065618, DAT_00068fe0, DAT_00068fe4;
+extern char *DAT_0005c65c, *DAT_0005c664, *DAT_0005c660, *B000758c4_j7; extern char B00069660_dl[], B000693e0_hM[], DAT_0005c73c[]; extern int DAT_0005c6d8, DAT_0005c6d4, DAT_0005c6d0, DAT_0005c6dc, DAT_0005c6e0, B0007560c_hn, DAT_0005c6cc, B000755e0_bo, DAT_0005c738, DAT_0005c730, DAT_0005c734, DAT_00056090, B00065618_e1, B00068fe0_eN, B00068fe4_eJ;
 void FUN_00013838(void)
 {
     int fd, k, off, n; char *p;
@@ -34,25 +34,25 @@ void FUN_00013838(void)
     DAT_0005c664 = DAT_0005c65c + 0x168;
     DAT_0005c660 = FUN_0004104c(0xe10);
     FUN_000412ec(DAT_0005c660, 0xe10, fd);
-    FUN_000412ec(DAT_00069660, 0x100, fd);
-    FUN_000412ec(DAT_000693e0, 0x100, fd);
+    FUN_000412ec(B00069660_dl, 0x100, fd);
+    FUN_000412ec(B000693e0_hM, 0x100, fd);
     FUN_000412ec(&DAT_0005c6d8, 4, fd);
     FUN_000412ec(&DAT_0005c6d4, 4, fd);
     FUN_000412ec(&DAT_0005c6d0, 4, fd);
     FUN_000412ec(&DAT_0005c6dc, 4, fd);
     FUN_000412ec(&DAT_0005c6e0, 4, fd);
-    FUN_000412ec(&DAT_0007560c, 4, fd);
+    FUN_000412ec(&B0007560c_hn, 4, fd);
     FUN_000412ec(&DAT_0005c6cc, 4, fd);
-    FUN_000412ec(&DAT_000755e0, 4, fd);
+    FUN_000412ec(&B000755e0_bo, 4, fd);
     FUN_000412ec(DAT_0005c73c, 0x400, fd);
     FUN_000412ec(&DAT_0005c738, 4, fd);
     FUN_000412ec(&DAT_0005c730, 4, fd);
     FUN_000412ec(&DAT_0005c734, 4, fd);
-    DAT_000758c4 = FUN_0004104c((DAT_0005c730 + 1) * 2);
-    FUN_000412ec(DAT_000758c4, (DAT_0005c730 + 1) * 2, fd);
+    B000758c4_j7 = FUN_0004104c((DAT_0005c730 + 1) * 2);
+    FUN_000412ec(B000758c4_j7, (DAT_0005c730 + 1) * 2, fd);
     FUN_000412ec(&DAT_00056090, 4, fd);
     DAT_0005608c = FUN_0004104c(DAT_00056090);
-    DAT_00065618 = 0;
+    B00065618_e1 = 0;
     k = 0;
     if (DAT_0005c738 > 0) {
         off = 4;
@@ -60,17 +60,17 @@ void FUN_00013838(void)
             n = 0;
             FUN_000412ec(&n, 2, fd);
             p = (char *)FUN_00013820(n);
-            *(char **)((char *)&DAT_00068fe0 + off) = p;
-            *(int *)((char *)&DAT_00065618 + off) = off;
+            *(char **)((char *)&B00068fe0_eN + off) = p;
+            *(int *)((char *)&B00065618_e1 + off) = off;
             k++;
             FUN_000412ec(p, n, fd);
-            p = *(char **)((char *)&DAT_00068fe0 + off);
+            p = *(char **)((char *)&B00068fe0_eN + off);
             off += 4;
             p += 0x204;
-            *(char **)((char *)&DAT_00068fe0 + off - 4) = p;
+            *(char **)((char *)&B00068fe0_eN + off - 4) = p;
         } while (k < DAT_0005c738);
     }
-    DAT_00068fe0 = DAT_00068fe4;
+    B00068fe0_eN = B00068fe4_eJ;
     FUN_000412dc(fd);
 }
 

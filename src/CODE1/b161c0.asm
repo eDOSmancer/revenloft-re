@@ -4,14 +4,14 @@
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
-public DAT_00038904
-DAT_00038904 label byte
+public B00038904_eu
+B00038904_eu label byte
     db 21 dup(?)
-public DAT_00038919
-DAT_00038919 label byte
+public B00038919_eu
+B00038919_eu label byte
     db 22 dup(?)
-public DAT_0003892f
-DAT_0003892f label byte
+public B0003892f_eu
+B0003892f_eu label byte
     db 89 dup(?)
 _BSS ends
 end

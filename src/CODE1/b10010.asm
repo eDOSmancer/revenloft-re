@@ -4,167 +4,167 @@
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
-public DAT_000355f8
-DAT_000355f8 label byte
+public B000355f8_eu
+B000355f8_eu label byte
     db 1024 dup(?)
-public DAT_000359f8
-DAT_000359f8 label byte
+public B000359f8_eu
+B000359f8_eu label byte
     db 8 dup(?)
-public DAT_00035a00
-DAT_00035a00 label byte
+public B00035a00_eu
+B00035a00_eu label byte
     db 248 dup(?)
-public DAT_00035af8
-DAT_00035af8 label byte
+public B00035af8_eu
+B00035af8_eu label byte
     db 1280 dup(?)
-public DAT_00035ff8
-DAT_00035ff8 label byte
+public B00035ff8_eu
+B00035ff8_eu label byte
     db 1024 dup(?)
-public DAT_000363f8
-DAT_000363f8 label byte
+public B000363f8_eu
+B000363f8_eu label byte
     db 256 dup(?)
-public DAT_000364f8
-DAT_000364f8 label byte
+public B000364f8_eu
+B000364f8_eu label byte
     db 768 dup(?)
-public DAT_000367f8
-DAT_000367f8 label byte
+public B000367f8_eu
+B000367f8_eu label byte
     db 16 dup(?)
-public DAT_00036808
-DAT_00036808 label byte
+public B00036808_eu
+B00036808_eu label byte
     db 1 dup(?)
-public DAT_00036809
-DAT_00036809 label byte
+public B00036809_eu
+B00036809_eu label byte
     db 1 dup(?)
-public DAT_0003680a
-DAT_0003680a label byte
+public B0003680a_eu
+B0003680a_eu label byte
     db 1 dup(?)
-public DAT_0003680b
-DAT_0003680b label byte
+public B0003680b_eu
+B0003680b_eu label byte
     db 1 dup(?)
-public DAT_0003680c
-DAT_0003680c label byte
+public B0003680c_eu
+B0003680c_eu label byte
     db 1 dup(?)
-public DAT_0003680d
-DAT_0003680d label byte
+public B0003680d_eu
+B0003680d_eu label byte
     db 1 dup(?)
-public DAT_0003680e
-DAT_0003680e label byte
+public B0003680e_eu
+B0003680e_eu label byte
     db 1 dup(?)
-public DAT_0003680f
-DAT_0003680f label byte
+public B0003680f_eu
+B0003680f_eu label byte
     db 1 dup(?)
-public DAT_00036810
-DAT_00036810 label byte
+public B00036810_eu
+B00036810_eu label byte
     db 2 dup(?)
-public DAT_00036812
-DAT_00036812 label byte
+public B00036812_eu
+B00036812_eu label byte
     db 1 dup(?)
-public DAT_00036813
-DAT_00036813 label byte
+public B00036813_eu
+B00036813_eu label byte
     db 1 dup(?)
-public DAT_00036814
-DAT_00036814 label byte
+public B00036814_eu
+B00036814_eu label byte
     db 2 dup(?)
-public DAT_00036816
-DAT_00036816 label byte
+public B00036816_eu
+B00036816_eu label byte
     db 2 dup(?)
-public DAT_00036818
-DAT_00036818 label byte
+public B00036818_eu
+B00036818_eu label byte
     db 2 dup(?)
-public DAT_0003681a
-DAT_0003681a label byte
+public B0003681a_eu
+B0003681a_eu label byte
     db 2 dup(?)
-public DAT_0003681c
-DAT_0003681c label byte
+public B0003681c_eu
+B0003681c_eu label byte
     db 2 dup(?)
-public DAT_0003681e
-DAT_0003681e label byte
+public B0003681e_eu
+B0003681e_eu label byte
     db 12 dup(?)
-public DAT_0003682a
-DAT_0003682a label byte
+public B0003682a_eu
+B0003682a_eu label byte
     db 1 dup(?)
-public DAT_0003682b
-DAT_0003682b label byte
+public B0003682b_eu
+B0003682b_eu label byte
     db 1 dup(?)
-public DAT_0003682c
-DAT_0003682c label byte
+public B0003682c_eu
+B0003682c_eu label byte
     db 2 dup(?)
-public DAT_0003682e
-DAT_0003682e label byte
+public B0003682e_eu
+B0003682e_eu label byte
     db 8 dup(?)
-public DAT_00036836
-DAT_00036836 label byte
+public B00036836_eu
+B00036836_eu label byte
     db 2 dup(?)
-public DAT_00036838
-DAT_00036838 label byte
+public B00036838_eu
+B00036838_eu label byte
     db 28 dup(?)
-public DAT_00036854
-DAT_00036854 label byte
+public B00036854_eu
+B00036854_eu label byte
     db 2 dup(?)
-public DAT_00036856
-DAT_00036856 label byte
+public B00036856_eu
+B00036856_eu label byte
     db 2 dup(?)
-public DAT_00036858
-DAT_00036858 label byte
+public B00036858_eu
+B00036858_eu label byte
     db 2 dup(?)
-public DAT_0003685a
-DAT_0003685a label byte
+public B0003685a_eu
+B0003685a_eu label byte
     db 169 dup(?)
-public DAT_00036903
-DAT_00036903 label byte
+public B00036903_eu
+B00036903_eu label byte
     db 4 dup(?)
-public DAT_00036907
-DAT_00036907 label byte
+public B00036907_eu
+B00036907_eu label byte
     db 34 dup(?)
-public DAT_00036929
-DAT_00036929 label byte
+public B00036929_eu
+B00036929_eu label byte
     db 279 dup(?)
-public DAT_00036a40
-DAT_00036a40 label byte
+public B00036a40_eu
+B00036a40_eu label byte
     db 18 dup(?)
-public DAT_00036a52
-DAT_00036a52 label byte
+public B00036a52_eu
+B00036a52_eu label byte
     db 1 dup(?)
-public DAT_00036a53
-DAT_00036a53 label byte
+public B00036a53_eu
+B00036a53_eu label byte
     db 1 dup(?)
-public DAT_00036a54
-DAT_00036a54 label byte
+public B00036a54_eu
+B00036a54_eu label byte
     db 44 dup(?)
-public DAT_00036a80
-DAT_00036a80 label byte
+public B00036a80_eu
+B00036a80_eu label byte
     db 1688 dup(?)
-public DAT_00037118
-DAT_00037118 label byte
+public B00037118_eu
+B00037118_eu label byte
     db 4 dup(?)
-public DAT_0003711c
-DAT_0003711c label byte
+public B0003711c_eu
+B0003711c_eu label byte
     db 4 dup(?)
-public DAT_00037120
-DAT_00037120 label byte
+public B00037120_eu
+B00037120_eu label byte
     db 4 dup(?)
-public DAT_00037124
-DAT_00037124 label byte
+public B00037124_eu
+B00037124_eu label byte
     db 4 dup(?)
-public DAT_00037128
-DAT_00037128 label byte
+public B00037128_eu
+B00037128_eu label byte
     db 4 dup(?)
-public DAT_0003712c
-DAT_0003712c label byte
+public B0003712c_eu
+B0003712c_eu label byte
     db 4 dup(?)
-public DAT_00037130
-DAT_00037130 label byte
+public B00037130_eu
+B00037130_eu label byte
     db 4 dup(?)
-public DAT_00037134
-DAT_00037134 label byte
+public B00037134_eu
+B00037134_eu label byte
     db 4 dup(?)
-public DAT_00037138
-DAT_00037138 label byte
+public B00037138_eu
+B00037138_eu label byte
     db 4 dup(?)
-public DAT_0003713c
-DAT_0003713c label byte
+public B0003713c_eu
+B0003713c_eu label byte
     db 4 dup(?)
-public DAT_00037140
-DAT_00037140 label byte
+public B00037140_eu
+B00037140_eu label byte
     db 56 dup(?)
 _BSS ends
 end

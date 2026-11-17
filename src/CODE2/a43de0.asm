@@ -11,8 +11,8 @@ extrn DAT_0005c044:byte
 extrn DAT_0005c048:byte
 extrn DAT_0005c658:byte
 extrn DAT_0005c65c:byte
-extrn DAT_000693e0:byte
-extrn DAT_00069660:byte
+extrn B000693e0_hM:byte
+extrn B00069660_dl:byte
 _DATA segment dword public use32 'DATA'
 DAT_0005fd20 label byte
     db 000h, 000h, 000h, 000h    ; 0005fd20  ....
@@ -1366,28 +1366,28 @@ L_00044a0f:
     db 066h, 0b8h
 L_00044a11:
     db 0dfh, 03ch
-    mov dx, word ptr [esi + DAT_000693e0]
+    mov dx, word ptr [esi + B000693e0_hM]
     imul dx
     shld dx, ax, 3
     mov byte ptr [edi + 5], dl
     db 066h, 0b8h
 L_00044a27:
     db 0dfh, 03ch
-    mov dx, word ptr [esi + DAT_000693e0]
+    mov dx, word ptr [esi + B000693e0_hM]
     imul dx
     shld dx, ax, 3
     mov byte ptr [edi + 4], dl
     db 066h, 0b8h
 L_00044a3d:
     db 0dfh, 03ch
-    mov dx, word ptr [esi + DAT_00069660]
+    mov dx, word ptr [esi + B00069660_dl]
     imul dx
     shld dx, ax, 3
     mov word ptr [edi + 2], dx
     db 066h, 0b8h
 L_00044a54:
     db 0dfh, 03ch
-    mov dx, word ptr [esi + DAT_00069660]
+    mov dx, word ptr [esi + B00069660_dl]
     imul dx
     shld dx, ax, 3
     mov word ptr [edi], dx

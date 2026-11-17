@@ -6,48 +6,48 @@
    and one copy out and back on dx (dx / dy / sx tie at savings 58; tietrace forced order dx, dy, sx = MATCH). */
 #include <stdlib.h>
 void *memset(void *, int, unsigned);
-extern unsigned char DAT_000640b0[];
+extern unsigned char B000640b0_h3[];
 int FUN_0002af90(int px, int py, int r, int n)
 {
     int k; int dx; int dy; int j; int sx; int sy;
-    memset(DAT_000640b0, 0, 8);
+    memset(B000640b0_h3, 0, 8);
     dy = py >> 16;
     dx = px >> 16;
     { int c; c = dx; dx = c; } /* STANDIN: copy out and back, dx +4 savings: dx sorts ahead of dy / sx at 58 and takes EBX (original dy ECX, dx EBX, sx ESI) */
     sy = dy < 0 ? -1 : dy > 0;
     sx = dx < 0 ? -1 : dx > 0;
     if (dx == 0) {
-        if (sy == -1) { DAT_000640b0[4] = 3; DAT_000640b0[6] = 2; DAT_000640b0[2] = 1; }
-        else if (sy == 1) { DAT_000640b0[0] = 3; DAT_000640b0[6] = 2; DAT_000640b0[2] = 1; }
+        if (sy == -1) { B000640b0_h3[4] = 3; B000640b0_h3[6] = 2; B000640b0_h3[2] = 1; }
+        else if (sy == 1) { B000640b0_h3[0] = 3; B000640b0_h3[6] = 2; B000640b0_h3[2] = 1; }
     } else if (dy == 0) {
-        if (sx == -1) { DAT_000640b0[6] = 3; DAT_000640b0[4] = 2; DAT_000640b0[0] = 1; }
-        else if (sx == 1) { DAT_000640b0[2] = 3; DAT_000640b0[4] = 2; DAT_000640b0[0] = 1; }
+        if (sx == -1) { B000640b0_h3[6] = 3; B000640b0_h3[4] = 2; B000640b0_h3[0] = 1; }
+        else if (sx == 1) { B000640b0_h3[2] = 3; B000640b0_h3[4] = 2; B000640b0_h3[0] = 1; }
     } else if (abs(dx) >= abs(dy)) {
         if (sx == -1) {
-            DAT_000640b0[6] = 4;
-            if (sy == sx) { DAT_000640b0[4] = 3; DAT_000640b0[0] = 2; DAT_000640b0[2] = 1; }
-            else { DAT_000640b0[0] = 3; DAT_000640b0[4] = 2; DAT_000640b0[2] = 1; }
+            B000640b0_h3[6] = 4;
+            if (sy == sx) { B000640b0_h3[4] = 3; B000640b0_h3[0] = 2; B000640b0_h3[2] = 1; }
+            else { B000640b0_h3[0] = 3; B000640b0_h3[4] = 2; B000640b0_h3[2] = 1; }
         } else {
-            DAT_000640b0[2] = 4;
-            if (sy == -1) { DAT_000640b0[4] = 3; DAT_000640b0[0] = 2; DAT_000640b0[6] = 1; }
-            else { DAT_000640b0[0] = 3; DAT_000640b0[4] = 2; DAT_000640b0[6] = 1; }
+            B000640b0_h3[2] = 4;
+            if (sy == -1) { B000640b0_h3[4] = 3; B000640b0_h3[0] = 2; B000640b0_h3[6] = 1; }
+            else { B000640b0_h3[0] = 3; B000640b0_h3[4] = 2; B000640b0_h3[6] = 1; }
         }
     } else if (abs(dy) > abs(dx)) {
         if (sy == -1) {
-            DAT_000640b0[4] = 4;
-            if (sx == sy) { DAT_000640b0[6] = 3; DAT_000640b0[2] = 2; DAT_000640b0[0] = 1; }
-            else { DAT_000640b0[2] = 3; DAT_000640b0[6] = 2; DAT_000640b0[0] = 1; }
+            B000640b0_h3[4] = 4;
+            if (sx == sy) { B000640b0_h3[6] = 3; B000640b0_h3[2] = 2; B000640b0_h3[0] = 1; }
+            else { B000640b0_h3[2] = 3; B000640b0_h3[6] = 2; B000640b0_h3[0] = 1; }
         } else {
-            DAT_000640b0[0] = 4;
-            if (sx == -1) { DAT_000640b0[6] = 3; DAT_000640b0[2] = 2; }
-            else { DAT_000640b0[2] = 3; DAT_000640b0[6] = 2; }
-            DAT_000640b0[4] = 1;
+            B000640b0_h3[0] = 4;
+            if (sx == -1) { B000640b0_h3[6] = 3; B000640b0_h3[2] = 2; }
+            else { B000640b0_h3[2] = 3; B000640b0_h3[6] = 2; }
+            B000640b0_h3[4] = 1;
         }
     }
     k = 4 - n;
     if (k) {
         for (j = 0; j < 8; j++) {
-            if (DAT_000640b0[j] == k) { r = j; break; }
+            if (B000640b0_h3[j] == k) { r = j; break; }
         }
     } else {
         r = (unsigned)(rand() * 8) >> 15;
@@ -86,19 +86,19 @@ int rand(void);
 int abs(int);
 #pragma intrinsic(abs)
 struct MOB { int a, b; unsigned char c8, c9, ca, cb; short cell, type, s10, cnt; unsigned short f0 : 1, f1 : 1, f2 : 1, dir : 3, step : 3, f9 : 5, top : 2; };
-extern int DAT_000755d0, DAT_000755d4;
-extern short DAT_000755d2, DAT_000755d6;
+extern int B000755d0_ao, B000755d4_ak;
+extern short B000755d2_ai, B000755d6_ae;
 
 
 void FUN_0002b27c(struct MOB *m, int b)
 {
     int tx, ty, dx, dy, n;
-    tx = DAT_000755d0;
+    tx = B000755d0_ao;
     tx -= m->b;
-    ty = DAT_000755d4 - m->a;
-    n = ((short *)m)[3] - DAT_000755d2;
+    ty = B000755d4_ak - m->a;
+    n = ((short *)m)[3] - B000755d2_ai;
     dx = abs(n);
-    n = ((short *)m)[1] - DAT_000755d6;
+    n = ((short *)m)[1] - B000755d6_ae;
     dy = abs(n);
     m->dir = FUN_0002af90(tx, ty, m->dir, 0);
     m->f0 = 1;
@@ -133,10 +133,10 @@ int abs(int);
 #pragma intrinsic(abs)
 struct MB3 { int a, b; int fl; unsigned short cell, type; short s10, s12; unsigned short f0 : 1, f12 : 2, dir : 3, step : 3, f9 : 5, top : 2; }; /* struct MOB under its own tag: FUN_0002b394 is a part of its own in the module merge */
 struct MT { char p0[0x19]; unsigned char frames; char p1[0xb]; short wait; char p3[0x16]; unsigned short snd; char p2[6]; };
-extern struct MT *DAT_00072230; /* the module declaration; FUN_0002b394 reads the scalar (original: mov edx, [0x72230]) */
+extern struct MT *B00072230_c4; /* the module declaration; FUN_0002b394 reads the scalar (original: mov edx, [0x72230]) */
 struct TBL { int a[12]; struct MT *p; int q; };
-extern struct TBL DAT_00072200;
-/* STANDIN: the monster-type table pointer DAT_00072230 read as a member (+0x30) of a record view of DAT_00072200: -1 memory node; the module declares DAT_00072230 as a scalar pointer */
+extern struct TBL B00072200_ew;
+/* STANDIN: the monster-type table pointer B00072230_c4 read as a member (+0x30) of a record view of B00072200_ew: -1 memory node; the module declares B00072230_c4 as a scalar pointer */
 void FUN_0002b394(struct MB3 *m)
 {
     if ((int)((unsigned)(rand() * 1000) >> 15) >= 0x3cf) {
@@ -144,21 +144,21 @@ void FUN_0002b394(struct MB3 *m)
         return;
     }
     m->f12 = 0;
-    m->step = (m->step + 1) % DAT_00072230[m->type].frames;
+    m->step = (m->step + 1) % B00072230_c4[m->type].frames;
 }
 
 /* ---- from build/var/mod/parts/p2b3f8.c */
 #define MOB T4_MOB
-/* FUN_0002b3f8 @ 0002b3f8: the position one step (0x5000 on the major axis) from monster m toward the party (the party cell is read as the high word of the int position: under the module's -oa a separate short global DAT_000755d2/d6 is a register candidate and moved every register) */
+/* FUN_0002b3f8 @ 0002b3f8: the position one step (0x5000 on the major axis) from monster m toward the party (the party cell is read as the high word of the int position: under the module's -oa a separate short global B000755d2_ai/d6 is a register candidate and moved every register) */
 int abs(int);
 #pragma intrinsic(abs)
 struct MOB { int a, b; };
-extern int DAT_000755d0, DAT_000755d4;   /* party position x, y (16.16); the cells are their high words */
+extern int B000755d0_ao, B000755d4_ak;   /* party position x, y (16.16); the cells are their high words */
 void FUN_0002b3f8(int *pb, int *pa, struct MOB *m)
 {
     int db, da;
-    db = ((short *)&DAT_000755d0)[1] - ((short *)m)[3];
-    da = ((short *)&DAT_000755d4)[1] - ((short *)m)[1];
+    db = ((short *)&B000755d0_ao)[1] - ((short *)m)[3];
+    da = ((short *)&B000755d4_ak)[1] - ((short *)m)[1];
     if (da == 0) {
         if (db == 0) {
             *pb = m->b;
@@ -195,19 +195,19 @@ struct MOB { int a, b; unsigned char c8, c9, ca, cb0 : 1, gone : 1, cb2 : 6; uns
 extern void FUN_00038110(int, int, int, int), FUN_0003df2c(int *, int *, int, int);
  /* STANDIN: declared int (the callee returns a short in AX); with the int local below this adds one pass-1 temp in the call block without a cwde */
 struct T { unsigned short wall : 6, b6 : 1, door : 1, b8 : 2, seen : 1, mark : 1, rest : 4; };
-extern struct T DAT_000698e0[];
+extern struct T B000698e0_b7[];
 #include "world.h"
 #define FUN_0003d5d0 ((int (*)(int, int, char *))FUN_0003d5d0)
 struct POS { unsigned short f; short i; };
-/* STANDIN: party x/y cells read as record members through the level record (0x755d0 = DAT_00075618 - 0x48, 0x755d4 = - 0x44) - removes two zero-savings -oa memory nodes; the module declares the cells as scalars */
-#define PX (*(struct POS *)((char *)&DAT_00075618 - 0x48))
-#define PY (*(struct POS *)((char *)&DAT_00075618 - 0x44))
-/* the map width DAT_00075619 read as the level-record member (world.h): no memory node */
+/* STANDIN: party x/y cells read as record members through the level record (0x755d0 = B00075618_b1 - 0x48, 0x755d4 = - 0x44) - removes two zero-savings -oa memory nodes; the module declares the cells as scalars */
+#define PX (*(struct POS *)((char *)&B00075618_b1 - 0x48))
+#define PY (*(struct POS *)((char *)&B00075618_b1 - 0x44))
+/* the map width B00075619_b0 read as the level-record member (world.h): no memory node */
 void FUN_0002b4f8(struct MOB *m, char *mon, char *z)
 {
     int sp, ang, dx, dy, n; union FIX nx, ny, d1, d0; short xs;
     if (!m->f0) {
-        if (DAT_000698e0[m->cell].b6) {
+        if (B000698e0_b7[m->cell].b6) {
             dx = abs(((short *)m)[3] - PX.i);
             dy = abs(((short *)m)[1] - PY.i);
             if (dx <= 4 && dy <= 4) {
@@ -228,7 +228,7 @@ void FUN_0002b4f8(struct MOB *m, char *mon, char *z)
     nx.v = d0.v + m->a;
     n = FUN_0003d5d0(nx.v, ny.v, z); /* STANDIN: result through the int local n - adds one single-block temp (savings 4) in the call block of the pass-1 list */
     if ((short)n) { /* STANDIN: the cast tests AX as the short return value (test ax, ax) */
-        xs = nx.h.hi * DAT_00075618.w;
+        xs = nx.h.hi * B00075618_b1.w;
         m->cell = ny.h.hi + xs;
         m->b = ny.v;
         m->a = nx.v;
@@ -254,11 +254,11 @@ void FUN_0002b4f8(struct MOB *m, char *mon, char *z)
 /* ---- from build/var/mod/parts/p2b6ec.c */
 /* FUN_0002b6ec @ 0002b6ec (module 0x2af90, -oa: n is declared before cnt, which gives n ebx and cnt ecx as in the original, and cnt is cleared first; tools/modclimb.py found the order) */
 #include "chars.h"
-extern unsigned short DAT_000718f0; extern int DAT_00071a12; 
+extern unsigned short B000718f0_hO; extern int B00071a12_dx; 
 /* struct MT: defined above */
-extern struct MT *DAT_00072230;
-#define CH10(k) (*(unsigned short *)((char *)&DAT_000718f0 + (k) * 0x248))
-#define CHF(k)  (*(int *)((char *)&DAT_00071a12 + (k) * 0x248))
+extern struct MT *B00072230_c4;
+#define CH10(k) (*(unsigned short *)((char *)&B000718f0_hO + (k) * 0x248))
+#define CHF(k)  (*(int *)((char *)&B00071a12_dx + (k) * 0x248))
 int FUN_0002b6ec(int a)
 {
     int any, n, cnt, k;
@@ -268,7 +268,7 @@ int FUN_0002b6ec(int a)
             n++;
             if (CHF(k) & 0x20) any = 1;
             if (CHF(k) & 0x200) {
-                if ((*(int *)((char *)DAT_00072230 + a * 0x45 + 0x3a) & 0x20) && *(unsigned char *)((char *)DAT_00072230 + a * 0x45 + 0x1d) <= 4) cnt++;
+                if ((*(int *)((char *)B00072230_c4 + a * 0x45 + 0x3a) & 0x20) && *(unsigned char *)((char *)B00072230_c4 + a * 0x45 + 0x1d) <= 4) cnt++;
             }
         }
     }
@@ -283,20 +283,20 @@ extern int FUN_0002af90(int px, int py, int r, int n); /* module prototype */
 extern void FUN_0002b27c(struct T2_MOB *m, int b); /* module prototype */
 extern int FUN_0002b6ec(int a); /* module prototype */
 #define MOB T7_MOB
-extern struct MT *DAT_00072230; 
-extern struct TBL DAT_00072200;
+extern struct MT *B00072230_c4; 
+extern struct TBL B00072200_ew;
 
 struct MOB { int a, b; int fl; unsigned short cell, type; short s10, s12; unsigned short f0 : 1, f12 : 2, dir : 3, step : 3, f9 : 5, top : 2; };
 /* struct T: defined above */
-extern struct T DAT_000698e0[];
+extern struct T B000698e0_b7[];
 struct V1 { int v; };
-extern struct V1 DAT_000758c0; /* STANDIN: record view, -1 memory node */
+extern struct V1 B000758c0_kK; /* STANDIN: record view, -1 memory node */
 #include "world.h"
 #define FUN_0002b27c ((void (*)(struct MOB *, char *))FUN_0002b27c)
 union CELL { int w; struct { unsigned short f; short i; } h; };
-/* STANDIN: the party cells read as records through the level record (0x755d0 = DAT_00075618 - 0x48, 0x755d4 = - 0x44): -4 memory nodes; the module declares the cells as scalars */
-#define CX (*(union CELL *)((char *)&DAT_00075618 - 0x48))
-#define CY (*(union CELL *)((char *)&DAT_00075618 - 0x44))
+/* STANDIN: the party cells read as records through the level record (0x755d0 = B00075618_b1 - 0x48, 0x755d4 = - 0x44): -4 memory nodes; the module declares the cells as scalars */
+#define CX (*(union CELL *)((char *)&B00075618_b1 - 0x48))
+#define CY (*(union CELL *)((char *)&B00075618_b1 - 0x44))
 /* the map size as level-record members (world.h), no memory node */
 extern short DAT_0005a7f8[];
 extern int FUN_000411e0(void);
@@ -310,7 +310,7 @@ void FUN_0002b760(struct MOB *m, char *z, int n)
         return;
     }
     if (m->type == 0xf) {
-        if (DAT_000698e0[m->cell].b6) FUN_0002b394((struct MB3 *)m);
+        if (B000698e0_b7[m->cell].b6) FUN_0002b394((struct MB3 *)m);
         return;
     }
     if (m->fl & 0x40000000) {
@@ -321,9 +321,9 @@ void FUN_0002b760(struct MOB *m, char *z, int n)
     }
     FUN_000390d0((unsigned short)FUN_000411e0());
     if (FUN_0002b6ec(m->type)) {
-        dx = DAT_00075618.w;
+        dx = B00075618_b1.w;
         dx *= rand();
-        tt = DAT_00075618.h; dy = tt; /* STANDIN: copy through tt (+1 in-block node) */
+        tt = B00075618_b1.h; dy = tt; /* STANDIN: copy through tt (+1 in-block node) */
         dy *= rand();
         dx = CX.w - ((int)((unsigned)dx >> 15) << 16);
         dy = CY.w - ((int)((unsigned)dy >> 15) << 16);
@@ -346,7 +346,7 @@ void FUN_0002b760(struct MOB *m, char *z, int n)
         if (!(m->fl & 0x10)) {
             m->top = 0;
             if ((int)((unsigned)(rand() * 1000) >> 15) > 0x3de)
-                FUN_00038110(DAT_00072200.p[m->type].snd + DAT_000758c0.v, 0xff, 0, 1);
+                FUN_00038110(B00072200_ew.p[m->type].snd + B000758c0_kK.v, 0xff, 0, 1);
             if (abs(dx) <= 0x15000 && abs(dy) <= 0x15000 && n == 0 && m->dir == d) {
                 m->f12 = 1;
                 m->fl &= ~0x30000000;
@@ -401,7 +401,7 @@ void FUN_0002b760(struct MOB *m, char *z, int n)
 /* ---- from build/var/mod/parts/p2bbd8.c */
 extern void FUN_0002b760(struct T7_MOB *m, char *z, int n); /* module prototype */
 #define MOB T8_MOB
-/* MATCH (round 22): alone and in module 0x2af90. First difference was the dead second `je` after `cmp byte [DAT_0005c02f],0`: two source tests of the same global, `!G || (G && !(step & 1))` (the second cmp is dropped as redundant, its jump stays). Then the type-9 block jumps to the last else's f0 clear: one `m->f0 = 0` at the loop end after if (type 9) {...} else {... if (ok) ... else if (type 8) {top, step, f0} else if (tries < 3) {...; continue;} else {flag}}, which replaces the goto stand-in. Registers of the two w*y products and the ny/nx slots: module 0x2af90 reads the map width/height as short scalars DAT_00075619/DAT_0007561b (not world.h's LEV members; FUN_0002b4f8 162 / FUN_0002b760 385 lines with scalars, 276 / 659 as members); `union FIX nx, ny, dy, dx`. 7 real compiles. */
+/* MATCH (round 22): alone and in module 0x2af90. First difference was the dead second `je` after `cmp byte [DAT_0005c02f],0`: two source tests of the same global, `!G || (G && !(step & 1))` (the second cmp is dropped as redundant, its jump stays). Then the type-9 block jumps to the last else's f0 clear: one `m->f0 = 0` at the loop end after if (type 9) {...} else {... if (ok) ... else if (type 8) {top, step, f0} else if (tries < 3) {...; continue;} else {flag}}, which replaces the goto stand-in. Registers of the two w*y products and the ny/nx slots: module 0x2af90 reads the map width/height as short scalars B00075619_b0/B0007561b_io (not world.h's LEV members; FUN_0002b4f8 162 / FUN_0002b760 385 lines with scalars, 276 / 659 as members); `union FIX nx, ny, dy, dx`. 7 real compiles. */
 /* history (round 19): the type-9 step is 16-bit (m[3]++; m[6] = xs + m[3]), the success block in FUN_0002b4f8's sibling order (recipe 61), union FIX locals. */
 /* FUN_0002bbd8 @ 0002bbd8: move monster m (kind data mon) until its move flag clears: pick a heading, step, retry up to three times when blocked */
 #include "world.h"
@@ -409,7 +409,7 @@ extern void FUN_0002b760(struct T7_MOB *m, char *z, int n); /* module prototype 
 /* struct FIX: defined above */
 struct MOB { int a, b; unsigned char c8, c9, ca, cb0 : 6, held : 1, cb7 : 1; short cell, type, s10, cnt; unsigned short f0 : 1, f1 : 1, f2 : 1, dir : 3, step : 3, f9 : 5, top : 2; };
 extern void FUN_0003df2c(int *, int *, int, int); 
-extern unsigned char DAT_0005c02f; extern short DAT_00075619;
+extern unsigned char DAT_0005c02f; extern short B00075619_b0;
 void FUN_0002bbd8(struct MOB *m, char *mon, char *z)
 {
     int tries, ang, sp; union FIX nx, ny, dy, dx; short xs;
@@ -425,7 +425,7 @@ void FUN_0002bbd8(struct MOB *m, char *mon, char *z)
         if (((unsigned short *)m)[7] == 9) {
             if (((short *)m)[3] != 0x18 || ((short *)m)[1] != 7)
             {
-                xs = ((short *)m)[1] * DAT_00075619;
+                xs = ((short *)m)[1] * B00075619_b0;
                 ((short *)m)[3]++;
                 ((short *)m)[6] = xs + ((short *)m)[3];
             }
@@ -442,7 +442,7 @@ void FUN_0002bbd8(struct MOB *m, char *mon, char *z)
                 nx.v = m->a;
             }
             if (FUN_0003d5d0(nx.v, ny.v, z)) {
-                xs = nx.h.hi * DAT_00075619;
+                xs = nx.h.hi * B00075619_b0;
                 ((short *)m)[6] = ny.h.hi + xs;
                 m->b = ny.v;
                 m->a = nx.v;
@@ -471,8 +471,8 @@ extern void FUN_0002b4f8(struct T5_MOB *m, char *mon, char *z); /* module protot
 extern void FUN_0002bbd8(struct T8_MOB *m, char *mon, char *z); /* module prototype */
 #define MOB T9_MOB
 /* FUN_0002bdac: per frame, step every monster, missile, timed object and projectile (round 65 lane AO: MATCH under -3s -ox -oe -oa -ot -w0).
-   Natural changes against r62aa m2.c: the three list counts as struct LEV members (world.h: DAT_00075618.nent / n4 / ndoor),
-   memmove's destination written &DAT_00067618[i] (not m) with the byte count * 0x16.  Stand-ins (tie order only, code unchanged):
+   Natural changes against r62aa m2.c: the three list counts as struct LEV members (world.h: B00075618_b1.nent / n4 / ndoor),
+   memmove's destination written &B00067618_e7[i] (not m) with the byte count * 0x16.  Stand-ins (tie order only, code unchanged):
    tq (copy of the monster-type record pointer, declared first) and tt (copy of the loop-4 frame remainder). */
 /* FUN_0002bdac: per frame, step every monster, missile, timed object and projectile */
 #include "world.h"
@@ -481,9 +481,9 @@ extern void FUN_0002bbd8(struct T8_MOB *m, char *mon, char *z); /* module protot
 void *memmove(void *, const void *, unsigned);
 struct MOB { int a, b; int fl; unsigned short cell, type; short s10, s12; unsigned short f0 : 1, f12 : 2, dir : 3, step : 3, del : 1, f10 : 4, top : 2; };
 /* struct MT: defined above */
-extern struct MT *DAT_00072230;
-extern unsigned char *DAT_00072234;
-extern struct MOB DAT_00064d80[], DAT_00072238[], DAT_00067618[], DAT_000748ec[];
+extern struct MT *B00072230_c4;
+extern unsigned char *B00072234_hx;
+extern struct MOB B00064d80_ay[], B00072238_dL[], B00067618_e7[], B000748ec_bk[];
 
 extern int DAT_0005c038;
 extern unsigned char DAT_0005bf38;
@@ -497,9 +497,9 @@ void FUN_0002bdac(void)
     unsigned char *ot, *o; int i; struct MOB *m; struct MT *t;
     int tt; /* STANDIN: named temp for the copy below (pass-1 tie order) */
     if (DAT_0005bf38) {
-        for (i = 0; i < DAT_00075618.nent; i++) {
-            m = &DAT_00064d80[i];
-            tq = &DAT_00072230[m->type]; t = tq; /* STANDIN: copy through a named temp - door-loop table pointer in edi */
+        for (i = 0; i < B00075618_b1.nent; i++) {
+            m = &B00064d80_ay[i];
+            tq = &B00072230_c4[m->type]; t = tq; /* STANDIN: copy through a named temp - door-loop table pointer in edi */
             if (m->fl & 0x2000000) continue;
             if (m->s10 == 0) {
                 if (m->fl & 8) m->fl &= ~8;
@@ -528,24 +528,24 @@ void FUN_0002bdac(void)
             } else m->s10--;
         }
     }
-    for (i = 0; i < DAT_00075618.ndoor; i++) {
-        m = &DAT_00072238[i];
+    for (i = 0; i < B00075618_b1.ndoor; i++) {
+        m = &B00072238_dL[i];
         if (m->type != 0x54) {
-            ot = DAT_000755dc + m->type * 7;
+            ot = B000755dc_aX + m->type * 7;
             m->step = (m->step + 1) % ot[5];
         }
     }
-    for (i = 0; i < DAT_00075618.n4; i++) {
-        m = &DAT_00067618[i];
+    for (i = 0; i < B00075618_b1.n4; i++) {
+        m = &B00067618_e7[i];
         if (m->del && FUN_0003388c(m, 1)) {
-            memmove(&DAT_00067618[i], &DAT_00067618[i + 1], (DAT_00075618.n4 - 1 - i) * 0x16);
+            memmove(&B00067618_e7[i], &B00067618_e7[i + 1], (B00075618_b1.n4 - 1 - i) * 0x16);
             i--;
-            DAT_00075618.n4--;
+            B00075618_b1.n4--;
         }
     }
     for (i = 0; i < DAT_0005c038; i++) {
-        m = &DAT_000748ec[i];
-        o = DAT_00072234 + m->type * 7;
+        m = &B000748ec_bk[i];
+        o = B00072234_hx + m->type * 7;
         if (m->type < 8) {
             if (DAT_0005bf38) {
                 FUN_00032e90(m, 1);
