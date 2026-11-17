@@ -19,7 +19,10 @@ extern short FUN_000159ac(unsigned char *pal); /* module prototype */
 #pragma pack(1)
 struct PE { unsigned char g, r, b; short idx; short x, y; };
 #pragma pack()
-extern short B00037ff3_eu, B00037ff5_eu, B00037ff7_eu, B000388fc_eu, B000388fe_eu, B00038900_eu, DAT_00030982;
+#define B00037ff3_eu (*(short *)((char *)&B00037ff0_eu + 3)) /* STANDIN: a name of its own in the original image, 3 bytes into B00037ff0_eu */
+#define B00037ff5_eu (*(short *)((char *)&B00037ff0_eu + 5)) /* STANDIN: a name of its own in the original image, 5 bytes into B00037ff0_eu */
+#define B00037ff7_eu (*(short *)((char *)&B00037ff0_eu + 7)) /* STANDIN: a name of its own in the original image, 7 bytes into B00037ff0_eu */
+extern short B000388fc_eu, B000388fe_eu, B00038900_eu, DAT_00030982;
  
 /* FUN_00015a34 @ 00015a34: feed every palette entry to FUN_00015880, from the start index down to 0 and then up to 255 */
 void FUN_00015a34(unsigned char *pal)
