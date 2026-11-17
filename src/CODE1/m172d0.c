@@ -150,7 +150,6 @@ struct S *FUN_00017868(int pg, int x, int y, int w, int key) { unsigned short n;
 struct SR { short size, n, w; unsigned char hb, flag; unsigned char data[1]; };
 #include "records.h"
 extern struct PC B000367f8_eu[4];
-#define B0003680b_eu ((unsigned char *)((char *)&B000367f8_eu + 19)) /* STANDIN: view, B000367f8_eu + 0x13 */
 extern int DAT_000304cc, DAT_000304d0; 
 extern void FUN_00011464(int, int, int, int, int, int, int, int, int, int, int, int, int), FUN_000115b0(int, int, int, int), FUN_000166c0(unsigned char *, int, int, int, int), FUN_000165c0(int, int, int, int), FUN_000165e8(int, int, int, int);
 extern unsigned FUN_0001043c(void);
@@ -228,7 +227,6 @@ int FUN_00017b74(int n) { B00038988_eu = FUN_0001954c(n, 0); return (*(unsigned 
 #undef SR
 /* ---- from build/var/mod/parts/p17b94.c */
 struct CHR { char b[0x248]; };
-#define B0003680c_eu ((unsigned char *)((char *)&B000367f8_eu + 20)) /* STANDIN: view, B000367f8_eu + 0x14 */
 extern int DAT_00032908, B0003898c_eu, B00038990_eu, DAT_000304cc, DAT_000304d0; 
 extern unsigned char *FUN_0001954c(int, int); extern void FUN_00016824(int, int, int, int, int), FUN_000167c8(int, int, int, int);
 extern void FUN_00011464(int, int, int, int, int, int, int, int, int, int, int, int, int), FUN_000115b0(int, int, int, int);

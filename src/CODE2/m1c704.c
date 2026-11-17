@@ -268,7 +268,6 @@ extern void FUN_0001cbc8(void); /* module prototype */
 
 extern int FUN_00029cc4(void), FUN_00024a60(char *), FUN_0002c1dc(int); extern void FUN_0001ad24(int);
 #define B000718fc_i0 (*(short *)((char *)&B000718e0_iO + 28)) /* STANDIN: view, B000718e0_iO + 0x1c */
-#define B00071aca_he (*(int *)((char *)&B000718e0_iO + 490)) /* STANDIN: view, B000718e0_iO + 0x1ea */
 #define B000719f3_iO (*(int *)((char *)&B000718e0_iO + 275)) /* STANDIN: view, B000718e0_iO + 0x113 */
 extern int DAT_00071a92, DAT_00071a86, DAT_000719f7, DAT_0005bf44, DAT_0005d8a8[];   extern unsigned char DAT_0005d681; extern char s_IRMGARDE_00050578[];
 #define CH(sym, i) (*(int *)((char *)&sym + (i) * 0x248))
@@ -424,8 +423,6 @@ int sprintf(char *, const char *, ...);
 struct ST { unsigned char lo : 2, s3 : 3, b5 : 1, dead : 1, b7 : 1; };
 extern struct ST DAT_000718f1[];
 #define CB(o, i) ((signed char)M000718e0_iO[(i) + (o)])
-#define B00071902_aC ((char *)((char *)&B000718e0_iO + 34)) /* STANDIN: view, B000718e0_iO + 0x22 */
-#define B00071904_aA ((char *)((char *)&B000718e0_iO + 36)) /* STANDIN: view, B000718e0_iO + 0x24 */
 extern char DAT_0005759c[], *PTR_s__s_loses_a_level__000567dc;
 #define B00071906_aG ((int *)((char *)&B000718e0_iO + 38)) /* STANDIN: view, B000718e0_iO + 0x26 */
 extern int DAT_0005d8a8[];
@@ -634,7 +631,6 @@ void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
 struct SP { unsigned short x, z, a, id, hidden, key; char pad[10]; };
 extern char B00077148_eJ[];
 #define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
-#define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
 extern struct MON B00064d80_ay[];
 #define B00064d8b_a7 (*(int *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
 extern int DAT_0005c050; extern unsigned short DAT_0005f038[]; extern char B00077148_eJ[];   
