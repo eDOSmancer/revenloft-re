@@ -48,7 +48,6 @@ c    m3e340   -3s -ox -oe -oa -ot -w0
 asm  b3e340   -3p -c
 c    m3f960   -3s -ox -oe -oa -ot -w0
 c    m40700   -3s -ox -oe -ot -w0
-asm  b40700   -3p -c
 lib  rand     CLIB3S.LIB
 lib  memmove  CLIB3S.LIB
 lib  set386   CLIB3S.LIB

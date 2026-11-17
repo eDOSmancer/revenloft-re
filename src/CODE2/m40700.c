@@ -1,3 +1,6 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+unsigned char B0007b6c4_dQ[12];
+/* BSS end */
 /* Module: FUN_00040700, LAB_00040708, FUN_00040738, FUN_00040748, FUN_000407f0, FUN_000408bc, FUN_000408f4,
    LAB_000408f8, FUN_00040abc, FUN_00040ac8, FUN_00040ad8, FUN_00040aec, FUN_00040b1c, FUN_00040b2c,
    FUN_00040b40, LAB_00040b54, FUN_00040bb4, FUN_00040c38, FUN_00040c94 */
@@ -28,7 +31,7 @@ void FUN_00040738(int v) { _disable(); DAT_0005f58c = v; _enable(); }
 /* FUN_00040748, FUN_000407f0: remove / add a key in the pressed-key list (the key count and the current key are volatile: the keyboard interrupt updates them); FUN_000407f0 also turns cursor keys into a move direction */
 void *memmove(void *, const void *, unsigned);
 extern volatile unsigned char DAT_0005f588;
-extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, B0007b6c4_dQ[], B0007b6c3_dR[];
+extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, B0007b6c4_dQ[12], B0007b6c3_dR[];
 void FUN_00040748(int key)
 {
     int k;
@@ -45,7 +48,7 @@ void FUN_00040748(int key)
 }
 
 extern volatile unsigned char DAT_0005f588;
-extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, B0007b6c4_dQ[], B0007b6c3_dR[];
+extern volatile unsigned char DAT_0005f572; extern unsigned char DAT_0005f571, B0007b6c4_dQ[12], B0007b6c3_dR[];
 
 extern short B000758fc_kL, B000758fe_j6;
 /* FUN_000407f0 @ 000407f0: add a key to the pressed-key list and turn cursor keys into a move direction (fc) and sense (fe) */
@@ -85,7 +88,7 @@ int FUN_000408bc(int v)
     return 0;
 }
 
-extern unsigned char B0007b6c4_dQ[];
+extern unsigned char B0007b6c4_dQ[12];
 
 
 void FUN_000408f4(void)
