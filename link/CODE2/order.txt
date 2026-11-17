@@ -9,7 +9,6 @@ c    m106c0   -3s -ox -oe -oa -ot -j -w0
 c    m13810   -3s -ox -oe -ot -w0
 c    m13a78   -3s -ox -oe -oa -ot -j -w0
 c    m186c4   -3s -ox -oe -oa -ot -w0
-asm  b186c4   -3p -c
 c    m1c704   -3s -ox -oe -oa -ot -w0
 c    m1ea90   -3s -ox -oe -ot -w0
 asm  b1ea90   -3p -c
