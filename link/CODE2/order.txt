@@ -64,7 +64,6 @@ lib  mkdir    CLIB3S.LIB
 lib  chdir    CLIB3S.LIB
 lib  intx386  CLIB3S.LIB
 c    m43aa0   -3s -ox -oe -ot -w0
-asm  b43aa0   -3p -c
 asm  a43de0   -3p -mf -c
 c    m44bb0   -3s -ot -d2 -oe -s -w0
 asm  b44bb0   -3p -c

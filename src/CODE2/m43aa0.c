@@ -1,3 +1,13 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+short B0007b7ae_hb;
+short B0007b7ac_kp;
+unsigned char F0007b7a8_f2[2];
+short B0007b7a8_b6;
+short B0007b7a6_c4;
+short B0007b7a4_c2;
+short B0007b7a2_c0;
+struct RMI B0007b770_gl;
+/* BSS end */
 /* Module: FUN_00043aa0, FUN_00043af4, FUN_00043b44, FUN_00043c90, FUN_00043cb0, FUN_00043d18, FUN_00043d38, FUN_00043d58, FUN_00043d78 */
 /* ---- from build/var/mod/parts/p43aa0.c */
 /* FUN_00043aa0 @ 00043aa0: issue real-mode int 33h through DPMI 0300h with the call structure at rmregs */
