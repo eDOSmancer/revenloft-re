@@ -37,5 +37,10 @@ Consistency test only: every module is one object file by all kinds of evidence.
 - e: the expanded calls stay inside their modules (FUN_0001ccf4 in m1c704, FUN_00033e1c in m33df0, FUN_0002c1dc in m2c0c0).
 - No disagreement was found; nothing was changed for this test.
 
+- paragraph alignment: the `_BSS` of every module except m3f960 and m40700 starts on a 16-byte boundary where the
+  image can show it (`docs/BSS.md`); this puts the boundary between m2c0c0 and m307e8 at 0x72220, the end of the
+  class-6 objects (the door table 0x72238-0x748e4 lies across the place where the earlier rounds cut).
+
 Not decided by any evidence: whether 0x7b6d0 (find record and path buffer, used by m411e0 only) belongs to m40d80 or
-m40700, and the int 0x7b63c at the end of m3c800 (`docs/BSS.md`, open points).
+m40700 (m40700's run would stay descending with them, and 0x7b6d0 is a paragraph boundary either way), and in CODE.1
+whether the 56-byte buffer 0x37140 is m150c0's or m10010's (`docs/BSS.md`, open points).

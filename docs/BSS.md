@@ -69,10 +69,11 @@ The names are stand-ins: the original identifiers are unknown, and any set of na
 buffer would do.  They are ordinary global names used directly in every C and assembler file (a header of `#define
 DAT_x B..` macros is not possible: about 350 places define views of the form `#define DAT_x ((T)&DAT_x)`).
 
-Bytes that no code names (the rest of an object whose extent is unknown, or variables the programs never reference by
-address) are defined as filler arrays `F<address of the object ahead>_<xx>` (`G...`, `H...` for further pieces), cut so
-that the size classes still descend.  A filler of 1-3 bytes at the end of a module is not defined: the linker's dword
-alignment of the next module's `_BSS` supplies it.
+Bytes that no code names inside a run are variables the programs never reference: they are defined like the others,
+under a fitted name with their own address, with the type of their neighbours and the comment "no code references it"
+(the earlier rounds wrote them as filler byte arrays `F<address>_<xx>`).  A gap of 1-3 bytes at the end of a module is
+not defined: the linker's dword alignment of the next module's `_BSS` supplies it, and a gap up to the next paragraph
+is the alignment of the next module (below).
 
 **Views.** Where the original image names an address *inside* an object (a member of a record that code addresses as a
 variable of its own), C cannot define that name.  It becomes a macro in the files (and headers) that use it,
@@ -83,7 +84,7 @@ whose address is taken becomes `(*(T (*)[n])...)`, and local macros that reused 
 (`#define B.. ((struct PC *)&B..)` ... `#undef`) were renamed `M...` so that the object's name always means the object
 (same preprocessed text).  Views in the sources:
 
-- CODE.2: the members of the party records (container 0x718e0; the flag words and names as struct members), 8 members of the monster table 0x64d80 (100 x 22 bytes),
+- CODE.2: the members of the party records that a function addresses with a byte offset (container 0x718e0; all other accesses are members of `struct PC`), the members of record 0 of the door table 0x72238 (0x7223a ... 0x7224c), 8 members of the monster table 0x64d80 (100 x 22 bytes),
   the members of record 0 of the tables 0x65a18 (256 x 28 bytes) and 0x67618 (300 x 22), 0x6994c (row 0 of the map
   0x698e0), 0x74900 (in the 150 x 22 table 0x748ec), the high words 0x755d2 / 0x755d6 of the party position and
   0x755ea ... 0x755f6 (assembler only), the level header's members (assembler only), element -1 of the tables 0x63020 and
@@ -115,14 +116,14 @@ real compiler), and **a dead read of a scalar the function does not otherwise us
 (FUN_0001083c, FUN_00010cb0, FUN_00012db0, FUN_00019368, FUN_0001aed8, FUN_0002b27c, FUN_00030a24).  Reading the lost
 variable itself does not help: a read at another size than the object's removes the node.
 
-**The character records** (CODE.2 0x718e0, CODE.1 0x367f8) are one object of 4 x 0x248 bytes in both programs.  In
-CODE.2 `include/chars.h` declares it `struct PCH B000718e0_iO[4]` (name, flag word, rest); the flag words and names of
-the records are written as members (`B000718e0_iO[1].fl`).  A member with a constant index costs the front end no more
-than a plain global, so FUN_0001ccf4 (four flag words) is expanded inline as in the original; a cast view was not
-(the earlier rounds therefore kept seven adjacent pieces).  A member is still no `-oa` memory node: FUN_0001d550,
-which expands FUN_0001ccf4, takes four dead reads (the original's pass-1 list has four zero-savings nodes at that
-place; a struct of four records instead of an array gives none either).  FUN_00026d04's first copy chain went from 3
-to 2 temporaries.
+**The character records** (CODE.2 0x718e0, CODE.1 0x367f8) are one object of 4 x 0x248 bytes in both programs,
+`struct PC x[4]` of `include/records.h` (the CODE.1 code uses the same member offsets).  A member with a constant
+index costs the front end no more than a plain global, so FUN_0001ccf4 (four flag words) is expanded inline as in the
+original; a cast view was not (the earlier rounds therefore kept seven adjacent pieces).  A member is still no `-oa`
+memory node: FUN_0001d550, which expands FUN_0001ccf4, takes four dead reads (the original's pass-1 list has four
+zero-savings nodes at that place; a struct of four records instead of an array gives none either).  Replacing a cast
+view of record 0 plus `i * 0x248` by `x[i].member` changed no function in either program (140 accesses, `-oa` modules
+included).  FUN_00026d04's first copy chain went from 3 to 2 temporaries.
 
 ## tools/bssfit.py
 
@@ -168,21 +169,29 @@ are in the link order.  Then m32e40 and the modules behind follow with their own
 | 0x67618 | 300 records of 22 bytes (6600) | `memmove(..., n * 0x16)`, ends at 0x68fe0 |
 | 0x698e0 | the map, 128 x 128 cells of 2 bytes (32768) | ends at the party records |
 | 0x748ec | 150 records of 22 bytes (3300); 0x74900 is inside | `memmove(..., n * 0x16)`, ends at 0x755d0 |
+| 0x72238 | 450 records of 22 bytes (9900, class 5): doors and fixtures; 0x7223a ... 0x72246 and 0x7224c are members of record 0 | `x + i * 0x16` from every label, `memmove(tab + i * 0x16, ...)`, the level files hold `ndoor * 0x16` bytes from 0x72238; 0x72238 + 9900 = 0x748e4, where the next ints start |
 | 0x755d0 / d4 | two ints (party position 16.16) | m307e8 passes `*(int *)&`; m2c0c0 declares 0x755e8-0x755f4 `int` |
 | CODE.1 0x37ff0 | 258 nodes of 9 bytes (2322); 0x388fc-0x38900 are the links of node 257 | 0x388fc = node 257 + 3, the link offsets |
 
 With them **CODE.2 has no object file without code**: every module defines one run, in link order, and the two runs of
-the shared data are m2c0c0's (0x64580-0x7224c: twelve class-6 objects, six ints, shorts) and m307e8's (0x7224c-0x75900:
-the 9880-byte table, then 40 objects of class 5 with the level header among them, two shorts).  m1c704, m270ac and
-m26810 define nothing.  Which of the two modules owns which shared run follows from the link order alone.
+the shared data are m2c0c0's (0x64580-0x72220: the twelve class-6 objects) and m307e8's (0x72220-0x75900: everything of
+class 5 - six ints and pointers, the door table, two ints, the 150-record table, the party position, the level header
+among 40 ints - and two shorts).  The boundary is where the class changes; it is also a paragraph boundary, which
+m307e8's `_BSS` needs (below).  m1c704, m270ac and m26810 define nothing.
 
-**Paragraph alignment.**  The pieces of m13a78, m1ea90, m1eee0, m231dc, m23f70, m29c80, m3ac80 and m43aa0 start on a
-16-byte boundary with 8 or 12 unnamed bytes ahead (m186c4 uses 8 of 16 bytes, m1eee0 and m231dc 4 of 16).  That is the
-alignment of their `_BSS` segment, not data of the module ahead: m29c80 has it by itself (the far pointer above); the
-m43aa0 as well (its real-mode call takes segment and offset of a local far pointer); the
-other six get it from `typedef void (__far *PARA_BSS)();` at the top of the file (STANDIN: their code shows no far
-pointer and no `double`, no header of the repository is shared by exactly these files; a far-pointer *parameter* does
-not align - m3e340 has one).  No filler object is left ahead of these modules.
+**Paragraph alignment.**  Wherever the image can show it, the `_BSS` of a CODE.2 module starts on a 16-byte boundary:
+m13a78, m1ea90, m1eee0, m231dc, m23f70, m29c80, m3ac80, m3e340 and m43aa0 have 4 to 12 unnamed bytes ahead (m186c4 uses
+8 of 16 bytes, m1eee0, m231dc and m38210 4 of 16, m3c800 12 of 16), and every other module's run starts on such a
+boundary anyway - except two, **m3f960** (0x7b67c) and **m40700** (0x7b6c4), which follow their predecessors
+dword-aligned.  So the alignment is not a property of a few files but of the game's modules as a group, and the two
+files without it are the exception.  WCC386 aligns `_BSS` to a paragraph when the file declares a far pointer or
+`double` object or typedef; `include/farproc.h` (a typedef of a far function pointer; inferred, the name is not known)
+is included by every C module of CODE.2 except those two and m26810, and replaces the six `PARA_BSS` typedefs of the
+earlier rounds.  m29c80 and m43aa0 have far pointer locals of their own as well.  Consequences that the SHA-1 test
+confirmed: m3e340 is aligned without help, so the int 0x7b63c that was kept as a filler at the end of m3c800 is
+alignment and is gone; m307e8 is aligned, so its run cannot start at 0x748e4 (where the earlier rounds cut) but at
+0x72220.  m26810 has no `_BSS`, so its alignment cannot be seen; it stays without the header because FUN_00026d04
+depends on the compiler's heap state (README, Caveats) and a further typedef changes that function.  No filler object is left ahead of any module.
 
 **CODE.1** has no object file without code either (`docs/FILES.md`).  The "runs" that seemed to start at 0x36814,
 0x3682c, 0x36838 and 0x36a54 are members of the first character record: 0x367f8 is the table of four records of 0x248
@@ -196,26 +205,28 @@ buffers (2049 bytes): one run as well.
 | program | defined in C |
 |---|---|
 | CODE.1 | m10010 6984, m150c0 2735, m15880 3346, m161c0 132, m172d0 72, m17f50 24, m184d0 48, m1b060 16, m1cef0 64 |
-| CODE.2 | m106c0 24, m13a78 1088, m186c4 8, m1ea90 68, m1eee0 4, m231dc 4, m23f70 5232, m28d90 8, m29c80 16, m2af90 1230, m2c0c0 56524, m307e8 14004, m32e40 6128, m38210 4, m3ac80 17712, m3c800 16, m3e340 57, m3f960 72, m40700 12, m40d80 124, m414b0 24, m43aa0 64, m44bb0 320 |
+| CODE.2 | m106c0 24, m13a78 1088, m186c4 8, m1ea90 68, m1eee0 4, m231dc 4, m23f70 5232, m28d90 8, m29c80 16, m2af90 1230, m2c0c0 56480, m307e8 14048, m32e40 6128, m38210 4, m3ac80 17712, m3c800 12, m3e340 57, m3f960 72, m40700 12, m40d80 124, m414b0 24, m43aa0 64, m44bb0 320 |
 
 No `b*.asm` is left.  `tools/bssfit.py check` reports every `_BSS` of both programs in address order.
 
 Open points:
 
-- **Fillers** (unnamed bytes inside a module's run, `F...` / `G...`).  None of them can be alignment, with one
-  exception: they lie between objects of one run, so each is a variable no code references (or the unknown rest of
-  the object ahead).  CODE.2 m2c0c0 5 (an int at 0x72228, shorts at 0x72240 / 42 / 48 / 4a), m3f960 6 (2 + 4 + 12 + 4 + 4 + 4 bytes
-  among its ints), m43aa0 1 (2 bytes); CODE.1 m172d0 6, m1cef0 1, m1b060 1 (12 bytes behind the configuration
-  pointer; the CODE.2 twin m38210 has the pointer alone, so three ints of an older version).  The exception is the int
-  0x7b63c at the end of m3c800: m3e340 behind it starts on a paragraph boundary, and removing the filler fails only
-  because m3e340's `_BSS` is not paragraph-aligned by its far-pointer parameter (FUN_0003f2e0) - undecided between an
-  unreferenced int and an alignment whose cause is not in the code.
-- **Dead reads**: twelve lines.  The object-file evidence gives no natural replacement: no file owns the high words
-  0x755d2 / 0x755d6 or a table element as a scalar of its own, and a struct member is no memory node (tested with the
-  party records, array and struct-of-records form).
-- **Element types**: objects written `unsigned char x[n]` in the definitions block of m2c0c0 / m307e8 (tables whose
-  record type is declared only by other modules) and in the CODE.1 `d*.c` files have the extent, not the type.
+- **Fillers**: none left.  The unnamed pieces inside the runs are defined as variables no code references, with the
+  type their neighbours have (`int`, `int [3]`, `short`; comment "no code references it"): CODE.2 m2c0c0 -> m307e8
+  0x72228, m3f960 six (4 + 4 + 4 + 12 + 4 + 2 bytes among its ints), m43aa0 0x7b7aa; CODE.1 m172d0 six, m1cef0 0x38a62,
+  m1b060 0x38a1c (`int [3]` behind the configuration pointer; the CODE.2 twin m38210 has the pointer alone).  Four
+  former fillers of m2c0c0 (shorts at 0x72240 / 42 / 48 / 4a) are members of record 0 of the door table; the int
+  0x7b63c of m3c800 was alignment (above).
+- **Dead reads**: eleven lines from the naming (twelve with the older one in m1eee0).  Each was removed again after
+  the tables had their types and every one is still needed.  No natural replacement exists inside one C object: no
+  file owns the high words 0x755d2 / 0x755d6 or a table element as a scalar of its own, and a struct or union member
+  is no `-oa` memory node (tested with the party records in array, struct-of-records and `struct PC` form).
+- **Element types**: `docs/TYPES.md` lists the typed objects.  Left: the files that read the monster, object, door
+  and missile tables through record types of their own (the state word is cut into bit-fields differently per
+  function), and 58 party-record accesses that index with a byte offset.
 - **0x7b6d0 (m40d80).** The find record (43 bytes) and the path buffer (81) must precede the library's `iob`; they are
   defined in `m40d80.c` as byte arrays although only m411e0 (linked after `iob`) uses them.  m40700 (12 bytes, class 5,
   directly ahead) could own them as well; the rule does not decide.
+- **CODE.1 0x37140.** The 56-byte text buffer is the first object of m150c0's run although only m10010 uses it; as an
+  object of class 6 it cannot follow m10010's ints unless it is 53-55 bytes long.  Stays with m150c0.
 - `xib.asm` is unchanged.

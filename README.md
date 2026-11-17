@@ -97,14 +97,19 @@ Nothing else is stored: there is no table of addresses, no fixup order table and
 
 Constructs that exist only because they reproduce the original bytes, not because the original source looked so:
 
-- **`STANDIN` lines in the C files** (591 marks in 49 files, the `BSS` blocks and views included): expressions, temporaries or filler objects written so
-  that the compiler makes the original's register choices or data layout. Each is marked with a comment.
-- **Names of the uninitialised variables** (`B<address>_xx`, 333 names) and the `/* BSS: ... */` block at the top
-  of 37 C files. WCC386 writes a module's `_BSS` by size class and symbol-table order, not in definition order; the
+- **`STANDIN` lines in the C files and headers** (570 marks in 47 files): expressions, temporaries or declarations written so
+  that the compiler makes the original's register choices or data layout. Each is marked with a comment. By kind:
+  389 expression forms and temporaries in function bodies (register ties, operand order, copy chains), 168 views
+  (below), 12 dead reads, 1 inferred typedef (`include/farproc.h`).
+- **Names of the uninitialised variables** (`B<address>_xx`, 311 names) and the `/* BSS: ... */` block at the top
+  of 32 C files. WCC386 writes a module's `_BSS` by size class and symbol-table order, not in definition order; the
   names are fitted so that every one lies in the same hash chain of the compiler's symbol table, and the block defines
-  the module's objects from the highest address down, which then yields the original layout. The block also holds
-  filler arrays (`F<address>_xx`) for bytes no code names. Names that lie inside a larger object (members of the party records, of the monster table, ...) are macros
-  (views, `container + offset`) in the files that use them. Rule, scheme and tool (`tools/bssfit.py`): `docs/BSS.md`.
+  the module's objects from the highest address down, which then yields the original layout. Variables no code
+  references are defined there as well (17, commented). The objects have their types: the tables are arrays of the
+  record types of `include/records.h` / `include/world.h` (`docs/TYPES.md`). Names of the original image that lie
+  inside a larger object (members of record 0 of a table, the high word of an int) are macros (views,
+  `container + offset`) in the files that still address them so; 140 such accesses to the character records were
+  turned into member accesses. Rule, scheme and tool (`tools/bssfit.py`): `docs/BSS.md`.
 - **No data-only files.** Inside one object file the size classes of `_BSS` only descend, so a rise at a dword
   boundary is either another object file or a label inside an object. Every rise turned out to be the second: in both
   programs each C module defines exactly one run (`docs/FILES.md` has the evidence per module boundary).
@@ -112,9 +117,10 @@ Constructs that exist only because they reproduce the original bytes, not becaus
   global is an entry in the register allocator's list; where a name of the original image turned out to lie inside
   another object (an element of a table, the high word of an int) the function lost that entry and came out with other
   registers, and the dead read puts an entry back (`docs/BSS.md`).
-- **`typedef void (__far *PARA_BSS)();`** at the top of six CODE.2 files: the `_BSS` contribution of these object
-  files starts on a paragraph boundary in the original (8 or 12 unnamed bytes ahead of it); WCC386 aligns `_BSS` so
-  when the file has a far pointer or `double` object, and a typedef of such a type has the same effect.
+- **`include/farproc.h`**: a typedef of a far function pointer that no code uses, included by every C module of CODE.2
+  except m3f960, m40700 and m26810. In the original every module's `_BSS` except those of m3f960 and m40700 starts on a
+  paragraph boundary wherever the image can show it; WCC386 aligns `_BSS` so when the file declares a far pointer or
+  `double` object or typedef, so the game's modules shared such a declaration. Which one is not known (`docs/BSS.md`).
 - **`xib.asm`**: an empty paragraph-aligned `XIB` segment. In both originals the C library's initialiser table starts
   on a paragraph boundary although every library object declares it word-aligned; some object of the original link
   aligned it, the image does not say which.
@@ -156,6 +162,8 @@ Constructs that exist only because they reproduce the original bytes, not becaus
     tools/bssfit.py          uninitialised data: fitted names, definitions block, checks (docs/BSS.md)
     tools/bssxref.py         which functions reference which uninitialised object (docs/BSS.md)
     docs/BSS.md              how WCC386 orders a module's _BSS and how the sources reproduce it
+    docs/FILES.md            the evidence for one object file per module
+    docs/TYPES.md            the typed data objects and the evidence for each type
     expected.sha1, build.cfg, Makefile
 
 ## Ownership
