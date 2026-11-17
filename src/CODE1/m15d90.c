@@ -49,11 +49,9 @@ int FUN_00015d90(int p)
 extern int FUN_00015d90(int p); /* module prototype */
 /* Round 33: matches in module 0x15d90 under the module set -ol with cls initialised at the declaration (first-definition tie, recipe 96) and the record offset written p * 0x248 + k * 2 like the other stores (the k-loop address node moves the 320-savings tie of the x*0x41 tail sum); found with the 9.5b trace (tietrace class B -> A). Round 24: matched only without -ol. Under -ol (FUN_00015d90 needs it) the first difference is cls in ecx and r*0xa8 in esi (original: cls esi), then the *0x41 sum register: identical instructions, an allocation tie; block-scoped k/r/cls (1 real) and modmat -oa/-oi/-or/-oc change nothing */
 struct T { short a, b, c, d, w[10]; };
-#define B00036a80_eu ((short *)((char *)&B000367f8_eu + 648)) /* STANDIN: view, B000367f8_eu + 0x288 */
-#define B00036a54_eu (*(unsigned char *)((char *)&B000367f8_eu + 604)) /* STANDIN: view, B000367f8_eu + 0x25c */
  extern unsigned char *B00037128_eu; extern struct T DAT_00030988[][6];  
 #define W(a, o) (*(short *)((a) + (o)))
-void FUN_00015f4c(void) { int k, r, cls = 0, p, m; for (p = 0; p < 2; p++) { r = FUN_00015d90(p); cls = B000367f8_eu[p].race; B000367f8_eu[p].inv[14] = DAT_00030988[r][cls].c; B000367f8_eu[p].inv[15] = DAT_00030988[r][cls].d; B000367f8_eu[p].inv[16] = DAT_00030988[r][cls].b; B000367f8_eu[p].inv[17] = DAT_00030988[r][cls].a; for (k = 0; k < 10; k++) B000367f8_eu[p].inv[k] = DAT_00030988[r][cls].w[k]; } if (FUN_00015d90(0) == FUN_00015d90(1) && B000367f8_eu[0].race == B00036a54_eu) for (m = 0; m < 10; m++) if (B00037128_eu[B00036a80_eu[m] * 0x41 + 0x2f] == 1) B00036a80_eu[m] = -1; }
+void FUN_00015f4c(void) { int k, r, cls = 0, p, m; for (p = 0; p < 2; p++) { r = FUN_00015d90(p); cls = B000367f8_eu[p].race; B000367f8_eu[p].inv[14] = DAT_00030988[r][cls].c; B000367f8_eu[p].inv[15] = DAT_00030988[r][cls].d; B000367f8_eu[p].inv[16] = DAT_00030988[r][cls].b; B000367f8_eu[p].inv[17] = DAT_00030988[r][cls].a; for (k = 0; k < 10; k++) B000367f8_eu[p].inv[k] = DAT_00030988[r][cls].w[k]; } if (FUN_00015d90(0) == FUN_00015d90(1) && B000367f8_eu[0].race == B000367f8_eu[1].race) for (m = 0; m < 10; m++) if (B00037128_eu[B000367f8_eu[1].inv[m] * 0x41 + 0x2f] == 1) B000367f8_eu[1].inv[m] = -1; }
 
 #undef W
 

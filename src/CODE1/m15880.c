@@ -26,9 +26,6 @@ struct PE { unsigned char g, r, b; short idx; short x, y; };
 #define B00037ff3_eu (*(short *)((char *)&B00037ff0_eu + 3)) /* STANDIN: a name of its own in the original image, 3 bytes into B00037ff0_eu */
 #define B00037ff5_eu (*(short *)((char *)&B00037ff0_eu + 5)) /* STANDIN: a name of its own in the original image, 5 bytes into B00037ff0_eu */
 #define B00037ff7_eu (*(short *)((char *)&B00037ff0_eu + 7)) /* STANDIN: a name of its own in the original image, 7 bytes into B00037ff0_eu */
-#define B000388fc_eu (*(short *)((char *)&B00037ff0_eu + 2316)) /* STANDIN: view, B00037ff0_eu + 0x90c */
-#define B000388fe_eu (*(short *)((char *)&B00037ff0_eu + 2318)) /* STANDIN: view, B00037ff0_eu + 0x90e */
-#define B00038900_eu (*(short *)((char *)&B00037ff0_eu + 2320)) /* STANDIN: view, B00037ff0_eu + 0x910 */
 extern short DAT_00030982;
  
 /* FUN_00015a34 @ 00015a34: feed every palette entry to FUN_00015880, from the start index down to 0 and then up to 255 */
@@ -39,9 +36,9 @@ void FUN_00015a34(unsigned char *pal)
     B00037ff3_eu = -1;
     B00037ff5_eu = 0x101;
     B00037ff7_eu = 0x101;
-    B000388fc_eu = -1;
-    B000388fe_eu = 0x101;
-    B00038900_eu = 0x101;
+    B00037ff0_eu[257].idx = -1;
+    B00037ff0_eu[257].left = 0x101;
+    B00037ff0_eu[257].right = 0x101;
     e.x = 0;
     e.y = 0;
     i = ((int (*)(unsigned char *))FUN_000159ac)(pal);   /* TODO types: the original call does not sign-extend the short result */
