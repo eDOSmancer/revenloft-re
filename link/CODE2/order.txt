@@ -37,7 +37,6 @@ asm  a373e7   -3p -mf -c
 lib  cmp386   CLIB3S.LIB
 c    m37d20   -3s -ox -oe -ot -w0
 c    m38210   -3s -ox -oe -oa -ot -w0
-asm  b38210   -3p -c
 c    m390d0   -3s -ox -oe -ot -w0
 asm  a39922   -3p -mf -c
 c    m3ac80   -3s -ot -d2 -oe -s -w0
