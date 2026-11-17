@@ -1,75 +1,8 @@
-; b2c0c0.asm - uninitialised data (_BSS) of module m2c0c0.c, 4124 bytes
-; STANDIN: these variables were defined in the C file.  They are defined here, in address order, because wcc386
-; writes the _BSS of a module in symbol-hash order and the hash depends on the (unknown) original names.
+; b307e8.asm - uninitialised data (_BSS) of module m307e8.c, 776 bytes
+; STANDIN: part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md).
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
-public B000748e4_h8
-B000748e4_h8 label byte
-    db 2 dup(?)
-public B000748e6_h6
-B000748e6_h6 label byte
-    db 2 dup(?)
-public B000748e8_jD
-B000748e8_jD label byte
-    db 2 dup(?)
-public B000748ea_bm
-B000748ea_bm label byte
-    db 2 dup(?)
-public B000748ec_bk
-B000748ec_bk label byte
-    db 20 dup(?)
-public B00074900_bn
-B00074900_bn label byte
-    db 3280 dup(?)
-public B000755d0_ao
-B000755d0_ao label byte
-    db 2 dup(?)
-public B000755d2_ai
-B000755d2_ai label byte
-    db 2 dup(?)
-public B000755d4_ak
-B000755d4_ak label byte
-    db 2 dup(?)
-public B000755d6_ae
-B000755d6_ae label byte
-    db 2 dup(?)
-public B000755d8_aw
-B000755d8_aw label byte
-    db 4 dup(?)
-public B000755dc_aX
-B000755dc_aX label byte
-    db 4 dup(?)
-public B000755e0_bo
-B000755e0_bo label byte
-    db 4 dup(?)
-public B000755e4_bk
-B000755e4_bk label byte
-    db 4 dup(?)
-public B000755e8_ag
-B000755e8_ag label byte
-    db 2 dup(?)
-public B000755ea_aN
-B000755ea_aN label byte
-    db 2 dup(?)
-public B000755ec_aH
-B000755ec_aH label byte
-    db 2 dup(?)
-public B000755ee_aJ
-B000755ee_aJ label byte
-    db 2 dup(?)
-public B000755f0_co
-B000755f0_co label byte
-    db 2 dup(?)
-public B000755f2_by
-B000755f2_by label byte
-    db 2 dup(?)
-public B000755f4_ck
-B000755f4_ck label byte
-    db 2 dup(?)
-public B000755f6_bu
-B000755f6_bu label byte
-    db 2 dup(?)
 public B000755f8_bg
 B000755f8_bg label byte
     db 4 dup(?)
