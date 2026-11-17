@@ -1,4 +1,3 @@
-typedef void (__far *PARA_BSS)(); /* STANDIN: the _BSS of this object file is paragraph-aligned in the original (unnamed bytes ahead of it up to the 16-byte boundary); a typedef of a far pointer type raises the alignment, as a far pointer or double variable of any function would (docs/BSS.md) */
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
 short B0007b7ae_hb;
 short B0007b7ac_kp;
@@ -23,8 +22,7 @@ void FUN_00043aa0(void *rmregs)
     r.x.eax = 0x300;
     r.x.ebx = 0x33;
     r.x.ecx = 0;
-    r.x.edi = (unsigned)rmregs;
-    s.es = FP_SEG((void __far *)rmregs);
+    { void __far *fp = rmregs; r.x.edi = FP_OFF(fp); s.es = FP_SEG(fp); }   /* the far pointer object is what makes this file's _BSS paragraph-aligned (docs/BSS.md) */
     int386x(0x31, &r, &r, &s);
 }
 
