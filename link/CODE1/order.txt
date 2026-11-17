@@ -14,7 +14,6 @@ c    m15d90   -3s -s -of+ -ot -d1+ -ol -w0
 asm  a16060   -3p -mf -c
 lib  rand     CLIB3S.LIB
 c    m161c0   -3s -s -of+ -ot -d1+ -ol -w0
-asm  b161c0   -3p -c
 c    m164b0   -3s -s -of+ -ot -d1+ -ol -w0
 lib  strlen   CLIB3S.LIB
 c    m16f10   -3s -s -of+ -ot -d1+ -ol -w0
