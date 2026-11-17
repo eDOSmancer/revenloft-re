@@ -330,8 +330,8 @@ def cmd_convert(prog, module, first=None, last=None, at=None, dry=False, trim=Fa
         t = blank_comments(text); cuts = []
         for n, d in dims.items():
             for m in re.finditer(r'\b%s\s*\[\s*\]' % n, t):
-                st = t.rfind(';', 0, m.start()); st2 = t.rfind('}', 0, m.start())
-                if re.match(r'\s*extern\b', t[max(st, st2) + 1:m.start()]) : cuts.append((m.start(), m.end(), '%s[%d]' % (n, d)))
+                st = t.rfind('extern', 0, m.start())
+                if st >= 0 and ';' not in t[st:m.start()]: cuts.append((m.start(), m.end(), '%s[%d]' % (n, d)))
         for a, b, r in sorted(cuts, reverse=True): text = text[:a] + r + text[b:]
     if at:
         p = text.index(at); new = text[:p] + block + text[p:]
