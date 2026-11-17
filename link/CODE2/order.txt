@@ -17,7 +17,6 @@ c    m23f70   -3s -ox -oe -oa -ot -j -w0
 c    m26810   -3s -ox -oe -oa -ot -w0
 c    m270ac   -3s -ox -oe -ot -w0
 c    m28d90   -3s -ox -oe -oa -ot -j -w0
-asm  b28d90   -3p -c
 c    m29c80   -3s -ox -oe -oa -ot -w0
 c    m2af90   -3s -ox -oe -oa -ot -w0
 c    m2c0c0   -3s -ox -oe -oa -ot -w0

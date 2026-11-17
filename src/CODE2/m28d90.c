@@ -1,3 +1,7 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+int B00064094_eL;
+int B00064090_dP;
+/* BSS end */
 /* Module: FUN_00028d90, FUN_000291c0, FUN_000292cc, FUN_00029378, FUN_0002942c, FUN_00029464, FUN_000297b8,
    FUN_00029888 */
 /* ---- from build/var/mod/parts/p28d90.c */
@@ -188,11 +192,12 @@ extern void FUN_0002a0b0(void), FUN_0002a288(void), FUN_00030294(void), FUN_0002
 extern int FUN_0002a1f4(void), FUN_00023ef8(int), FUN_00017b94(void); extern void *FUN_0003f29c(int, int);
 extern void FUN_000425b0(unsigned char *, int, int, char *, int), FUN_000422ec(unsigned char *, int, int, unsigned char, unsigned char, unsigned char), FUN_00042220(unsigned char *, int, int, unsigned char, unsigned char, unsigned char);
 extern void FUN_000391b0(unsigned char), FUN_0003e510(int, int, int, int), FUN_00039234(unsigned char *);
-extern unsigned char DAT_0005c054[], DAT_0005880d[], DAT_00059e39, DAT_0005c02c, DAT_0005c02b, B00064090_dP, B00064094_eL;
+extern unsigned char DAT_0005c054[], DAT_0005880d[], DAT_00059e39, DAT_0005c02c, DAT_0005c02b; extern int B00064090_dP, B00064094_eL;
 extern int DAT_0005c050, B000758dc_cl; extern short DAT_00059e31, DAT_00059e33; 
 void FUN_00029464(void)
 {
     int sel, ly, lx, done, n, k; void *p;
+    { extern int B000755d0_ao, B000755d4_ak; int d; d = B000755d0_ao; d = B000755d4_ak; } /* STANDIN: dead reads of two scalars this function does not use - two zero-savings -oa memory nodes in the pass-1 conflict list, in place of the nodes of the two saved values (ints that the function reads as bytes: no node) */
     FUN_0002a0b0();
     FUN_00029378();
     sel = -1;
@@ -329,8 +334,8 @@ void FUN_00029888(void)
     int skip;
     unsigned t;
     FUN_0003f844();
-    *(int *)&B00064090_dP = DAT_0005c02c;
-    *(int *)&B00064094_eL = DAT_0005c02b;
+    B00064090_dP = DAT_0005c02c;
+    B00064094_eL = DAT_0005c02b;
     DAT_0005c02c = 1;
     DAT_0005c02b = 1;
     if (!DAT_0005f050[0x72]) {
