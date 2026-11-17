@@ -5,6 +5,8 @@ usage: tools/bssfit.py classes PROG                 size classes of every label 
        tools/bssfit.py rename  PROG                 give every label of the b*.asm files its fitted name, in all sources
        tools/bssfit.py convert PROG MODULE [--first NAME] [--last NAME] [--at TEXT] [--trim] [--size NAME=N ...] [--dry]
                                                     move the labels of b<module>.asm (or the run NAME..NAME) into m<module>.c
+       tools/bssfit.py view    PROG NAME CONTAINER OFFSET
+                                                    NAME lies inside the object CONTAINER: declare it as a view of it
        tools/bssfit.py check   PROG                 _BSS of every compiled module object: publics in address-name order
        tools/bssfit.py name    PROG STEM            the fitted name for a 10-character stem (e.g. B0007b67c_)
 PROG is CODE1 or CODE2.  `convert` compiles probes under DOSBox-X (build/bss/), verifies the layout of the module's object
@@ -357,6 +359,40 @@ def cmd_convert(prog, module, first=None, last=None, at=None, dry=False, trim=Fa
     open(op, 'w').write('\n'.join(o))
     print('   left in assembler: %d bytes ahead, %d bytes behind' % (sum(s for n, s in head), sum(s for n, s in tail)))
 
+def cmd_view(prog, name, cont, off):
+    """NAME is a label inside the object CONT: every C file that declares it sees it as a view of CONT instead, and the
+    label is dropped from its b*.asm (its bytes go to the label ahead of it)"""
+    for f in sorted(glob.glob(src(prog, 'm*.c'))):
+        text = read(f); t = blank_comments(text)
+        if not re.search(r'\b%s\b' % name, t): continue
+        D = declarations(text)
+        if name not in D: raise SystemExit('%s uses %s without a declaration' % (f, name))
+        base, decl = D[name]; cuts = []; first = None
+        if decl == '@': view = '(*(%s *)((char *)&%s + %d))' % (base, cont, off)
+        elif re.fullmatch(r'@\s*\[[^\]]*\]', decl): view = '((%s *)((char *)&%s + %d))' % (base, cont, off)
+        else: raise SystemExit('%s: no view for the declarator %s' % (f, decl))
+        for m in re.finditer(r'\bextern\b', t):
+            e = t.find(';', m.start()); st = t[m.start():e + 1]
+            if not re.search(r'\b%s\b' % name, st): continue
+            parts = split_top(st[len('extern'):-1]); keep = [q for q in parts if not re.search(r'\b%s\b' % name, q)]
+            if len(keep) == len(parts): continue
+            if first is None: first = m.start()
+            if not re.search(r'\b%s\b' % name, parts[0]): new = 'extern' + ','.join(keep) + ';'
+            elif keep:
+                b0 = re.match(r'\s*((?:\w+\s+)+)', parts[0]).group(1); new = 'extern ' + b0 + ','.join(keep).lstrip() + ';'
+            else: new = ''
+            cuts.append((m.start(), e + 1, new))
+        for s, e, new in sorted(cuts, reverse=True): text = text[:s] + new + text[e:]
+        ls = text.rfind('\n', 0, first) + 1
+        pre = '' if re.search(r'\b%s\b' % cont, blank_comments(text[:ls])) else 'extern unsigned char %s[]; ' % cont
+        text = text[:ls] + '%s#define %s %s /* STANDIN: a name of its own in the original image, %d bytes into %s */\n' % (pre, name, view, off, cont) + text[ls:]
+        open(f, 'w', encoding='latin1').write(text); print('view in', os.path.basename(f))
+    for f in glob.glob(src(prog, 'b*.asm')):
+        L = labels(f); k = next((i for i, (n, s) in enumerate(L) if n == name), None)
+        if k is None: continue
+        L[k - 1] = (L[k - 1][0], L[k - 1][1] + L[k][1]); del L[k]
+        write_asm(f, 'm' + os.path.basename(f)[1:-4], L, "part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md).")
+
 def cmd_check(prog):
     work = os.path.join(ROOT, 'build', prog, 'cc'); bad = 0
     for f in sorted(glob.glob(os.path.join(work, 'M*.OBJ'))):
@@ -375,6 +411,7 @@ if __name__ == '__main__':
     elif a[0] == 'rename': cmd_rename(a[1])
     elif a[0] == 'convert': cmd_convert(a[1], a[2], opt('--first'), opt('--last'), opt('--at'), '--dry' in a, '--trim' in a,
                                         {x.split('=')[0]: int(x.split('=')[1], 0) for i, x in enumerate(a) if i and a[i - 1] == '--size'})
+    elif a[0] == 'view': cmd_view(a[1], a[2], a[3], int(a[4], 0))
     elif a[0] == 'check': sys.exit(1 if cmd_check(a[1]) else 0)
     elif a[0] == 'name': print(fit(a[1], a[2]))
     else: raise SystemExit(__doc__)
