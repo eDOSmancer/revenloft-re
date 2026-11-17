@@ -100,7 +100,9 @@ extern void FUN_00040508(int, int, int, char *, int), FUN_0004060c(int, int, cha
    predecessor FUN_00023fd4; solve that first, then this one should match without change. */
 /* + FUN_00024118 (same module: its exit jumps into this function's epilogue): NEAR MISS 5 instr, the last ']' skip loop runs on a temporary in eax (mov eax,esi; loop; mov esi,eax) in the original, here directly on s. Tried p/c temporaries, do-while, a p for the whole parse */
 void *memset(void *, int, unsigned);
-extern unsigned short B000718f0_hO;
+#include "chars.h"
+#define B000718f0_hO (B000718e0_iO[0].fl)
+
 /* FUN_00024118 @ 00024118: copy s to d, keeping the first alternative of each [b | a] group when several members are alive, the second when one is */
 void FUN_00024118(unsigned char *s, unsigned char *d, int n)
 {
@@ -172,7 +174,6 @@ void FUN_00024218(int sel, int all)
 }
 
 /* ---- from src/CODE2/f2430c.c */
-/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
 #define M00063020_bP ((unsigned short *)B00063020_bP)
 #define M000718e0_iO ((unsigned char *)&B000718e0_iO)
 /* Round 53 (module 0x23f70 -oa, 2 compiles): the walk as `for (;; DAT_00057fec += 2) { p = &B00063020_bP[DAT_00057fec]; ...}` (one more 2/4 constant in the loop): 173 lines; without p (table at each use): compiler error exit. The constant tie (1 / 4 / 2 at eight uses) stands; one more use of 2 or 4 or one fewer of 1 in the loop decides it (found = 1 is the extra use of 1 here). */
@@ -540,7 +541,7 @@ extern void FUN_00024e9c(int i); /* module prototype */
 /* FUN_00024fc0 @ 00024fc0 */
 #include "chars.h"
 extern void FUN_0001ad24(int); 
-extern unsigned short B000718f0_hO; extern unsigned char DAT_0005d681[], DAT_0005cf5a[], DAT_0005cf5b[]; extern int DAT_0005d8a8[];
+ extern unsigned char DAT_0005d681[], DAT_0005cf5a[], DAT_0005cf5b[]; extern int DAT_0005d8a8[];
 void FUN_00024fc0(void)
 {
     int k, off, who, h;
@@ -565,7 +566,7 @@ void FUN_00024fc0(void)
 /* FUN_00025050 @ 00025050: script op: give the party an item (into a free pack slot, or into the hand) */
 #include "chars.h"
 extern int FUN_0002c1dc(int); extern void FUN_0002c124(int), FUN_0002a344(short, unsigned char), FUN_0001f238(int, int, int), FUN_0003195c(int, int, int, int, int, int, int);
-extern short DAT_00058600; extern unsigned short B000718f0_hO; extern int B000755d0_ao, B000755d4_ak;
+extern short DAT_00058600;  extern int B000755d0_ao, B000755d4_ak;
 #define SLOT(off, j) (*(short *)((char *)&B00071920_bM + (off) + (j) * 2))
 void FUN_00025050(int item)
 {
@@ -722,7 +723,7 @@ extern void FUN_0002538c(short a, short b); /* module prototype */
 /* FUN_000253fc @ 000253fc: does the party hold all fifteen pieces of item 0x75 (item is an int local: the short-prototype conversion keeps it in edi as movsx edx,di) */
 #include "chars.h"
 extern int FUN_0001f390(short, short); 
-extern int B00064020_bW; extern short DAT_00058600; extern unsigned short B000718f0_hO;
+extern int B00064020_bW; extern short DAT_00058600; 
 int FUN_000253fc(void)
 {
     int k, j; int item;

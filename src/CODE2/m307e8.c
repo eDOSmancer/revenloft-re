@@ -266,7 +266,9 @@ int FUN_00030cf4(int k)
 
 /* ---- from build/var/mod/parts/p30d7c.c */
 /* FUN_00030d7c @ 00030d7c: find the first party member holding a level-5 class */
-extern unsigned short B000718f0_hO;
+extern unsigned char B000718e0_iO[];
+#define B000718f0_hO (*(unsigned short *)((char *)&B000718e0_iO + 16)) /* STANDIN: view, B000718e0_iO + 0x10 */
+
 #define CB(off, o) (*(signed char *)((char *)&B000718f0_hO + (off) + (o)))
 #define CW(off, o) (*(short *)((char *)&B000718f0_hO + (off) + (o)))
 void FUN_00030d7c(int *w, int *lvl)
@@ -400,7 +402,7 @@ fail:
 struct IP { unsigned char *p; };
 #define ITEMP (((struct IP *)((char *)&B00075618_b1 - 0x40))->p) /* STANDIN: the item-table pointer B000755d8_aw read through the level record B00075618_b1 (0x75618 - 0x40 = 0x755d8, same address and bytes): a record access is no -oa memory node, and the module keeps world.h's one declaration of B000755d8_aw */
 #include "records.h"
-#define B000718f0_hO ((char *)&B000718f0_hO)
+#define M000718f0_hO ((char *)&B000718f0_hO)
 #define FUN_0002a344 ((void (*)(int, unsigned char))FUN_0002a344)
 extern struct CURSOR DAT_000585fc; /* STANDIN: held item DAT_00058600 / DAT_00058602 as CURSOR members .id / .f - removes two -oa memory nodes */
 #pragma pack(1)
@@ -484,11 +486,11 @@ void FUN_000311d8(int m, int a, int b, int flags)
             if (k == 12) FUN_0002c21c(PTR_s_NOT_ENOUGH_SPACE_IN_INVENTORY_0005d678.s);
         }
     } else if (flags & 1) {
-        if (!(*(unsigned short *)(B000718f0_hO + m * 0x248) & 0x8000)) FUN_00023118();
+        if (!(*(unsigned short *)(M000718f0_hO + m * 0x248) & 0x8000)) FUN_00023118();
     }
 }
 
-#undef B000718f0_hO
+#undef M000718f0_hO
 #undef FUN_0002a344
 #undef ITEMP
 #undef RS
@@ -508,13 +510,13 @@ extern int FUN_00034478(int, int);
 extern struct CURSOR DAT_000585fc; /* STANDIN: held item DAT_00058600 / DAT_00058602 as CURSOR members .id / .f - removes two -oa memory nodes */
 extern int DAT_0005c050;
 #include "world.h"
-#define B000718f0_hO ((char *)&B000718f0_hO)
+#define M000718f0_hO ((char *)&B000718f0_hO)
 #define FUN_0002a344 ((void (*)(short, int))FUN_0002a344)
 /* struct IP: defined above */
 #define ITEMP (((struct IP *)((char *)&B00075618_b1 - 0x40))->p) /* STANDIN: the item-table pointer B000755d8_aw read through the level record B00075618_b1 (0x75618 - 0x40 = 0x755d8, same address and bytes): a record access is no -oa memory node, and the module keeps world.h's one declaration of B000755d8_aw */
 extern signed char DAT_00056fa0[];
 
-#define FL(m) (*(unsigned short *)(B000718f0_hO + (m) * 0x248))
+#define FL(m) (*(unsigned short *)(M000718f0_hO + (m) * 0x248))
 #define HAND(m, s) (*(short *)(B0007193c_aB + (m) * 0x248 + (s) * 2))
 #define ITEM(i, o) ITEMP[(i) * 0x41 + (o)]
 void FUN_000314b8(int m, int s, int flags)
@@ -561,7 +563,7 @@ void FUN_000314b8(int m, int s, int flags)
     }
 }
 
-#undef B000718f0_hO
+#undef M000718f0_hO
 #undef FUN_0002a344
 #undef ITEMP
 #undef FL

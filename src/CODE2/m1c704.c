@@ -4,7 +4,7 @@
    FUN_0001dda4, FUN_0001e028, FUN_0001e0bc, FUN_0001e0f8, FUN_0001e284, FUN_0001e578, FUN_0001e5f0
    Verified module (2026-11-17; was a module file from tools/modfile.py, round 23). */
 /* ---- from src/CODE2/f1c704.c */
-/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
+#include "chars.h"
 #define M000718e0_iO ((struct CHR *)&B000718e0_iO)
 /* FUN_0001c704 @ 0001c704: advance the active hand (0..7) to the next one holding a usable weapon. Round 20: natural form
    (character record as a struct, declarations in order) matches under the module's -oa; the earlier -oa-less fit needed
@@ -249,10 +249,14 @@ void FUN_0001cbc8(void)
 /* ---- from src/CODE2/f1ccf4.c */
 extern void FUN_0001cbc8(void); /* module prototype */
 /* FUN_0001ccf4 @ 0001ccf4: game over when no party member can act */
- extern unsigned short B000718f0_hO, B00071b38_c0, B00071d80_d5, B00071fc8_l9;
+#define B000718f0_hO (B000718e0_iO[0].fl)
+#define B00071b38_c0 (B000718e0_iO[1].fl)
+#define B00071d80_d5 (B000718e0_iO[2].fl)
+#define B00071fc8_l9 (B000718e0_iO[3].fl)
+ 
 void FUN_0001ccf4(void)
 {
-    if ((B000718f0_hO & 0xd040) && (B00071b38_c0 & 0xd040) && (B00071d80_d5 & 0xd040) && (B00071fc8_l9 & 0xd040)) FUN_0001cbc8();
+    if ((B000718e0_iO[0].fl & 0xd040) && (B000718e0_iO[1].fl & 0xd040) && (B000718e0_iO[2].fl & 0xd040) && (B000718e0_iO[3].fl & 0xd040)) FUN_0001cbc8();
 }
 
 /* ---- from src/CODE2/wip/f1cd44.c */
@@ -266,7 +270,7 @@ extern int FUN_00029cc4(void), FUN_00024a60(char *), FUN_0002c1dc(int); extern v
 #define B000718fc_i0 (*(short *)((char *)&B000718e0_iO + 28)) /* STANDIN: view, B000718e0_iO + 0x1c */
 #define B00071aca_he (*(int *)((char *)&B000718e0_iO + 490)) /* STANDIN: view, B000718e0_iO + 0x1ea */
 #define B000719f3_iO (*(int *)((char *)&B000718e0_iO + 275)) /* STANDIN: view, B000718e0_iO + 0x113 */
-extern int DAT_00071a92, DAT_00071a86, DAT_000719f7, DAT_0005bf44, DAT_0005d8a8[]; extern unsigned short B000718f0_hO, B00071b38_c0, B00071d80_d5, B00071fc8_l9;  extern unsigned char DAT_0005d681; extern char s_IRMGARDE_00050578[];
+extern int DAT_00071a92, DAT_00071a86, DAT_000719f7, DAT_0005bf44, DAT_0005d8a8[];   extern unsigned char DAT_0005d681; extern char s_IRMGARDE_00050578[];
 #define CH(sym, i) (*(int *)((char *)&sym + (i) * 0x248))
 #define CH16(sym, i) (*(short *)((char *)&sym + (i) * 0x248))
 #define CHU16(sym, i) (*(unsigned short *)((char *)&sym + (i) * 0x248))
@@ -411,7 +415,7 @@ void FUN_0001d0b0(int c, int k, int l)
 extern void FUN_0001d0b0(int c, int k, int l); /* module prototype */
 #define DAT_0005d681 ((unsigned char *)&DAT_0005d681)
 #define M000718e0_iO ((char *)&B000718e0_iO)
-#define B000718f0_hO ((char *)&B000718f0_hO)
+#define M000718f0_hO ((char *)&B000718f0_hO)
 #define M000718fc_i0 ((char *)&B000718fc_i0)
 #define M00071900_bm ((char *)&B00071900_bm)
 /* FUN_0001d1e0 @ 0001d1e0: drain one level from party member p: pick the class (highest level, ties at random), lower it and reset its XP to the middle of the new level, update spell/turning tables and announce it; at level 1 the character dies */
@@ -479,7 +483,7 @@ void FUN_0001d1e0(int p)
 
 #undef DAT_0005d681
 #undef M000718e0_iO
-#undef B000718f0_hO
+#undef M000718f0_hO
 #undef M000718fc_i0
 #undef M00071900_bm
 #undef CB
@@ -489,7 +493,7 @@ void FUN_0001d1e0(int p)
 #undef L2
 /* ---- from src/CODE2/f1d4e8.c */
 /* FUN_0001d4e8 @ 0001d4e8 */
-extern unsigned short B000718f0_hO; 
+ 
 #define CH_FLAGS(k) (*(int *)((char *)&B00071a12_dx + (k) * 0x248))
 int FUN_0001d4e8(int i, unsigned char *m)
 {
@@ -520,6 +524,7 @@ extern unsigned char DAT_0005687e[];
 void FUN_0001d550(struct M *m, unsigned char *def, int ctx)
 {
     int ang, dmg, k, first, who, h, dy, dx, fl, vlad;
+    { extern int B000755e0_bo, B000755e4_bk, B000755e8_ag, B000755ec_aH; int d; d = B000755e0_bo; d = B000755e4_bk; d = B000755e8_ag; d = B000755ec_aH; }
     if (m->type == 0xf) {
         for (k = 0; k < 4; k++)
             if (M000718e0_iO[k].fl < 0x4000 && !FUN_0001cee4(k))
@@ -728,7 +733,7 @@ void FUN_0001dc7c(int c, int k, int l)
 extern int FUN_0001dbd4(int i); /* module prototype */
 extern void FUN_0001dc7c(int c, int k, int l); /* module prototype */
 #define M000718e0_iO ((char *)&B000718e0_iO)
-#define B000718f0_hO ((char *)&B000718f0_hO)
+#define M000718f0_hO ((char *)&B000718f0_hO)
 #define M000718f5_h2 ((char *)&B000718f5_h2)
 #define M000718f6_h5 ((char *)B000718f6_h5)
 #define M000718f7_h4 ((char *)B000718f7_h4)
@@ -749,12 +754,12 @@ void FUN_0001dda4(int xp)
 {
     int nc; int best; int k; int share; int per; int c; int n; int who;
     n = 0;
-    for (k = 0; k < 4; k++) if (!(U16(B000718f0_hO, k * 0x248) & 0xf240)) n++;
+    for (k = 0; k < 4; k++) if (!(U16(M000718f0_hO, k * 0x248) & 0xf240)) n++;
     share = ((n >> 1) + xp) / n;
     if (!share) share = 1;
     best = 0;
     for (who = 0; who < 4; who++) {
-        if (U16(B000718f0_hO, who * 0x248) & 0xf240) continue;
+        if (U16(M000718f0_hO, who * 0x248) & 0xf240) continue;
         nc = 1;
         if (S8(M000718f6_h5, who * 0x248) != -1) nc = 2;
         if (S8(M000718f7_h4, who * 0x248) != -1) nc++;
@@ -782,7 +787,7 @@ void FUN_0001dda4(int xp)
 }
 
 #undef M000718e0_iO
-#undef B000718f0_hO
+#undef M000718f0_hO
 #undef M000718f5_h2
 #undef M000718f6_h5
 #undef M000718f7_h4

@@ -25,7 +25,7 @@ extern void FUN_00015bdc(int mode, int i, int row, unsigned char *tbl); /* modul
 /* FUN_00013a78 @ 00013a78: after a level change, clamp the memorised (low nibble) and prepared (high nibble) spell counts of member i to the slots of the new table row */
 struct NB { unsigned char lo : 4, hi : 4; };
 
-extern unsigned char B000718e0_iO;
+#include "chars.h"
 #define B0007194a_al ((struct NB *)((char *)&B000718e0_iO + 106)) /* STANDIN: view, B000718e0_iO + 0x6a */
 extern unsigned char DAT_00056210[], DAT_00056208[]; extern int DAT_00056440[]; 
 void FUN_00013a78(int i, int row)
@@ -96,7 +96,6 @@ void FUN_00013c04(int i, int row)
 #undef M000718f5_h2
 /* ---- from src/CODE2/f13de4.c */
 #define NB T2_NB
-/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
 #define M000718e0_iO ((struct CH *)&B000718e0_iO)
 /* FUN_00013de4 @ 00013de4: reset the priest spell book of party member i for class level lvl */
 #pragma pack(1)
@@ -356,7 +355,8 @@ struct SLOT { unsigned char lo : 4, hi : 4; };
 extern void FUN_00019d90(int, int, int), FUN_0002f494(int);
 #define B000718fc_i0 (*(short *)((char *)&B000718e0_iO + 28)) /* STANDIN: view, B000718e0_iO + 0x1c */
 #define B000718fe_ar (*(short *)((char *)&B000718e0_iO + 30)) /* STANDIN: view, B000718e0_iO + 0x1e */
- extern unsigned short B000718f0_hO;  extern unsigned char DAT_0005cf5a;
+#define B000718f0_hO (B000718e0_iO[0].fl)
+   extern unsigned char DAT_0005cf5a;
 int FUN_000144d0(int a, int b, int c, int d, int *e, int *f, int g)
 {
     int r, k, idx, t;
@@ -678,7 +678,7 @@ void FUN_0001461c(void)
 /* ---- from src/CODE2/f150dc.c */
 /* FUN_000150dc @ 000150dc: which class slot of party member i can cast (mode 0: priest, 1: mage) */
 #include "chars.h"
-extern unsigned short B000718f0_hO;
+
 #define CB(i, o) (*(signed char *)(CHAR_REC(i) + (o)))
 #define CW(i, o) (*(short *)(CHAR_REC(i) + (o)))
 int FUN_000150dc(int mode, int i)

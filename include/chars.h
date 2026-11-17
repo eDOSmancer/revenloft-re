@@ -1,9 +1,11 @@
 /* Party / character records: 4 records of 0x248 bytes at B000718e0_iO (loaded from CHARS, 0x920 bytes).
    Field accessors are written as byte offsets from the record base until the struct is recovered. */
 #define CHAR_REC(i)        ((char *)&B000718e0_iO + (i) * 0x248)
-#ifndef PARTY_HEAD_SIZED   /* STANDIN: m2c0c0.c, which defines the first piece of the records (docs/BSS.md), declares it with its size */
-extern unsigned char B000718e0_iO;
+#ifndef PCH_DEFINED
+#define PCH_DEFINED
+struct PCH { char name[0x10]; unsigned short fl; char rest[0x236]; };   /* the record as far as every file knows it; struct PC of records.h is the full layout */
 #endif
+extern struct PCH B000718e0_iO[4];
 #define CH_CLASS_S(i)      (*((signed char *)&B000718f5_h2 + (i) * 0x248))   /* +0x15 */
 #define CH_TYPE(i)         (*((unsigned char *)&B00071913_a2 + (i) * 0x248)) /* +0x33 */
 #define CH_LEVEL(i)        (*((unsigned char *)&B0007191f_dW + (i) * 0x248)) /* +0x3f */

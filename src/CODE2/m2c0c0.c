@@ -17,13 +17,8 @@ int B00072224_hh;
 int B00072220_gw;
 int B00072200_ew[8];
 /* STANDIN: the party records, 4 x 0x248 bytes at 0x718e0 (include/chars.h), defined as seven adjacent pieces cut at the names of the 2nd and 3rd record and at the four flag words (+0x10): these stay objects of their own (as views FUN_0001ccf4 / FUN_00033e1c are no longer expanded inline, docs/BSS.md) */
-unsigned char B00071fc8_l9[568];
-unsigned char B00071d80_d5[584];
-char B00071d70_aF[16];
-unsigned char B00071b38_c0[568];
-char B00071b28_gs[16];
-unsigned char B000718f0_hO[568];
-unsigned char B000718e0_iO[16];
+#define PCH_DEFINED
+struct PCH { char name[0x10]; unsigned short fl; char rest[0x236]; } B000718e0_iO[4];   /* the four character records (include/chars.h) */
 unsigned char B000698e0_b7[32768];
 char B00069660_dl[640];
 char B000693e0_hM[640];
@@ -34,8 +29,8 @@ int B00065618_e1[256];
 unsigned char B00064d80_ay[2200];
 char B00064580_eK[2048];
 /* BSS end */
-extern unsigned char B000718f0_hO[568];
-#define PARTY_HEAD_SIZED /* STANDIN: see include/chars.h */
+#define B000718f0_hO (*(unsigned char (*)[568])((char *)&B000718e0_iO + 16)) /* STANDIN: view, B000718e0_iO + 0x10 */
+
 /* Module: FUN_0002c0c0, FUN_0002c124, FUN_0002c160, FUN_0002c1a0, FUN_0002c1dc, FUN_0002c21c, FUN_0002c258,
    FUN_0002c2c4, FUN_0002c2cc, FUN_0002c328, FUN_0002c368, FUN_0002c40c, FUN_0002c77c, FUN_0002c924,
    FUN_0002ca2c, FUN_0002cd48, FUN_0002ce68, FUN_0002e4a0, FUN_0002e534, FUN_0002e594, FUN_0002e74c,
@@ -225,7 +220,7 @@ void FUN_0002c40c(int win, int x, int y, int w, int h)
 /* ---- from build/var/mod/parts/p2c77c.c */
 extern void FUN_0002c368(unsigned char *buf, int n); /* module prototype */
 extern void FUN_0002c40c(int win, int x, int y, int w, int h); /* module prototype */
-/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO[16];
+#include "chars.h"
 #define M000718e0_iO ((char *)&B000718e0_iO)
 /* FUN_0002c77c @ 0002c77c: party member i says string s: bubble sized to the text, portrait, text, wait for a click */
 void *memset(void *, int, unsigned);
@@ -274,9 +269,9 @@ void FUN_0002c77c(int i, int s)
 /* FUN_0002c924 @ 0002c924: pick a random living, able party member */
 #include "chars.h"
 int rand(void);
-#define B000718f0_hO (*(unsigned short *)((char *)&B000718f0_hO)) /* STANDIN: the first bytes of the object */
+#define M000718f0_hO (*(unsigned short *)((char *)&B000718f0_hO)) /* STANDIN: the first bytes of the object */
 
-#define CH10(k) (*(unsigned short *)((char *)&B000718f0_hO + (k) * 0x248))
+#define CH10(k) (*(unsigned short *)((char *)&M000718f0_hO + (k) * 0x248))
 int FUN_0002c924(void)
 {
     int k, start;
@@ -763,7 +758,7 @@ void FUN_0002e4a0(void)
     unsigned t = FUN_00029cc4();
     int k, j;
     for (k = 0; k < 4; k++) {
-        if (!(*(unsigned short *)((char *)&B000718f0_hO + k * 0x248) & 0x8000)) {
+        if (!(*(unsigned short *)((char *)&M000718f0_hO + k * 0x248) & 0x8000)) {
             for (j = 0; j < 2; j++) {
                 if (*(unsigned *)((char *)&B000719eb_cp + (k * 0x248 + j * 4)) != 0 && *(unsigned *)((char *)&B000719eb_cp + (k * 0x248 + j * 4)) <= t) { DAT_0005cf5a[k] = 1; *(unsigned *)((char *)&B000719eb_cp + (k * 0x248 + j * 4)) = 0; }
             }
@@ -837,7 +832,7 @@ extern void FUN_00041f94(void); extern int FUN_0001f2d4(int, int);
 #define B000718fe_ar (*(short *)((char *)&B000718e0_iO + 30)) /* STANDIN: view, B000718e0_iO + 0x1e */
 #define B000718f4_h3 (*(unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
 extern int DAT_0005bf58, DAT_0005bf50, DAT_0005bf54, DAT_0005a7e4; extern unsigned DAT_0005cf4c;   extern unsigned char DAT_0005cf5a[];  
-#define CH16(o) (*(unsigned short *)((char *)&B000718f0_hO + (o)))
+#define CH16(o) (*(unsigned short *)((char *)&M000718f0_hO + (o)))
 #define HP(o) (*(short *)((char *)&B000718fc_i0 + (o)))
 #define MAXHP(o) (*(short *)((char *)&B000718fe_ar + (o)))
 void FUN_0002e75c(void)
@@ -1194,7 +1189,7 @@ void FUN_0002f1c8(void)
 /* FUN_0002f3fc @ 0002f3fc: status icon of party member i */
 #include "chars.h"
 
-#define CH10(i) (*(unsigned short *)((char *)&B000718f0_hO + (i) * 0x248))
+#define CH10(i) (*(unsigned short *)((char *)&M000718f0_hO + (i) * 0x248))
 int FUN_0002f3fc(int i)
 {
     int r = 2;

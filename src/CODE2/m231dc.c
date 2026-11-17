@@ -333,7 +333,9 @@ extern int FUN_000239ac(int n); /* module prototype */
 #define FUN_0004131c ((int (*)(int, int, int))FUN_0004131c)
 /* FUN_00023ad8 @ 00023ad8: set up scene *mode: save the audio state (except mode 12), adjust the mode to the party, open its data stream */
 extern void FUN_00029ccc(int), FUN_00038dcc(int), FUN_0002aacc(void); extern int FUN_00039048(void), FUN_00039050(void), FUN_00039098(void), FUN_000390a0(void); extern void *FUN_0004104c(int);
-extern char B000718f0_hO[]; extern int B00062c10_h8, DAT_00057f78, DAT_00057f88, DAT_00057f94, DAT_00057fa4, DAT_00057fa0, DAT_00057fb0, DAT_00057f7c, DAT_00057fac;
+extern unsigned char B000718e0_iO[];
+#define B000718f0_hO ((char *)((char *)&B000718e0_iO + 16)) /* STANDIN: view, B000718e0_iO + 0x10 */
+ extern int B00062c10_h8, DAT_00057f78, DAT_00057f88, DAT_00057f94, DAT_00057fa4, DAT_00057fa0, DAT_00057fb0, DAT_00057f7c, DAT_00057fac;
 extern unsigned char DAT_00057f8c;
 /* struct CSEQ: defined above */   /* DAT_00057f98, DAT_00057f9c: see f23248.c */
 extern struct CSEQ DAT_00057f98;

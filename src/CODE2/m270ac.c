@@ -149,7 +149,9 @@ void FUN_000271fc(int lvl)
 /* FUN_00027838 @ 00027838: per-day check: a party member who slept badly may fall ill unless the area is safe */
 int rand(void);
 extern int FUN_0002c1dc(int); extern void FUN_0002c77c(int, int);
-extern unsigned short B000718f0_hO; extern int DAT_0005c6c8, DAT_0005bf2c;
+extern unsigned char B000718e0_iO[];
+#define B000718f0_hO (*(unsigned short *)((char *)&B000718e0_iO + 16)) /* STANDIN: view, B000718e0_iO + 0x10 */
+ extern int DAT_0005c6c8, DAT_0005bf2c;
 #define CH16(o) (*(unsigned short *)((char *)&B000718f0_hO + (o)))
 void FUN_00027838(void)
 {

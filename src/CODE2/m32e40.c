@@ -47,7 +47,8 @@ void FUN_00032e90(struct PRJ *p, int flag)
 #include "chars.h"
 extern void FUN_000398f0(int, int, int, int, int, void *);
 #define B00071a11_dy (*(unsigned char *)((char *)&B000718e0_iO + 305)) /* STANDIN: view, B000718e0_iO + 0x131 */
-extern unsigned short B000718f0_hO; extern unsigned char DAT_0005cf70[]; extern int B000758dc_cl, DAT_0005c034;
+#define B000718f0_hO (B000718e0_iO[0].fl)
+ extern unsigned char DAT_0005cf70[]; extern int B000758dc_cl, DAT_0005c034;
 #define CB(i) (*((unsigned char *)&B00071a11_dy + (i) * 0x248))
 void FUN_00032f40(int i, int c)
 {

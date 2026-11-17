@@ -11,7 +11,10 @@
    FUN_00033fc4 */
 #include "world.h"
 /* ---- from build/var/mod/parts/p33df0.c */
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+#include "chars.h"
+#define B000718f0_hO (&B000718e0_iO[0].fl)
+#define B00071b38_c0 (&B000718e0_iO[1].fl)
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 /* FUN_00033df0 @ 00033df0: leave the current view: redraw, stop the sound, play effect 10 and switch to screen 0xc */
 void FUN_00033df0(void)
@@ -24,11 +27,11 @@ void FUN_00033df0(void)
     FUN_000305b4(0xc);
 }
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 /* FUN_00033e1c @ 00033e1c: 0 when outdoors with n >= 2 and one of the first two members still standing, else 1 */
@@ -38,7 +41,7 @@ int FUN_00033e1c(int n)
     return 1;
 }
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 
@@ -60,13 +63,13 @@ int FUN_00033e58(unsigned k)
     return 0;
 }
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 
 /* ---- from build/var/mod/parts/p33eac.c */
 /* FUN_00033eac @ 00033eac */
-extern unsigned char B000718e0_iO;
+
 #define B000718f5_h2 (*(signed char *)((char *)&B000718e0_iO + 21)) /* STANDIN: view, B000718e0_iO + 0x15 */
 #define B000718f6_h5 (*(signed char *)((char *)&B000718e0_iO + 22)) /* STANDIN: view, B000718e0_iO + 0x16 */
 #define B000718f7_h4 (*(signed char *)((char *)&B000718e0_iO + 23)) /* STANDIN: view, B000718e0_iO + 0x17 */
@@ -77,7 +80,7 @@ int FUN_00033eac(int i, int v)
     return 0;
 }
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 
@@ -94,7 +97,7 @@ int FUN_00033ee4(int v)
     return 0;
 }
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 
@@ -102,7 +105,7 @@ extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_0002
 /* FUN_00033f34 */
 int FUN_00033f34(unsigned x) { if (x >= 0x7e && x <= 0x86) return 1; return 0; }
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 
@@ -124,7 +127,7 @@ int FUN_00033f50(int k)
     return 0;
 }
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 
@@ -161,7 +164,7 @@ extern int FUN_00033eac(int i, int v); /* module prototype */
 extern int FUN_00033f50(int k); /* module prototype */
 extern int FUN_00033fc4(int k); /* module prototype */
 extern int FUN_00034060(unsigned k); /* module prototype */
-/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
+/* the module declaration (seen through a cast view below) */ 
 /* FUN_000340a8 @ 000340a8: (round 20: character record, item table and the solo flag in the list-count block as structs; matches under both flag sets; under -oa two allocation ties remain) may party member p use item it (class, level and solo-character rules); the it == -1 case of the solo rule jumps with goto into the final ok = 0 block */
 #include "world.h"
 #define M000718e0_iO ((struct CHR *)&B000718e0_iO)
@@ -222,8 +225,8 @@ extern int FUN_00033f50(int k); /* module prototype */
 /* FUN_000343e0 @ 000343e0: may party member i change the item in equipment slot k */
 #include "chars.h"
 #include "world.h"
-#define B000718f0_hO (*(unsigned short *)&B000718f0_hO)
-#define B00071b38_c0 (*(unsigned short *)&B00071b38_c0)
+#define M000718f0_hO (B000718e0_iO[0].fl)
+#define M00071b38_c0 (B000718e0_iO[1].fl)
 
 #define B0007193c_aB (*(short *)((char *)&B000718e0_iO + 92)) /* STANDIN: view, B000718e0_iO + 0x5c */
   
@@ -239,15 +242,15 @@ int FUN_000343e0(int i, int k)
     }
     if (!r && item == -1) {
         r = 1;
-        if (B00075618_b1.solo == 0xff && i >= 2 && (B000718f0_hO < 0x4000 || B00071b38_c0 < 0x4000)) ok = 0;
+        if (B00075618_b1.solo == 0xff && i >= 2 && (M000718f0_hO < 0x4000 || M00071b38_c0 < 0x4000)) ok = 0;
         else ok = 1;
         if (!ok) r = 0;
     }
     return r;
 }
 
-#undef B000718f0_hO
-#undef B00071b38_c0
+#undef M000718f0_hO
+#undef M00071b38_c0
 /* ---- from build/var/mod/parts/p34478.c */
 extern int FUN_000340a8(int p, int it, int *kind); /* module prototype */
 /* (the eight helpers this function expands in line are defined above in this module) */
@@ -258,12 +261,12 @@ extern int FUN_000340a8(int p, int it, int *kind); /* module prototype */
    and the declaration order res first (model search; fixes the res / table-base slot tie at rough savings 3). */
 #include "world.h"
 /* ---- from build/var/mod/parts/p33df0.c */
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 /* FUN_00033df0 @ 00033df0: leave the current view: redraw, stop the sound, play effect 10 and switch to screen 0xc */
 
 
-extern unsigned char DAT_0005bf38; extern unsigned short B000718f0_hO[], B00071b38_c0[];
+extern unsigned char DAT_0005bf38; 
 extern void FUN_0002f1c8(void), FUN_0002ea78(void), FUN_00038168(void), FUN_00023ef8(int), FUN_000305b4(int);
 
 /* FUN_00033e1c @ 00033e1c: 0 when outdoors with n >= 2 and one of the first two members still standing, else 1 */

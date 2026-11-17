@@ -111,7 +111,9 @@ int FUN_0003ca5c(int y, int x)
 /* FUN_0003cad4 @ 0003cad4: the end: the party is put at the gate and Vladislav, Irmgarde and Tatiana leave; debug-info module */
 extern int FUN_00024a60(char *), FUN_0002c1dc(int);
 extern void FUN_000281b4(int), FUN_00024c40(int), FUN_0002c160(int), FUN_0002c124(int), FUN_0001ccf4(void);
-extern int DAT_0005c658, DAT_0005bf44; extern unsigned short B000718f0_hO[]; extern unsigned char DAT_0005cf5a[];
+extern char B000718e0_iO[];
+#define B000718f0_hO ((unsigned short *)((char *)&B000718e0_iO + 16)) /* STANDIN: view, B000718e0_iO + 0x10 */
+extern int DAT_0005c658, DAT_0005bf44;  extern unsigned char DAT_0005cf5a[];
 #define M000755d0_ao (*(int *)&B000755d0_ao)
 #define M000755d4_ak (*(int *)&B000755d4_ak)
 #define CH16(i) (*(unsigned short *)((char *)B000718f0_hO + (i) * 0x248))
@@ -296,7 +298,7 @@ extern int FUN_0002c1dc(int), FUN_0002c328(int, int, int, int);
 #pragma aux FUN_0002c328 modify [eax ebx ecx edx];
 extern void FUN_000281b4(int), FUN_0002f1c8(void), FUN_0002ea78(void), FUN_0001cd44(int, int), FUN_0003e510(int, int, int, int), FUN_0002ea04(void);
  extern int DAT_0005c6c8, B0007b630_hz, B0007b634_e6, DAT_0005c658, B000758ec_bl, DAT_0005bf44;
-extern unsigned short B000718f0_hO[];
+
 #define M000755d0_ao (*(int *)&B000755d0_ao)
 #define M000755d4_ak (*(int *)&B000755d4_ak)
 int FUN_0003d004(int k)
@@ -565,7 +567,7 @@ short FUN_0003d5d0(int x, int y, int who)
 /* ---- from build/var/mod/parts/p3d9fc.c */
 /* FUN_0003d9fc @ 0003d9fc: the first able elf in the party may get a vision (1 in 2) */
 #define B000718f4_h3 ((unsigned char *)((char *)&B000718e0_iO + 20)) /* STANDIN: view, B000718e0_iO + 0x14 */
-extern unsigned short B000718f0_hO[]; 
+ 
 extern int FUN_0002c328(int, int, int, int); extern void FUN_0002c77c(int, int);
 void FUN_0003d9fc(void)
 {
@@ -589,7 +591,7 @@ void FUN_0003d9fc(void)
 struct CELL { unsigned short lo : 10, b10 : 1, b11 : 1, rest : 4; };
 #define M000698e0_b7 ((struct CELL *)B000698e0_b7)
 extern short B00077108_dk[];
-extern unsigned short B000718f0_hO[]; 
+ 
 extern int FUN_0002c328(int, int, int, int); extern void FUN_0002c77c(int, int);
 void FUN_0003da7c(int c)
 {

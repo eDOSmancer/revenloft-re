@@ -91,7 +91,6 @@ int FUN_00026a58(int k, int f)
 #include "chars.h"
 struct NB { unsigned char lo : 4, hi : 4; };
 
-extern unsigned char B000718e0_iO;
 #define B0007194a_al (*(unsigned char *)((char *)&B000718e0_iO + 106)) /* STANDIN: view, B000718e0_iO + 0x6a */
 extern signed char DAT_0005817c[][4]; 
 void FUN_00026a88(int i)
@@ -107,7 +106,13 @@ void *memset(void *, int, unsigned);
 extern int FUN_0001dbd4(int); extern void FUN_00013ea4(int, int), FUN_00026a88(int), FUN_00013de4(int, int);
 #define B000719eb_cp ((char *)((char *)&B000718e0_iO + 267)) /* STANDIN: view, B000718e0_iO + 0x10b */
 #define B00071c33_jl ((char *)((char *)&B000718e0_iO + 851)) /* STANDIN: view, B000718e0_iO + 0x353 */
-extern char B00071b28_gs[], B00071d70_aF[]; extern unsigned short B000718f0_hO, B00071b38_c0, B00071d80_d5, B00071fc8_l9;
+#define B000718f0_hO (B000718e0_iO[0].fl)
+#define B00071b38_c0 (B000718e0_iO[1].fl)
+#define B00071d80_d5 (B000718e0_iO[2].fl)
+#define B00071fc8_l9 (B000718e0_iO[3].fl)
+#define B00071b28_gs (B000718e0_iO[1].name)
+#define B00071d70_aF (B000718e0_iO[2].name)
+ 
 #define M000718e0_iO ((char *)&B000718e0_iO)
 #define C8(k, o) (*(signed char *)(M000718e0_iO + (k) * 0x248 + (o)))
 #define CB(k, o) (*(unsigned char *)(M000718e0_iO + (k) * 0x248 + (o)))
@@ -184,11 +189,10 @@ void FUN_00026d04(void)
     FUN_00026810();
     FUN_000268c8();
     f = FUN_000412a0("INIT");
-    { /* STANDIN: copy chain (3 block-local temps, propagated away; they advance the instruction-id counter that places the BlkTooBig block cuts) */
+    { /* STANDIN: copy chain (2 block-local temps, propagated away; they advance the instruction-id counter that places the BlkTooBig block cuts) */
         int t0 = FUN_00026a58(0, f); /* STANDIN */
         int t1 = t0; /* STANDIN */
-        int t2 = t1; /* STANDIN */
-        B000758dc_cl = t2; /* STANDIN */
+        B000758dc_cl = t1; /* STANDIN */
     }
     B000758d8_j3 = FUN_00026a58(1, f);
     B000758e4_h7 = FUN_00026a58(2, f);

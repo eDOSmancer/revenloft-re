@@ -31,7 +31,7 @@ extern unsigned short DAT_00057e8c[][5];
 /* FUN_0001eee0 and FUN_00021630 in one file (round 62 lane Z): FUN_00021630's auto initialiser range[6][2] is the module's lead data at 0x1eeb0 (the compiler emits it ahead of the first function of the object), so it lands at 0x1eeb0 only when FUN_0001eee0 is the first function of the file; replaces src/CODE2/f1eee0.c and src/CODE2/f21630.c, supersedes asmfb/w1eeb0.asm */
 /* FUN_0001eee0 @ 0001eee0 */
 #include "world.h"
-extern unsigned char B000718e0_iO;
+#include "chars.h"
 #define B00071940_lM (*(short *)((char *)&B000718e0_iO + 96)) /* STANDIN: view, B000718e0_iO + 0x60 */
  
 int FUN_0001eee0(int i)
@@ -78,7 +78,6 @@ extern int FUN_0001eee0(int i); /* module prototype */
 extern int FUN_0001ef34(int i); /* module prototype */
 extern int FUN_0001f2d4(int i, int v); /* module prototype */
 extern int FUN_0001fe44(int i); /* module prototype */
-/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
 /* (FUN_0001ef70: defined in this module) */
 /* The copy of FUN_0001ef70 ahead of the function is the module's own definition (src/CODE2/f1ef70.c): the original expands it in line here, which needs both in one compile; it goes away when module 0x1eee0 becomes one module file. */
 /* FUN_0001ef70 @ 0001ef70: armour bonus of item it (base value plus magic) */
@@ -291,7 +290,8 @@ int FUN_0001f40c(short a, short b)
 extern int FUN_0001f390(short a, short b); /* module prototype */
 /* FUN_0001f4b0 @ 0001f4b0: does anyone in the party carry item b (in hand or in any slot) */
 #include "chars.h"
- extern short DAT_00058600; extern unsigned short B000718f0_hO;
+#define B000718f0_hO (B000718e0_iO[0].fl)
+ extern short DAT_00058600; 
 int FUN_0001f4b0(short b)
 {
     int off, k;
@@ -316,7 +316,7 @@ extern int FUN_0001f40c(short a, short b); /* module prototype */
 /* FUN_0001f540 @ 0001f540: remove item from the hand or from any party member's pack (also inside containers) */
 #include "chars.h"
 extern void FUN_0002a344(short, unsigned char); 
-extern short DAT_00058600; extern unsigned short B000718f0_hO;
+extern short DAT_00058600; 
 #define SLOT(off, j) (*(short *)((char *)&B00071920_bM + (off) + (j) * 2))
 void FUN_0001f540(int item)
 {

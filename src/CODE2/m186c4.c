@@ -11,7 +11,7 @@ int B00062ba0_hT;
    */
 /* ---- from src/CODE2/f186c4.c */
 /* FUN_000186c4 @ 000186c4 */
-extern unsigned char B000718e0_iO;
+#include "chars.h"
 #define B0007193c_aB (*(short *)((char *)&B000718e0_iO + 92)) /* STANDIN: view, B000718e0_iO + 0x5c */
 #define B0007193e_bP (*(short *)((char *)&B000718e0_iO + 94)) /* STANDIN: view, B000718e0_iO + 0x5e */
 extern short DAT_000567ca[];
@@ -23,7 +23,6 @@ void FUN_000186c4(int i, int k)
 }
 
 /* ---- from src/CODE2/f1871c.c */
-/* the module declaration (seen through a cast view below) */ extern unsigned char B000718e0_iO;
 /* FUN_0001871c @ 0001871c: spell effect e of member who wears off: toggle its bit, post "<name>'s <effect> wears off.", clear its duration and undo the effect */
 #include <string.h>
 #include <stdio.h>
@@ -330,7 +329,8 @@ extern int FUN_00024a60(char *), FUN_0001f2d4(int, int), FUN_0001cf2c(int, int);
 #undef DAT_000566c8
 #undef M000718e0_iO
 #define B00071a14_ff (*(int *)((char *)&B000718e0_iO + 308)) /* STANDIN: view, B000718e0_iO + 0x134 */
-extern unsigned short B000718f0_hO[]; 
+#define B000718f0_hO (*(unsigned short (*)[])((char *)&B000718e0_iO + 16)) /* STANDIN: view, B000718e0_iO + 0x10 */
+ 
 #define M000718e0_iO ((struct PC *)&B000718e0_iO)
 void FUN_00019070(struct MS *p, int f)
 {
@@ -653,7 +653,7 @@ int FUN_00019790(int it, int i, int snd, int bit, int k, int a, int b)
 /* FUN_00019b4c @ 00019b4c: play spell effect fx over the portrait of party member who, or over every standing member when all is set */
 struct FX { int img, x, y; unsigned char n, fr[20]; };
 extern void FUN_0003e608(void), FUN_0002f494(int), FUN_0003975c(int, int, int, int, int), FUN_0002a8c8(int, int, int, int, int), FUN_00038168(void), FUN_0003e614(unsigned, int);
-extern struct FX DAT_000566ec[]; extern unsigned char DAT_0005cf5a; extern unsigned short B000718f0_hO[]; extern int B000758dc_cl, DAT_0005c050; /* STANDIN: scalar declaration of DAT_0005cf5a, see the first one (module head) */
+extern struct FX DAT_000566ec[]; extern unsigned char DAT_0005cf5a;  extern int B000758dc_cl, DAT_0005c050; /* STANDIN: scalar declaration of DAT_0005cf5a, see the first one (module head) */
 void FUN_00019b4c(int who, int fx, int all)
 {
     struct FX *e; unsigned char *f, *g, *h; int y, k, j, p;
