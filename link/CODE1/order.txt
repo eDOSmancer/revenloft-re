@@ -37,7 +37,6 @@ lib  cstart   3CSDL.B
 lib  argcargv CLIB3S.LIB
 lib  int386x  CLIB3S.LIB
 c    m1cef0   -3s -s -of+ -ot -d1+ -ol -w0
-asm  b1cef0   -3p -c
 lib  memmove  CLIB3S.LIB
 lib  access   CLIB3S.LIB
 lib  dosfind  CLIB3S.LIB
