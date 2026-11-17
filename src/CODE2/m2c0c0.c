@@ -4,7 +4,7 @@ struct OBJR B00072238_dL[450];   /* doors and fixtures; 0x7223a ... 0x7224c are 
 void *B00072234_hx;
 char *B00072230_c4;
 int B0007222c_cz;
-unsigned char F00072224_a6[4];
+int B00072228_il;   /* no code references it */
 int B00072224_hh;
 int B00072220_gw;
 int B00072200_ew[8];
