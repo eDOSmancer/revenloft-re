@@ -1,9 +1,3 @@
-/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
-short B0007223e_dx;
-unsigned short B0007223c_dz;
-short B0007223a_et;
-char B00072238_dL[2];
-/* BSS end */
 /* Module: FUN_000270ac, FUN_000271d0, FUN_000271fc, FUN_00027838, FUN_00027a68, FUN_000281b4 */
 /* names inside DAT_0005819c (tools/dataview.py): views of the object the module defines */
 #define DAT_000581a4 (*(char *)((char *)DAT_0005819c + 0x8))

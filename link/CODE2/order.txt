@@ -8,24 +8,29 @@ asm  xib      -3p -c
 c    m106c0   -3s -ox -oe -oa -ot -j -w0
 c    m13810   -3s -ox -oe -ot -w0
 c    m13a78   -3s -ox -oe -oa -ot -j -w0
-c    d62ba0   -3s -ox -oe -oa -ot -w0
-c    d62bb0   -3s -ox -oe -oa -ot -w0
-c    d640a0   -3s -ox -oe -oa -ot -w0
 c    m186c4   -3s -ox -oe -oa -ot -w0
+asm  b186c4   -3p -c
 c    m1c704   -3s -ox -oe -oa -ot -w0
-c    d68fe0   -3s -ox -oe -oa -ot -w0
 c    m1ea90   -3s -ox -oe -ot -w0
+asm  b1ea90   -3p -c
 c    m1eee0   -3s -ox -oe -oa -ot -w0
+asm  b1eee0   -3p -c
 c    m231dc   -3s -ox -oe -oa -ot -w0
+asm  b231dc   -3p -c
 c    m23f70   -3s -ox -oe -oa -ot -j -w0
+asm  b23f70   -3p -c
 c    m26810   -3s -ox -oe -oa -ot -w0
 c    m270ac   -3s -ox -oe -ot -w0
 c    m28d90   -3s -ox -oe -oa -ot -j -w0
+asm  b28d90   -3p -c
 c    m29c80   -3s -ox -oe -oa -ot -w0
+asm  b29c80   -3p -c
 c    m2af90   -3s -ox -oe -oa -ot -w0
-c    d748e4   -3s -ox -oe -oa -ot -w0
+asm  b2af90   -3p -c
 c    m2c0c0   -3s -ox -oe -oa -ot -w0
+asm  b2c0c0   -3p -c
 c    m307e8   -3s -ox -oe -oa -ot -w0
+asm  b307e8   -3p -c
 c    m32e40   -3s -ox -oe -oa -ot -w0
 c    m33df0   -3s -ox -oe -ot -w0
 asm  a373e7   -3p -mf -c
