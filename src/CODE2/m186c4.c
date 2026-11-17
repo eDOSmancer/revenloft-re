@@ -1,3 +1,14 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+int B00065a2c_ay;
+unsigned char B00065a28_bn[4];
+unsigned char B00065a24_aj[4];
+unsigned char B00065a20_bf[4];
+unsigned char B00065a1c_ai[4];
+unsigned char B00065a18_cn[4];
+unsigned char B00065618_e1[1024];
+struct O B00064d80_ay[100];
+char B00064580_eK[2048];
+/* BSS end */
 /* Module: FUN_000186c4, FUN_0001871c, FUN_0001893c, FUN_00018a80, FUN_00018c88, FUN_00018cf4, FUN_00019070,
    FUN_00019368, FUN_00019418, FUN_000194e0, FUN_000195c0, FUN_000196e0, FUN_00019790, FUN_00019b4c,
    FUN_00019d90, FUN_0001a254, FUN_0001a5bc, FUN_0001a60c, FUN_0001a668, FUN_0001a794, FUN_0001a8a0,
@@ -229,7 +240,7 @@ void FUN_00018c88(int i)
 #include "world.h"
 struct PRJ { int a, b; short c8, ca; unsigned short s, type; short timer, w12; unsigned short lo : 11, owner : 3, st : 2; };
 struct O { int a, b; unsigned char f8, f9, fa; unsigned char fb0 : 1, dead : 1, fb2 : 6; unsigned short s, type; short timer, hp; unsigned short w14; };
-extern struct O B00064d80_ay[];  extern unsigned char *B00072230_c4, DAT_000566c8[];
+extern struct O B00064d80_ay[100];  extern unsigned char *B00072230_c4, DAT_000566c8[];
 #include "records.h"
 #define M000718e0_iO ((struct PC *)&B000718e0_iO)
 
@@ -457,7 +468,7 @@ extern unsigned short B00077148_eJ;
 #define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
 extern int DAT_0005c050; extern unsigned short DAT_0005f038[], B00077148_eJ;
 /* struct O: defined above */
-extern struct O B00064d80_ay[];
+extern struct O B00064d80_ay[100];
 #define BTN(page, off) ((char *)&B00077148_eJ + (page) * 0x2260 + (off))
 int FUN_000194e0(int x, int y)
 {

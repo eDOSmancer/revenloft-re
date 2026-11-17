@@ -1,8 +1,11 @@
-; b1c704.asm - uninitialised data (_BSS) of module m1c704.c, 41672 bytes
+; b1c704.asm - uninitialised data (_BSS) of module m1c704.c, 13744 bytes
 ; STANDIN: part of the module's uninitialised data that is not defined in the C file (see docs/BSS.md).
 .386p
 DGROUP group _BSS
 _BSS segment dword public use32 'BSS'
+public B00065a30_af
+B00065a30_af label byte
+    db 7144 dup(?)
 public B00067618_e7
 B00067618_e7 label byte
     db 2 dup(?)
@@ -27,20 +30,5 @@ B0006762c_ey label byte
 public B0006762e_es
 B0006762e_es label byte
     db 6578 dup(?)
-public B00068fe0_eN
-B00068fe0_eN label byte
-    db 1024 dup(?)
-public B000693e0_hM
-B000693e0_hM label byte
-    db 640 dup(?)
-public B00069660_dl
-B00069660_dl label byte
-    db 640 dup(?)
-public B000698e0_b7
-B000698e0_b7 label byte
-    db 108 dup(?)
-public B0006994c_hI
-B0006994c_hI label byte
-    db 32660 dup(?)
 _BSS ends
 end

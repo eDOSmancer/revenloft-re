@@ -9,10 +9,14 @@ c    m106c0   -3s -ox -oe -oa -ot -j -w0
 c    m13810   -3s -ox -oe -ot -w0
 c    m13a78   -3s -ox -oe -oa -ot -j -w0
 asm  b13a78   -3p -c
+c    d62b58   -3s -ox -oe -oa -ot -w0
+c    d62bb0   -3s -ox -oe -oa -ot -w0
+c    d63020   -3s -ox -oe -oa -ot -w0
+c    d640a0   -3s -ox -oe -oa -ot -w0
 c    m186c4   -3s -ox -oe -oa -ot -w0
-asm  b186c4   -3p -c
 c    m1c704   -3s -ox -oe -oa -ot -w0
 asm  b1c704   -3p -c
+c    d68fe0   -3s -ox -oe -oa -ot -w0
 c    m1ea90   -3s -ox -oe -ot -w0
 c    m1eee0   -3s -ox -oe -oa -ot -w0
 c    m231dc   -3s -ox -oe -oa -ot -w0
