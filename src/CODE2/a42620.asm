@@ -54,11 +54,9 @@ extrn B000755f8_bg:byte
 extrn B000755fc_ax:byte
 extrn B00075600_b9:byte
 extrn B00075604_mM:byte
-extrn B00075606_b3:byte
 extrn B00075608_c1:byte
 extrn B0007560c_hn:byte
 extrn B00075610_a9:byte
-extrn B00075612_lo:byte
 extrn B00075619_b0:byte
 extrn B0007561b_io:byte
 extrn B00075621_lx:byte
@@ -795,7 +793,7 @@ L_00042fc2:
     push eax
     test word ptr [edi + B000698e0_b7], 0x100
     je short L_00043049
-    movsx eax, word ptr [B00075612_lo]
+    movsx eax, word ptr [B00075610_a9+2]
     movsx edx, word ptr [B00075619_b0]
     mul edx
     shl eax, 1
@@ -904,7 +902,7 @@ L_0004315c:
     push eax
     test word ptr [edi + B000698e0_b7], 0x100
     je short L_000431da
-    movsx eax, word ptr [B00075606_b3]
+    movsx eax, word ptr [B00075604_mM+2]
     shl eax, 1
     db 08bh, 0d7h    ; mov edx, edi (WASM encodes it differently)
     db 02bh, 0f8h    ; sub edi, eax (WASM encodes it differently)
