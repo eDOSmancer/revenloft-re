@@ -208,7 +208,7 @@ void FUN_00018a80(int t, int dir, int who, union FX x, union FX y)
 #undef CHR
 #undef M000718e0_iO
 /* ---- from src/CODE2/f18c88.c */
-#define B000748ec_bk ((struct SP *)B000748ec_bk)
+#define M000748ec_bk ((struct SP *)B000748ec_bk)
 /* FUN_00018c88 @ 00018c88: unload spell slot i */
 void *memmove(void *, const void *, unsigned);
 extern void FUN_0003f580(const char *);
@@ -217,11 +217,11 @@ struct SP { char b[0x16]; };
 void FUN_00018c88(int i)
 {
     if (i >= DAT_0005c038) FUN_0003f580(PTR_s_error_unloading_spell__000566a4);
-    memmove(&B000748ec_bk[i], &B000748ec_bk[i + 1], (DAT_0005c038 - 1 - i) * 0x16);
+    memmove(&M000748ec_bk[i], &M000748ec_bk[i + 1], (DAT_0005c038 - 1 - i) * 0x16);
     DAT_0005c038--;
 }
 
-#undef B000748ec_bk
+#undef M000748ec_bk
 /* ---- from src/CODE2/wip/f18cf4.c */
 /* Round 46: 35 -> 9 instruction lines in module 0x186c4 (886/889 to the last ret: 2 bytes short). The class block `if (4 == cls[k]) mult = lvl[k]` read six per-field symbols (B000718f5_h2/6/7, B00071900_bm/2/4); as members of the one record `B000718e0_iO[c]` (include/records.h struct PC) the block and everything the round-45 note listed as slot differences is equal. The item (struct ITEM *it) and monster-type (struct MTYPE *t, .rad / .imm / .f3a) records are code-neutral here. Left, the tail only: after the roll the original moves the result (`mov edx,eax`), keeps d in edx and uses eax for p->type and the type index; ours keeps d in eax and uses edx. Tried: the tail value in hit / mult / c / xlo / type / yhi (19 / 50 / 39 / 27 / 9 / 9), a (short) cast on the hp read (9), declaration climb 42 + pair swaps 91 (all 9). */
 /* Round 49 (1 compile, read): the 9 lines are the damage variable d of the dice branch: EDX in the original (`mov edx,eax` after FUN_0002c328, `movsx edx` for the hp override, `push edx`), EAX here, with p->type then in EDX; the monster-table reads are [edi + 0x14d8e] (offset register + table symbol) in the original. Not traced further this round. */
@@ -1293,7 +1293,7 @@ void FUN_0001aed8(int who)
 struct SPX { union FX a, b; int dir; unsigned short cell, type; short timer, w12; unsigned short b0 : 1, st : 2, face : 3, fr : 3, rest : 7; };
 struct EFL { int a, b; int fl; unsigned short s, type; short timer, hp; unsigned short w14; };
 struct MCELL { unsigned short lo : 6, seen : 1, door : 1, rest : 8; };
-#define B000748ec_bk ((struct SPX *)B000748ec_bk)
+#define M000748ec_bk ((struct SPX *)B000748ec_bk)
 #define M00064d80_ay ((struct EFL *)B00064d80_ay)
 #define M000698e0_b7 ((struct MCELL *)B000698e0_b7)
 extern int B000758bc_al;
@@ -1338,19 +1338,19 @@ void FUN_0001b02c(int a0, int a1, int range, int dmg, int mask, int mark, int ki
             if (hit) break;
             if (mark) {
                 for (i = 0; i < DAT_0005c038; i++)
-                    if (B000748ec_bk[i].cell == cell) break;
+                    if (M000748ec_bk[i].cell == cell) break;
             } else i = DAT_0005c038;
             if (i == DAT_0005c038) {
-                B000748ec_bk[i].b.v = x.v;
-                B000748ec_bk[i].a.v = y.v;
+                M000748ec_bk[i].b.v = x.v;
+                M000748ec_bk[i].a.v = y.v;
                 if (mark) {
-                    B000748ec_bk[i].b.s.f = 0x8000;
-                    B000748ec_bk[i].a.s.f = 0x8000;
+                    M000748ec_bk[i].b.s.f = 0x8000;
+                    M000748ec_bk[i].a.s.f = 0x8000;
                 }
-                B000748ec_bk[i].cell = cell;
-                B000748ec_bk[i].type = kind;
-                B000748ec_bk[i].fr = rr;
-                if (kind == 8) B000748ec_bk[i].fr = (unsigned)rand() * 3 >> 15;
+                M000748ec_bk[i].cell = cell;
+                M000748ec_bk[i].type = kind;
+                M000748ec_bk[i].fr = rr;
+                if (kind == 8) M000748ec_bk[i].fr = (unsigned)rand() * 3 >> 15;
                 DAT_0005c038++;
                 for (k = 0; k <= B00075618_b1.nent; k++) {
                     if (!(M00064d80_ay[k].fl & 0x2000000) && M00064d80_ay[k].s == cell && (M00064d80_ay[k].fl & 0x10000000) && M00064d80_ay[k].hp != 0) {
@@ -1382,7 +1382,7 @@ void FUN_0001b02c(int a0, int a1, int range, int dmg, int mask, int mark, int ki
     done = 0;
     do {
         for (i = 0; i < DAT_0005c038; i++) {
-            if (B000748ec_bk[i].type == kind) {
+            if (M000748ec_bk[i].type == kind) {
                 FUN_00018c88(i);
                 break;
             }
@@ -1392,7 +1392,7 @@ void FUN_0001b02c(int a0, int a1, int range, int dmg, int mask, int mark, int ki
     DAT_0005c02f = save;
 }
 
-#undef B000748ec_bk
+#undef M000748ec_bk
 #undef M00064d80_ay
 #undef M000698e0_b7
 

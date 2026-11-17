@@ -14,10 +14,7 @@ B000748e8_jD label byte
     db 4 dup(?)
 public B000748ec_bk
 B000748ec_bk label byte
-    db 20 dup(?)
-public B00074900_bn
-B00074900_bn label byte
-    db 3280 dup(?)
+    db 3300 dup(?)
 public B000755d0_ao
 B000755d0_ao label byte
     db 2 dup(?)
