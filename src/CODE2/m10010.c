@@ -4,7 +4,12 @@
 /* FUN_00010010 @ 00010010: mark the door at (x, y) */
  
 #include "world.h"
-extern short B0007223a_et, B0007223e_dx; extern unsigned short B00072246_dJ, B0007224c_ez;
+#define B00072246_dJ (*(unsigned short *)((char *)&B00072238_dL + 14)) /* STANDIN: view, B00072238_dL + 0xe */
+#define B0007224c_ez (*(unsigned short *)((char *)&B00072238_dL + 20)) /* STANDIN: view, B00072238_dL + 0x14 */
+extern unsigned char B00072238_dL[];
+#define B0007223a_et (*(short *)((char *)&B00072238_dL + 2)) /* STANDIN: view, B00072238_dL + 0x2 */
+#define B0007223e_dx (*(short *)((char *)&B00072238_dL + 6)) /* STANDIN: view, B00072238_dL + 0x6 */
+ 
 #define DR_KIND(i) (*(unsigned short *)((char *)&B00072246_dJ + (i) * 0x16))
 #define DR_X(i)    (*(short *)((char *)&B0007223e_dx + (i) * 0x16))
 #define DR_Y(i)    (*(short *)((char *)&B0007223a_et + (i) * 0x16))

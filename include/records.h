@@ -81,6 +81,22 @@ struct MONR {
     unsigned short w14;                 /* +0x14 */
 };
 
+/* screen column: 256 records of 7 ints (28 bytes) at 0x65a18, filled by the renderer (a42620.asm) per screen column:
+   FUN_00032894 reads h (+8), d (+0x10) and the map cell (+0x14), FUN_0003b088 cell and val (+0x18) for i < 0x100 */
+struct COL { int a, w, h, c, d, cell, val; };
+
+/* placed object: 0x16 bytes, the record of the three tables that share the monster record's frame - 300 objects on the
+   floor / in flight at 0x67618, 450 doors and fixtures at 0x72238 (B00075618_b1.ndoor of them go to the level file as
+   n * 0x16 bytes), 150 at 0x748ec.  Position 16.16, cell, type, timer, a count and a state word of bit-fields; the files
+   that need other field cuts of the state word keep their own view of the record (docs/TYPES.md). */
+struct OBJR {
+    int a, b;                           /* +0x00 x, +0x04 y */
+    unsigned char f8, f9, fa, fb;       /* +0x08 */
+    unsigned short cell, type;          /* +0x0c, +0x0e */
+    short timer, w12;                   /* +0x10, +0x12 */
+    unsigned short b0 : 1, st : 2, face : 3, frame : 3, b9 : 1, b10 : 1, own : 3, top : 2;   /* +0x14 */
+};
+
 /* sorted draw list: 2 lists (one per page) of 400 entries of 0x16 bytes at 0x77148 (0x2260 per list) */
 struct DRAWE { unsigned short id; char p2[4]; unsigned short mon; short f8; unsigned short ord; char pc[10]; };
 

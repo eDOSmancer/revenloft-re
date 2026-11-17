@@ -40,7 +40,10 @@ void FUN_000106c0(void)
 /* NEAR MISS (round 23, module 0x106c0 -oa, 37 worklist lines) a. first difference: block layout - ours places the else loop first (jne to the first loop), the loop tests are N > i (cmp N,i; jg) where the original has i < N (cmp i,N; jl), i in eax (orig edx); decision: the operand order of the loop conditions (recipe 61) and the layout of the two found-returns. c. i < N in both loops: 37 -> 31 lines (1 real); the found tests as != ... continue: same code. Left: the else loop placed first and the shared found-return tail. FUN_00010700 near miss (127-129/146, -oa): the original gives the second loop its own epilogue and does not thread the entry jump of the first loop. 2026-11-08: one counter k = i for both loops gives the shared i*0x16 and the frame (131/146, -oa); left: the compiler threads both found-returns into one mov eax,edx tail, the original jumps from the first loop to the store/epilogue and gives the second loop its own. Mixed counters, r/break forms tried */
 /* FUN_00010700 @ 00010700: find the door/entry at (x, y) starting from index i (-oa module: the table pointer is cached in EBP) */
 #include "world.h"
-extern volatile unsigned char DAT_00055fcb; extern short DAT_0005604c, B0007223a_et, B0007223e_dx; extern char *DAT_00056048;
+extern unsigned short B00072238_dL;
+#define B0007223a_et (*(short *)((char *)&B00072238_dL + 2)) /* STANDIN: view, B00072238_dL + 0x2 */
+#define B0007223e_dx (*(short *)((char *)&B00072238_dL + 6)) /* STANDIN: view, B00072238_dL + 0x6 */
+extern volatile unsigned char DAT_00055fcb; extern short DAT_0005604c; extern char *DAT_00056048;
 #define DR_X(i) (*(short *)((char *)&B0007223e_dx + (i) * 0x16))
 #define DR_Y(i) (*(short *)((char *)&B0007223a_et + (i) * 0x16))
 int FUN_00010700(int x, int y, int i)
@@ -87,7 +90,8 @@ int FUN_00010794(int x, int y, int i)
 /* FUN_000107e4 @ 000107e4: index of the first door of kind 0x54 at (x, y) from door i on, or -1 (separate loop counter k = i) (the count is a member of struct LCNT, recipe 27: not cached under the module's -oa) */
  
 #include "world.h"
-extern short B0007223a_et, B0007223e_dx; extern unsigned short B00072246_dJ;
+#define B00072246_dJ (*(unsigned short *)((char *)&B00072238_dL + 14)) /* STANDIN: view, B00072238_dL + 0xe */
+ 
 #define DR_KIND(i) (*(unsigned short *)((char *)&B00072246_dJ + (i) * 0x16))
 #define DR_X(i)    (*(short *)((char *)&B0007223e_dx + (i) * 0x16))
 #define DR_Y(i)    (*(short *)((char *)&B0007223a_et + (i) * 0x16))
@@ -297,7 +301,8 @@ extern unsigned char DAT_00051760[];
 
 extern char *DAT_00056048;
 #define B00064d84_aE (*(unsigned short *)((char *)&B00064d80_ay + 4)) /* STANDIN: view, B00064d80_ay + 0x4 */
-extern unsigned short B00072238_dL, B0007223c_dz, B00072246_dJ, B00064d80_ay;
+#define B0007223c_dz (*(unsigned short *)((char *)&B00072238_dL + 4)) /* STANDIN: view, B00072238_dL + 0x4 */
+extern unsigned short B00072238_dL, B00064d80_ay;
 #define IT(o, i) (*(unsigned short *)((char *)&o + (i) * 0x16))
 #define PT(o, i) (*(unsigned short *)(DAT_00056048 + (i) * 0x16 + (o)))
 void FUN_00010cb0(int x, int y, int px, int py)
@@ -997,7 +1002,7 @@ extern void FUN_00012474(FILE *fp, FILE *out, int tofile); /* module prototype *
 /* FUN_000126e8 @ 000126e8: print the automap to the printer (fp) or write it to a file (out); under the module's -oa the merge loop walks ln[2] with p and ln[0] with a; with the shared declarations (world.h) b declared before a gives the original registers of the merge loop (round 21; the old fit copied fp into a local) */
 #include <stdio.h>
 #include "world.h"
-#define B00072246_dJ ((unsigned short *)&B00072246_dJ)
+#define M00072246_dJ ((unsigned short *)&B00072246_dJ)
  
 extern void FUN_0003e6d0(void), FUN_000410b0(void *), FUN_00041304(void *, int, FILE *);
 extern char *FUN_0004104c(int);
@@ -1048,7 +1053,7 @@ void FUN_000126e8(FILE *fp, FILE *out, int tofile)
         for (y = 0, p = ln[2]; y < H; p++, y++)
             if (DAT_00051760[x + W * y] != 0xff)
                 for (k = FUN_00010700(x, y, 0); k != -1; k = FUN_00010700(x, y, k + 1))
-                    if (*(unsigned short *)((char *)B00072246_dJ + k * 0x16) >= 0x3c && *(unsigned short *)((char *)B00072246_dJ + k * 0x16) <= 0x41) *p = '*';
+                    if (*(unsigned short *)((char *)M00072246_dJ + k * 0x16) >= 0x3c && *(unsigned short *)((char *)M00072246_dJ + k * 0x16) <= 0x41) *p = '*';
                     else *p = 0xfe;
         for (y = 0, q = ln[0]; y < H; q++, y++)
             if (FUN_000123b8(x, y, ch)) {
@@ -1083,7 +1088,7 @@ void FUN_000126e8(FILE *fp, FILE *out, int tofile)
     FUN_000410b0(ln[0]);
 }
 
-#undef B00072246_dJ
+#undef M00072246_dJ
 #undef W
 #undef H
 /* ---- from build/var/mod/parts/p12a34.c */

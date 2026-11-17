@@ -1134,7 +1134,10 @@ void FUN_0002608c(void)
 void *memmove(void *, const void *, unsigned);
 extern void FUN_0003195c(int, int, int, int, int, int, int);
 
- extern char B00072238_dL[], B0007223c_dz[]; extern unsigned short B00072246_dJ;
+#define B00072246_dJ (*(unsigned short *)((char *)&B00072238_dL + 14)) /* STANDIN: view, B00072238_dL + 0xe */
+extern char B00072238_dL[];
+#define B0007223c_dz ((char *)((char *)&B00072238_dL + 4)) /* STANDIN: view, B00072238_dL + 0x4 */
+ extern char B00072238_dL[]; 
 void FUN_0002624c(void)
 {
     int k;

@@ -1,4 +1,5 @@
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+#include "records.h"
 short B000758fe_j6;
 short B000758fc_kL;
 int B000758f8_h3;
@@ -36,10 +37,9 @@ unsigned char *B000755dc_aX;
 struct IT *B000755d8_aw;
 unsigned char B000755d4_ak[4];
 unsigned char B000755d0_ao[4];
-char B000748ec_bk[3300];
+struct OBJR B000748ec_bk[150];
 int B000748e8_jD;
 int B000748e4_h8;
-unsigned char B0007224c_ez[9880];
 /* BSS end */
 extern unsigned char B000755d4_ak[4];
 extern unsigned char B000755d0_ao[4];
@@ -1011,7 +1011,9 @@ extern void FUN_00031f70(void); /* module prototype */
 extern unsigned short B00077148_eJ;
 #define B00077152_el (*(unsigned short *)((char *)&B00077148_eJ + 10)) /* STANDIN: a name of its own in the original image, 10 bytes into B00077148_eJ */
 #define B00067626_hm (*(unsigned short *)((char *)&B00067618_e7 + 14)) /* STANDIN: view, B00067618_e7 + 0xe */
-extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], B00077148_eJ, B00072246_dJ;
+extern unsigned char B00072238_dL[];
+#define B00072246_dJ (*(unsigned short *)((char *)&B00072238_dL + 14)) /* STANDIN: view, B00072238_dL + 0xe */
+extern int DAT_0005c050, DAT_0005bf44; extern unsigned short DAT_0005f038[], B00077148_eJ;
 extern unsigned char DAT_00058602, DAT_0005cf68; 
 extern int FUN_0003ac80(int), FUN_0001f4b0(short), FUN_0002c1dc(int), FUN_0003ad18(int), FUN_0003ade0(int), FUN_0003acdc(int);
 extern int FUN_00034478(int, int), FUN_000343e0(int, int);

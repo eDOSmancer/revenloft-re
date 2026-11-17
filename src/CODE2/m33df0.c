@@ -732,7 +732,10 @@ void *memmove(void *, const void *, unsigned);
 extern void FUN_0002c124(int);
 #define B00064d8b_a7 (*(int *)((char *)&B00064d80_ay + 11)) /* STANDIN: view, B00064d80_ay + 0xb */
 #define B00064d8e_a6 (*(unsigned short *)((char *)&B00064d80_ay + 14)) /* STANDIN: view, B00064d80_ay + 0xe */
- extern unsigned short B00072246_dJ, B00072244_c8, B000698e0_b7; extern unsigned char B00072238_dL[]; 
+extern unsigned char B00072238_dL[];
+#define B00072246_dJ (*(unsigned short *)((char *)&B00072238_dL + 14)) /* STANDIN: view, B00072238_dL + 0xe */
+#define B00072244_c8 (*(unsigned short *)((char *)&B00072238_dL + 12)) /* STANDIN: view, B00072238_dL + 0xc */
+ extern unsigned short B000698e0_b7; extern unsigned char B00072238_dL[]; 
 #define DR_KIND(i) (*(unsigned short *)((char *)&B00072246_dJ + (i) * 0x16))
 #define DR_CELL(i) (*(unsigned short *)((char *)&B00072244_c8 + (i) * 0x16))
 #define CELLF(c) (*(int *)((char *)&B000698e0_b7 + (c) * 2))

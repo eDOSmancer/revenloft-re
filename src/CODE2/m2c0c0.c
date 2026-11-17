@@ -1,14 +1,6 @@
 /* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
-unsigned char G00072246_aa[2];
-unsigned char F00072246_aP[2];
-unsigned short B00072246_dJ;
-unsigned short B00072244_c8;
-unsigned char G0007223e_b6[2];
-unsigned char F0007223e_c7[2];
-short B0007223e_dx;
-unsigned short B0007223c_dz;
-short B0007223a_et;
-unsigned short B00072238_dL;
+#include "records.h"
+struct OBJR B00072238_dL[450];   /* doors and fixtures; 0x7223a ... 0x7224c are members of record 0 (docs/TYPES.md) */
 void *B00072234_hx;
 char *B00072230_c4;
 int B0007222c_cz;
@@ -19,14 +11,14 @@ int B00072200_ew[8];
 /* the party records, 4 x 0x248 bytes at 0x718e0, are one object (include/chars.h, docs/BSS.md) */
 #define PCH_DEFINED
 struct PCH { char name[0x10]; unsigned short fl; char rest[0x236]; } B000718e0_iO[4];   /* the four character records (include/chars.h) */
-unsigned char B000698e0_b7[32768];
+unsigned short B000698e0_b7[128 * 128];   /* the map: one cell word per square */
 char B00069660_dl[640];
 char B000693e0_hM[640];
-unsigned char B00068fe0_eN[1024];
-unsigned char B00067618_e7[6600];
-unsigned char B00065a18_cn[7168];
+char *B00068fe0_eN[256];
+struct OBJR B00067618_e7[300];
+struct COL B00065a18_cn[256];
 int B00065618_e1[256];
-unsigned char B00064d80_ay[2200];
+struct MONR B00064d80_ay[100];
 char B00064580_eK[2048];
 /* BSS end */
 #define B000718f0_hO (*(unsigned char (*)[568])((char *)&B000718e0_iO + 16)) /* STANDIN: view, B000718e0_iO + 0x10 */

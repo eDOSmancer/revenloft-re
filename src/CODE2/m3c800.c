@@ -176,7 +176,7 @@ struct MT { unsigned char pad[0x39]; unsigned char lo : 7, ghost : 1; unsigned c
 struct O { int a, b; unsigned char f8, f9, fa, fb; unsigned short s, type; short timer, w12; unsigned short w14; };
 
 extern unsigned char *B000755dc_aX; extern int DAT_0005c6c8;
-#define B00072238_dL ((struct SO *)B00072238_dL)
+#define M00072238_dL ((struct SO *)B00072238_dL)
 #define M00064d80_ay ((struct O *)B00064d80_ay)
 #define B00072230_c4 (*(struct MT **)&B00072230_c4)
 #define M000755d0_ao (*(int *)&B000755d0_ao)
@@ -186,20 +186,20 @@ int FUN_0003cc88(unsigned y, unsigned x, int who)
 {
     int i; unsigned a, b, c, d; unsigned char *t;
     for (i = 0; i < B00075618_b1.ndoor; i++) {
-        b = B00072238_dL[i].b;
+        b = M00072238_dL[i].b;
         a = b;
-        d = B00072238_dL[i].a;
+        d = M00072238_dL[i].a;
         c = d;
-        if (*(unsigned short *)(B000755dc_aX + B00072238_dL[i].type * 7 + 2) <= 1) continue;
-        t = B000755dc_aX + B00072238_dL[i].type * 7;
+        if (*(unsigned short *)(B000755dc_aX + M00072238_dL[i].type * 7 + 2) <= 1) continue;
+        t = B000755dc_aX + M00072238_dL[i].type * 7;
         a -= *(unsigned short *)(t + 2);
         b += *(unsigned short *)(t + 2);
         c -= *(unsigned short *)(t + 2);
         d += *(unsigned short *)(t + 2);
         if ((x >= a && x <= b) && (y >= c && y <= d)) {
             if (who == -1) {
-                if (B00072238_dL[i].type == 0x54) {
-                    if (B00072238_dL[i].st == 1) {
+                if (M00072238_dL[i].type == 0x54) {
+                    if (M00072238_dL[i].st == 1) {
                         if (DAT_0005c6c8 == 0x17) {
                             ((short *)&M000755d0_ao)[1] = 3;
                             ((short *)&M000755d0_ao)[0] = 0x8000;
@@ -218,7 +218,7 @@ int FUN_0003cc88(unsigned y, unsigned x, int who)
                             return 2;
                         }
                     }
-                } else if (B00072238_dL[i].type == 0x7a) {
+                } else if (M00072238_dL[i].type == 0x7a) {
                     FUN_0003cad4();
                     return 2;
                 } else return 1;
@@ -235,7 +235,7 @@ int FUN_0003cc88(unsigned y, unsigned x, int who)
 
 #undef M00064d80_ay
 #undef B00072230_c4
-#undef B00072238_dL
+#undef M00072238_dL
 #undef M000755d0_ao
 #undef M000755d4_ak
 #undef O

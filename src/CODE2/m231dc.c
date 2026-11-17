@@ -15,7 +15,11 @@ int B00062c10_h8;
 #include "world.h"
 void *memmove(void *, const void *, unsigned);
 
- extern short B0007223a_et, B0007223e_dx; extern unsigned short B00072246_dJ; extern unsigned char B00072238_dL[];
+#define B00072246_dJ (*(unsigned short *)((char *)&B00072238_dL + 14)) /* STANDIN: view, B00072238_dL + 0xe */
+extern unsigned char B00072238_dL[];
+#define B0007223a_et (*(short *)((char *)&B00072238_dL + 2)) /* STANDIN: view, B00072238_dL + 0x2 */
+#define B0007223e_dx (*(short *)((char *)&B00072238_dL + 6)) /* STANDIN: view, B00072238_dL + 0x6 */
+   extern unsigned char B00072238_dL[];
 #define DR_KIND(i) (*(unsigned short *)((char *)&B00072246_dJ + (i) * 0x16))
 #define DR_X(i)    (*(short *)((char *)&B0007223e_dx + (i) * 0x16))
 #define DR_Y(i)    (*(short *)((char *)&B0007223a_et + (i) * 0x16))
