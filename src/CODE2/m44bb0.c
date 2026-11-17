@@ -1,3 +1,9 @@
+/* BSS: the uninitialised data of this module (tools/bssfit.py, docs/BSS.md). wcc386 emits these objects by size class and, in a class, last declared first; every name lies in one chain of its symbol table, so the declarations run from the highest address down. STANDIN: the names (fitted to the hash) and the F... filler objects (bytes no code names). */
+struct SD B0007b870_hl[32];
+struct SD B0007b7f0_dN[32];
+unsigned char B0007b7d0_ko[32];
+unsigned char B0007b7b0_bn[32];
+/* BSS end */
 /* Module: FUN_00044bb0, FUN_00044de8 */
 /* ---- from build/var/mod/parts/p44bb0.c */
 /* FUN_00044bb0 @ 00044bb0: draw a wall decoration polygon for the four corner rows ys and distances ds (in 1/8 steps): front face, or the mirrored face when the decoration faces the other way */
@@ -46,7 +52,7 @@ void FUN_00044bb0(int *ys, int *ds, struct WD *w)
 union FX { int v; struct { unsigned short f; short i; } s; };
 struct SD { short y; unsigned short d; };
 struct MK { unsigned char kind; unsigned char b0 : 3, b3 : 1, deco : 1, b5 : 3; };
-extern struct SD B0007b7f0_dN[], B0007b870_hl[]; extern unsigned char B0007b7b0_bn[], B0007b7d0_ko[];
+extern struct SD B0007b7f0_dN[32], B0007b870_hl[32]; extern unsigned char B0007b7b0_bn[32], B0007b7d0_ko[32];
 extern int B000755d0_ao, B000755d4_ak; 
 extern void *memset(void *, int, unsigned), *memmove(void *, const void *, unsigned);
 extern struct MK *FUN_0002e8c8(int, int); extern void FUN_00045798(int, int, short *, unsigned short *), FUN_00044bb0(int *, int *, void *);
